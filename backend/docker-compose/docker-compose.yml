@@ -1,0 +1,31 @@
+version: '3'
+services:
+
+  database:
+    image: "postgres" # use latest official postgres version
+    environment:
+      - POSTGRES_USER=SLL
+      - POSTGRES_PASSWORD=SLL
+      - POSTGRES_DB=SLL    
+    ports:
+      - '5432:5432'
+    volumes:
+      - ../../database/data:/var/lib/postgresql/data/
+  jhipster-registry:
+    extends:
+      file: jhipster-registry.yml
+      service: jhipster-registry
+  contenedor:
+    image: "gateway_sll"
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - 'SPRING_PROFILES_ACTIVE=prod,swagger'
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+      - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/GATEWAY_SLL'
+      - JHIPSTER_SLEEP=30
+    ports:
+      - '8080:8080'    
+    depends_on: 
+      - database
