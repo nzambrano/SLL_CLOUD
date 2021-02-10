@@ -46,7 +46,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/SLLPE
     username: SLLPE
-    password:
+    password: SLLPE
     hikari:
       poolName: Hikari
       auto-commit: false
