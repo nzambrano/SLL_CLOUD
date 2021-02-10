@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.prosegur.sllpe",
+      "nativeLanguage": "es"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "microservice",
+    "baseName": "SLLPE",
+    "packageName": "com.prosegur.sllpe",
+    "packageFolder": "com/prosegur/sllpe",
+    "serverPort": "8081",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZjI1ZTI4MWEwZGEzMzk4NTEwNTZkYWYxYmY2YzI0MWUwN2E2Yjg1MjQ0M2QxNmI1YTBiNTViNTExOTUwNTY2MjI4ZTJiZDAyZWZjMGU3NDJlNTEyYTM1Yjk4MGViMGNiNTU4ZmIwZTZlNDFhYWI4NzBkM2JhZWQyNWY3MGZkNjI=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1612965180693,
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "es",
+    "languages": ["es", "en"],
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
