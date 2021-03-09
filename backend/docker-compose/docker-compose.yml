@@ -30,7 +30,7 @@ services:
     depends_on: 
       - database
 
-  canaletico:
+  sllpe:
     image: sllpe
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m

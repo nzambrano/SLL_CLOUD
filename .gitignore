@@ -1,5 +1,6 @@
 database
-./database/data/*
+/database/*
+import sll
 .git
 .gradle
 .project
