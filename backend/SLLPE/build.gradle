@@ -25,7 +25,12 @@ plugins {
     id "org.sonarqube"
     id "io.spring.nohttp"
     //jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
+    //Agregado para la creacion de entidades por ingenieria inversa
+    id "org.hibernate.gradle.tools" version "1.2.5"
 }
+
+//Se implementa el plugin
+apply plugin: "hibernatetools-gradle-plugin"
 
 group = "com.prosegur.sllpe"
 version = "0.0.1-SNAPSHOT"
@@ -206,6 +211,11 @@ dependencies {
         implementation platform("io.github.jhipster:jhipster-dependencies:${jhipster_dependencies_version}")
     }
 
+    //Agregar dependencias faltantes
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+	compile group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '2.3.3'
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
+
     // Use ", version: jhipster_dependencies_version, changing: true" if you want
     // to use a SNAPSHOT release instead of a stable release
     implementation group: "io.github.jhipster", name: "jhipster-framework"
@@ -307,6 +317,18 @@ task cleanResources(type: Delete) {
 wrapper {
     gradleVersion = "6.5"
 }
+
+database{
+    // catalog = [ "catalog1": new Schema() ]    
+    url         = "jdbc:postgresql://localhost:5432/SLL"
+    user = "SLL"
+    password = "SLL"
+    driver = "org.postgresql.Driver"
+    basePackage = "com.prosegur.sllpe.domain"
+    dialect = "org.hibernate.dialect.PostgreSQLDialect"
+    port = 5432
+}
+
 
 compileJava.dependsOn processResources
 processResources.dependsOn bootBuildInfo
