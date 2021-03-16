@@ -25,7 +25,7 @@ CREATE OR REPLACE VIEW sll.m4sll_vw_ban_pe
                      JOIN sll.m4sll_entidades m4peex ON m4aure.id_organization::text = m4peex.id_organization::text AND m4aure.aur_autor_reu::text = 'R'::text AND m4peex.ent_nro_identificacion::text = m4aure.ent_nro_identificacion::text
                   WHERE m4peex.id_organization::text = l_1.id_organization::text AND m4aure.lit_id_litigio::text = l_1.lit_id_litigio::text)) || ' '::text) || (( SELECT string_agg(slen.std_n_leg_ent::text, ' | '::text ORDER BY m4aure.lit_id_litigio, m4aure.std_id_leg_ent) AS nombre
                    FROM sll.m4sll_autor_reu m4aure
-                     JOIN std_leg_ent slen ON m4aure.id_organization::text = slen.id_organization::text AND m4aure.aur_autor_reu::text = 'R'::text AND slen.std_id_leg_ent::text = m4aure.std_id_leg_ent::text
+                     JOIN public.std_leg_ent slen ON m4aure.id_organization::text = slen.id_organization::text AND m4aure.aur_autor_reu::text = 'R'::text AND slen.std_id_leg_ent::text = m4aure.std_id_leg_ent::text
                   WHERE slen.id_organization::text = l_1.id_organization::text AND m4aure.lit_id_litigio::text = l_1.lit_id_litigio::text))) || ' '::text) || (( SELECT string_agg(m4pe.pex_nombre::text, ' | '::text ORDER BY m4aure.lit_id_litigio, m4pe.pex_nro_documento) AS nombre
                    FROM sll.m4sll_autor_reu m4aure
                      JOIN sll.m4sll_persona_ext m4pe ON m4pe.id_organization::text = m4aure.id_organization::text AND m4aure.aur_autor_reu::text = 'R'::text AND m4pe.pex_nro_documento::text = m4aure.pex_nro_documento::text
@@ -38,7 +38,7 @@ CREATE OR REPLACE VIEW sll.m4sll_vw_ban_pe
                      JOIN sll.m4sll_entidades m4peex ON m4aure.id_organization::text = m4peex.id_organization::text AND m4aure.aur_autor_reu::text = 'A'::text AND m4peex.ent_nro_identificacion::text = m4aure.ent_nro_identificacion::text
                   WHERE m4peex.id_organization::text = l_1.id_organization::text AND m4aure.lit_id_litigio::text = l_1.lit_id_litigio::text)) || ' '::text) || (( SELECT string_agg(slen.std_n_leg_ent::text, ' | '::text ORDER BY m4aure.lit_id_litigio, m4aure.std_id_leg_ent) AS nombre
                    FROM sll.m4sll_autor_reu m4aure
-                     JOIN std_leg_ent slen ON m4aure.id_organization::text = slen.id_organization::text AND m4aure.aur_autor_reu::text = 'A'::text AND slen.std_id_leg_ent::text = m4aure.std_id_leg_ent::text
+                     JOIN public.std_leg_ent slen ON m4aure.id_organization::text = slen.id_organization::text AND m4aure.aur_autor_reu::text = 'A'::text AND slen.std_id_leg_ent::text = m4aure.std_id_leg_ent::text
                   WHERE slen.id_organization::text = l_1.id_organization::text AND m4aure.lit_id_litigio::text = l_1.lit_id_litigio::text))) || ' '::text) || (( SELECT string_agg(m4pe.pex_nombre::text, ' | '::text ORDER BY m4aure.lit_id_litigio, m4pe.pex_nro_documento) AS nombre
                    FROM sll.m4sll_autor_reu m4aure
                      JOIN sll.m4sll_persona_ext m4pe ON m4pe.id_organization::text = m4aure.id_organization::text AND m4aure.aur_autor_reu::text = 'A'::text AND m4pe.pex_nro_documento::text = m4aure.pex_nro_documento::text
