@@ -37,21 +37,10 @@ public class M4sllVwBanPeResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private M4sllVwBanPeRepository m4sllVwBanPeRepository;
-    private M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository;
+    private final M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository;
 
-    public M4sllVwBanPeResource(M4sllVwBanPeRepository m4sllVwBanPeRepository, M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository) {
-        this.m4sllVwBanPeRepository = m4sllVwBanPeRepository;
+    public M4sllVwBanPeResource(M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository) {
         this.m4sllVwBanPeConsultaRepository = m4sllVwBanPeConsultaRepository;
-    }
-
-
-    @GetMapping("/m4sll_vw_ban_pe")
-    public ResponseEntity<List<M4sllVwBanPe>> getAllM4sllVwBanPe() {
-        log.debug("REST request to get ALL M4sllVwBanPe : {}");
-
-        List<M4sllVwBanPe> M4sllVwBanPeAll = m4sllVwBanPeRepository.findAll();
-        return ResponseEntity.ok().body(M4sllVwBanPeAll);
     }
 
     /**
@@ -61,10 +50,10 @@ public class M4sllVwBanPeResource {
      * @return the {@link ResponseEntity} with Bandeja {@code 200 (OK)} and the list of m4sll_vw_ban_pe_consulta in body.
      */
 
-    @GetMapping("/m4sll_vw_ban_pe_consulta")
-    public ResponseEntity<List<M4sllVwBanPeConsulta>> getM4sllVwBanPeConsultas(Pageable pageable) {
+    @GetMapping("/m4sll_vw_ban_pe_consulta/{lit_id_litigio}/{lit_nro_proceso}")
+    public ResponseEntity<List<M4sllVwBanPeConsulta>> getM4sllVwBanPeConsulta(Pageable pageable, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("lit_nro_proceso") String lit_nro_proceso) {
         log.debug("REST request to get a page of m4sll_vw_ban_pe_consulta : {}");
-        Page<M4sllVwBanPeConsulta> page = m4sllVwBanPeConsultaRepository.findAll(pageable);
+        Page<M4sllVwBanPeConsulta> page = m4sllVwBanPeConsultaRepository.obtenerM4sllVwBanPeConsulta(pageable, lit_id_litigio, lit_nro_proceso);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
