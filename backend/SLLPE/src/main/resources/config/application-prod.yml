@@ -25,7 +25,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
-
+      #defaultZone: http://admin:${jhipster.registry.password}@172.18.0.4:8761/eureka/
+#busca el ip de contenedor registry
+#docker inspect bfe59e03813b | grep "IPAddress"
 management:
   metrics:
     export:
