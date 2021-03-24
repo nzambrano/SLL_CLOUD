@@ -94,7 +94,7 @@ public class M4sllPagosResource {
   }
 
   /*
-    @GetMapping("/m4sll_pagos/{id_organization}/{lit_id_litigio}/{aur_secuencia}")
+    @GetMapping("/m4sll_pagos/{id_organization}/{lit_id_litigio}/{pag_secuencia}")
     public ResponseEntity<M4sllPagos> getM4sllPagos(
     		@PathVariable("id_organization") String id_organization,
     		@PathVariable("lit_id_litigio") String lit_id_litigio,
