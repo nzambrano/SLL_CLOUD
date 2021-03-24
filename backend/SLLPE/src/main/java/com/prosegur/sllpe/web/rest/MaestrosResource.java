@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.prosegur.sllpe.repository.M4sllLitigiosRepository;
+import com.prosegur.sllpe.repository.M4sllAbogadosRepository;
+import com.prosegur.sllpe.repository.M4sllNegociosRepository;
 
 
 /**
@@ -25,21 +25,19 @@ import com.prosegur.sllpe.repository.M4sllLitigiosRepository;
 public class MaestrosResource {
 
 	private final Logger log = LoggerFactory.getLogger(MaestrosResource.class);
-//	private StatusRepository statusRepository;
-//	private FasesRepository fasesRepository;
+
+	private M4sllAbogadosRepository abogadosRepository;
+	private M4sllNegociosRepository negociosRepository;
 	
 	
-	private M4sllLitigiosRepository litigiosRepository;
-	
-	
-	//public MaestrosResource(StatusRepository statusRepository, FasesRepository fasesRepository) {
+
 	public MaestrosResource(
-			M4sllLitigiosRepository litigiosRepository			
+			M4sllAbogadosRepository abogadosRepository			
 	) {
-		this.litigiosRepository = litigiosRepository;
-		
-		//this.statusRepository = statusRepository;
-        //this.fasesRepository = fasesRepository;
+
+		this.abogadosRepository = abogadosRepository;
+		this.negociosRepository = negociosRepository;
+
     }
 	
 	
@@ -53,9 +51,10 @@ public class MaestrosResource {
 	public ResponseEntity<Object> listar() {
 		List<HashMap<String, Object>> entities = new ArrayList<HashMap<String, Object>>();
 		HashMap<String, Object> map = new HashMap<>();
-			map.put("litigio", litigiosRepository.findAll());
-			//map.put("Std_Geo_Div", std_geo_divRepository.findAll());
-			//map.put("Status", statusRepository.findAll());
+			// map.put("litigio", litigiosRepository.findAll());
+		map.put("abogados", abogadosRepository.findAbogados("0050"));
+		map.put("negocios", negociosRepository.findNegocioByPais("0050"));
+
 			
 			
 		entities.add(map);
@@ -67,9 +66,9 @@ public class MaestrosResource {
     public ResponseEntity<Object> listarFiltrado(@PathVariable String id) {
 		List<HashMap<String, Object>> entities = new ArrayList<HashMap<String, Object>>();
 		
-		if(id.equals("fases")) {
+		if(id.equals("negocios")) {
 			HashMap<String, Object> map = new HashMap<>();
-			//map.put("Fases", fasesRepository.findAll());
+			map.put("negocios", negociosRepository..findNegocioByPais("0050"));
 			entities.add(map);
 		}else if(id.equals("status")) {
 			HashMap<String, Object> map = new HashMap<>();
