@@ -98,7 +98,7 @@ public class M4sllPagosResource {
     public ResponseEntity<M4sllPagos> getM4sllPagos(
     		@PathVariable("id_organization") String id_organization,
     		@PathVariable("lit_id_litigio") String lit_id_litigio,
-    		@PathVariable("pag_secuencia") Integer pag_secuencia    		
+    		@PathVariable("pag_secuencia") Long pag_secuencia    		
             ) {
         log.debug("REST request to get m4sll_pagos : {} | {} | {}", lit_id_litigio, id_organization, pag_secuencia);
         M4sllPagosId id = new M4sllPagosId();
@@ -117,9 +117,26 @@ public class M4sllPagosResource {
     @PathVariable("lit_id_litigio") String lit_id_litigio
   ) {
     log.debug("REST request to delete m4sll_pagos : {} | {}", lit_id_litigio, id_organization);
+    List<M4sllPagos> M4sllPagosByInput = m4sllPagosRepository.findM4sllPagosByInput(id_organization, lit_id_litigio);
+
+    m4sllPagosRepository.deleteAll(M4sllPagosByInput);
+    return ResponseEntity
+      .noContent()
+      .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, M4sllPagosByInput.toString()))
+      .build();
+  }
+
+  @DeleteMapping("/m4sll_pagos/{id_organization}/{lit_id_litigio}/{pag_secuencia}")
+  public ResponseEntity<Void> deleteM4sllPagos(
+    @PathVariable("id_organization") String id_organization,
+    @PathVariable("lit_id_litigio") String lit_id_litigio,
+    @PathVariable("pag_secuencia") Long pag_secuencia
+  ) {
+    log.debug("REST request to delete m4sll_pagos : {} | {} | {}", lit_id_litigio, id_organization, pag_secuencia);
     M4sllPagosId id = new M4sllPagosId();
     id.setIdOrganization(id_organization);
     id.setLitIdLitigio(lit_id_litigio);
+    id.setPagSecuencia(pag_secuencia);
 
     m4sllPagosRepository.deleteById(id);
     return ResponseEntity
