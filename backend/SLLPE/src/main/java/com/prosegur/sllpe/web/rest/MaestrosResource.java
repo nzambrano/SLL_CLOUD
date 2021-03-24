@@ -68,7 +68,7 @@ public class MaestrosResource {
 		
 		if(id.equals("negocios")) {
 			HashMap<String, Object> map = new HashMap<>();
-			map.put("negocios", negociosRepository..findNegocioByPais("0050"));
+			map.put("negocios", negociosRepository.findNegocioByPais("0050"));
 			entities.add(map);
 		}else if(id.equals("status")) {
 			HashMap<String, Object> map = new HashMap<>();
