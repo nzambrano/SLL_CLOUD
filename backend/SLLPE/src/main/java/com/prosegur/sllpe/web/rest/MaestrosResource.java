@@ -32,7 +32,9 @@ public class MaestrosResource {
 	
 
 	public MaestrosResource(
-			M4sllAbogadosRepository abogadosRepository			
+			M4sllAbogadosRepository abogadosRepository,
+			M4sllNegociosRepository negociosRepository			
+			
 	) {
 
 		this.abogadosRepository = abogadosRepository;

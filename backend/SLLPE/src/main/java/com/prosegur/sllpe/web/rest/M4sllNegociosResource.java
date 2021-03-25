@@ -43,12 +43,13 @@ public class M4sllNegociosResource {
     }
 
     /* Select en la BD */
-    @GetMapping("/m4sll_negocios")
+    @GetMapping("/m4sll_negocios/{id_organization}")
     public ResponseEntity<List<M4sllNegocios>> getAllM4sllNegocios(
+    		@PathVariable("id_organization") String idOrganization
     ) {
         log.debug("REST request to get ALL M4sllNegocios : {}");
 
-        List<M4sllNegocios> M4sllNegociosAll = M4sllNegociosRepository.findAll();
+        List<M4sllNegocios> M4sllNegociosAll = M4sllNegociosRepository.findNegocioByPais(idOrganization);
         return ResponseEntity.ok().body(M4sllNegociosAll);
     }
 

@@ -16,7 +16,7 @@ public interface M4sllAbogadosRepository extends JpaRepository<M4sllMtAbogados, 
     public Long obtenerUltimaSecuencia(
             @Param("id_organization") String id_organization);
 	@Query(
-		    value = "select * from sll.m4sll_pedidos  where id_organization =  :id_organization",
+		    value = "select * from sll.m4sll_mt_abogados  where id_organization =  :id_organization",
 		    nativeQuery = true
 		  )
     public List<M4sllMtAbogados> findAbogados(@Param("id_organization") String id_organization);
