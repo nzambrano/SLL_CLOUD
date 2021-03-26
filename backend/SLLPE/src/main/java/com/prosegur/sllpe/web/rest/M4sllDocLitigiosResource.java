@@ -51,8 +51,8 @@ public class M4sllDocLitigiosResource {
     Long id_dolSecuencia = m4sllDocLitigiosServices.UltimaSecuencia(m4sll_doc_litigios);
 
     id.setDolSecuencia(id_dolSecuencia);
-    id.setLitIdLitigio(m4sll_doc_litigios.getId().getLitIdLitigio());
     id.setIdOrganization(m4sll_doc_litigios.getId().getIdOrganization());
+    id.setLitIdLitigio(m4sll_doc_litigios.getId().getLitIdLitigio());
 
     m4sll_doc_litigios.setId(id);
     M4sllDocLitigios result = m4sllDocLitigiosRepository.save(m4sll_doc_litigios);
@@ -105,7 +105,7 @@ public class M4sllDocLitigiosResource {
     		@PathVariable("lit_id_litigio") String lit_id_litigio,
     		@PathVariable("dol_secuencia") Long dol_secuencia    		
             ) {
-        log.debug("REST request to get m4sll_doc_litigios : {} | {} | {}", lit_id_litigio, id_organization, dol_secuencia);
+        log.debug("REST request to get m4sll_doc_litigios : {} | {} | {}", id_organization, lit_id_litigio, dol_secuencia);
         M4sllDocLitigiosId id = new M4sllDocLitigiosId();
         id.setIdOrganization(id_organization);
         id.setLitIdLitigio(lit_id_litigio);        
@@ -121,7 +121,7 @@ public class M4sllDocLitigiosResource {
     @PathVariable("id_organization") String id_organization,
     @PathVariable("lit_id_litigio") String lit_id_litigio
   ) {
-    log.debug("REST request to delete m4sll_doc_litigios : {} | {}", lit_id_litigio, id_organization);
+    log.debug("REST request to delete m4sll_doc_litigios : {} | {}", id_organization, lit_id_litigio);
     List<M4sllDocLitigios> M4sllDocLitigiosByInput = m4sllDocLitigiosRepository.findM4sllDocLitigiosByInput(
       id_organization,
       lit_id_litigio

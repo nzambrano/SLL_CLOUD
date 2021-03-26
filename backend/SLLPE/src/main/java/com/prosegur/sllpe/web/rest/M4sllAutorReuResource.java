@@ -124,7 +124,7 @@ public class M4sllAutorReuResource {
             @PathVariable("lit_id_litigio") String litIdLitigio,
             @PathVariable("aur_secuencia") Integer  aurSecuencia
             ) {
-        log.debug("REST request to delete m4sll_autor_reu : {} | {}", litIdLitigio, idOrganization, aurSecuencia );
+        log.debug("REST request to delete m4sll_autor_reu : {} | {} | {}", litIdLitigio, idOrganization, aurSecuencia );
         M4sllAutorReuId id = new M4sllAutorReuId();
         id.setIdOrganization(idOrganization);
         id.setLitIdLitigio(litIdLitigio);
