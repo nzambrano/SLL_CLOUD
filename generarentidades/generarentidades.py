@@ -3,11 +3,12 @@ import os
 import shutil
 import subprocess
 
+#correrocambiaresto
 # install: pip install stringcase
 # usage: https://pypi.org/project/stringcase/
 import stringcase
 
-
+#correrocambiaresto
 basepath = "C:\\Users\\asd\\Desktop\\laburo\\prosegur\\proyectos\\sll_cloud\\backend\\SLLPE"
 builddomainpath = basepath + "\\build\\generated\\src\\java\\com\\prosegur\\sllpe\\domain"
 maindomainpath = basepath + "\\src\\main\\java\\com\\prosegur\\sllpe\\domain"
@@ -19,17 +20,31 @@ mainrepositorypath = basepath + "\\src\\main\\java\\com\\prosegur\\sllpe\\reposi
 
 hibernaterevengxml = os.path.join(xmlpath, 'hibernate.reveng.xml')
 
-# snake case = m4sll_lit_seguimie
-# oldtblnamesnake = stringcase.snakecase("M4sllLitigios")
-# newtblnamesnake = stringcase.snakecase("m4sll_tp_entidades")
-oldtblnamesnake = sys.argv[1]
-newtblnamesnake = sys.argv[2]
+#correrocambiaresto
+# asegurarse de no tener el puerto repetido en el hibernate.cfg.xml
+# asegurarse que en hibernate.reveng.xml figure esta linea
+    # <schema-selection match-catalog=".*" match-schema="sll.*" match-table="xxxxxxxxxxxxxxxxxxxxx" />
 
-oldtblnamepascal = stringcase.pascalcase(oldtblnamesnake)
-newtblnamepascal = stringcase.pascalcase(newtblnamesnake)
 
-oldtblnamecamel = stringcase.camelcase(oldtblnamesnake)
-newtblnamecamel = stringcase.camelcase(newtblnamesnake)
+#correrocambiaresto
+# Usar generarComandoPython.xlsx para generar el comando para disparar el script: 
+#                            Nueva Tabla        Pks Nueva Tabla                              Tabla Template     PKs Tabla template
+# python generarentidades.py m4sll_doc_litigios dol_secuencia,lit_id_litigio,id_organization m4sll_lit_seguimie lit_id_litigio,id_organization,lis_secuencia
+
+
+
+# oldTblNameSnake = stringcase.snakecase("m4sll_lit_seguimie")
+# newTblNameSnake = stringcase.snakecase("m4sll_doc_litigios")
+
+newTblNameSnake = stringcase.snakecase(sys.argv[1])
+newPksConcat = sys.argv[2]
+
+oldTblNameSnake = stringcase.snakecase(sys.argv[3])
+oldPksConcat = sys.argv[4]
+
+
+oldtblnamepascal = stringcase.pascalcase(oldTblNameSnake)
+newtblnamepascal = stringcase.pascalcase(newTblNameSnake)
 
 newtblnamepascalRepository = newtblnamepascal + "Repository.java"
 newtblnamepascalServices = newtblnamepascal + "Services.java"
@@ -50,20 +65,22 @@ def searchnreplace(filesIn, lstIn):
 
         for old, new in lstIn:
             # Replace the target string
-            filedata = filedata.replace(old, new)
+            filedata = filedata.replace(stringcase.snakecase(old), stringcase.snakecase(new))
+            filedata = filedata.replace(stringcase.camelcase(old), stringcase.camelcase(new))
+            filedata = filedata.replace(stringcase.pascalcase(old), stringcase.pascalcase(new))
 
         # Write the file out again
         with open(fileIn, "w") as file:
             file.write(filedata)
 
 
-# wscript % replacescript % "%xmlpath%\hibernate.cfg.xml" "%oldtblnamesnake%" "%newtblnamesnake%"
-searchnreplace([hibernaterevengxml], [('xxxxxxxxxxxxxxxxxxxxx',newtblnamesnake)])
+# wscript % replacescript % "%xmlpath%\hibernate.cfg.xml" "%oldTblNameSnake%" "%newTblNameSnake%"
+searchnreplace([hibernaterevengxml], [('xxxxxxxxxxxxxxxxxxxxx',newTblNameSnake)])
 
 # asegurarse de que no este la carpeta generated antes de correr hbm2dao
 shutil.rmtree(builddomainpath, ignore_errors=True)
 
-# subprocess.check_call(['your_command', 'arg 1', 'arg 2'], cwd=working_dir)
+# disparar comando gradlew
 subprocess.run(["gradlew", "hbm2dao", "--stacktrace"], cwd=basepath, shell=True)
 
 # move %builddomainpath%\%newtblnamepascal%* %maindomainpath%
@@ -105,13 +122,18 @@ dirsLst.append(newFilenameAbsPathRepository)
 dirsLst.append(newFilenameAbsPathResource)
 
 
-snkTpl = (oldtblnamesnake, newtblnamesnake)
-pasTpl = (oldtblnamepascal, newtblnamepascal)
-cmlTpl = (oldtblnamecamel, newtblnamecamel)
+snkTpl = (oldTblNameSnake, newTblNameSnake)
+searchnreplaceLst = [snkTpl]
 
-searchnreplace(dirsLst, [snkTpl, pasTpl, cmlTpl])
+searchnreplace(dirsLst, searchnreplaceLst)
 
+# reemplazar columnas
+newPkslst = newPksConcat.split(',')
+oldPkslst = oldPksConcat.split(',')
 
+searchnreplaceLst = zip(oldPkslst, newPkslst)
+
+searchnreplace(dirsLst, searchnreplaceLst)
 
 # deshacer cambios para la prox corrida
-searchnreplace([hibernaterevengxml], [('newtblnamesnake',xxxxxxxxxxxxxxxxxxxxx)])
+searchnreplace([hibernaterevengxml], [('newTblNameSnake',xxxxxxxxxxxxxxxxxxxxx)])
