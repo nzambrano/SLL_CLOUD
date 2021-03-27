@@ -12,7 +12,12 @@ import com.prosegur.sllpe.domain.M4sllTpPedidoId;
 
 public interface M4sllTipoPedidoRepository extends JpaRepository<M4sllTpPedido, M4sllTpPedidoId> {
 
-    @Query(
+	@Query(value = "select COALESCE(max(cast(tpe_id_pedido as integer)),0)+1 as secuencia from sll.m4sll_tp_pedido where id_organization = :id_organization", nativeQuery = true)
+	
+	public Long obtenerUltimaSecuencia(
+            @Param("id_organization") String id_organization);
+
+	@Query(
 		    value = "select * from sll.m4sll_tp_pedido  where id_organization =  :id_organization",
 		    nativeQuery = true
 		  )
@@ -20,3 +25,5 @@ public interface M4sllTipoPedidoRepository extends JpaRepository<M4sllTpPedido, 
 	public List<M4sllTpPedido> findTpPedido(@Param("id_organization") String id_organization);
 
 }
+
+
