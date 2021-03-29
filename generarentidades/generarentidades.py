@@ -14,7 +14,7 @@ import stringcase
 
 # correrocambiaresto
 # Cambiar el directorio base. la r es para que interprete literal la \ sino habria que escaparla poniendo \\
-basePath = r"C:\Users\asd\Desktop\laburo\prosegur\proyectos\sll_cloud\backend\SLLPE"
+basePath = r"C:\www\ESTRUCTURA_NUEVA\procde\SLL_CLOUD\backend\SLLPE"
 mainPath = basePath + r"\src\main\java\com\prosegur\sllpe"
 
 buildDomainPath = basePath + r"\build\generated\src\java\com\prosegur\sllpe\domain"
