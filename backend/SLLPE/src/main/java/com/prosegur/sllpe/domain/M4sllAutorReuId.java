@@ -12,26 +12,26 @@ import javax.persistence.Embeddable;
 public class M4sllAutorReuId  implements java.io.Serializable {
 
 
-     private long aurSecuencia;
-     private String litIdLitigio;
-     private String idOrganization;
+    private long aurSecuencia;
+    private String litIdLitigio;
+    private String idOrganization;
 
     public M4sllAutorReuId() {
     }
 
     public M4sllAutorReuId(long aurSecuencia, String litIdLitigio, String idOrganization) {
-       this.aurSecuencia = aurSecuencia;
-       this.litIdLitigio = litIdLitigio;
-       this.idOrganization = idOrganization;
+        this.aurSecuencia = aurSecuencia;
+        this.litIdLitigio = litIdLitigio;
+        this.idOrganization = idOrganization;
     }
-   
+
 
 
     @Column(name="aur_secuencia", nullable=false)
     public long getAurSecuencia() {
         return this.aurSecuencia;
     }
-    
+
     public void setAurSecuencia(long aurSecuencia) {
         this.aurSecuencia = aurSecuencia;
     }
@@ -41,7 +41,7 @@ public class M4sllAutorReuId  implements java.io.Serializable {
     public String getLitIdLitigio() {
         return this.litIdLitigio;
     }
-    
+
     public void setLitIdLitigio(String litIdLitigio) {
         this.litIdLitigio = litIdLitigio;
     }
@@ -51,31 +51,31 @@ public class M4sllAutorReuId  implements java.io.Serializable {
     public String getIdOrganization() {
         return this.idOrganization;
     }
-    
+
     public void setIdOrganization(String idOrganization) {
         this.idOrganization = idOrganization;
     }
 
 
-   public boolean equals(Object other) {
-         if ( (this == other ) ) return true;
-		 if ( (other == null ) ) return false;
-		 if ( !(other instanceof M4sllAutorReuId) ) return false;
-		 M4sllAutorReuId castOther = ( M4sllAutorReuId ) other; 
-         
-		 return (this.getAurSecuencia()==castOther.getAurSecuencia())
- && ( (this.getLitIdLitigio()==castOther.getLitIdLitigio()) || ( this.getLitIdLitigio()!=null && castOther.getLitIdLitigio()!=null && this.getLitIdLitigio().equals(castOther.getLitIdLitigio()) ) )
- && ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) );
-   }
-   
-   public int hashCode() {
-         int result = 17;
-         
-         result = 37 * result + (int) this.getAurSecuencia();
-         result = 37 * result + ( getLitIdLitigio() == null ? 0 : this.getLitIdLitigio().hashCode() );
-         result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
-         return result;
-   }   
+    public boolean equals(Object other) {
+        if ( (this == other ) ) return true;
+        if ( (other == null ) ) return false;
+        if ( !(other instanceof M4sllAutorReuId) ) return false;
+        M4sllAutorReuId castOther = ( M4sllAutorReuId ) other;
+
+        return (this.getAurSecuencia()==castOther.getAurSecuencia())
+               && ( (this.getLitIdLitigio()==castOther.getLitIdLitigio()) || ( this.getLitIdLitigio()!=null && castOther.getLitIdLitigio()!=null && this.getLitIdLitigio().equals(castOther.getLitIdLitigio()) ) )
+               && ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) );
+    }
+
+    public int hashCode() {
+        int result = 17;
+
+        result = 37 * result + (int) this.getAurSecuencia();
+        result = 37 * result + ( getLitIdLitigio() == null ? 0 : this.getLitIdLitigio().hashCode() );
+        result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
+        return result;
+    }
 
 
 }

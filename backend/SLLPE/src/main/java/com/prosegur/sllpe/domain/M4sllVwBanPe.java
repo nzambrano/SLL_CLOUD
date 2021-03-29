@@ -14,39 +14,40 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="m4sll_vw_ban_pe"
-    ,schema="sll"
-)
+            ,schema="sll"
+      )
 public class M4sllVwBanPe  implements java.io.Serializable {
 
 
-     private M4sllVwBanPeId id;
+    private M4sllVwBanPeId id;
 
     public M4sllVwBanPe() {
     }
 
     public M4sllVwBanPe(M4sllVwBanPeId id) {
-       this.id = id;
+        this.id = id;
     }
-   
-     @EmbeddedId
 
-    
+    @EmbeddedId
+
+
     @AttributeOverrides( {
-        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", length=4) ), 
-        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", length=10) ), 
-        @AttributeOverride(name="litNroProceso", column=@Column(name="lit_nro_proceso", length=100) ), 
-        @AttributeOverride(name="litValorTotal", column=@Column(name="lit_valor_total", precision=18, scale=4) ), 
-        @AttributeOverride(name="litBpo", column=@Column(name="lit_bpo", length=254) ), 
-        @AttributeOverride(name="reu", column=@Column(name="reu") ), 
-        @AttributeOverride(name="autor", column=@Column(name="autor") ), 
-        @AttributeOverride(name="triNmTribunal", column=@Column(name="tri_nm_tribunal", length=254) ), 
-        @AttributeOverride(name="tstNmTpStatus", column=@Column(name="tst_nm_tp_status", length=254) ), 
-        @AttributeOverride(name="tplNmTpLitigio", column=@Column(name="tpl_nm_tp_litigio", length=254) ), 
-        @AttributeOverride(name="tsdNmTpStatusDet", column=@Column(name="tsd_nm_tp_status_det", length=254) ) } )
+        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", length=4) ),
+        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", length=10) ),
+        @AttributeOverride(name="litNroProceso", column=@Column(name="lit_nro_proceso", length=100) ),
+        @AttributeOverride(name="litValorTotal", column=@Column(name="lit_valor_total", precision=18, scale=4) ),
+        @AttributeOverride(name="litBpo", column=@Column(name="lit_bpo", length=254) ),
+        @AttributeOverride(name="reu", column=@Column(name="reu") ),
+        @AttributeOverride(name="autor", column=@Column(name="autor") ),
+        @AttributeOverride(name="triNmTribunal", column=@Column(name="tri_nm_tribunal", length=254) ),
+        @AttributeOverride(name="tstNmTpStatus", column=@Column(name="tst_nm_tp_status", length=254) ),
+        @AttributeOverride(name="tplNmTpLitigio", column=@Column(name="tpl_nm_tp_litigio", length=254) ),
+        @AttributeOverride(name="tsdNmTpStatusDet", column=@Column(name="tsd_nm_tp_status_det", length=254) )
+    } )
     public M4sllVwBanPeId getId() {
         return this.id;
     }
-    
+
     public void setId(M4sllVwBanPeId id) {
         this.id = id;
     }

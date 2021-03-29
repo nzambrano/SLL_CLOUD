@@ -18,81 +18,82 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name="m4sll_tp_pedido"
-    ,schema="sll"
-    , uniqueConstraints = @UniqueConstraint(columnNames="tpe_id_pedido") 
-)
+            ,schema="sll"
+       , uniqueConstraints = @UniqueConstraint(columnNames="tpe_id_pedido")
+      )
 public class M4sllTpPedido  implements java.io.Serializable {
 
 
-     private M4sllTpPedidoId id;
-     private String tpeNmPedido;
-     private String idApprole;
-     private String idSecuser;
-     private Date dtLastUpdate;
-     private String tplIdTpLitigio;
-     private String tpeProvisionaSN;
-     private Date tpeDtEnd;
-     private Date tpeDtStart;
+    private M4sllTpPedidoId id;
+    private String tpeNmPedido;
+    private String idApprole;
+    private String idSecuser;
+    private Date dtLastUpdate;
+    private String tplIdTpLitigio;
+    private String tpeProvisionaSN;
+    private Date tpeDtEnd;
+    private Date tpeDtStart;
 
     public M4sllTpPedido() {
     }
 
-	
+
     public M4sllTpPedido(M4sllTpPedidoId id) {
         this.id = id;
     }
     public M4sllTpPedido(M4sllTpPedidoId id, String tpeNmPedido, String idApprole, String idSecuser, Date dtLastUpdate, String tplIdTpLitigio, String tpeProvisionaSN, Date tpeDtEnd, Date tpeDtStart) {
-       this.id = id;
-       this.tpeNmPedido = tpeNmPedido;
-       this.idApprole = idApprole;
-       this.idSecuser = idSecuser;
-       this.dtLastUpdate = dtLastUpdate;
-       this.tplIdTpLitigio = tplIdTpLitigio;
-       this.tpeProvisionaSN = tpeProvisionaSN;
-       this.tpeDtEnd = tpeDtEnd;
-       this.tpeDtStart = tpeDtStart;
+        this.id = id;
+        this.tpeNmPedido = tpeNmPedido;
+        this.idApprole = idApprole;
+        this.idSecuser = idSecuser;
+        this.dtLastUpdate = dtLastUpdate;
+        this.tplIdTpLitigio = tplIdTpLitigio;
+        this.tpeProvisionaSN = tpeProvisionaSN;
+        this.tpeDtEnd = tpeDtEnd;
+        this.tpeDtStart = tpeDtStart;
     }
-   
-     @EmbeddedId
 
-    
+    @EmbeddedId
+
+
     @AttributeOverrides( {
-        @AttributeOverride(name="tpeIdPedido", column=@Column(name="tpe_id_pedido", unique=true, nullable=false, length=3) ), 
-        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) ) } )
+        @AttributeOverride(name="tpeIdPedido", column=@Column(name="tpe_id_pedido", unique=true, nullable=false, length=3) ),
+        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) )
+    } )
     public M4sllTpPedidoId getId() {
         return this.id;
     }
-    
+
     public void setId(M4sllTpPedidoId id) {
         this.id = id;
     }
 
-    
+
     @Column(name="tpe_nm_pedido", length=254)
     public String getTpeNmPedido() {
         return this.tpeNmPedido;
     }
-    
+
     public void setTpeNmPedido(String tpeNmPedido) {
         this.tpeNmPedido = tpeNmPedido;
     }
 
-    
+
     @Column(name="id_approle", length=30)
     public String getIdApprole() {
         return this.idApprole;
     }
-    
+
     public void setIdApprole(String idApprole) {
         this.idApprole = idApprole;
     }
 
-    
+
     @Column(name="id_secuser", length=30)
     public String getIdSecuser() {
         return this.idSecuser;
     }
-    
+
     public void setIdSecuser(String idSecuser) {
         this.idSecuser = idSecuser;
     }
@@ -102,27 +103,27 @@ public class M4sllTpPedido  implements java.io.Serializable {
     public Date getDtLastUpdate() {
         return this.dtLastUpdate;
     }
-    
+
     public void setDtLastUpdate(Date dtLastUpdate) {
         this.dtLastUpdate = dtLastUpdate;
     }
 
-    
+
     @Column(name="tpl_id_tp_litigio", length=3)
     public String getTplIdTpLitigio() {
         return this.tplIdTpLitigio;
     }
-    
+
     public void setTplIdTpLitigio(String tplIdTpLitigio) {
         this.tplIdTpLitigio = tplIdTpLitigio;
     }
 
-    
+
     @Column(name="tpe_provisiona_s_n", length=1)
     public String getTpeProvisionaSN() {
         return this.tpeProvisionaSN;
     }
-    
+
     public void setTpeProvisionaSN(String tpeProvisionaSN) {
         this.tpeProvisionaSN = tpeProvisionaSN;
     }
@@ -132,7 +133,7 @@ public class M4sllTpPedido  implements java.io.Serializable {
     public Date getTpeDtEnd() {
         return this.tpeDtEnd;
     }
-    
+
     public void setTpeDtEnd(Date tpeDtEnd) {
         this.tpeDtEnd = tpeDtEnd;
     }
@@ -142,7 +143,7 @@ public class M4sllTpPedido  implements java.io.Serializable {
     public Date getTpeDtStart() {
         return this.tpeDtStart;
     }
-    
+
     public void setTpeDtStart(Date tpeDtStart) {
         this.tpeDtStart = tpeDtStart;
     }

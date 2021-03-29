@@ -17,69 +17,70 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="m4sll_doc_litigios"
-    ,schema="sll"
-)
+            ,schema="sll"
+      )
 public class M4sllDocLitigios  implements java.io.Serializable {
 
 
-     private M4sllDocLitigiosId id;
-     private String tdlIdTpDocLitigio;
-     private Date dolFecha;
-     private String dolObservacion;
-     private String dolUrlDocLit;
-     private String dooIdDocOrigen;
-     private String idApprole;
-     private String idSecuser;
-     private Date dtLastUpdate;
-     private String tfaIdTpFase;
-     private String dolCkAsociaFase;
-     private String dolNombre;
-     private Date dolDtNotificacion;
+    private M4sllDocLitigiosId id;
+    private String tdlIdTpDocLitigio;
+    private Date dolFecha;
+    private String dolObservacion;
+    private String dolUrlDocLit;
+    private String dooIdDocOrigen;
+    private String idApprole;
+    private String idSecuser;
+    private Date dtLastUpdate;
+    private String tfaIdTpFase;
+    private String dolCkAsociaFase;
+    private String dolNombre;
+    private Date dolDtNotificacion;
 
     public M4sllDocLitigios() {
     }
 
-	
+
     public M4sllDocLitigios(M4sllDocLitigiosId id) {
         this.id = id;
     }
     public M4sllDocLitigios(M4sllDocLitigiosId id, String tdlIdTpDocLitigio, Date dolFecha, String dolObservacion, String dolUrlDocLit, String dooIdDocOrigen, String idApprole, String idSecuser, Date dtLastUpdate, String tfaIdTpFase, String dolCkAsociaFase, String dolNombre, Date dolDtNotificacion) {
-       this.id = id;
-       this.tdlIdTpDocLitigio = tdlIdTpDocLitigio;
-       this.dolFecha = dolFecha;
-       this.dolObservacion = dolObservacion;
-       this.dolUrlDocLit = dolUrlDocLit;
-       this.dooIdDocOrigen = dooIdDocOrigen;
-       this.idApprole = idApprole;
-       this.idSecuser = idSecuser;
-       this.dtLastUpdate = dtLastUpdate;
-       this.tfaIdTpFase = tfaIdTpFase;
-       this.dolCkAsociaFase = dolCkAsociaFase;
-       this.dolNombre = dolNombre;
-       this.dolDtNotificacion = dolDtNotificacion;
+        this.id = id;
+        this.tdlIdTpDocLitigio = tdlIdTpDocLitigio;
+        this.dolFecha = dolFecha;
+        this.dolObservacion = dolObservacion;
+        this.dolUrlDocLit = dolUrlDocLit;
+        this.dooIdDocOrigen = dooIdDocOrigen;
+        this.idApprole = idApprole;
+        this.idSecuser = idSecuser;
+        this.dtLastUpdate = dtLastUpdate;
+        this.tfaIdTpFase = tfaIdTpFase;
+        this.dolCkAsociaFase = dolCkAsociaFase;
+        this.dolNombre = dolNombre;
+        this.dolDtNotificacion = dolDtNotificacion;
     }
-   
-     @EmbeddedId
 
-    
+    @EmbeddedId
+
+
     @AttributeOverrides( {
-        @AttributeOverride(name="dolSecuencia", column=@Column(name="dol_secuencia", nullable=false) ), 
-        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ), 
-        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) ) } )
+        @AttributeOverride(name="dolSecuencia", column=@Column(name="dol_secuencia", nullable=false) ),
+        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ),
+        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) )
+    } )
     public M4sllDocLitigiosId getId() {
         return this.id;
     }
-    
+
     public void setId(M4sllDocLitigiosId id) {
         this.id = id;
     }
 
-    
+
     @Column(name="tdl_id_tp_doc_litigio", length=3)
     public String getTdlIdTpDocLitigio() {
         return this.tdlIdTpDocLitigio;
     }
-    
+
     public void setTdlIdTpDocLitigio(String tdlIdTpDocLitigio) {
         this.tdlIdTpDocLitigio = tdlIdTpDocLitigio;
     }
@@ -89,57 +90,57 @@ public class M4sllDocLitigios  implements java.io.Serializable {
     public Date getDolFecha() {
         return this.dolFecha;
     }
-    
+
     public void setDolFecha(Date dolFecha) {
         this.dolFecha = dolFecha;
     }
 
-    
+
     @Column(name="dol_observacion", length=1000)
     public String getDolObservacion() {
         return this.dolObservacion;
     }
-    
+
     public void setDolObservacion(String dolObservacion) {
         this.dolObservacion = dolObservacion;
     }
 
-    
+
     @Column(name="dol_url_doc_lit", length=1000)
     public String getDolUrlDocLit() {
         return this.dolUrlDocLit;
     }
-    
+
     public void setDolUrlDocLit(String dolUrlDocLit) {
         this.dolUrlDocLit = dolUrlDocLit;
     }
 
-    
+
     @Column(name="doo_id_doc_origen", length=3)
     public String getDooIdDocOrigen() {
         return this.dooIdDocOrigen;
     }
-    
+
     public void setDooIdDocOrigen(String dooIdDocOrigen) {
         this.dooIdDocOrigen = dooIdDocOrigen;
     }
 
-    
+
     @Column(name="id_approle", length=30)
     public String getIdApprole() {
         return this.idApprole;
     }
-    
+
     public void setIdApprole(String idApprole) {
         this.idApprole = idApprole;
     }
 
-    
+
     @Column(name="id_secuser", length=30)
     public String getIdSecuser() {
         return this.idSecuser;
     }
-    
+
     public void setIdSecuser(String idSecuser) {
         this.idSecuser = idSecuser;
     }
@@ -149,37 +150,37 @@ public class M4sllDocLitigios  implements java.io.Serializable {
     public Date getDtLastUpdate() {
         return this.dtLastUpdate;
     }
-    
+
     public void setDtLastUpdate(Date dtLastUpdate) {
         this.dtLastUpdate = dtLastUpdate;
     }
 
-    
+
     @Column(name="tfa_id_tp_fase", length=3)
     public String getTfaIdTpFase() {
         return this.tfaIdTpFase;
     }
-    
+
     public void setTfaIdTpFase(String tfaIdTpFase) {
         this.tfaIdTpFase = tfaIdTpFase;
     }
 
-    
+
     @Column(name="dol_ck_asocia_fase", length=1)
     public String getDolCkAsociaFase() {
         return this.dolCkAsociaFase;
     }
-    
+
     public void setDolCkAsociaFase(String dolCkAsociaFase) {
         this.dolCkAsociaFase = dolCkAsociaFase;
     }
 
-    
+
     @Column(name="dol_nombre", length=254)
     public String getDolNombre() {
         return this.dolNombre;
     }
-    
+
     public void setDolNombre(String dolNombre) {
         this.dolNombre = dolNombre;
     }
@@ -189,7 +190,7 @@ public class M4sllDocLitigios  implements java.io.Serializable {
     public Date getDolDtNotificacion() {
         return this.dolDtNotificacion;
     }
-    
+
     public void setDolDtNotificacion(Date dolDtNotificacion) {
         this.dolDtNotificacion = dolDtNotificacion;
     }

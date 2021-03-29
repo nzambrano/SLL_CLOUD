@@ -18,7 +18,7 @@ public class M4sllLitSeguimieHome {
     private static final Log log = LogFactory.getLog(M4sllLitSeguimieHome.class);
 
     @PersistenceContext private EntityManager entityManager;
-    
+
     public void persist(M4sllLitSeguimie transientInstance) {
         log.debug("persisting M4sllLitSeguimie instance");
         try {
@@ -30,7 +30,7 @@ public class M4sllLitSeguimieHome {
             throw re;
         }
     }
-    
+
     public void remove(M4sllLitSeguimie persistentInstance) {
         log.debug("removing M4sllLitSeguimie instance");
         try {
@@ -42,7 +42,7 @@ public class M4sllLitSeguimieHome {
             throw re;
         }
     }
-    
+
     public M4sllLitSeguimie merge(M4sllLitSeguimie detachedInstance) {
         log.debug("merging M4sllLitSeguimie instance");
         try {
@@ -55,7 +55,7 @@ public class M4sllLitSeguimieHome {
             throw re;
         }
     }
-    
+
     public M4sllLitSeguimie findById( M4sllLitSeguimieId id) {
         log.debug("getting M4sllLitSeguimie instance with id: " + id);
         try {

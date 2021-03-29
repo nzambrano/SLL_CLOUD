@@ -12,17 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class M4sllPagosServices {
 
-  private final M4sllPagosRepository M4sllPagosRepository;
+    private final M4sllPagosRepository M4sllPagosRepository;
 
-  public M4sllPagosServices(M4sllPagosRepository m4sllPagosRepository) {
-    this.M4sllPagosRepository = m4sllPagosRepository;
-  }
+    public M4sllPagosServices(M4sllPagosRepository m4sllPagosRepository) {
+        this.M4sllPagosRepository = m4sllPagosRepository;
+    }
 
-  public boolean casteoError(M4sllPagos m4sllPagos) {
-    return m4sllPagos != null ? true : false;
-  }
+    public boolean casteoError(M4sllPagos m4sllPagos) {
+        return m4sllPagos != null ? true : false;
+    }
 
-  public Long UltimaSecuencia(M4sllPagos m4sllPagos) {
-    return M4sllPagosRepository.obtenerUltimaSecuencia(m4sllPagos.getId().getLitIdLitigio(), m4sllPagos.getId().getIdOrganization());
-  }
+    public Long UltimaSecuencia(M4sllPagos m4sllPagos) {
+        return M4sllPagosRepository.obtenerUltimaSecuencia(m4sllPagos.getId().getLitIdLitigio(), m4sllPagos.getId().getIdOrganization());
+    }
 }

@@ -17,86 +17,87 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="m4sll_negocios"
-    ,schema="sll"
-)
+            ,schema="sll"
+      )
 public class M4sllNegocios  implements java.io.Serializable {
 
 
-     private M4sllNegociosId id;
-     private String negNmNegocio;
-     private String litCentroCosto;
-     private String idApprole;
-     private String idSecuser;
-     private Date dtLastUpdate;
-     private String negDivision;
+    private M4sllNegociosId id;
+    private String negNmNegocio;
+    private String litCentroCosto;
+    private String idApprole;
+    private String idSecuser;
+    private Date dtLastUpdate;
+    private String negDivision;
 
     public M4sllNegocios() {
     }
 
-	
+
     public M4sllNegocios(M4sllNegociosId id) {
         this.id = id;
     }
     public M4sllNegocios(M4sllNegociosId id, String negNmNegocio, String litCentroCosto, String idApprole, String idSecuser, Date dtLastUpdate, String negDivision) {
-       this.id = id;
-       this.negNmNegocio = negNmNegocio;
-       this.litCentroCosto = litCentroCosto;
-       this.idApprole = idApprole;
-       this.idSecuser = idSecuser;
-       this.dtLastUpdate = dtLastUpdate;
-       this.negDivision = negDivision;
+        this.id = id;
+        this.negNmNegocio = negNmNegocio;
+        this.litCentroCosto = litCentroCosto;
+        this.idApprole = idApprole;
+        this.idSecuser = idSecuser;
+        this.dtLastUpdate = dtLastUpdate;
+        this.negDivision = negDivision;
     }
-   
-     @EmbeddedId
 
-    
+    @EmbeddedId
+
+
     @AttributeOverrides( {
-        @AttributeOverride(name="negIdNegocio", column=@Column(name="neg_id_negocio", nullable=false, length=3) ), 
-        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) ) } )
+        @AttributeOverride(name="negIdNegocio", column=@Column(name="neg_id_negocio", nullable=false, length=3) ),
+        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) )
+    } )
     public M4sllNegociosId getId() {
         return this.id;
     }
-    
+
     public void setId(M4sllNegociosId id) {
         this.id = id;
     }
 
-    
+
     @Column(name="neg_nm_negocio", length=254)
     public String getNegNmNegocio() {
         return this.negNmNegocio;
     }
-    
+
     public void setNegNmNegocio(String negNmNegocio) {
         this.negNmNegocio = negNmNegocio;
     }
 
-    
+
     @Column(name="lit_centro_costo", length=30)
     public String getLitCentroCosto() {
         return this.litCentroCosto;
     }
-    
+
     public void setLitCentroCosto(String litCentroCosto) {
         this.litCentroCosto = litCentroCosto;
     }
 
-    
+
     @Column(name="id_approle", length=30)
     public String getIdApprole() {
         return this.idApprole;
     }
-    
+
     public void setIdApprole(String idApprole) {
         this.idApprole = idApprole;
     }
 
-    
+
     @Column(name="id_secuser", length=30)
     public String getIdSecuser() {
         return this.idSecuser;
     }
-    
+
     public void setIdSecuser(String idSecuser) {
         this.idSecuser = idSecuser;
     }
@@ -106,17 +107,17 @@ public class M4sllNegocios  implements java.io.Serializable {
     public Date getDtLastUpdate() {
         return this.dtLastUpdate;
     }
-    
+
     public void setDtLastUpdate(Date dtLastUpdate) {
         this.dtLastUpdate = dtLastUpdate;
     }
 
-    
+
     @Column(name="neg_division", length=4)
     public String getNegDivision() {
         return this.negDivision;
     }
-    
+
     public void setNegDivision(String negDivision) {
         this.negDivision = negDivision;
     }

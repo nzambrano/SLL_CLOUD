@@ -19,7 +19,7 @@ public class M4sllTpEntidadesHome {
     private static final Log log = LogFactory.getLog(M4sllTpEntidadesHome.class);
 
     @PersistenceContext private EntityManager entityManager;
-    
+
     public void persist(M4sllTpEntidades transientInstance) {
         log.debug("persisting M4sllTpEntidades instance");
         try {
@@ -31,7 +31,7 @@ public class M4sllTpEntidadesHome {
             throw re;
         }
     }
-    
+
     public void remove(M4sllTpEntidades persistentInstance) {
         log.debug("removing M4sllTpEntidades instance");
         try {
@@ -43,7 +43,7 @@ public class M4sllTpEntidadesHome {
             throw re;
         }
     }
-    
+
     public M4sllTpEntidades merge(M4sllTpEntidades detachedInstance) {
         log.debug("merging M4sllTpEntidades instance");
         try {
@@ -56,7 +56,7 @@ public class M4sllTpEntidadesHome {
             throw re;
         }
     }
-    
+
     public M4sllTpEntidades findById( M4sllTpEntidadesId id) {
         log.debug("getting M4sllTpEntidades instance with id: " + id);
         try {

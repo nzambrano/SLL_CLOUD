@@ -12,20 +12,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class M4sllLitSeguimieServices {
 
-  private final M4sllLitSeguimieRepository M4sllLitSeguimieRepository;
+    private final M4sllLitSeguimieRepository M4sllLitSeguimieRepository;
 
-  public M4sllLitSeguimieServices(M4sllLitSeguimieRepository m4sllLitSeguimieRepository) {
-    this.M4sllLitSeguimieRepository = m4sllLitSeguimieRepository;
-  }
+    public M4sllLitSeguimieServices(M4sllLitSeguimieRepository m4sllLitSeguimieRepository) {
+        this.M4sllLitSeguimieRepository = m4sllLitSeguimieRepository;
+    }
 
-  public boolean casteoError(M4sllLitSeguimie m4sllLitSeguimie) {
-    return m4sllLitSeguimie != null ? true : false;
-  }
+    public boolean casteoError(M4sllLitSeguimie m4sllLitSeguimie) {
+        return m4sllLitSeguimie != null ? true : false;
+    }
 
-  public Long UltimaSecuencia(M4sllLitSeguimie m4sllLitSeguimie) {
-    return M4sllLitSeguimieRepository.obtenerUltimaSecuencia(
-      m4sllLitSeguimie.getId().getIdOrganization(),
-      m4sllLitSeguimie.getId().getLitIdLitigio()
-    );
-  }
+    public Long UltimaSecuencia(M4sllLitSeguimie m4sllLitSeguimie) {
+        return M4sllLitSeguimieRepository.obtenerUltimaSecuencia(
+                   m4sllLitSeguimie.getId().getIdOrganization(),
+                   m4sllLitSeguimie.getId().getLitIdLitigio()
+               );
+    }
 }

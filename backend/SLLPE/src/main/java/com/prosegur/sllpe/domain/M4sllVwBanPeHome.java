@@ -17,7 +17,7 @@ public class M4sllVwBanPeHome {
     private static final Log log = LogFactory.getLog(M4sllVwBanPeHome.class);
 
     @PersistenceContext private EntityManager entityManager;
-    
+
     public void persist(M4sllVwBanPe transientInstance) {
         log.debug("persisting M4sllVwBanPe instance");
         try {
@@ -29,7 +29,7 @@ public class M4sllVwBanPeHome {
             throw re;
         }
     }
-    
+
     public void remove(M4sllVwBanPe persistentInstance) {
         log.debug("removing M4sllVwBanPe instance");
         try {
@@ -41,7 +41,7 @@ public class M4sllVwBanPeHome {
             throw re;
         }
     }
-    
+
     public M4sllVwBanPe merge(M4sllVwBanPe detachedInstance) {
         log.debug("merging M4sllVwBanPe instance");
         try {
@@ -54,7 +54,7 @@ public class M4sllVwBanPeHome {
             throw re;
         }
     }
-    
+
     public M4sllVwBanPe findById( M4sllVwBanPeId id) {
         log.debug("getting M4sllVwBanPe instance with id: " + id);
         try {

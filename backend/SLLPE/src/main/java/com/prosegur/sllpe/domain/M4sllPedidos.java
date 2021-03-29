@@ -18,103 +18,104 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="m4sll_pedidos"
-    ,schema="sll"
-)
+            ,schema="sll"
+      )
 public class M4sllPedidos  implements java.io.Serializable {
 
-     private M4sllPedidosId id;
-     private BigDecimal pedValor;
-     private String pedObservacion;
-     private String pedSubPedido;
-     private String pedPrincipalSN;
-     private Date pedPeriodo;
-     private BigDecimal pedValorRecargo;
-     private String idApprole;
-     private String idSecuser;
-     private Date dtLastUpdate;
+    private M4sllPedidosId id;
+    private BigDecimal pedValor;
+    private String pedObservacion;
+    private String pedSubPedido;
+    private String pedPrincipalSN;
+    private Date pedPeriodo;
+    private BigDecimal pedValorRecargo;
+    private String idApprole;
+    private String idSecuser;
+    private Date dtLastUpdate;
 
     public M4sllPedidos() {
     }
 
-	
+
     public M4sllPedidos(M4sllPedidosId id) {
         this.id = id;
     }
     public M4sllPedidos(M4sllPedidosId id, BigDecimal pedValor, String pedObservacion, String pedSubPedido, String pedPrincipalSN, Date pedPeriodo, BigDecimal pedValorRecargo, String idApprole, String idSecuser, Date dtLastUpdate) {
-       this.id = id;
-       this.pedValor = pedValor;
-       this.pedObservacion = pedObservacion;
-       this.pedSubPedido = pedSubPedido;
-       this.pedPrincipalSN = pedPrincipalSN;
-       this.pedPeriodo = pedPeriodo;
-       this.pedValorRecargo = pedValorRecargo;
-       this.idApprole = idApprole;
-       this.idSecuser = idSecuser;
-       this.dtLastUpdate = dtLastUpdate;
+        this.id = id;
+        this.pedValor = pedValor;
+        this.pedObservacion = pedObservacion;
+        this.pedSubPedido = pedSubPedido;
+        this.pedPrincipalSN = pedPrincipalSN;
+        this.pedPeriodo = pedPeriodo;
+        this.pedValorRecargo = pedValorRecargo;
+        this.idApprole = idApprole;
+        this.idSecuser = idSecuser;
+        this.dtLastUpdate = dtLastUpdate;
     }
-   
+
     @EmbeddedId
 
     @AttributeOverrides( {
-        @AttributeOverride(name="tpeIdPedido", column=@Column(name="tpe_id_pedido", nullable=false, length=3) ), 
-        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ), 
-        @AttributeOverride(name="pedSecuencia", column=@Column(name="ped_secuencia", nullable=false, length=10) ), 
-        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) ) } )
-    
+        @AttributeOverride(name="tpeIdPedido", column=@Column(name="tpe_id_pedido", nullable=false, length=3) ),
+        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ),
+        @AttributeOverride(name="pedSecuencia", column=@Column(name="ped_secuencia", nullable=false, length=10) ),
+        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) )
+    } )
+
     public M4sllPedidosId getId() {
         return this.id;
     }
-    
+
     public void setId(M4sllPedidosId id) {
         this.id = id;
     }
 
-    /*     
+    /*
     @Column(name="ped_secuencia")
     public Long getPedSecuencia() {
         return this.pedSecuencia;
     }
-    
+
     public void setPedSecuencia(Long pedSecuencia) {
         this.pedSecuencia = pedSecuencia;
     }*/
 
-    
+
     @Column(name="ped_valor", precision=18, scale=4)
     public BigDecimal getPedValor() {
         return this.pedValor;
     }
-    
+
     public void setPedValor(BigDecimal pedValor) {
         this.pedValor = pedValor;
     }
 
-    
+
     @Column(name="ped_observacion", length=254)
     public String getPedObservacion() {
         return this.pedObservacion;
     }
-    
+
     public void setPedObservacion(String pedObservacion) {
         this.pedObservacion = pedObservacion;
     }
 
-    
+
     @Column(name="ped_sub_pedido", length=254)
     public String getPedSubPedido() {
         return this.pedSubPedido;
     }
-    
+
     public void setPedSubPedido(String pedSubPedido) {
         this.pedSubPedido = pedSubPedido;
     }
 
-    
+
     @Column(name="ped_principal_s_n", length=1)
     public String getPedPrincipalSN() {
         return this.pedPrincipalSN;
     }
-    
+
     public void setPedPrincipalSN(String pedPrincipalSN) {
         this.pedPrincipalSN = pedPrincipalSN;
     }
@@ -124,37 +125,37 @@ public class M4sllPedidos  implements java.io.Serializable {
     public Date getPedPeriodo() {
         return this.pedPeriodo;
     }
-    
+
     public void setPedPeriodo(Date pedPeriodo) {
         this.pedPeriodo = pedPeriodo;
     }
 
-    
+
     @Column(name="ped_valor_recargo", precision=18, scale=4)
     public BigDecimal getPedValorRecargo() {
         return this.pedValorRecargo;
     }
-    
+
     public void setPedValorRecargo(BigDecimal pedValorRecargo) {
         this.pedValorRecargo = pedValorRecargo;
     }
 
-    
+
     @Column(name="id_approle", length=30)
     public String getIdApprole() {
         return this.idApprole;
     }
-    
+
     public void setIdApprole(String idApprole) {
         this.idApprole = idApprole;
     }
 
-    
+
     @Column(name="id_secuser", length=30)
     public String getIdSecuser() {
         return this.idSecuser;
     }
-    
+
     public void setIdSecuser(String idSecuser) {
         this.idSecuser = idSecuser;
     }
@@ -164,7 +165,7 @@ public class M4sllPedidos  implements java.io.Serializable {
     public Date getDtLastUpdate() {
         return this.dtLastUpdate;
     }
-    
+
     public void setDtLastUpdate(Date dtLastUpdate) {
         this.dtLastUpdate = dtLastUpdate;
     }

@@ -48,59 +48,59 @@ public class M4sllFasesResource {
 
     @PostMapping("/m4sll_fases")
     public ResponseEntity<M4sllFases> createM4sllFases(@RequestBody M4sllFases fases)
-            throws URISyntaxException {
+    throws URISyntaxException {
         log.debug("REST request to create m4sll_fases : {}", fases);
         // M4sllFasesId id = new M4sllFasesId();
         FasesServices faseServices = new FasesServices(m4sllfasesRepository);
         Long fas_secuencia = faseServices.UltimaSecuencia(fases);
-        
+
         fases.setFasSecuencia(fas_secuencia);
         // id.setLitIdLitigio(m4sll_fases.getId().getLitIdLitigio());
         // id.setIdOrganization(m4sll_fases.getId().getIdOrganization());
-        
+
         // m4sll_fases.setId(id);
-        
+
         M4sllFases result = m4sllfasesRepository.save(fases);
         return ResponseEntity
-                .created(new URI("/api/m4sll_fases/" + result.getId())).headers(HeaderUtil
-                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-                .body(result);
+               .created(new URI("/api/m4sll_fases/" + result.getId())).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .body(result);
     }
 
     @PutMapping("/m4sll_fases")
     public ResponseEntity<M4sllFases> updateM4sllFases(@RequestBody M4sllFases m4sll_fases)
-            throws URISyntaxException {
+    throws URISyntaxException {
         log.debug("REST request to update m4sll_fases : {}", m4sll_fases);
         if (m4sll_fases.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         M4sllFases result = m4sllfasesRepository.save(m4sll_fases);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                m4sll_fases.getId().toString())).body(result);
+                                           m4sll_fases.getId().toString())).body(result);
     }
 
-   /*
-    @GetMapping("/m4sll_fases")
-    public ResponseEntity<List<M4sllFases>> getAllM4sllFases() {
-        log.debug("REST request to get ALL M4sllFases : {}");
+    /*
+     @GetMapping("/m4sll_fases")
+     public ResponseEntity<List<M4sllFases>> getAllM4sllFases() {
+         log.debug("REST request to get ALL M4sllFases : {}");
 
-        List<M4sllFases> M4sllFasesAll = m4sllfasesRepository.findAll();
-        return ResponseEntity.ok().body(M4sllFasesAll);
-    }
-    */
-    
+         List<M4sllFases> M4sllFasesAll = m4sllfasesRepository.findAll();
+         return ResponseEntity.ok().body(M4sllFasesAll);
+     }
+     */
+
     @GetMapping("/m4sll_fases/{ID_ORGANIZATION}/{LIT_ID_LITIGIO}")
     public ResponseEntity<List<M4sllFases>> getAutoresByLitigio(
-    		@PathVariable("ID_ORGANIZATION") String ID_ORGANIZATION,
-    		@PathVariable("LIT_ID_LITIGIO") String LIT_ID_LITIGIO    		
-            
-            ) {
+        @PathVariable("ID_ORGANIZATION") String ID_ORGANIZATION,
+        @PathVariable("LIT_ID_LITIGIO") String LIT_ID_LITIGIO
+
+    ) {
         log.debug("REST request to get ALL M4sllFases : {}");
 
         List<M4sllFases> M4sllFasesAll = m4sllfasesRepository.getFases(
-        		ID_ORGANIZATION,
-        		LIT_ID_LITIGIO        		
-        		);
+                                             ID_ORGANIZATION,
+                                             LIT_ID_LITIGIO
+                                         );
         return ResponseEntity.ok().body(M4sllFasesAll);
     }
 
@@ -109,12 +109,12 @@ public class M4sllFasesResource {
     public ResponseEntity<M4sllFases> getM4sllFases(
     		@PathVariable("ID_ORGANIZATION") String idOrganization,
     		@PathVariable("LIT_ID_LITIGIO") String litIdLitigio,
-    		@PathVariable("aur_secuencia") Integer aurSecuencia    		
+    		@PathVariable("aur_secuencia") Integer aurSecuencia
             ) {
         log.debug("REST request to get m4sll_fases : {} | {}", litIdLitigio, idOrganization, aurSecuencia );
         M4sllFasesId id = new M4sllFasesId();
         id.setIdOrganization(idOrganization);
-        id.setLitIdLitigio(litIdLitigio);        
+        id.setLitIdLitigio(litIdLitigio);
         id.setAurSecuencia(aurSecuencia);
 
         Optional<M4sllFases> m4sll_fases = m4sllFasesRepository.findById(id);
@@ -124,21 +124,21 @@ public class M4sllFasesResource {
 
     @DeleteMapping("/m4sll_fases/{ID_ORGANIZATION}/{LIT_ID_LITIGIO}/{FAS_SECUENCIA}")
     public ResponseEntity<Void> deleteM4sllFases(
-    		@PathVariable("ID_ORGANIZATION") String idOrganization,
-            @PathVariable("LIT_ID_LITIGIO") String litIdLitigio,
-            @PathVariable("FAS_SECUENCIA") Integer  fasSecuencia
-            ) {
+        @PathVariable("ID_ORGANIZATION") String idOrganization,
+        @PathVariable("LIT_ID_LITIGIO") String litIdLitigio,
+        @PathVariable("FAS_SECUENCIA") Integer  fasSecuencia
+    ) {
         log.debug("REST request to delete m4sll_fases : {} | {}", litIdLitigio, idOrganization, fasSecuencia );
         M4sllFasesId id = new M4sllFasesId();
         id.setIdOrganization(idOrganization);
         id.setLitIdLitigio(litIdLitigio);
         // m4sllfasesRepository.setFasSecuencia(fasSecuencia);
         M4sllFases fase = m4sllfasesRepository.getFaseFasSecuencia(idOrganization, litIdLitigio, fasSecuencia);
-        
+
         m4sllfasesRepository.delete(fase);
         //m4sllfasesRepository.deleteById(id);
         return ResponseEntity.noContent()
-                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-                .build();
+               .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+               .build();
     }
 }

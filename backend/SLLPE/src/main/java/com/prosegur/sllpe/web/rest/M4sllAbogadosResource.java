@@ -55,34 +55,34 @@ public class M4sllAbogadosResource {
     /* Update en la BD */
     @PutMapping("/m4sll_mt_abogados")
     public ResponseEntity<M4sllMtAbogados> M4sllMtAbogados(@RequestBody M4sllMtAbogados m4sll_mt_abogados)
-            throws URISyntaxException {
+    throws URISyntaxException {
         log.debug("REST request to update m4sll_mt_abogados : {}", m4sll_mt_abogados);
         if (m4sll_mt_abogados.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         M4sllMtAbogados result = M4sllAbogadosRepository.save(m4sll_mt_abogados);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                m4sll_mt_abogados.getId().toString())).body(result);
+                                           m4sll_mt_abogados.getId().toString())).body(result);
     }
 
     /* Delete en la BD */
-    
+
     @DeleteMapping("/m4sll_mt_abogados/{id_idOrganization}/{mab_secuencia}")
     public ResponseEntity<Void> deleteM4sllAbogados(
-            @PathVariable("id_idOrganization") String id_idOrganization,
-            @PathVariable("mab_secuencia") Long mab_secuencia) {
+        @PathVariable("id_idOrganization") String id_idOrganization,
+        @PathVariable("mab_secuencia") Long mab_secuencia) {
         log.debug("REST request to delete m4sll_mt_abogados : {} | {}",id_idOrganization,mab_secuencia);
         M4sllMtAbogadosId id = new M4sllMtAbogadosId();
         id.setIdOrganization(id_idOrganization);
         id.setMabSecuencia(mab_secuencia);
-        
+
         M4sllAbogadosRepository.deleteById(id);
         return ResponseEntity.noContent()
-                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-                .build();
+               .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+               .build();
     }
 
-    /* Insert en la BD 
+    /* Insert en la BD
     @PostMapping("/m4sll_mt_abogados")
     public ResponseEntity<M4sllMtAbogados> createM4sllAbogados(@RequestBody M4sllMtAbogados m4sll_mt_abogados)
             throws URISyntaxException {
@@ -99,25 +99,25 @@ public class M4sllAbogadosResource {
     /* Insert en la BD */
     @PostMapping("/m4sll_mt_abogados")
     public ResponseEntity<M4sllMtAbogados> createM4sllAbogados(@RequestBody M4sllMtAbogados m4sll_mt_abogados)
-            throws URISyntaxException {
+    throws URISyntaxException {
 
         log.debug("REST request to create m4sll_mt_abogados : {}", m4sll_mt_abogados);
-        
+
         M4sllMtAbogadosId id = new M4sllMtAbogadosId();
-        
+
         AbogadoServices abogadoServices = new AbogadoServices(M4sllAbogadosRepository);
         Long mab_secuencia = abogadoServices.UltimaSecuencia(m4sll_mt_abogados);
-        
+
         id.setIdOrganization(m4sll_mt_abogados.getId().getIdOrganization());
         id.setMabSecuencia(mab_secuencia);
-        
+
         m4sll_mt_abogados.setId(id);
 
         M4sllMtAbogados result = M4sllAbogadosRepository.save(m4sll_mt_abogados);
         return ResponseEntity
-                .created(new URI("/api/m4sll_mt_abogados/" + result.getId())).headers(HeaderUtil
-                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-                .body(result);
+               .created(new URI("/api/m4sll_mt_abogados/" + result.getId())).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .body(result);
     }
 
 }

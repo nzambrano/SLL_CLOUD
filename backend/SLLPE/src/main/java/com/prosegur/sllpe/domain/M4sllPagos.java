@@ -18,155 +18,156 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="m4sll_pagos"
-    ,schema="sll"
-)
+            ,schema="sll"
+      )
 public class M4sllPagos  implements java.io.Serializable {
 
 
-     private M4sllPagosId id;
-     private String tspIdSalidaPago;
-     private Long dcpSecuencia;
-     private String mepIdMedioPago;
-     private String stpIdStatusPago;
-     private String tpaIdPago;
-     private BigDecimal pagValor;
-     private Date pagFecEst;
-     private Date pagFecVto;
-     private Date pagFecApr;
-     private Date pagFecErp;
-     private Date pagFecPag;
-     private String pagDescripcion;
-     private String pagDocumento;
-     private String pagCombinacion;
-     private Long pagCkComb;
-     private String pagCkRecuperado;
-     private String pagCkSolicitado;
-     private Date pagFecha;
-     private String pagComprobante;
-     private String pagNroIdentificacion;
-     private String pagTipoCuentaDestno;
-     private String pagNroCuentaDestino;
-     private String pagDestinatario;
-     private String pagEmailDestinatario;
-     private Long pagNroSolicitud;
-     private String pagCodigoIban;
-     private String idApprole;
-     private String idSecuser;
-     private Date dtLastUpdate;
-     private String pagDescripcionDoc;
+    private M4sllPagosId id;
+    private String tspIdSalidaPago;
+    private Long dcpSecuencia;
+    private String mepIdMedioPago;
+    private String stpIdStatusPago;
+    private String tpaIdPago;
+    private BigDecimal pagValor;
+    private Date pagFecEst;
+    private Date pagFecVto;
+    private Date pagFecApr;
+    private Date pagFecErp;
+    private Date pagFecPag;
+    private String pagDescripcion;
+    private String pagDocumento;
+    private String pagCombinacion;
+    private Long pagCkComb;
+    private String pagCkRecuperado;
+    private String pagCkSolicitado;
+    private Date pagFecha;
+    private String pagComprobante;
+    private String pagNroIdentificacion;
+    private String pagTipoCuentaDestno;
+    private String pagNroCuentaDestino;
+    private String pagDestinatario;
+    private String pagEmailDestinatario;
+    private Long pagNroSolicitud;
+    private String pagCodigoIban;
+    private String idApprole;
+    private String idSecuser;
+    private Date dtLastUpdate;
+    private String pagDescripcionDoc;
 
     public M4sllPagos() {
     }
 
-	
+
     public M4sllPagos(M4sllPagosId id) {
         this.id = id;
     }
     public M4sllPagos(M4sllPagosId id, String tspIdSalidaPago, Long dcpSecuencia, String mepIdMedioPago, String stpIdStatusPago, String tpaIdPago, BigDecimal pagValor, Date pagFecEst, Date pagFecVto, Date pagFecApr, Date pagFecErp, Date pagFecPag, String pagDescripcion, String pagDocumento, String pagCombinacion, Long pagCkComb, String pagCkRecuperado, String pagCkSolicitado, Date pagFecha, String pagComprobante, String pagNroIdentificacion, String pagTipoCuentaDestno, String pagNroCuentaDestino, String pagDestinatario, String pagEmailDestinatario, Long pagNroSolicitud, String pagCodigoIban, String idApprole, String idSecuser, Date dtLastUpdate, String pagDescripcionDoc) {
-       this.id = id;
-       this.tspIdSalidaPago = tspIdSalidaPago;
-       this.dcpSecuencia = dcpSecuencia;
-       this.mepIdMedioPago = mepIdMedioPago;
-       this.stpIdStatusPago = stpIdStatusPago;
-       this.tpaIdPago = tpaIdPago;
-       this.pagValor = pagValor;
-       this.pagFecEst = pagFecEst;
-       this.pagFecVto = pagFecVto;
-       this.pagFecApr = pagFecApr;
-       this.pagFecErp = pagFecErp;
-       this.pagFecPag = pagFecPag;
-       this.pagDescripcion = pagDescripcion;
-       this.pagDocumento = pagDocumento;
-       this.pagCombinacion = pagCombinacion;
-       this.pagCkComb = pagCkComb;
-       this.pagCkRecuperado = pagCkRecuperado;
-       this.pagCkSolicitado = pagCkSolicitado;
-       this.pagFecha = pagFecha;
-       this.pagComprobante = pagComprobante;
-       this.pagNroIdentificacion = pagNroIdentificacion;
-       this.pagTipoCuentaDestno = pagTipoCuentaDestno;
-       this.pagNroCuentaDestino = pagNroCuentaDestino;
-       this.pagDestinatario = pagDestinatario;
-       this.pagEmailDestinatario = pagEmailDestinatario;
-       this.pagNroSolicitud = pagNroSolicitud;
-       this.pagCodigoIban = pagCodigoIban;
-       this.idApprole = idApprole;
-       this.idSecuser = idSecuser;
-       this.dtLastUpdate = dtLastUpdate;
-       this.pagDescripcionDoc = pagDescripcionDoc;
+        this.id = id;
+        this.tspIdSalidaPago = tspIdSalidaPago;
+        this.dcpSecuencia = dcpSecuencia;
+        this.mepIdMedioPago = mepIdMedioPago;
+        this.stpIdStatusPago = stpIdStatusPago;
+        this.tpaIdPago = tpaIdPago;
+        this.pagValor = pagValor;
+        this.pagFecEst = pagFecEst;
+        this.pagFecVto = pagFecVto;
+        this.pagFecApr = pagFecApr;
+        this.pagFecErp = pagFecErp;
+        this.pagFecPag = pagFecPag;
+        this.pagDescripcion = pagDescripcion;
+        this.pagDocumento = pagDocumento;
+        this.pagCombinacion = pagCombinacion;
+        this.pagCkComb = pagCkComb;
+        this.pagCkRecuperado = pagCkRecuperado;
+        this.pagCkSolicitado = pagCkSolicitado;
+        this.pagFecha = pagFecha;
+        this.pagComprobante = pagComprobante;
+        this.pagNroIdentificacion = pagNroIdentificacion;
+        this.pagTipoCuentaDestno = pagTipoCuentaDestno;
+        this.pagNroCuentaDestino = pagNroCuentaDestino;
+        this.pagDestinatario = pagDestinatario;
+        this.pagEmailDestinatario = pagEmailDestinatario;
+        this.pagNroSolicitud = pagNroSolicitud;
+        this.pagCodigoIban = pagCodigoIban;
+        this.idApprole = idApprole;
+        this.idSecuser = idSecuser;
+        this.dtLastUpdate = dtLastUpdate;
+        this.pagDescripcionDoc = pagDescripcionDoc;
     }
-   
-     @EmbeddedId
 
-    
+    @EmbeddedId
+
+
     @AttributeOverrides( {
-        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ), 
-        @AttributeOverride(name="pagSecuencia", column=@Column(name="pag_secuencia", nullable=false) ), 
-        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) ) } )
+        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ),
+        @AttributeOverride(name="pagSecuencia", column=@Column(name="pag_secuencia", nullable=false) ),
+        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) )
+    } )
     public M4sllPagosId getId() {
         return this.id;
     }
-    
+
     public void setId(M4sllPagosId id) {
         this.id = id;
     }
 
-    
+
     @Column(name="tsp_id_salida_pago", length=3)
     public String getTspIdSalidaPago() {
         return this.tspIdSalidaPago;
     }
-    
+
     public void setTspIdSalidaPago(String tspIdSalidaPago) {
         this.tspIdSalidaPago = tspIdSalidaPago;
     }
 
-    
+
     @Column(name="dcp_secuencia")
     public Long getDcpSecuencia() {
         return this.dcpSecuencia;
     }
-    
+
     public void setDcpSecuencia(Long dcpSecuencia) {
         this.dcpSecuencia = dcpSecuencia;
     }
 
-    
+
     @Column(name="mep_id_medio_pago", length=3)
     public String getMepIdMedioPago() {
         return this.mepIdMedioPago;
     }
-    
+
     public void setMepIdMedioPago(String mepIdMedioPago) {
         this.mepIdMedioPago = mepIdMedioPago;
     }
 
-    
+
     @Column(name="stp_id_status_pago", length=3)
     public String getStpIdStatusPago() {
         return this.stpIdStatusPago;
     }
-    
+
     public void setStpIdStatusPago(String stpIdStatusPago) {
         this.stpIdStatusPago = stpIdStatusPago;
     }
 
-    
+
     @Column(name="tpa_id_pago", length=3)
     public String getTpaIdPago() {
         return this.tpaIdPago;
     }
-    
+
     public void setTpaIdPago(String tpaIdPago) {
         this.tpaIdPago = tpaIdPago;
     }
 
-    
+
     @Column(name="pag_valor", precision=18)
     public BigDecimal getPagValor() {
         return this.pagValor;
     }
-    
+
     public void setPagValor(BigDecimal pagValor) {
         this.pagValor = pagValor;
     }
@@ -176,7 +177,7 @@ public class M4sllPagos  implements java.io.Serializable {
     public Date getPagFecEst() {
         return this.pagFecEst;
     }
-    
+
     public void setPagFecEst(Date pagFecEst) {
         this.pagFecEst = pagFecEst;
     }
@@ -186,7 +187,7 @@ public class M4sllPagos  implements java.io.Serializable {
     public Date getPagFecVto() {
         return this.pagFecVto;
     }
-    
+
     public void setPagFecVto(Date pagFecVto) {
         this.pagFecVto = pagFecVto;
     }
@@ -196,7 +197,7 @@ public class M4sllPagos  implements java.io.Serializable {
     public Date getPagFecApr() {
         return this.pagFecApr;
     }
-    
+
     public void setPagFecApr(Date pagFecApr) {
         this.pagFecApr = pagFecApr;
     }
@@ -206,7 +207,7 @@ public class M4sllPagos  implements java.io.Serializable {
     public Date getPagFecErp() {
         return this.pagFecErp;
     }
-    
+
     public void setPagFecErp(Date pagFecErp) {
         this.pagFecErp = pagFecErp;
     }
@@ -216,67 +217,67 @@ public class M4sllPagos  implements java.io.Serializable {
     public Date getPagFecPag() {
         return this.pagFecPag;
     }
-    
+
     public void setPagFecPag(Date pagFecPag) {
         this.pagFecPag = pagFecPag;
     }
 
-    
+
     @Column(name="pag_descripcion", length=1000)
     public String getPagDescripcion() {
         return this.pagDescripcion;
     }
-    
+
     public void setPagDescripcion(String pagDescripcion) {
         this.pagDescripcion = pagDescripcion;
     }
 
-    
+
     @Column(name="pag_documento", length=254)
     public String getPagDocumento() {
         return this.pagDocumento;
     }
-    
+
     public void setPagDocumento(String pagDocumento) {
         this.pagDocumento = pagDocumento;
     }
 
-    
+
     @Column(name="pag_combinacion", length=254)
     public String getPagCombinacion() {
         return this.pagCombinacion;
     }
-    
+
     public void setPagCombinacion(String pagCombinacion) {
         this.pagCombinacion = pagCombinacion;
     }
 
-    
+
     @Column(name="pag_ck_comb")
     public Long getPagCkComb() {
         return this.pagCkComb;
     }
-    
+
     public void setPagCkComb(Long pagCkComb) {
         this.pagCkComb = pagCkComb;
     }
 
-    
+
     @Column(name="pag_ck_recuperado", length=1)
     public String getPagCkRecuperado() {
         return this.pagCkRecuperado;
     }
-    
+
     public void setPagCkRecuperado(String pagCkRecuperado) {
         this.pagCkRecuperado = pagCkRecuperado;
     }
 
-    
+
     @Column(name="pag_ck_solicitado", length=1)
     public String getPagCkSolicitado() {
         return this.pagCkSolicitado;
     }
-    
+
     public void setPagCkSolicitado(String pagCkSolicitado) {
         this.pagCkSolicitado = pagCkSolicitado;
     }
@@ -286,107 +287,107 @@ public class M4sllPagos  implements java.io.Serializable {
     public Date getPagFecha() {
         return this.pagFecha;
     }
-    
+
     public void setPagFecha(Date pagFecha) {
         this.pagFecha = pagFecha;
     }
 
-    
+
     @Column(name="pag_comprobante", length=2000)
     public String getPagComprobante() {
         return this.pagComprobante;
     }
-    
+
     public void setPagComprobante(String pagComprobante) {
         this.pagComprobante = pagComprobante;
     }
 
-    
+
     @Column(name="pag_nro_identificacion", length=254)
     public String getPagNroIdentificacion() {
         return this.pagNroIdentificacion;
     }
-    
+
     public void setPagNroIdentificacion(String pagNroIdentificacion) {
         this.pagNroIdentificacion = pagNroIdentificacion;
     }
 
-    
+
     @Column(name="pag_tipo_cuenta_destno", length=254)
     public String getPagTipoCuentaDestno() {
         return this.pagTipoCuentaDestno;
     }
-    
+
     public void setPagTipoCuentaDestno(String pagTipoCuentaDestno) {
         this.pagTipoCuentaDestno = pagTipoCuentaDestno;
     }
 
-    
+
     @Column(name="pag_nro_cuenta_destino", length=254)
     public String getPagNroCuentaDestino() {
         return this.pagNroCuentaDestino;
     }
-    
+
     public void setPagNroCuentaDestino(String pagNroCuentaDestino) {
         this.pagNroCuentaDestino = pagNroCuentaDestino;
     }
 
-    
+
     @Column(name="pag_destinatario", length=2000)
     public String getPagDestinatario() {
         return this.pagDestinatario;
     }
-    
+
     public void setPagDestinatario(String pagDestinatario) {
         this.pagDestinatario = pagDestinatario;
     }
 
-    
+
     @Column(name="pag_email_destinatario", length=254)
     public String getPagEmailDestinatario() {
         return this.pagEmailDestinatario;
     }
-    
+
     public void setPagEmailDestinatario(String pagEmailDestinatario) {
         this.pagEmailDestinatario = pagEmailDestinatario;
     }
 
-    
+
     @Column(name="pag_nro_solicitud")
     public Long getPagNroSolicitud() {
         return this.pagNroSolicitud;
     }
-    
+
     public void setPagNroSolicitud(Long pagNroSolicitud) {
         this.pagNroSolicitud = pagNroSolicitud;
     }
 
-    
+
     @Column(name="pag_codigo_iban", length=254)
     public String getPagCodigoIban() {
         return this.pagCodigoIban;
     }
-    
+
     public void setPagCodigoIban(String pagCodigoIban) {
         this.pagCodigoIban = pagCodigoIban;
     }
 
-    
+
     @Column(name="id_approle", length=30)
     public String getIdApprole() {
         return this.idApprole;
     }
-    
+
     public void setIdApprole(String idApprole) {
         this.idApprole = idApprole;
     }
 
-    
+
     @Column(name="id_secuser", length=30)
     public String getIdSecuser() {
         return this.idSecuser;
     }
-    
+
     public void setIdSecuser(String idSecuser) {
         this.idSecuser = idSecuser;
     }
@@ -396,17 +397,17 @@ public class M4sllPagos  implements java.io.Serializable {
     public Date getDtLastUpdate() {
         return this.dtLastUpdate;
     }
-    
+
     public void setDtLastUpdate(Date dtLastUpdate) {
         this.dtLastUpdate = dtLastUpdate;
     }
 
-    
+
     @Column(name="pag_descripcion_doc", length=1000)
     public String getPagDescripcionDoc() {
         return this.pagDescripcionDoc;
     }
-    
+
     public void setPagDescripcionDoc(String pagDescripcionDoc) {
         this.pagDescripcionDoc = pagDescripcionDoc;
     }

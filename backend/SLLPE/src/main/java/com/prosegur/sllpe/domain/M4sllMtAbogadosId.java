@@ -12,22 +12,22 @@ import javax.persistence.Embeddable;
 public class M4sllMtAbogadosId  implements java.io.Serializable {
 
 
-     private long mabSecuencia;
-     private String idOrganization;
+    private long mabSecuencia;
+    private String idOrganization;
 
     public M4sllMtAbogadosId() {
     }
 
     public M4sllMtAbogadosId(long mabSecuencia, String idOrganization) {
-       this.mabSecuencia = mabSecuencia;
-       this.idOrganization = idOrganization;
+        this.mabSecuencia = mabSecuencia;
+        this.idOrganization = idOrganization;
     }
-    
+
     @Column(name="mab_secuencia", nullable=false)
     public long getMabSecuencia() {
         return this.mabSecuencia;
     }
-    
+
     public void setMabSecuencia(long mabSecuencia) {
         this.mabSecuencia = mabSecuencia;
     }
@@ -37,29 +37,29 @@ public class M4sllMtAbogadosId  implements java.io.Serializable {
     public String getIdOrganization() {
         return this.idOrganization;
     }
-    
+
     public void setIdOrganization(String idOrganization) {
         this.idOrganization = idOrganization;
     }
 
 
-   public boolean equals(Object other) {
-         if ( (this == other ) ) return true;
-		 if ( (other == null ) ) return false;
-		 if ( !(other instanceof M4sllMtAbogadosId) ) return false;
-		 M4sllMtAbogadosId castOther = ( M4sllMtAbogadosId ) other; 
-         
-		 return (this.getMabSecuencia()==castOther.getMabSecuencia())
- && ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) );
-   }
-   
-   public int hashCode() {
-         int result = 17;
-         
-         result = 37 * result + (int) this.getMabSecuencia();
-         result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
-         return result;
-   }   
+    public boolean equals(Object other) {
+        if ( (this == other ) ) return true;
+        if ( (other == null ) ) return false;
+        if ( !(other instanceof M4sllMtAbogadosId) ) return false;
+        M4sllMtAbogadosId castOther = ( M4sllMtAbogadosId ) other;
+
+        return (this.getMabSecuencia()==castOther.getMabSecuencia())
+               && ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) );
+    }
+
+    public int hashCode() {
+        int result = 17;
+
+        result = 37 * result + (int) this.getMabSecuencia();
+        result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
+        return result;
+    }
 
 
 }

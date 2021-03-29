@@ -12,24 +12,24 @@ import javax.persistence.Embeddable;
 public class M4sllTpFasesId  implements java.io.Serializable {
 
 
-     private String tfaIdTpFase;
-     private String idOrganization;
+    private String tfaIdTpFase;
+    private String idOrganization;
 
     public M4sllTpFasesId() {
     }
 
     public M4sllTpFasesId(String tfaIdTpFase, String idOrganization) {
-       this.tfaIdTpFase = tfaIdTpFase;
-       this.idOrganization = idOrganization;
+        this.tfaIdTpFase = tfaIdTpFase;
+        this.idOrganization = idOrganization;
     }
-   
+
 
 
     @Column(name="tfa_id_tp_fase", nullable=false, length=3)
     public String getTfaIdTpFase() {
         return this.tfaIdTpFase;
     }
-    
+
     public void setTfaIdTpFase(String tfaIdTpFase) {
         this.tfaIdTpFase = tfaIdTpFase;
     }
@@ -39,29 +39,29 @@ public class M4sllTpFasesId  implements java.io.Serializable {
     public String getIdOrganization() {
         return this.idOrganization;
     }
-    
+
     public void setIdOrganization(String idOrganization) {
         this.idOrganization = idOrganization;
     }
 
 
-   public boolean equals(Object other) {
-         if ( (this == other ) ) return true;
-		 if ( (other == null ) ) return false;
-		 if ( !(other instanceof M4sllTpFasesId) ) return false;
-		 M4sllTpFasesId castOther = ( M4sllTpFasesId ) other; 
-         
-		 return ( (this.getTfaIdTpFase()==castOther.getTfaIdTpFase()) || ( this.getTfaIdTpFase()!=null && castOther.getTfaIdTpFase()!=null && this.getTfaIdTpFase().equals(castOther.getTfaIdTpFase()) ) )
- && ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) );
-   }
-   
-   public int hashCode() {
-         int result = 17;
-         
-         result = 37 * result + ( getTfaIdTpFase() == null ? 0 : this.getTfaIdTpFase().hashCode() );
-         result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
-         return result;
-   }   
+    public boolean equals(Object other) {
+        if ( (this == other ) ) return true;
+        if ( (other == null ) ) return false;
+        if ( !(other instanceof M4sllTpFasesId) ) return false;
+        M4sllTpFasesId castOther = ( M4sllTpFasesId ) other;
+
+        return ( (this.getTfaIdTpFase()==castOther.getTfaIdTpFase()) || ( this.getTfaIdTpFase()!=null && castOther.getTfaIdTpFase()!=null && this.getTfaIdTpFase().equals(castOther.getTfaIdTpFase()) ) )
+               && ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) );
+    }
+
+    public int hashCode() {
+        int result = 17;
+
+        result = 37 * result + ( getTfaIdTpFase() == null ? 0 : this.getTfaIdTpFase().hashCode() );
+        result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
+        return result;
+    }
 
 
 }
