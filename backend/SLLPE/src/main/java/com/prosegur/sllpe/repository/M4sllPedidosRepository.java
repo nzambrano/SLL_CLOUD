@@ -14,11 +14,11 @@ public interface M4sllPedidosRepository extends JpaRepository<M4sllPedidos, M4sl
 
     @Query(value = "select COALESCE(max(ped_secuencia),0)+1 as secuencia from sll.m4sll_pedidos where id_organization = :id_organization and lit_id_litigio = :lit_id_litigio", nativeQuery = true)
     public Long obtenerUltimaSecuencia(
-            @Param("id_organization") String id_organization,
-            @Param("lit_id_litigio") String lit_id_litigio);
-	@Query(
-		    value = "select * from sll.m4sll_pedidos  where id_organization =  :id_organization and lit_id_litigio = :lit_id_litigio",
-		    nativeQuery = true
-		  )
+        @Param("id_organization") String id_organization,
+        @Param("lit_id_litigio") String lit_id_litigio);
+    @Query(
+        value = "select * from sll.m4sll_pedidos  where id_organization =  :id_organization and lit_id_litigio = :lit_id_litigio",
+        nativeQuery = true
+    )
     public List<M4sllPedidos> findPedidosByLitigio(@Param("id_organization") String id_organization, @Param("lit_id_litigio") String lit_id_litigio);
 }

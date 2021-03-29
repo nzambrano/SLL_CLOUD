@@ -14,11 +14,11 @@ public interface M4sllAbogadosRepository extends JpaRepository<M4sllMtAbogados, 
 
     @Query(value = "select COALESCE(max(mab_secuencia),0)+1 as secuencia from sll.m4sll_mt_abogados where id_organization = :id_organization", nativeQuery = true)
     public Long obtenerUltimaSecuencia(
-            @Param("id_organization") String id_organization);
-	@Query(
-		    value = "select * from sll.m4sll_mt_abogados  where id_organization =  :id_organization",
-		    nativeQuery = true
-		  )
+        @Param("id_organization") String id_organization);
+    @Query(
+        value = "select * from sll.m4sll_mt_abogados  where id_organization =  :id_organization",
+        nativeQuery = true
+    )
     public List<M4sllMtAbogados> findAbogados(@Param("id_organization") String id_organization);
 
 }

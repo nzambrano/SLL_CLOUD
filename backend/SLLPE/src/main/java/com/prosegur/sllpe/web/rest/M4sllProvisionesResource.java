@@ -46,35 +46,35 @@ public class M4sllProvisionesResource {
 
     @PostMapping("/provision")
     public ResponseEntity<M4sllValEcLit> createM4sllValEcLit(@RequestBody M4sllValEcLit provision)
-            throws URISyntaxException {
+    throws URISyntaxException {
         log.debug("REST request to create provision : {}", provision);
         M4sllValEcLitId id = new M4sllValEcLitId();
         ProvisionesServices provisionesServices = new ProvisionesServices(m4sllProvisionesRepository);
         Long velSecuencia = provisionesServices.UltimaSecuencia(provision);
-        
+
         id.setVelSecuencia(velSecuencia);
         id.setLitIdLitigio(provision.getId().getLitIdLitigio());
-        id.setIdOrganization(provision.getId().getIdOrganization());    
-        
+        id.setIdOrganization(provision.getId().getIdOrganization());
+
         provision.setId(id);
-        
+
         M4sllValEcLit result = m4sllProvisionesRepository.save(provision);
         return ResponseEntity
-                .created(new URI("/api/provision/" + result.getId())).headers(HeaderUtil
-                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-                .body(result);
+               .created(new URI("/api/provision/" + result.getId())).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .body(result);
     }
 
     @PutMapping("/provision")
     public ResponseEntity<M4sllValEcLit> updateM4sllValEcLit(@RequestBody M4sllValEcLit provision)
-            throws URISyntaxException {
+    throws URISyntaxException {
         log.debug("REST request to update provision : {}", provision);
         if (provision.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         M4sllValEcLit result = m4sllProvisionesRepository.save(provision);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                provision.getId().toString())).body(result);
+                                           provision.getId().toString())).body(result);
     }
 
     /*@GetMapping("/provision")
@@ -85,23 +85,23 @@ public class M4sllProvisionesResource {
         return ResponseEntity.ok().body(M4sllValEcLitAll);
     }
     */
-    
+
     @GetMapping("/provision/{ID_ORGANIZATION}/{LIT_ID_LITIGIO}/{VEL_SECUENCIA}")
     public ResponseEntity<Optional<M4sllValEcLit>> getProvicionesByLitigioByTipo(
-    		@PathVariable("ID_ORGANIZATION") String idOrganization,
-    		@PathVariable("LIT_ID_LITIGIO") String litIdLitigio,
-    		@PathVariable("VEL_SECUENCIA") Long velSecuencia
-            
-            ) {
+        @PathVariable("ID_ORGANIZATION") String idOrganization,
+        @PathVariable("LIT_ID_LITIGIO") String litIdLitigio,
+        @PathVariable("VEL_SECUENCIA") Long velSecuencia
+
+    ) {
         log.debug("REST request to get ALL M4sllValEcLit : {}");
-        
+
         M4sllValEcLitId id = new M4sllValEcLitId();
         id.setIdOrganization(idOrganization);
         id.setLitIdLitigio(litIdLitigio);
         id.setVelSecuencia(velSecuencia);
-        
+
         Optional<M4sllValEcLit> provicion = m4sllProvisionesRepository.findById(id);
-        		
+
         return ResponseEntity.ok().body(provicion);
     }
 
@@ -110,12 +110,12 @@ public class M4sllProvisionesResource {
     public ResponseEntity<M4sllValEcLit> getM4sllValEcLit(
     		@PathVariable("id_organization") String idOrganization,
     		@PathVariable("lit_id_litigio") String litIdLitigio,
-    		@PathVariable("aur_secuencia") Integer aurSecuencia    		
+    		@PathVariable("aur_secuencia") Integer aurSecuencia
             ) {
         log.debug("REST request to get provision : {} | {}", litIdLitigio, idOrganization, aurSecuencia );
         M4sllValEcLitId id = new M4sllValEcLitId();
         id.setIdOrganization(idOrganization);
-        id.setLitIdLitigio(litIdLitigio);        
+        id.setLitIdLitigio(litIdLitigio);
         id.setAurSecuencia(aurSecuencia);
 
         Optional<M4sllValEcLit> provision = m4sllProvisionesRepository.findById(id);
@@ -125,20 +125,20 @@ public class M4sllProvisionesResource {
 
     @DeleteMapping("/provision/{ID_ORGANIZATION}/{LIT_ID_LITIGIO}/{VEL_SECUENCIA}")
     public ResponseEntity<Void> deleteM4sllValEcLit(
-    		@PathVariable("ID_ORGANIZATION") String idOrganization,
-            @PathVariable("LIT_ID_LITIGIO") String litIdLitigio,
-            @PathVariable("VEL_SECUENCIA") Long  velSecuencia
-            ) {
+        @PathVariable("ID_ORGANIZATION") String idOrganization,
+        @PathVariable("LIT_ID_LITIGIO") String litIdLitigio,
+        @PathVariable("VEL_SECUENCIA") Long  velSecuencia
+    ) {
         log.debug("REST request to delete provision : {} | {}", litIdLitigio, idOrganization, velSecuencia );
         M4sllValEcLitId id = new M4sllValEcLitId();
         id.setIdOrganization(idOrganization);
         id.setLitIdLitigio(litIdLitigio);
         id.setVelSecuencia(velSecuencia);
-        
+
 
         m4sllProvisionesRepository.deleteById(id);
         return ResponseEntity.noContent()
-                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-                .build();
+               .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+               .build();
     }
 }

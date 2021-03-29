@@ -17,112 +17,113 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="m4sll_estudio_jur"
-    ,schema="sll"
-)
+            ,schema="sll"
+      )
 public class M4sllEstudioJur  implements java.io.Serializable {
 
 
-     private M4sllEstudioJurId id;
-     private String ejuNmEstJuridico;
-     private String ejuEmail;
-     private String ejuTelOficina;
-     private String ejuTelMovil;
-     private String idApprole;
-     private String idSecuser;
-     private Date dtLastUpdate;
-     private Date ejuDtEnd;
-     private Date ejuDtStart;
+    private M4sllEstudioJurId id;
+    private String ejuNmEstJuridico;
+    private String ejuEmail;
+    private String ejuTelOficina;
+    private String ejuTelMovil;
+    private String idApprole;
+    private String idSecuser;
+    private Date dtLastUpdate;
+    private Date ejuDtEnd;
+    private Date ejuDtStart;
 
     public M4sllEstudioJur() {
     }
 
-	
+
     public M4sllEstudioJur(M4sllEstudioJurId id) {
         this.id = id;
     }
     public M4sllEstudioJur(M4sllEstudioJurId id, String ejuNmEstJuridico, String ejuEmail, String ejuTelOficina, String ejuTelMovil, String idApprole, String idSecuser, Date dtLastUpdate, Date ejuDtEnd, Date ejuDtStart) {
-       this.id = id;
-       this.ejuNmEstJuridico = ejuNmEstJuridico;
-       this.ejuEmail = ejuEmail;
-       this.ejuTelOficina = ejuTelOficina;
-       this.ejuTelMovil = ejuTelMovil;
-       this.idApprole = idApprole;
-       this.idSecuser = idSecuser;
-       this.dtLastUpdate = dtLastUpdate;
-       this.ejuDtEnd = ejuDtEnd;
-       this.ejuDtStart = ejuDtStart;
+        this.id = id;
+        this.ejuNmEstJuridico = ejuNmEstJuridico;
+        this.ejuEmail = ejuEmail;
+        this.ejuTelOficina = ejuTelOficina;
+        this.ejuTelMovil = ejuTelMovil;
+        this.idApprole = idApprole;
+        this.idSecuser = idSecuser;
+        this.dtLastUpdate = dtLastUpdate;
+        this.ejuDtEnd = ejuDtEnd;
+        this.ejuDtStart = ejuDtStart;
     }
-   
-     @EmbeddedId
 
-    
+    @EmbeddedId
+
+
     @AttributeOverrides( {
-        @AttributeOverride(name="ejuIdEstJuridico", column=@Column(name="eju_id_est_juridico", nullable=false) ), 
-        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) ) } )
+        @AttributeOverride(name="ejuIdEstJuridico", column=@Column(name="eju_id_est_juridico", nullable=false) ),
+        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) )
+    } )
     public M4sllEstudioJurId getId() {
         return this.id;
     }
-    
+
     public void setId(M4sllEstudioJurId id) {
         this.id = id;
     }
 
-    
+
     @Column(name="eju_nm_est_juridico", length=254)
     public String getEjuNmEstJuridico() {
         return this.ejuNmEstJuridico;
     }
-    
+
     public void setEjuNmEstJuridico(String ejuNmEstJuridico) {
         this.ejuNmEstJuridico = ejuNmEstJuridico;
     }
 
-    
+
     @Column(name="eju_email", length=254)
     public String getEjuEmail() {
         return this.ejuEmail;
     }
-    
+
     public void setEjuEmail(String ejuEmail) {
         this.ejuEmail = ejuEmail;
     }
 
-    
+
     @Column(name="eju_tel_oficina", length=30)
     public String getEjuTelOficina() {
         return this.ejuTelOficina;
     }
-    
+
     public void setEjuTelOficina(String ejuTelOficina) {
         this.ejuTelOficina = ejuTelOficina;
     }
 
-    
+
     @Column(name="eju_tel_movil", length=30)
     public String getEjuTelMovil() {
         return this.ejuTelMovil;
     }
-    
+
     public void setEjuTelMovil(String ejuTelMovil) {
         this.ejuTelMovil = ejuTelMovil;
     }
 
-    
+
     @Column(name="id_approle", length=30)
     public String getIdApprole() {
         return this.idApprole;
     }
-    
+
     public void setIdApprole(String idApprole) {
         this.idApprole = idApprole;
     }
 
-    
+
     @Column(name="id_secuser", length=30)
     public String getIdSecuser() {
         return this.idSecuser;
     }
-    
+
     public void setIdSecuser(String idSecuser) {
         this.idSecuser = idSecuser;
     }
@@ -132,7 +133,7 @@ public class M4sllEstudioJur  implements java.io.Serializable {
     public Date getDtLastUpdate() {
         return this.dtLastUpdate;
     }
-    
+
     public void setDtLastUpdate(Date dtLastUpdate) {
         this.dtLastUpdate = dtLastUpdate;
     }
@@ -142,7 +143,7 @@ public class M4sllEstudioJur  implements java.io.Serializable {
     public Date getEjuDtEnd() {
         return this.ejuDtEnd;
     }
-    
+
     public void setEjuDtEnd(Date ejuDtEnd) {
         this.ejuDtEnd = ejuDtEnd;
     }
@@ -152,7 +153,7 @@ public class M4sllEstudioJur  implements java.io.Serializable {
     public Date getEjuDtStart() {
         return this.ejuDtStart;
     }
-    
+
     public void setEjuDtStart(Date ejuDtStart) {
         this.ejuDtStart = ejuDtStart;
     }

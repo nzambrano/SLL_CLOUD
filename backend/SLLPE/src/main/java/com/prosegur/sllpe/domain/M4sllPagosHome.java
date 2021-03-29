@@ -17,7 +17,7 @@ public class M4sllPagosHome {
     private static final Log log = LogFactory.getLog(M4sllPagosHome.class);
 
     @PersistenceContext private EntityManager entityManager;
-    
+
     public void persist(M4sllPagos transientInstance) {
         log.debug("persisting M4sllPagos instance");
         try {
@@ -29,7 +29,7 @@ public class M4sllPagosHome {
             throw re;
         }
     }
-    
+
     public void remove(M4sllPagos persistentInstance) {
         log.debug("removing M4sllPagos instance");
         try {
@@ -41,7 +41,7 @@ public class M4sllPagosHome {
             throw re;
         }
     }
-    
+
     public M4sllPagos merge(M4sllPagos detachedInstance) {
         log.debug("merging M4sllPagos instance");
         try {
@@ -54,7 +54,7 @@ public class M4sllPagosHome {
             throw re;
         }
     }
-    
+
     public M4sllPagos findById( M4sllPagosId id) {
         log.debug("getting M4sllPagos instance with id: " + id);
         try {

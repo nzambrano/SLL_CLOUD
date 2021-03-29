@@ -17,7 +17,7 @@ public class M4sllDocLitigiosHome {
     private static final Log log = LogFactory.getLog(M4sllDocLitigiosHome.class);
 
     @PersistenceContext private EntityManager entityManager;
-    
+
     public void persist(M4sllDocLitigios transientInstance) {
         log.debug("persisting M4sllDocLitigios instance");
         try {
@@ -29,7 +29,7 @@ public class M4sllDocLitigiosHome {
             throw re;
         }
     }
-    
+
     public void remove(M4sllDocLitigios persistentInstance) {
         log.debug("removing M4sllDocLitigios instance");
         try {
@@ -41,7 +41,7 @@ public class M4sllDocLitigiosHome {
             throw re;
         }
     }
-    
+
     public M4sllDocLitigios merge(M4sllDocLitigios detachedInstance) {
         log.debug("merging M4sllDocLitigios instance");
         try {
@@ -54,7 +54,7 @@ public class M4sllDocLitigiosHome {
             throw re;
         }
     }
-    
+
     public M4sllDocLitigios findById( M4sllDocLitigiosId id) {
         log.debug("getting M4sllDocLitigios instance with id: " + id);
         try {

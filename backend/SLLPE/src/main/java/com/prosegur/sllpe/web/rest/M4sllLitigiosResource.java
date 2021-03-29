@@ -43,26 +43,26 @@ public class M4sllLitigiosResource {
 
     @PostMapping("/m4sll_litigios")
     public ResponseEntity<M4sllLitigios> createM4sllLitigios(@RequestBody M4sllLitigios m4sll_litigios)
-            throws URISyntaxException {
+    throws URISyntaxException {
         log.debug("REST request to create m4sll_litigios : {}", m4sll_litigios);
 
         M4sllLitigios result = m4sllLitigiosRepository.save(m4sll_litigios);
         return ResponseEntity
-                .created(new URI("/api/m4sll_litigios/" + result.getId())).headers(HeaderUtil
-                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-                .body(result);
+               .created(new URI("/api/m4sll_litigios/" + result.getId())).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .body(result);
     }
 
     @PutMapping("/m4sll_litigios")
     public ResponseEntity<M4sllLitigios> updateM4sllLitigios(@RequestBody M4sllLitigios m4sll_litigios)
-            throws URISyntaxException {
+    throws URISyntaxException {
         log.debug("REST request to update m4sll_litigios : {}", m4sll_litigios);
         if (m4sll_litigios.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         M4sllLitigios result = m4sllLitigiosRepository.save(m4sll_litigios);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                m4sll_litigios.getId().toString())).body(result);
+                                           m4sll_litigios.getId().toString())).body(result);
     }
 
     @GetMapping("/m4sll_litigios")
@@ -75,8 +75,8 @@ public class M4sllLitigiosResource {
 
     @GetMapping("/m4sll_litigios/{id_litIdLitigio}/{id_idOrganization}")
     public ResponseEntity<M4sllLitigios> getM4sllLitigios(
-            @PathVariable("id_litIdLitigio") String id_litIdLitigio,
-            @PathVariable("id_idOrganization") String id_idOrganization) {
+        @PathVariable("id_litIdLitigio") String id_litIdLitigio,
+        @PathVariable("id_idOrganization") String id_idOrganization) {
         log.debug("REST request to get m4sll_litigios : {} | {}", id_litIdLitigio, id_idOrganization);
         M4sllLitigiosId id = new M4sllLitigiosId();
         id.setLitIdLitigio(id_litIdLitigio);
@@ -88,8 +88,8 @@ public class M4sllLitigiosResource {
 
     @DeleteMapping("/m4sll_litigios/{id_litIdLitigio}/{id_idOrganization}")
     public ResponseEntity<Void> deleteM4sllLitigios(
-            @PathVariable("id_litIdLitigio") String id_litIdLitigio,
-            @PathVariable("id_idOrganization") String id_idOrganization) {
+        @PathVariable("id_litIdLitigio") String id_litIdLitigio,
+        @PathVariable("id_idOrganization") String id_idOrganization) {
         log.debug("REST request to delete m4sll_litigios : {} | {}", id_litIdLitigio, id_idOrganization);
         M4sllLitigiosId id = new M4sllLitigiosId();
         id.setLitIdLitigio(id_litIdLitigio);
@@ -97,7 +97,7 @@ public class M4sllLitigiosResource {
 
         m4sllLitigiosRepository.deleteById(id);
         return ResponseEntity.noContent()
-                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-                .build();
+               .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+               .build();
     }
 }

@@ -18,264 +18,265 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="m4sll_litigios"
-    ,schema="sll"
-)
+            ,schema="sll"
+      )
 public class M4sllLitigios  implements java.io.Serializable {
 
 
-     private M4sllLitigiosId id;
-     private String mcaIdCodigoAlterno;
-     private String mriIdRiesgo;
-     private String mmaIdMateria;
-     private String negIdNegocio;
-     private String ejsIdEstJurSub;
-     private String tplIdTpLitigio;
-     private String litNroProceso;
-     private String litDescripcion;
-     private String litBpo;
-     private Date litFechaInicio;
-     private Date litFechaNotificacion;
-     private String litUsrRegistra;
-     private Date litFechaPresentacion;
-     private Date litHoraPresentacion;
-     private Date litFechaCierre;
-     private String litAcuerdo;
-     private String litRelevante;
-     private BigDecimal litHonContador;
-     private BigDecimal litHonJuridico;
-     private String litObservaciones;
-     private String triIdTribunal;
-     private String treIdRecurrencia;
-     private Long ejuIdEstJuridico;
-     private String tfaIdTpFase;
-     private String tstIdTpStatus;
-     private String tsdIdTpStaDet;
-     private String tmoIdTpMotivo;
-     private String stdIdCountry;
-     private String stdIdGeoDiv;
-     private String stdIdSubGeoDiv;
-     private String litAbogadoResponsable;
-     private BigDecimal litValorTotal;
-     private String litCkAval;
-     private String litCkMinuta;
-     private String stdIdGeoPlace;
-     private String trcIdTpReclamo;
-     private String tflIdTpFalta;
-     private String litIdLegado;
-     private String litJuez;
-     private String litPazYSvc;
-     private String edeIdDelegacion;
-     private String eciIdCiudad;
-     private String stdIdLegEnt;
-     private Date litDtActualizacion;
-     private String litUserActualizacion;
-     private String litCentroCosto;
-     private String litDivision;
-     private String litRegion;
-     private String litNumeroEjecucion;
-     private BigDecimal litValorPedTotal;
-     private Long mabSecuencia;
-     private String litUbicacionFisica;
-     private Long litSecuencia;
-     private String litCorporativoSN;
-     private String litSubrogadoSN;
-     private Short litPorcentajeProbabilidad;
-     private String litSustentacion;
-     private String litFlexCondena;
-     private String litFlexHonorarios;
-     private BigDecimal litPrevision;
-     private BigDecimal litProvision;
-     private BigDecimal litImporteTransf;
-     private BigDecimal litDescuentosSSTotal;
-     private BigDecimal litImporteBrutoTotal;
-     private BigDecimal litRetencionJudicialTotal;
-     private BigDecimal litDescuentosIrpfTotal;
-     private String idApprole;
-     private String idSecuser;
-     private Date dtLastUpdate;
-     private String litCkCalcProv;
+    private M4sllLitigiosId id;
+    private String mcaIdCodigoAlterno;
+    private String mriIdRiesgo;
+    private String mmaIdMateria;
+    private String negIdNegocio;
+    private String ejsIdEstJurSub;
+    private String tplIdTpLitigio;
+    private String litNroProceso;
+    private String litDescripcion;
+    private String litBpo;
+    private Date litFechaInicio;
+    private Date litFechaNotificacion;
+    private String litUsrRegistra;
+    private Date litFechaPresentacion;
+    private Date litHoraPresentacion;
+    private Date litFechaCierre;
+    private String litAcuerdo;
+    private String litRelevante;
+    private BigDecimal litHonContador;
+    private BigDecimal litHonJuridico;
+    private String litObservaciones;
+    private String triIdTribunal;
+    private String treIdRecurrencia;
+    private Long ejuIdEstJuridico;
+    private String tfaIdTpFase;
+    private String tstIdTpStatus;
+    private String tsdIdTpStaDet;
+    private String tmoIdTpMotivo;
+    private String stdIdCountry;
+    private String stdIdGeoDiv;
+    private String stdIdSubGeoDiv;
+    private String litAbogadoResponsable;
+    private BigDecimal litValorTotal;
+    private String litCkAval;
+    private String litCkMinuta;
+    private String stdIdGeoPlace;
+    private String trcIdTpReclamo;
+    private String tflIdTpFalta;
+    private String litIdLegado;
+    private String litJuez;
+    private String litPazYSvc;
+    private String edeIdDelegacion;
+    private String eciIdCiudad;
+    private String stdIdLegEnt;
+    private Date litDtActualizacion;
+    private String litUserActualizacion;
+    private String litCentroCosto;
+    private String litDivision;
+    private String litRegion;
+    private String litNumeroEjecucion;
+    private BigDecimal litValorPedTotal;
+    private Long mabSecuencia;
+    private String litUbicacionFisica;
+    private Long litSecuencia;
+    private String litCorporativoSN;
+    private String litSubrogadoSN;
+    private Short litPorcentajeProbabilidad;
+    private String litSustentacion;
+    private String litFlexCondena;
+    private String litFlexHonorarios;
+    private BigDecimal litPrevision;
+    private BigDecimal litProvision;
+    private BigDecimal litImporteTransf;
+    private BigDecimal litDescuentosSSTotal;
+    private BigDecimal litImporteBrutoTotal;
+    private BigDecimal litRetencionJudicialTotal;
+    private BigDecimal litDescuentosIrpfTotal;
+    private String idApprole;
+    private String idSecuser;
+    private Date dtLastUpdate;
+    private String litCkCalcProv;
 
     public M4sllLitigios() {
     }
 
-	
+
     public M4sllLitigios(M4sllLitigiosId id) {
         this.id = id;
     }
     public M4sllLitigios(M4sllLitigiosId id, String mcaIdCodigoAlterno, String mriIdRiesgo, String mmaIdMateria, String negIdNegocio, String ejsIdEstJurSub, String tplIdTpLitigio, String litNroProceso, String litDescripcion, String litBpo, Date litFechaInicio, Date litFechaNotificacion, String litUsrRegistra, Date litFechaPresentacion, Date litHoraPresentacion, Date litFechaCierre, String litAcuerdo, String litRelevante, BigDecimal litHonContador, BigDecimal litHonJuridico, String litObservaciones, String triIdTribunal, String treIdRecurrencia, Long ejuIdEstJuridico, String tfaIdTpFase, String tstIdTpStatus, String tsdIdTpStaDet, String tmoIdTpMotivo, String stdIdCountry, String stdIdGeoDiv, String stdIdSubGeoDiv, String litAbogadoResponsable, BigDecimal litValorTotal, String litCkAval, String litCkMinuta, String stdIdGeoPlace, String trcIdTpReclamo, String tflIdTpFalta, String litIdLegado, String litJuez, String litPazYSvc, String edeIdDelegacion, String eciIdCiudad, String stdIdLegEnt, Date litDtActualizacion, String litUserActualizacion, String litCentroCosto, String litDivision, String litRegion, String litNumeroEjecucion, BigDecimal litValorPedTotal, Long mabSecuencia, String litUbicacionFisica, Long litSecuencia, String litCorporativoSN, String litSubrogadoSN, Short litPorcentajeProbabilidad, String litSustentacion, String litFlexCondena, String litFlexHonorarios, BigDecimal litPrevision, BigDecimal litProvision, BigDecimal litImporteTransf, BigDecimal litDescuentosSSTotal, BigDecimal litImporteBrutoTotal, BigDecimal litRetencionJudicialTotal, BigDecimal litDescuentosIrpfTotal, String idApprole, String idSecuser, Date dtLastUpdate, String litCkCalcProv) {
-       this.id = id;
-       this.mcaIdCodigoAlterno = mcaIdCodigoAlterno;
-       this.mriIdRiesgo = mriIdRiesgo;
-       this.mmaIdMateria = mmaIdMateria;
-       this.negIdNegocio = negIdNegocio;
-       this.ejsIdEstJurSub = ejsIdEstJurSub;
-       this.tplIdTpLitigio = tplIdTpLitigio;
-       this.litNroProceso = litNroProceso;
-       this.litDescripcion = litDescripcion;
-       this.litBpo = litBpo;
-       this.litFechaInicio = litFechaInicio;
-       this.litFechaNotificacion = litFechaNotificacion;
-       this.litUsrRegistra = litUsrRegistra;
-       this.litFechaPresentacion = litFechaPresentacion;
-       this.litHoraPresentacion = litHoraPresentacion;
-       this.litFechaCierre = litFechaCierre;
-       this.litAcuerdo = litAcuerdo;
-       this.litRelevante = litRelevante;
-       this.litHonContador = litHonContador;
-       this.litHonJuridico = litHonJuridico;
-       this.litObservaciones = litObservaciones;
-       this.triIdTribunal = triIdTribunal;
-       this.treIdRecurrencia = treIdRecurrencia;
-       this.ejuIdEstJuridico = ejuIdEstJuridico;
-       this.tfaIdTpFase = tfaIdTpFase;
-       this.tstIdTpStatus = tstIdTpStatus;
-       this.tsdIdTpStaDet = tsdIdTpStaDet;
-       this.tmoIdTpMotivo = tmoIdTpMotivo;
-       this.stdIdCountry = stdIdCountry;
-       this.stdIdGeoDiv = stdIdGeoDiv;
-       this.stdIdSubGeoDiv = stdIdSubGeoDiv;
-       this.litAbogadoResponsable = litAbogadoResponsable;
-       this.litValorTotal = litValorTotal;
-       this.litCkAval = litCkAval;
-       this.litCkMinuta = litCkMinuta;
-       this.stdIdGeoPlace = stdIdGeoPlace;
-       this.trcIdTpReclamo = trcIdTpReclamo;
-       this.tflIdTpFalta = tflIdTpFalta;
-       this.litIdLegado = litIdLegado;
-       this.litJuez = litJuez;
-       this.litPazYSvc = litPazYSvc;
-       this.edeIdDelegacion = edeIdDelegacion;
-       this.eciIdCiudad = eciIdCiudad;
-       this.stdIdLegEnt = stdIdLegEnt;
-       this.litDtActualizacion = litDtActualizacion;
-       this.litUserActualizacion = litUserActualizacion;
-       this.litCentroCosto = litCentroCosto;
-       this.litDivision = litDivision;
-       this.litRegion = litRegion;
-       this.litNumeroEjecucion = litNumeroEjecucion;
-       this.litValorPedTotal = litValorPedTotal;
-       this.mabSecuencia = mabSecuencia;
-       this.litUbicacionFisica = litUbicacionFisica;
-       this.litSecuencia = litSecuencia;
-       this.litCorporativoSN = litCorporativoSN;
-       this.litSubrogadoSN = litSubrogadoSN;
-       this.litPorcentajeProbabilidad = litPorcentajeProbabilidad;
-       this.litSustentacion = litSustentacion;
-       this.litFlexCondena = litFlexCondena;
-       this.litFlexHonorarios = litFlexHonorarios;
-       this.litPrevision = litPrevision;
-       this.litProvision = litProvision;
-       this.litImporteTransf = litImporteTransf;
-       this.litDescuentosSSTotal = litDescuentosSSTotal;
-       this.litImporteBrutoTotal = litImporteBrutoTotal;
-       this.litRetencionJudicialTotal = litRetencionJudicialTotal;
-       this.litDescuentosIrpfTotal = litDescuentosIrpfTotal;
-       this.idApprole = idApprole;
-       this.idSecuser = idSecuser;
-       this.dtLastUpdate = dtLastUpdate;
-       this.litCkCalcProv = litCkCalcProv;
+        this.id = id;
+        this.mcaIdCodigoAlterno = mcaIdCodigoAlterno;
+        this.mriIdRiesgo = mriIdRiesgo;
+        this.mmaIdMateria = mmaIdMateria;
+        this.negIdNegocio = negIdNegocio;
+        this.ejsIdEstJurSub = ejsIdEstJurSub;
+        this.tplIdTpLitigio = tplIdTpLitigio;
+        this.litNroProceso = litNroProceso;
+        this.litDescripcion = litDescripcion;
+        this.litBpo = litBpo;
+        this.litFechaInicio = litFechaInicio;
+        this.litFechaNotificacion = litFechaNotificacion;
+        this.litUsrRegistra = litUsrRegistra;
+        this.litFechaPresentacion = litFechaPresentacion;
+        this.litHoraPresentacion = litHoraPresentacion;
+        this.litFechaCierre = litFechaCierre;
+        this.litAcuerdo = litAcuerdo;
+        this.litRelevante = litRelevante;
+        this.litHonContador = litHonContador;
+        this.litHonJuridico = litHonJuridico;
+        this.litObservaciones = litObservaciones;
+        this.triIdTribunal = triIdTribunal;
+        this.treIdRecurrencia = treIdRecurrencia;
+        this.ejuIdEstJuridico = ejuIdEstJuridico;
+        this.tfaIdTpFase = tfaIdTpFase;
+        this.tstIdTpStatus = tstIdTpStatus;
+        this.tsdIdTpStaDet = tsdIdTpStaDet;
+        this.tmoIdTpMotivo = tmoIdTpMotivo;
+        this.stdIdCountry = stdIdCountry;
+        this.stdIdGeoDiv = stdIdGeoDiv;
+        this.stdIdSubGeoDiv = stdIdSubGeoDiv;
+        this.litAbogadoResponsable = litAbogadoResponsable;
+        this.litValorTotal = litValorTotal;
+        this.litCkAval = litCkAval;
+        this.litCkMinuta = litCkMinuta;
+        this.stdIdGeoPlace = stdIdGeoPlace;
+        this.trcIdTpReclamo = trcIdTpReclamo;
+        this.tflIdTpFalta = tflIdTpFalta;
+        this.litIdLegado = litIdLegado;
+        this.litJuez = litJuez;
+        this.litPazYSvc = litPazYSvc;
+        this.edeIdDelegacion = edeIdDelegacion;
+        this.eciIdCiudad = eciIdCiudad;
+        this.stdIdLegEnt = stdIdLegEnt;
+        this.litDtActualizacion = litDtActualizacion;
+        this.litUserActualizacion = litUserActualizacion;
+        this.litCentroCosto = litCentroCosto;
+        this.litDivision = litDivision;
+        this.litRegion = litRegion;
+        this.litNumeroEjecucion = litNumeroEjecucion;
+        this.litValorPedTotal = litValorPedTotal;
+        this.mabSecuencia = mabSecuencia;
+        this.litUbicacionFisica = litUbicacionFisica;
+        this.litSecuencia = litSecuencia;
+        this.litCorporativoSN = litCorporativoSN;
+        this.litSubrogadoSN = litSubrogadoSN;
+        this.litPorcentajeProbabilidad = litPorcentajeProbabilidad;
+        this.litSustentacion = litSustentacion;
+        this.litFlexCondena = litFlexCondena;
+        this.litFlexHonorarios = litFlexHonorarios;
+        this.litPrevision = litPrevision;
+        this.litProvision = litProvision;
+        this.litImporteTransf = litImporteTransf;
+        this.litDescuentosSSTotal = litDescuentosSSTotal;
+        this.litImporteBrutoTotal = litImporteBrutoTotal;
+        this.litRetencionJudicialTotal = litRetencionJudicialTotal;
+        this.litDescuentosIrpfTotal = litDescuentosIrpfTotal;
+        this.idApprole = idApprole;
+        this.idSecuser = idSecuser;
+        this.dtLastUpdate = dtLastUpdate;
+        this.litCkCalcProv = litCkCalcProv;
     }
-   
-     @EmbeddedId
 
-    
+    @EmbeddedId
+
+
     @AttributeOverrides( {
-        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ), 
-        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) ) } )
+        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ),
+        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) )
+    } )
     public M4sllLitigiosId getId() {
         return this.id;
     }
-    
+
     public void setId(M4sllLitigiosId id) {
         this.id = id;
     }
 
-    
+
     @Column(name="mca_id_codigo_alterno", length=3)
     public String getMcaIdCodigoAlterno() {
         return this.mcaIdCodigoAlterno;
     }
-    
+
     public void setMcaIdCodigoAlterno(String mcaIdCodigoAlterno) {
         this.mcaIdCodigoAlterno = mcaIdCodigoAlterno;
     }
 
-    
+
     @Column(name="mri_id_riesgo", length=3)
     public String getMriIdRiesgo() {
         return this.mriIdRiesgo;
     }
-    
+
     public void setMriIdRiesgo(String mriIdRiesgo) {
         this.mriIdRiesgo = mriIdRiesgo;
     }
 
-    
+
     @Column(name="mma_id_materia", length=3)
     public String getMmaIdMateria() {
         return this.mmaIdMateria;
     }
-    
+
     public void setMmaIdMateria(String mmaIdMateria) {
         this.mmaIdMateria = mmaIdMateria;
     }
 
-    
+
     @Column(name="neg_id_negocio", length=3)
     public String getNegIdNegocio() {
         return this.negIdNegocio;
     }
-    
+
     public void setNegIdNegocio(String negIdNegocio) {
         this.negIdNegocio = negIdNegocio;
     }
 
-    
+
     @Column(name="ejs_id_est_jur_sub", length=3)
     public String getEjsIdEstJurSub() {
         return this.ejsIdEstJurSub;
     }
-    
+
     public void setEjsIdEstJurSub(String ejsIdEstJurSub) {
         this.ejsIdEstJurSub = ejsIdEstJurSub;
     }
 
-    
+
     @Column(name="tpl_id_tp_litigio", length=3)
     public String getTplIdTpLitigio() {
         return this.tplIdTpLitigio;
     }
-    
+
     public void setTplIdTpLitigio(String tplIdTpLitigio) {
         this.tplIdTpLitigio = tplIdTpLitigio;
     }
 
-    
+
     @Column(name="lit_nro_proceso", length=100)
     public String getLitNroProceso() {
         return this.litNroProceso;
     }
-    
+
     public void setLitNroProceso(String litNroProceso) {
         this.litNroProceso = litNroProceso;
     }
 
-    
+
     @Column(name="lit_descripcion", length=254)
     public String getLitDescripcion() {
         return this.litDescripcion;
     }
-    
+
     public void setLitDescripcion(String litDescripcion) {
         this.litDescripcion = litDescripcion;
     }
 
-    
+
     @Column(name="lit_bpo", length=254)
     public String getLitBpo() {
         return this.litBpo;
     }
-    
+
     public void setLitBpo(String litBpo) {
         this.litBpo = litBpo;
     }
@@ -285,7 +286,7 @@ public class M4sllLitigios  implements java.io.Serializable {
     public Date getLitFechaInicio() {
         return this.litFechaInicio;
     }
-    
+
     public void setLitFechaInicio(Date litFechaInicio) {
         this.litFechaInicio = litFechaInicio;
     }
@@ -295,17 +296,17 @@ public class M4sllLitigios  implements java.io.Serializable {
     public Date getLitFechaNotificacion() {
         return this.litFechaNotificacion;
     }
-    
+
     public void setLitFechaNotificacion(Date litFechaNotificacion) {
         this.litFechaNotificacion = litFechaNotificacion;
     }
 
-    
+
     @Column(name="lit_usr_registra", length=30)
     public String getLitUsrRegistra() {
         return this.litUsrRegistra;
     }
-    
+
     public void setLitUsrRegistra(String litUsrRegistra) {
         this.litUsrRegistra = litUsrRegistra;
     }
@@ -315,7 +316,7 @@ public class M4sllLitigios  implements java.io.Serializable {
     public Date getLitFechaPresentacion() {
         return this.litFechaPresentacion;
     }
-    
+
     public void setLitFechaPresentacion(Date litFechaPresentacion) {
         this.litFechaPresentacion = litFechaPresentacion;
     }
@@ -325,7 +326,7 @@ public class M4sllLitigios  implements java.io.Serializable {
     public Date getLitHoraPresentacion() {
         return this.litHoraPresentacion;
     }
-    
+
     public void setLitHoraPresentacion(Date litHoraPresentacion) {
         this.litHoraPresentacion = litHoraPresentacion;
     }
@@ -335,287 +336,287 @@ public class M4sllLitigios  implements java.io.Serializable {
     public Date getLitFechaCierre() {
         return this.litFechaCierre;
     }
-    
+
     public void setLitFechaCierre(Date litFechaCierre) {
         this.litFechaCierre = litFechaCierre;
     }
 
-    
+
     @Column(name="lit_acuerdo", length=1)
     public String getLitAcuerdo() {
         return this.litAcuerdo;
     }
-    
+
     public void setLitAcuerdo(String litAcuerdo) {
         this.litAcuerdo = litAcuerdo;
     }
 
-    
+
     @Column(name="lit_relevante", length=1)
     public String getLitRelevante() {
         return this.litRelevante;
     }
-    
+
     public void setLitRelevante(String litRelevante) {
         this.litRelevante = litRelevante;
     }
 
-    
+
     @Column(name="lit_hon_contador", precision=18, scale=4)
     public BigDecimal getLitHonContador() {
         return this.litHonContador;
     }
-    
+
     public void setLitHonContador(BigDecimal litHonContador) {
         this.litHonContador = litHonContador;
     }
 
-    
+
     @Column(name="lit_hon_juridico", precision=18, scale=4)
     public BigDecimal getLitHonJuridico() {
         return this.litHonJuridico;
     }
-    
+
     public void setLitHonJuridico(BigDecimal litHonJuridico) {
         this.litHonJuridico = litHonJuridico;
     }
 
-    
+
     @Column(name="lit_observaciones", length=1000)
     public String getLitObservaciones() {
         return this.litObservaciones;
     }
-    
+
     public void setLitObservaciones(String litObservaciones) {
         this.litObservaciones = litObservaciones;
     }
 
-    
+
     @Column(name="tri_id_tribunal", length=3)
     public String getTriIdTribunal() {
         return this.triIdTribunal;
     }
-    
+
     public void setTriIdTribunal(String triIdTribunal) {
         this.triIdTribunal = triIdTribunal;
     }
 
-    
+
     @Column(name="tre_id_recurrencia", length=3)
     public String getTreIdRecurrencia() {
         return this.treIdRecurrencia;
     }
-    
+
     public void setTreIdRecurrencia(String treIdRecurrencia) {
         this.treIdRecurrencia = treIdRecurrencia;
     }
 
-    
+
     @Column(name="eju_id_est_juridico")
     public Long getEjuIdEstJuridico() {
         return this.ejuIdEstJuridico;
     }
-    
+
     public void setEjuIdEstJuridico(Long ejuIdEstJuridico) {
         this.ejuIdEstJuridico = ejuIdEstJuridico;
     }
 
-    
+
     @Column(name="tfa_id_tp_fase", length=3)
     public String getTfaIdTpFase() {
         return this.tfaIdTpFase;
     }
-    
+
     public void setTfaIdTpFase(String tfaIdTpFase) {
         this.tfaIdTpFase = tfaIdTpFase;
     }
 
-    
+
     @Column(name="tst_id_tp_status", length=3)
     public String getTstIdTpStatus() {
         return this.tstIdTpStatus;
     }
-    
+
     public void setTstIdTpStatus(String tstIdTpStatus) {
         this.tstIdTpStatus = tstIdTpStatus;
     }
 
-    
+
     @Column(name="tsd_id_tp_sta_det", length=3)
     public String getTsdIdTpStaDet() {
         return this.tsdIdTpStaDet;
     }
-    
+
     public void setTsdIdTpStaDet(String tsdIdTpStaDet) {
         this.tsdIdTpStaDet = tsdIdTpStaDet;
     }
 
-    
+
     @Column(name="tmo_id_tp_motivo", length=3)
     public String getTmoIdTpMotivo() {
         return this.tmoIdTpMotivo;
     }
-    
+
     public void setTmoIdTpMotivo(String tmoIdTpMotivo) {
         this.tmoIdTpMotivo = tmoIdTpMotivo;
     }
 
-    
+
     @Column(name="std_id_country", length=4)
     public String getStdIdCountry() {
         return this.stdIdCountry;
     }
-    
+
     public void setStdIdCountry(String stdIdCountry) {
         this.stdIdCountry = stdIdCountry;
     }
 
-    
+
     @Column(name="std_id_geo_div", length=8)
     public String getStdIdGeoDiv() {
         return this.stdIdGeoDiv;
     }
-    
+
     public void setStdIdGeoDiv(String stdIdGeoDiv) {
         this.stdIdGeoDiv = stdIdGeoDiv;
     }
 
-    
+
     @Column(name="std_id_sub_geo_div", length=8)
     public String getStdIdSubGeoDiv() {
         return this.stdIdSubGeoDiv;
     }
-    
+
     public void setStdIdSubGeoDiv(String stdIdSubGeoDiv) {
         this.stdIdSubGeoDiv = stdIdSubGeoDiv;
     }
 
-    
+
     @Column(name="lit_abogado_responsable", length=30)
     public String getLitAbogadoResponsable() {
         return this.litAbogadoResponsable;
     }
-    
+
     public void setLitAbogadoResponsable(String litAbogadoResponsable) {
         this.litAbogadoResponsable = litAbogadoResponsable;
     }
 
-    
+
     @Column(name="lit_valor_total", precision=18, scale=4)
     public BigDecimal getLitValorTotal() {
         return this.litValorTotal;
     }
-    
+
     public void setLitValorTotal(BigDecimal litValorTotal) {
         this.litValorTotal = litValorTotal;
     }
 
-    
+
     @Column(name="lit_ck_aval", length=1)
     public String getLitCkAval() {
         return this.litCkAval;
     }
-    
+
     public void setLitCkAval(String litCkAval) {
         this.litCkAval = litCkAval;
     }
 
-    
+
     @Column(name="lit_ck_minuta", length=1)
     public String getLitCkMinuta() {
         return this.litCkMinuta;
     }
-    
+
     public void setLitCkMinuta(String litCkMinuta) {
         this.litCkMinuta = litCkMinuta;
     }
 
-    
+
     @Column(name="std_id_geo_place", length=9)
     public String getStdIdGeoPlace() {
         return this.stdIdGeoPlace;
     }
-    
+
     public void setStdIdGeoPlace(String stdIdGeoPlace) {
         this.stdIdGeoPlace = stdIdGeoPlace;
     }
 
-    
+
     @Column(name="trc_id_tp_reclamo", length=3)
     public String getTrcIdTpReclamo() {
         return this.trcIdTpReclamo;
     }
-    
+
     public void setTrcIdTpReclamo(String trcIdTpReclamo) {
         this.trcIdTpReclamo = trcIdTpReclamo;
     }
 
-    
+
     @Column(name="tfl_id_tp_falta", length=3)
     public String getTflIdTpFalta() {
         return this.tflIdTpFalta;
     }
-    
+
     public void setTflIdTpFalta(String tflIdTpFalta) {
         this.tflIdTpFalta = tflIdTpFalta;
     }
 
-    
+
     @Column(name="lit_id_legado", length=10)
     public String getLitIdLegado() {
         return this.litIdLegado;
     }
-    
+
     public void setLitIdLegado(String litIdLegado) {
         this.litIdLegado = litIdLegado;
     }
 
-    
+
     @Column(name="lit_juez", length=60)
     public String getLitJuez() {
         return this.litJuez;
     }
-    
+
     public void setLitJuez(String litJuez) {
         this.litJuez = litJuez;
     }
 
-    
+
     @Column(name="lit_paz_y_svc", length=1)
     public String getLitPazYSvc() {
         return this.litPazYSvc;
     }
-    
+
     public void setLitPazYSvc(String litPazYSvc) {
         this.litPazYSvc = litPazYSvc;
     }
 
-    
+
     @Column(name="ede_id_delegacion", length=3)
     public String getEdeIdDelegacion() {
         return this.edeIdDelegacion;
     }
-    
+
     public void setEdeIdDelegacion(String edeIdDelegacion) {
         this.edeIdDelegacion = edeIdDelegacion;
     }
 
-    
+
     @Column(name="eci_id_ciudad", length=3)
     public String getEciIdCiudad() {
         return this.eciIdCiudad;
     }
-    
+
     public void setEciIdCiudad(String eciIdCiudad) {
         this.eciIdCiudad = eciIdCiudad;
     }
 
-    
+
     @Column(name="std_id_leg_ent", length=9)
     public String getStdIdLegEnt() {
         return this.stdIdLegEnt;
     }
-    
+
     public void setStdIdLegEnt(String stdIdLegEnt) {
         this.stdIdLegEnt = stdIdLegEnt;
     }
@@ -625,247 +626,247 @@ public class M4sllLitigios  implements java.io.Serializable {
     public Date getLitDtActualizacion() {
         return this.litDtActualizacion;
     }
-    
+
     public void setLitDtActualizacion(Date litDtActualizacion) {
         this.litDtActualizacion = litDtActualizacion;
     }
 
-    
+
     @Column(name="lit_user_actualizacion", length=30)
     public String getLitUserActualizacion() {
         return this.litUserActualizacion;
     }
-    
+
     public void setLitUserActualizacion(String litUserActualizacion) {
         this.litUserActualizacion = litUserActualizacion;
     }
 
-    
+
     @Column(name="lit_centro_costo", length=30)
     public String getLitCentroCosto() {
         return this.litCentroCosto;
     }
-    
+
     public void setLitCentroCosto(String litCentroCosto) {
         this.litCentroCosto = litCentroCosto;
     }
 
-    
+
     @Column(name="lit_division", length=30)
     public String getLitDivision() {
         return this.litDivision;
     }
-    
+
     public void setLitDivision(String litDivision) {
         this.litDivision = litDivision;
     }
 
-    
+
     @Column(name="lit_region", length=30)
     public String getLitRegion() {
         return this.litRegion;
     }
-    
+
     public void setLitRegion(String litRegion) {
         this.litRegion = litRegion;
     }
 
-    
+
     @Column(name="lit_numero_ejecucion", length=30)
     public String getLitNumeroEjecucion() {
         return this.litNumeroEjecucion;
     }
-    
+
     public void setLitNumeroEjecucion(String litNumeroEjecucion) {
         this.litNumeroEjecucion = litNumeroEjecucion;
     }
 
-    
+
     @Column(name="lit_valor_ped_total", precision=18, scale=4)
     public BigDecimal getLitValorPedTotal() {
         return this.litValorPedTotal;
     }
-    
+
     public void setLitValorPedTotal(BigDecimal litValorPedTotal) {
         this.litValorPedTotal = litValorPedTotal;
     }
 
-    
+
     @Column(name="mab_secuencia")
     public Long getMabSecuencia() {
         return this.mabSecuencia;
     }
-    
+
     public void setMabSecuencia(Long mabSecuencia) {
         this.mabSecuencia = mabSecuencia;
     }
 
-    
+
     @Column(name="lit_ubicacion_fisica", length=254)
     public String getLitUbicacionFisica() {
         return this.litUbicacionFisica;
     }
-    
+
     public void setLitUbicacionFisica(String litUbicacionFisica) {
         this.litUbicacionFisica = litUbicacionFisica;
     }
 
-    
+
     @Column(name="lit_secuencia")
     public Long getLitSecuencia() {
         return this.litSecuencia;
     }
-    
+
     public void setLitSecuencia(Long litSecuencia) {
         this.litSecuencia = litSecuencia;
     }
 
-    
+
     @Column(name="lit_corporativo_s_n", length=1)
     public String getLitCorporativoSN() {
         return this.litCorporativoSN;
     }
-    
+
     public void setLitCorporativoSN(String litCorporativoSN) {
         this.litCorporativoSN = litCorporativoSN;
     }
 
-    
+
     @Column(name="lit_subrogado_s_n", length=1)
     public String getLitSubrogadoSN() {
         return this.litSubrogadoSN;
     }
-    
+
     public void setLitSubrogadoSN(String litSubrogadoSN) {
         this.litSubrogadoSN = litSubrogadoSN;
     }
 
-    
+
     @Column(name="lit_porcentaje_probabilidad")
     public Short getLitPorcentajeProbabilidad() {
         return this.litPorcentajeProbabilidad;
     }
-    
+
     public void setLitPorcentajeProbabilidad(Short litPorcentajeProbabilidad) {
         this.litPorcentajeProbabilidad = litPorcentajeProbabilidad;
     }
 
-    
+
     @Column(name="lit_sustentacion", length=1000)
     public String getLitSustentacion() {
         return this.litSustentacion;
     }
-    
+
     public void setLitSustentacion(String litSustentacion) {
         this.litSustentacion = litSustentacion;
     }
 
-    
+
     @Column(name="lit_flex_condena", length=254)
     public String getLitFlexCondena() {
         return this.litFlexCondena;
     }
-    
+
     public void setLitFlexCondena(String litFlexCondena) {
         this.litFlexCondena = litFlexCondena;
     }
 
-    
+
     @Column(name="lit_flex_honorarios", length=254)
     public String getLitFlexHonorarios() {
         return this.litFlexHonorarios;
     }
-    
+
     public void setLitFlexHonorarios(String litFlexHonorarios) {
         this.litFlexHonorarios = litFlexHonorarios;
     }
 
-    
+
     @Column(name="lit_prevision", precision=14, scale=4)
     public BigDecimal getLitPrevision() {
         return this.litPrevision;
     }
-    
+
     public void setLitPrevision(BigDecimal litPrevision) {
         this.litPrevision = litPrevision;
     }
 
-    
+
     @Column(name="lit_provision", precision=18, scale=4)
     public BigDecimal getLitProvision() {
         return this.litProvision;
     }
-    
+
     public void setLitProvision(BigDecimal litProvision) {
         this.litProvision = litProvision;
     }
 
-    
+
     @Column(name="lit_importe_transf", precision=18, scale=4)
     public BigDecimal getLitImporteTransf() {
         return this.litImporteTransf;
     }
-    
+
     public void setLitImporteTransf(BigDecimal litImporteTransf) {
         this.litImporteTransf = litImporteTransf;
     }
 
-    
+
     @Column(name="lit_descuentos_s_s_total", precision=18, scale=4)
     public BigDecimal getLitDescuentosSSTotal() {
         return this.litDescuentosSSTotal;
     }
-    
+
     public void setLitDescuentosSSTotal(BigDecimal litDescuentosSSTotal) {
         this.litDescuentosSSTotal = litDescuentosSSTotal;
     }
 
-    
+
     @Column(name="lit_importe_bruto_total", precision=18, scale=4)
     public BigDecimal getLitImporteBrutoTotal() {
         return this.litImporteBrutoTotal;
     }
-    
+
     public void setLitImporteBrutoTotal(BigDecimal litImporteBrutoTotal) {
         this.litImporteBrutoTotal = litImporteBrutoTotal;
     }
 
-    
+
     @Column(name="lit_retencion_judicial_total", precision=18, scale=4)
     public BigDecimal getLitRetencionJudicialTotal() {
         return this.litRetencionJudicialTotal;
     }
-    
+
     public void setLitRetencionJudicialTotal(BigDecimal litRetencionJudicialTotal) {
         this.litRetencionJudicialTotal = litRetencionJudicialTotal;
     }
 
-    
+
     @Column(name="lit_descuentos_irpf_total", precision=18, scale=4)
     public BigDecimal getLitDescuentosIrpfTotal() {
         return this.litDescuentosIrpfTotal;
     }
-    
+
     public void setLitDescuentosIrpfTotal(BigDecimal litDescuentosIrpfTotal) {
         this.litDescuentosIrpfTotal = litDescuentosIrpfTotal;
     }
 
-    
+
     @Column(name="id_approle", length=30)
     public String getIdApprole() {
         return this.idApprole;
     }
-    
+
     public void setIdApprole(String idApprole) {
         this.idApprole = idApprole;
     }
 
-    
+
     @Column(name="id_secuser", length=30)
     public String getIdSecuser() {
         return this.idSecuser;
     }
-    
+
     public void setIdSecuser(String idSecuser) {
         this.idSecuser = idSecuser;
     }
@@ -875,17 +876,17 @@ public class M4sllLitigios  implements java.io.Serializable {
     public Date getDtLastUpdate() {
         return this.dtLastUpdate;
     }
-    
+
     public void setDtLastUpdate(Date dtLastUpdate) {
         this.dtLastUpdate = dtLastUpdate;
     }
 
-    
+
     @Column(name="lit_ck_calc_prov", length=1)
     public String getLitCkCalcProv() {
         return this.litCkCalcProv;
     }
-    
+
     public void setLitCkCalcProv(String litCkCalcProv) {
         this.litCkCalcProv = litCkCalcProv;
     }

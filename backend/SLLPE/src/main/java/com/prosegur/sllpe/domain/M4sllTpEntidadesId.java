@@ -12,24 +12,24 @@ import javax.persistence.Embeddable;
 public class M4sllTpEntidadesId  implements java.io.Serializable {
 
 
-     private String tpeIdTpEntidad;
-     private String idOrganization;
+    private String tpeIdTpEntidad;
+    private String idOrganization;
 
     public M4sllTpEntidadesId() {
     }
 
     public M4sllTpEntidadesId(String tpeIdTpEntidad, String idOrganization) {
-       this.tpeIdTpEntidad = tpeIdTpEntidad;
-       this.idOrganization = idOrganization;
+        this.tpeIdTpEntidad = tpeIdTpEntidad;
+        this.idOrganization = idOrganization;
     }
-   
+
 
 
     @Column(name="tpe_id_tp_entidad", nullable=false, length=3)
     public String getTpeIdTpEntidad() {
         return this.tpeIdTpEntidad;
     }
-    
+
     public void setTpeIdTpEntidad(String tpeIdTpEntidad) {
         this.tpeIdTpEntidad = tpeIdTpEntidad;
     }
@@ -39,29 +39,29 @@ public class M4sllTpEntidadesId  implements java.io.Serializable {
     public String getIdOrganization() {
         return this.idOrganization;
     }
-    
+
     public void setIdOrganization(String idOrganization) {
         this.idOrganization = idOrganization;
     }
 
 
-   public boolean equals(Object other) {
-         if ( (this == other ) ) return true;
-		 if ( (other == null ) ) return false;
-		 if ( !(other instanceof M4sllTpEntidadesId) ) return false;
-		 M4sllTpEntidadesId castOther = ( M4sllTpEntidadesId ) other; 
-         
-		 return ( (this.getTpeIdTpEntidad()==castOther.getTpeIdTpEntidad()) || ( this.getTpeIdTpEntidad()!=null && castOther.getTpeIdTpEntidad()!=null && this.getTpeIdTpEntidad().equals(castOther.getTpeIdTpEntidad()) ) )
- && ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) );
-   }
-   
-   public int hashCode() {
-         int result = 17;
-         
-         result = 37 * result + ( getTpeIdTpEntidad() == null ? 0 : this.getTpeIdTpEntidad().hashCode() );
-         result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
-         return result;
-   }   
+    public boolean equals(Object other) {
+        if ( (this == other ) ) return true;
+        if ( (other == null ) ) return false;
+        if ( !(other instanceof M4sllTpEntidadesId) ) return false;
+        M4sllTpEntidadesId castOther = ( M4sllTpEntidadesId ) other;
+
+        return ( (this.getTpeIdTpEntidad()==castOther.getTpeIdTpEntidad()) || ( this.getTpeIdTpEntidad()!=null && castOther.getTpeIdTpEntidad()!=null && this.getTpeIdTpEntidad().equals(castOther.getTpeIdTpEntidad()) ) )
+               && ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) );
+    }
+
+    public int hashCode() {
+        int result = 17;
+
+        result = 37 * result + ( getTpeIdTpEntidad() == null ? 0 : this.getTpeIdTpEntidad().hashCode() );
+        result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
+        return result;
+    }
 
 
 }

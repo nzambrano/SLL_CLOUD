@@ -17,164 +17,165 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="m4sll_mt_abogados"
-    ,schema="sll"
-)
+            ,schema="sll"
+      )
 public class M4sllMtAbogados  implements java.io.Serializable {
 
 
-     private M4sllMtAbogadosId id;
-     private String mabNombre;
-     private String mabApellido;
-     private String mabEmail;
-     private String mabChkInt;
-     private String stdIdPerson;
-     private String edeIdDelegacion;
-     private String eciIdCiudad;
-     private String stdIdLegEnt;
-     private Date mabDtEnd;
-     private String idApprole;
-     private String idSecuser;
-     private Date dtLastUpdate;
-     private Date mabDtStart;
-     private String mabNCedula;
-     private String mabNTarjProf;
-     private String mabTelefono;
-     private String mabCelular;
-     private String mabDomicilio;
-     private String mabEmpresa;
-     private String mabNit;
-     private Date mabDtInicioContrato;
-     private Date mabDtFinContrato;
-     private String mabTipoVinculacion;
-     private String stdIdSubGeoDiv;
-     private String stdIdGeoPlace;
+    private M4sllMtAbogadosId id;
+    private String mabNombre;
+    private String mabApellido;
+    private String mabEmail;
+    private String mabChkInt;
+    private String stdIdPerson;
+    private String edeIdDelegacion;
+    private String eciIdCiudad;
+    private String stdIdLegEnt;
+    private Date mabDtEnd;
+    private String idApprole;
+    private String idSecuser;
+    private Date dtLastUpdate;
+    private Date mabDtStart;
+    private String mabNCedula;
+    private String mabNTarjProf;
+    private String mabTelefono;
+    private String mabCelular;
+    private String mabDomicilio;
+    private String mabEmpresa;
+    private String mabNit;
+    private Date mabDtInicioContrato;
+    private Date mabDtFinContrato;
+    private String mabTipoVinculacion;
+    private String stdIdSubGeoDiv;
+    private String stdIdGeoPlace;
 
     public M4sllMtAbogados() {
     }
 
-	
+
     public M4sllMtAbogados(M4sllMtAbogadosId id) {
         this.id = id;
     }
     public M4sllMtAbogados(M4sllMtAbogadosId id, String mabNombre, String mabApellido, String mabEmail, String mabChkInt, String stdIdPerson, String edeIdDelegacion, String eciIdCiudad, String stdIdLegEnt, Date mabDtEnd, String idApprole, String idSecuser, Date dtLastUpdate, Date mabDtStart, String mabNCedula, String mabNTarjProf, String mabTelefono, String mabCelular, String mabDomicilio, String mabEmpresa, String mabNit, Date mabDtInicioContrato, Date mabDtFinContrato, String mabTipoVinculacion, String stdIdSubGeoDiv, String stdIdGeoPlace) {
-       this.id = id;
-       this.mabNombre = mabNombre;
-       this.mabApellido = mabApellido;
-       this.mabEmail = mabEmail;
-       this.mabChkInt = mabChkInt;
-       this.stdIdPerson = stdIdPerson;
-       this.edeIdDelegacion = edeIdDelegacion;
-       this.eciIdCiudad = eciIdCiudad;
-       this.stdIdLegEnt = stdIdLegEnt;
-       this.mabDtEnd = mabDtEnd;
-       this.idApprole = idApprole;
-       this.idSecuser = idSecuser;
-       this.dtLastUpdate = dtLastUpdate;
-       this.mabDtStart = mabDtStart;
-       this.mabNCedula = mabNCedula;
-       this.mabNTarjProf = mabNTarjProf;
-       this.mabTelefono = mabTelefono;
-       this.mabCelular = mabCelular;
-       this.mabDomicilio = mabDomicilio;
-       this.mabEmpresa = mabEmpresa;
-       this.mabNit = mabNit;
-       this.mabDtInicioContrato = mabDtInicioContrato;
-       this.mabDtFinContrato = mabDtFinContrato;
-       this.mabTipoVinculacion = mabTipoVinculacion;
-       this.stdIdSubGeoDiv = stdIdSubGeoDiv;
-       this.stdIdGeoPlace = stdIdGeoPlace;
+        this.id = id;
+        this.mabNombre = mabNombre;
+        this.mabApellido = mabApellido;
+        this.mabEmail = mabEmail;
+        this.mabChkInt = mabChkInt;
+        this.stdIdPerson = stdIdPerson;
+        this.edeIdDelegacion = edeIdDelegacion;
+        this.eciIdCiudad = eciIdCiudad;
+        this.stdIdLegEnt = stdIdLegEnt;
+        this.mabDtEnd = mabDtEnd;
+        this.idApprole = idApprole;
+        this.idSecuser = idSecuser;
+        this.dtLastUpdate = dtLastUpdate;
+        this.mabDtStart = mabDtStart;
+        this.mabNCedula = mabNCedula;
+        this.mabNTarjProf = mabNTarjProf;
+        this.mabTelefono = mabTelefono;
+        this.mabCelular = mabCelular;
+        this.mabDomicilio = mabDomicilio;
+        this.mabEmpresa = mabEmpresa;
+        this.mabNit = mabNit;
+        this.mabDtInicioContrato = mabDtInicioContrato;
+        this.mabDtFinContrato = mabDtFinContrato;
+        this.mabTipoVinculacion = mabTipoVinculacion;
+        this.stdIdSubGeoDiv = stdIdSubGeoDiv;
+        this.stdIdGeoPlace = stdIdGeoPlace;
     }
-   
-     @EmbeddedId
 
-    
+    @EmbeddedId
+
+
     @AttributeOverrides( {
-        @AttributeOverride(name="mabSecuencia", column=@Column(name="mab_secuencia", nullable=false) ), 
-        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) ) } )
+        @AttributeOverride(name="mabSecuencia", column=@Column(name="mab_secuencia", nullable=false) ),
+        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) )
+    } )
     public M4sllMtAbogadosId getId() {
         return this.id;
     }
-    
+
     public void setId(M4sllMtAbogadosId id) {
         this.id = id;
     }
 
-    
+
     @Column(name="mab_nombre")
     public String getMabNombre() {
         return this.mabNombre;
     }
-    
+
     public void setMabNombre(String mabNombre) {
         this.mabNombre = mabNombre;
     }
 
-    
+
     @Column(name="mab_apellido")
     public String getMabApellido() {
         return this.mabApellido;
     }
-    
+
     public void setMabApellido(String mabApellido) {
         this.mabApellido = mabApellido;
     }
 
-    
+
     @Column(name="mab_email")
     public String getMabEmail() {
         return this.mabEmail;
     }
-    
+
     public void setMabEmail(String mabEmail) {
         this.mabEmail = mabEmail;
     }
 
-    
+
     @Column(name="mab_chk_int", length=1)
     public String getMabChkInt() {
         return this.mabChkInt;
     }
-    
+
     public void setMabChkInt(String mabChkInt) {
         this.mabChkInt = mabChkInt;
     }
 
-    
+
     @Column(name="std_id_person", length=10)
     public String getStdIdPerson() {
         return this.stdIdPerson;
     }
-    
+
     public void setStdIdPerson(String stdIdPerson) {
         this.stdIdPerson = stdIdPerson;
     }
 
-    
+
     @Column(name="ede_id_delegacion", length=3)
     public String getEdeIdDelegacion() {
         return this.edeIdDelegacion;
     }
-    
+
     public void setEdeIdDelegacion(String edeIdDelegacion) {
         this.edeIdDelegacion = edeIdDelegacion;
     }
 
-    
+
     @Column(name="eci_id_ciudad", length=3)
     public String getEciIdCiudad() {
         return this.eciIdCiudad;
     }
-    
+
     public void setEciIdCiudad(String eciIdCiudad) {
         this.eciIdCiudad = eciIdCiudad;
     }
 
-    
+
     @Column(name="std_id_leg_ent", length=9)
     public String getStdIdLegEnt() {
         return this.stdIdLegEnt;
     }
-    
+
     public void setStdIdLegEnt(String stdIdLegEnt) {
         this.stdIdLegEnt = stdIdLegEnt;
     }
@@ -184,27 +185,27 @@ public class M4sllMtAbogados  implements java.io.Serializable {
     public Date getMabDtEnd() {
         return this.mabDtEnd;
     }
-    
+
     public void setMabDtEnd(Date mabDtEnd) {
         this.mabDtEnd = mabDtEnd;
     }
 
-    
+
     @Column(name="id_approle", length=30)
     public String getIdApprole() {
         return this.idApprole;
     }
-    
+
     public void setIdApprole(String idApprole) {
         this.idApprole = idApprole;
     }
 
-    
+
     @Column(name="id_secuser", length=30)
     public String getIdSecuser() {
         return this.idSecuser;
     }
-    
+
     public void setIdSecuser(String idSecuser) {
         this.idSecuser = idSecuser;
     }
@@ -214,7 +215,7 @@ public class M4sllMtAbogados  implements java.io.Serializable {
     public Date getDtLastUpdate() {
         return this.dtLastUpdate;
     }
-    
+
     public void setDtLastUpdate(Date dtLastUpdate) {
         this.dtLastUpdate = dtLastUpdate;
     }
@@ -224,77 +225,77 @@ public class M4sllMtAbogados  implements java.io.Serializable {
     public Date getMabDtStart() {
         return this.mabDtStart;
     }
-    
+
     public void setMabDtStart(Date mabDtStart) {
         this.mabDtStart = mabDtStart;
     }
 
-    
+
     @Column(name="mab_n_cedula", length=100)
     public String getMabNCedula() {
         return this.mabNCedula;
     }
-    
+
     public void setMabNCedula(String mabNCedula) {
         this.mabNCedula = mabNCedula;
     }
 
-    
+
     @Column(name="mab_n_tarj_prof", length=100)
     public String getMabNTarjProf() {
         return this.mabNTarjProf;
     }
-    
+
     public void setMabNTarjProf(String mabNTarjProf) {
         this.mabNTarjProf = mabNTarjProf;
     }
 
-    
+
     @Column(name="mab_telefono", length=50)
     public String getMabTelefono() {
         return this.mabTelefono;
     }
-    
+
     public void setMabTelefono(String mabTelefono) {
         this.mabTelefono = mabTelefono;
     }
 
-    
+
     @Column(name="mab_celular", length=50)
     public String getMabCelular() {
         return this.mabCelular;
     }
-    
+
     public void setMabCelular(String mabCelular) {
         this.mabCelular = mabCelular;
     }
 
-    
+
     @Column(name="mab_domicilio", length=254)
     public String getMabDomicilio() {
         return this.mabDomicilio;
     }
-    
+
     public void setMabDomicilio(String mabDomicilio) {
         this.mabDomicilio = mabDomicilio;
     }
 
-    
+
     @Column(name="mab_empresa", length=254)
     public String getMabEmpresa() {
         return this.mabEmpresa;
     }
-    
+
     public void setMabEmpresa(String mabEmpresa) {
         this.mabEmpresa = mabEmpresa;
     }
 
-    
+
     @Column(name="mab_nit", length=100)
     public String getMabNit() {
         return this.mabNit;
     }
-    
+
     public void setMabNit(String mabNit) {
         this.mabNit = mabNit;
     }
@@ -304,7 +305,7 @@ public class M4sllMtAbogados  implements java.io.Serializable {
     public Date getMabDtInicioContrato() {
         return this.mabDtInicioContrato;
     }
-    
+
     public void setMabDtInicioContrato(Date mabDtInicioContrato) {
         this.mabDtInicioContrato = mabDtInicioContrato;
     }
@@ -314,37 +315,37 @@ public class M4sllMtAbogados  implements java.io.Serializable {
     public Date getMabDtFinContrato() {
         return this.mabDtFinContrato;
     }
-    
+
     public void setMabDtFinContrato(Date mabDtFinContrato) {
         this.mabDtFinContrato = mabDtFinContrato;
     }
 
-    
+
     @Column(name="mab_tipo_vinculacion", length=254)
     public String getMabTipoVinculacion() {
         return this.mabTipoVinculacion;
     }
-    
+
     public void setMabTipoVinculacion(String mabTipoVinculacion) {
         this.mabTipoVinculacion = mabTipoVinculacion;
     }
 
-    
+
     @Column(name="std_id_sub_geo_div", length=8)
     public String getStdIdSubGeoDiv() {
         return this.stdIdSubGeoDiv;
     }
-    
+
     public void setStdIdSubGeoDiv(String stdIdSubGeoDiv) {
         this.stdIdSubGeoDiv = stdIdSubGeoDiv;
     }
 
-    
+
     @Column(name="std_id_geo_place", length=9)
     public String getStdIdGeoPlace() {
         return this.stdIdGeoPlace;
     }
-    
+
     public void setStdIdGeoPlace(String stdIdGeoPlace) {
         this.stdIdGeoPlace = stdIdGeoPlace;
     }

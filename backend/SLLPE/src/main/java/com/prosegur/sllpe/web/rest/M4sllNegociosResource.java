@@ -45,7 +45,7 @@ public class M4sllNegociosResource {
     /* Select en la BD */
     @GetMapping("/m4sll_negocios/{id_organization}")
     public ResponseEntity<List<M4sllNegocios>> getAllM4sllNegocios(
-    		@PathVariable("id_organization") String idOrganization
+        @PathVariable("id_organization") String idOrganization
     ) {
         log.debug("REST request to get ALL M4sllNegocios : {}");
 
@@ -56,54 +56,54 @@ public class M4sllNegociosResource {
     /* Update en la BD */
     @PutMapping("/m4sll_negocios")
     public ResponseEntity<M4sllNegocios> M4sllNegocios(@RequestBody M4sllNegocios m4sll_negocios)
-            throws URISyntaxException {
+    throws URISyntaxException {
         log.debug("REST request to update m4sll_negocios : {}", m4sll_negocios);
         if (m4sll_negocios.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         M4sllNegocios result = M4sllNegociosRepository.save(m4sll_negocios);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                m4sll_negocios.getId().toString())).body(result);
+                                           m4sll_negocios.getId().toString())).body(result);
     }
 
     /* Delete en la BD */
-    
+
     @DeleteMapping("/m4sll_negocios/{id_idOrganization}/{neg_idNegocio}")
     public ResponseEntity<Void> deleteM4sllNegocios(
-            @PathVariable("id_idOrganization") String id_idOrganization,
-            @PathVariable("neg_idNegocio") String neg_idNegocio) {
+        @PathVariable("id_idOrganization") String id_idOrganization,
+        @PathVariable("neg_idNegocio") String neg_idNegocio) {
         log.debug("REST request to delete m4sll_negocios : {} | {}",id_idOrganization,neg_idNegocio);
         M4sllNegociosId id = new M4sllNegociosId();
         id.setIdOrganization(id_idOrganization);
         id.setNegIdNegocio(neg_idNegocio);
-        
+
         M4sllNegociosRepository.deleteById(id);
         return ResponseEntity.noContent()
-                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-                .build();
+               .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+               .build();
     }
 
-     /* Insert en la BD */
-     @PostMapping("/m4sll_negocios")
-     public ResponseEntity<M4sllNegocios> createM4sllNegocios(@RequestBody M4sllNegocios m4sll_negocios)
-             throws URISyntaxException {
- 
-         log.debug("REST request to create m4sll_mt_abogados : {}", m4sll_negocios);
-         
-         M4sllNegociosId id = new M4sllNegociosId();
-         
-         NegocioServices negocioServices = new NegocioServices(M4sllNegociosRepository);
-         String neg_id_negocio = negocioServices.UltimaSecuencia(m4sll_negocios).toString();
-         
-         id.setIdOrganization(m4sll_negocios.getId().getIdOrganization());
-         id.setNegIdNegocio(neg_id_negocio);
-         
-         m4sll_negocios.setId(id);
- 
-         M4sllNegocios result = M4sllNegociosRepository.save(m4sll_negocios);
-         return ResponseEntity
-                 .created(new URI("/api/m4sll_negocios/" + result.getId())).headers(HeaderUtil
-                         .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-                 .body(result);
-     }
+    /* Insert en la BD */
+    @PostMapping("/m4sll_negocios")
+    public ResponseEntity<M4sllNegocios> createM4sllNegocios(@RequestBody M4sllNegocios m4sll_negocios)
+    throws URISyntaxException {
+
+        log.debug("REST request to create m4sll_mt_abogados : {}", m4sll_negocios);
+
+        M4sllNegociosId id = new M4sllNegociosId();
+
+        NegocioServices negocioServices = new NegocioServices(M4sllNegociosRepository);
+        String neg_id_negocio = negocioServices.UltimaSecuencia(m4sll_negocios).toString();
+
+        id.setIdOrganization(m4sll_negocios.getId().getIdOrganization());
+        id.setNegIdNegocio(neg_id_negocio);
+
+        m4sll_negocios.setId(id);
+
+        M4sllNegocios result = M4sllNegociosRepository.save(m4sll_negocios);
+        return ResponseEntity
+               .created(new URI("/api/m4sll_negocios/" + result.getId())).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .body(result);
+    }
 }

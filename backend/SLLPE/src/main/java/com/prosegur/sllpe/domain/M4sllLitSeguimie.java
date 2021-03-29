@@ -17,67 +17,68 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="m4sll_lit_seguimie"
-    ,schema="sll"
-)
+            ,schema="sll"
+      )
 public class M4sllLitSeguimie  implements java.io.Serializable {
 
 
-     private M4sllLitSeguimieId id;
-     private String lisSeguimiento;
-     private String stdIdPerson;
-     private Date lisFecha;
-     private String idApprole;
-     private String idSecuser;
-     private Date dtLastUpdate;
+    private M4sllLitSeguimieId id;
+    private String lisSeguimiento;
+    private String stdIdPerson;
+    private Date lisFecha;
+    private String idApprole;
+    private String idSecuser;
+    private Date dtLastUpdate;
 
     public M4sllLitSeguimie() {
     }
 
-	
+
     public M4sllLitSeguimie(M4sllLitSeguimieId id) {
         this.id = id;
     }
     public M4sllLitSeguimie(M4sllLitSeguimieId id, String lisSeguimiento, String stdIdPerson, Date lisFecha, String idApprole, String idSecuser, Date dtLastUpdate) {
-       this.id = id;
-       this.lisSeguimiento = lisSeguimiento;
-       this.stdIdPerson = stdIdPerson;
-       this.lisFecha = lisFecha;
-       this.idApprole = idApprole;
-       this.idSecuser = idSecuser;
-       this.dtLastUpdate = dtLastUpdate;
+        this.id = id;
+        this.lisSeguimiento = lisSeguimiento;
+        this.stdIdPerson = stdIdPerson;
+        this.lisFecha = lisFecha;
+        this.idApprole = idApprole;
+        this.idSecuser = idSecuser;
+        this.dtLastUpdate = dtLastUpdate;
     }
-   
-     @EmbeddedId
 
-    
+    @EmbeddedId
+
+
     @AttributeOverrides( {
-        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ), 
-        @AttributeOverride(name="lisSecuencia", column=@Column(name="lis_secuencia", nullable=false) ), 
-        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) ) } )
+        @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ),
+        @AttributeOverride(name="lisSecuencia", column=@Column(name="lis_secuencia", nullable=false) ),
+        @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) )
+    } )
     public M4sllLitSeguimieId getId() {
         return this.id;
     }
-    
+
     public void setId(M4sllLitSeguimieId id) {
         this.id = id;
     }
 
-    
+
     @Column(name="lis_seguimiento", length=1000)
     public String getLisSeguimiento() {
         return this.lisSeguimiento;
     }
-    
+
     public void setLisSeguimiento(String lisSeguimiento) {
         this.lisSeguimiento = lisSeguimiento;
     }
 
-    
+
     @Column(name="std_id_person", length=10)
     public String getStdIdPerson() {
         return this.stdIdPerson;
     }
-    
+
     public void setStdIdPerson(String stdIdPerson) {
         this.stdIdPerson = stdIdPerson;
     }
@@ -87,27 +88,27 @@ public class M4sllLitSeguimie  implements java.io.Serializable {
     public Date getLisFecha() {
         return this.lisFecha;
     }
-    
+
     public void setLisFecha(Date lisFecha) {
         this.lisFecha = lisFecha;
     }
 
-    
+
     @Column(name="id_approle", length=30)
     public String getIdApprole() {
         return this.idApprole;
     }
-    
+
     public void setIdApprole(String idApprole) {
         this.idApprole = idApprole;
     }
 
-    
+
     @Column(name="id_secuser", length=30)
     public String getIdSecuser() {
         return this.idSecuser;
     }
-    
+
     public void setIdSecuser(String idSecuser) {
         this.idSecuser = idSecuser;
     }
@@ -117,7 +118,7 @@ public class M4sllLitSeguimie  implements java.io.Serializable {
     public Date getDtLastUpdate() {
         return this.dtLastUpdate;
     }
-    
+
     public void setDtLastUpdate(Date dtLastUpdate) {
         this.dtLastUpdate = dtLastUpdate;
     }

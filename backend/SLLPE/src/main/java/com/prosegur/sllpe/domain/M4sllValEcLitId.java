@@ -12,26 +12,26 @@ import javax.persistence.Embeddable;
 public class M4sllValEcLitId  implements java.io.Serializable {
 
 
-     private long velSecuencia;
-     private String litIdLitigio;
-     private String idOrganization;
+    private long velSecuencia;
+    private String litIdLitigio;
+    private String idOrganization;
 
     public M4sllValEcLitId() {
     }
 
     public M4sllValEcLitId(long velSecuencia, String litIdLitigio, String idOrganization) {
-       this.velSecuencia = velSecuencia;
-       this.litIdLitigio = litIdLitigio;
-       this.idOrganization = idOrganization;
+        this.velSecuencia = velSecuencia;
+        this.litIdLitigio = litIdLitigio;
+        this.idOrganization = idOrganization;
     }
-   
+
 
 
     @Column(name="vel_secuencia", nullable=false)
     public long getVelSecuencia() {
         return this.velSecuencia;
     }
-    
+
     public void setVelSecuencia(long velSecuencia) {
         this.velSecuencia = velSecuencia;
     }
@@ -41,7 +41,7 @@ public class M4sllValEcLitId  implements java.io.Serializable {
     public String getLitIdLitigio() {
         return this.litIdLitigio;
     }
-    
+
     public void setLitIdLitigio(String litIdLitigio) {
         this.litIdLitigio = litIdLitigio;
     }
@@ -51,31 +51,31 @@ public class M4sllValEcLitId  implements java.io.Serializable {
     public String getIdOrganization() {
         return this.idOrganization;
     }
-    
+
     public void setIdOrganization(String idOrganization) {
         this.idOrganization = idOrganization;
     }
 
 
-   public boolean equals(Object other) {
-         if ( (this == other ) ) return true;
-		 if ( (other == null ) ) return false;
-		 if ( !(other instanceof M4sllValEcLitId) ) return false;
-		 M4sllValEcLitId castOther = ( M4sllValEcLitId ) other; 
-         
-		 return (this.getVelSecuencia()==castOther.getVelSecuencia())
- && ( (this.getLitIdLitigio()==castOther.getLitIdLitigio()) || ( this.getLitIdLitigio()!=null && castOther.getLitIdLitigio()!=null && this.getLitIdLitigio().equals(castOther.getLitIdLitigio()) ) )
- && ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) );
-   }
-   
-   public int hashCode() {
-         int result = 17;
-         
-         result = 37 * result + (int) this.getVelSecuencia();
-         result = 37 * result + ( getLitIdLitigio() == null ? 0 : this.getLitIdLitigio().hashCode() );
-         result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
-         return result;
-   }   
+    public boolean equals(Object other) {
+        if ( (this == other ) ) return true;
+        if ( (other == null ) ) return false;
+        if ( !(other instanceof M4sllValEcLitId) ) return false;
+        M4sllValEcLitId castOther = ( M4sllValEcLitId ) other;
+
+        return (this.getVelSecuencia()==castOther.getVelSecuencia())
+               && ( (this.getLitIdLitigio()==castOther.getLitIdLitigio()) || ( this.getLitIdLitigio()!=null && castOther.getLitIdLitigio()!=null && this.getLitIdLitigio().equals(castOther.getLitIdLitigio()) ) )
+               && ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) );
+    }
+
+    public int hashCode() {
+        int result = 17;
+
+        result = 37 * result + (int) this.getVelSecuencia();
+        result = 37 * result + ( getLitIdLitigio() == null ? 0 : this.getLitIdLitigio().hashCode() );
+        result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
+        return result;
+    }
 
 
 }

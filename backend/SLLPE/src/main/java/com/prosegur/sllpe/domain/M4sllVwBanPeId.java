@@ -13,42 +13,42 @@ import javax.persistence.Embeddable;
 public class M4sllVwBanPeId  implements java.io.Serializable {
 
 
-     private String idOrganization;
-     private String litIdLitigio;
-     private String litNroProceso;
-     private BigDecimal litValorTotal;
-     private String litBpo;
-     private String reu;
-     private String autor;
-     private String triNmTribunal;
-     private String tstNmTpStatus;
-     private String tplNmTpLitigio;
-     private String tsdNmTpStatusDet;
+    private String idOrganization;
+    private String litIdLitigio;
+    private String litNroProceso;
+    private BigDecimal litValorTotal;
+    private String litBpo;
+    private String reu;
+    private String autor;
+    private String triNmTribunal;
+    private String tstNmTpStatus;
+    private String tplNmTpLitigio;
+    private String tsdNmTpStatusDet;
 
     public M4sllVwBanPeId() {
     }
 
     public M4sllVwBanPeId(String idOrganization, String litIdLitigio, String litNroProceso, BigDecimal litValorTotal, String litBpo, String reu, String autor, String triNmTribunal, String tstNmTpStatus, String tplNmTpLitigio, String tsdNmTpStatusDet) {
-       this.idOrganization = idOrganization;
-       this.litIdLitigio = litIdLitigio;
-       this.litNroProceso = litNroProceso;
-       this.litValorTotal = litValorTotal;
-       this.litBpo = litBpo;
-       this.reu = reu;
-       this.autor = autor;
-       this.triNmTribunal = triNmTribunal;
-       this.tstNmTpStatus = tstNmTpStatus;
-       this.tplNmTpLitigio = tplNmTpLitigio;
-       this.tsdNmTpStatusDet = tsdNmTpStatusDet;
+        this.idOrganization = idOrganization;
+        this.litIdLitigio = litIdLitigio;
+        this.litNroProceso = litNroProceso;
+        this.litValorTotal = litValorTotal;
+        this.litBpo = litBpo;
+        this.reu = reu;
+        this.autor = autor;
+        this.triNmTribunal = triNmTribunal;
+        this.tstNmTpStatus = tstNmTpStatus;
+        this.tplNmTpLitigio = tplNmTpLitigio;
+        this.tsdNmTpStatusDet = tsdNmTpStatusDet;
     }
-   
+
 
 
     @Column(name="id_organization", length=4)
     public String getIdOrganization() {
         return this.idOrganization;
     }
-    
+
     public void setIdOrganization(String idOrganization) {
         this.idOrganization = idOrganization;
     }
@@ -58,7 +58,7 @@ public class M4sllVwBanPeId  implements java.io.Serializable {
     public String getLitIdLitigio() {
         return this.litIdLitigio;
     }
-    
+
     public void setLitIdLitigio(String litIdLitigio) {
         this.litIdLitigio = litIdLitigio;
     }
@@ -68,7 +68,7 @@ public class M4sllVwBanPeId  implements java.io.Serializable {
     public String getLitNroProceso() {
         return this.litNroProceso;
     }
-    
+
     public void setLitNroProceso(String litNroProceso) {
         this.litNroProceso = litNroProceso;
     }
@@ -78,7 +78,7 @@ public class M4sllVwBanPeId  implements java.io.Serializable {
     public BigDecimal getLitValorTotal() {
         return this.litValorTotal;
     }
-    
+
     public void setLitValorTotal(BigDecimal litValorTotal) {
         this.litValorTotal = litValorTotal;
     }
@@ -88,7 +88,7 @@ public class M4sllVwBanPeId  implements java.io.Serializable {
     public String getLitBpo() {
         return this.litBpo;
     }
-    
+
     public void setLitBpo(String litBpo) {
         this.litBpo = litBpo;
     }
@@ -98,7 +98,7 @@ public class M4sllVwBanPeId  implements java.io.Serializable {
     public String getReu() {
         return this.reu;
     }
-    
+
     public void setReu(String reu) {
         this.reu = reu;
     }
@@ -108,7 +108,7 @@ public class M4sllVwBanPeId  implements java.io.Serializable {
     public String getAutor() {
         return this.autor;
     }
-    
+
     public void setAutor(String autor) {
         this.autor = autor;
     }
@@ -118,7 +118,7 @@ public class M4sllVwBanPeId  implements java.io.Serializable {
     public String getTriNmTribunal() {
         return this.triNmTribunal;
     }
-    
+
     public void setTriNmTribunal(String triNmTribunal) {
         this.triNmTribunal = triNmTribunal;
     }
@@ -128,7 +128,7 @@ public class M4sllVwBanPeId  implements java.io.Serializable {
     public String getTstNmTpStatus() {
         return this.tstNmTpStatus;
     }
-    
+
     public void setTstNmTpStatus(String tstNmTpStatus) {
         this.tstNmTpStatus = tstNmTpStatus;
     }
@@ -138,7 +138,7 @@ public class M4sllVwBanPeId  implements java.io.Serializable {
     public String getTplNmTpLitigio() {
         return this.tplNmTpLitigio;
     }
-    
+
     public void setTplNmTpLitigio(String tplNmTpLitigio) {
         this.tplNmTpLitigio = tplNmTpLitigio;
     }
@@ -148,47 +148,47 @@ public class M4sllVwBanPeId  implements java.io.Serializable {
     public String getTsdNmTpStatusDet() {
         return this.tsdNmTpStatusDet;
     }
-    
+
     public void setTsdNmTpStatusDet(String tsdNmTpStatusDet) {
         this.tsdNmTpStatusDet = tsdNmTpStatusDet;
     }
 
 
-   public boolean equals(Object other) {
-         if ( (this == other ) ) return true;
-		 if ( (other == null ) ) return false;
-		 if ( !(other instanceof M4sllVwBanPeId) ) return false;
-		 M4sllVwBanPeId castOther = ( M4sllVwBanPeId ) other; 
-         
-		 return ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) )
- && ( (this.getLitIdLitigio()==castOther.getLitIdLitigio()) || ( this.getLitIdLitigio()!=null && castOther.getLitIdLitigio()!=null && this.getLitIdLitigio().equals(castOther.getLitIdLitigio()) ) )
- && ( (this.getLitNroProceso()==castOther.getLitNroProceso()) || ( this.getLitNroProceso()!=null && castOther.getLitNroProceso()!=null && this.getLitNroProceso().equals(castOther.getLitNroProceso()) ) )
- && ( (this.getLitValorTotal()==castOther.getLitValorTotal()) || ( this.getLitValorTotal()!=null && castOther.getLitValorTotal()!=null && this.getLitValorTotal().equals(castOther.getLitValorTotal()) ) )
- && ( (this.getLitBpo()==castOther.getLitBpo()) || ( this.getLitBpo()!=null && castOther.getLitBpo()!=null && this.getLitBpo().equals(castOther.getLitBpo()) ) )
- && ( (this.getReu()==castOther.getReu()) || ( this.getReu()!=null && castOther.getReu()!=null && this.getReu().equals(castOther.getReu()) ) )
- && ( (this.getAutor()==castOther.getAutor()) || ( this.getAutor()!=null && castOther.getAutor()!=null && this.getAutor().equals(castOther.getAutor()) ) )
- && ( (this.getTriNmTribunal()==castOther.getTriNmTribunal()) || ( this.getTriNmTribunal()!=null && castOther.getTriNmTribunal()!=null && this.getTriNmTribunal().equals(castOther.getTriNmTribunal()) ) )
- && ( (this.getTstNmTpStatus()==castOther.getTstNmTpStatus()) || ( this.getTstNmTpStatus()!=null && castOther.getTstNmTpStatus()!=null && this.getTstNmTpStatus().equals(castOther.getTstNmTpStatus()) ) )
- && ( (this.getTplNmTpLitigio()==castOther.getTplNmTpLitigio()) || ( this.getTplNmTpLitigio()!=null && castOther.getTplNmTpLitigio()!=null && this.getTplNmTpLitigio().equals(castOther.getTplNmTpLitigio()) ) )
- && ( (this.getTsdNmTpStatusDet()==castOther.getTsdNmTpStatusDet()) || ( this.getTsdNmTpStatusDet()!=null && castOther.getTsdNmTpStatusDet()!=null && this.getTsdNmTpStatusDet().equals(castOther.getTsdNmTpStatusDet()) ) );
-   }
-   
-   public int hashCode() {
-         int result = 17;
-         
-         result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
-         result = 37 * result + ( getLitIdLitigio() == null ? 0 : this.getLitIdLitigio().hashCode() );
-         result = 37 * result + ( getLitNroProceso() == null ? 0 : this.getLitNroProceso().hashCode() );
-         result = 37 * result + ( getLitValorTotal() == null ? 0 : this.getLitValorTotal().hashCode() );
-         result = 37 * result + ( getLitBpo() == null ? 0 : this.getLitBpo().hashCode() );
-         result = 37 * result + ( getReu() == null ? 0 : this.getReu().hashCode() );
-         result = 37 * result + ( getAutor() == null ? 0 : this.getAutor().hashCode() );
-         result = 37 * result + ( getTriNmTribunal() == null ? 0 : this.getTriNmTribunal().hashCode() );
-         result = 37 * result + ( getTstNmTpStatus() == null ? 0 : this.getTstNmTpStatus().hashCode() );
-         result = 37 * result + ( getTplNmTpLitigio() == null ? 0 : this.getTplNmTpLitigio().hashCode() );
-         result = 37 * result + ( getTsdNmTpStatusDet() == null ? 0 : this.getTsdNmTpStatusDet().hashCode() );
-         return result;
-   }   
+    public boolean equals(Object other) {
+        if ( (this == other ) ) return true;
+        if ( (other == null ) ) return false;
+        if ( !(other instanceof M4sllVwBanPeId) ) return false;
+        M4sllVwBanPeId castOther = ( M4sllVwBanPeId ) other;
+
+        return ( (this.getIdOrganization()==castOther.getIdOrganization()) || ( this.getIdOrganization()!=null && castOther.getIdOrganization()!=null && this.getIdOrganization().equals(castOther.getIdOrganization()) ) )
+               && ( (this.getLitIdLitigio()==castOther.getLitIdLitigio()) || ( this.getLitIdLitigio()!=null && castOther.getLitIdLitigio()!=null && this.getLitIdLitigio().equals(castOther.getLitIdLitigio()) ) )
+               && ( (this.getLitNroProceso()==castOther.getLitNroProceso()) || ( this.getLitNroProceso()!=null && castOther.getLitNroProceso()!=null && this.getLitNroProceso().equals(castOther.getLitNroProceso()) ) )
+               && ( (this.getLitValorTotal()==castOther.getLitValorTotal()) || ( this.getLitValorTotal()!=null && castOther.getLitValorTotal()!=null && this.getLitValorTotal().equals(castOther.getLitValorTotal()) ) )
+               && ( (this.getLitBpo()==castOther.getLitBpo()) || ( this.getLitBpo()!=null && castOther.getLitBpo()!=null && this.getLitBpo().equals(castOther.getLitBpo()) ) )
+               && ( (this.getReu()==castOther.getReu()) || ( this.getReu()!=null && castOther.getReu()!=null && this.getReu().equals(castOther.getReu()) ) )
+               && ( (this.getAutor()==castOther.getAutor()) || ( this.getAutor()!=null && castOther.getAutor()!=null && this.getAutor().equals(castOther.getAutor()) ) )
+               && ( (this.getTriNmTribunal()==castOther.getTriNmTribunal()) || ( this.getTriNmTribunal()!=null && castOther.getTriNmTribunal()!=null && this.getTriNmTribunal().equals(castOther.getTriNmTribunal()) ) )
+               && ( (this.getTstNmTpStatus()==castOther.getTstNmTpStatus()) || ( this.getTstNmTpStatus()!=null && castOther.getTstNmTpStatus()!=null && this.getTstNmTpStatus().equals(castOther.getTstNmTpStatus()) ) )
+               && ( (this.getTplNmTpLitigio()==castOther.getTplNmTpLitigio()) || ( this.getTplNmTpLitigio()!=null && castOther.getTplNmTpLitigio()!=null && this.getTplNmTpLitigio().equals(castOther.getTplNmTpLitigio()) ) )
+               && ( (this.getTsdNmTpStatusDet()==castOther.getTsdNmTpStatusDet()) || ( this.getTsdNmTpStatusDet()!=null && castOther.getTsdNmTpStatusDet()!=null && this.getTsdNmTpStatusDet().equals(castOther.getTsdNmTpStatusDet()) ) );
+    }
+
+    public int hashCode() {
+        int result = 17;
+
+        result = 37 * result + ( getIdOrganization() == null ? 0 : this.getIdOrganization().hashCode() );
+        result = 37 * result + ( getLitIdLitigio() == null ? 0 : this.getLitIdLitigio().hashCode() );
+        result = 37 * result + ( getLitNroProceso() == null ? 0 : this.getLitNroProceso().hashCode() );
+        result = 37 * result + ( getLitValorTotal() == null ? 0 : this.getLitValorTotal().hashCode() );
+        result = 37 * result + ( getLitBpo() == null ? 0 : this.getLitBpo().hashCode() );
+        result = 37 * result + ( getReu() == null ? 0 : this.getReu().hashCode() );
+        result = 37 * result + ( getAutor() == null ? 0 : this.getAutor().hashCode() );
+        result = 37 * result + ( getTriNmTribunal() == null ? 0 : this.getTriNmTribunal().hashCode() );
+        result = 37 * result + ( getTstNmTpStatus() == null ? 0 : this.getTstNmTpStatus().hashCode() );
+        result = 37 * result + ( getTplNmTpLitigio() == null ? 0 : this.getTplNmTpLitigio().hashCode() );
+        result = 37 * result + ( getTsdNmTpStatusDet() == null ? 0 : this.getTsdNmTpStatusDet().hashCode() );
+        return result;
+    }
 
 
 }

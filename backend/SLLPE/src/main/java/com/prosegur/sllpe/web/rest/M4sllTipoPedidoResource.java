@@ -56,56 +56,56 @@ public class M4sllTipoPedidoResource {
     /* Update en la BD */
     @PutMapping("/m4sll_tp_pedido")
     public ResponseEntity<M4sllTpPedido> updateM4sllTpPedido(@RequestBody M4sllTpPedido m4sll_tp_pedido)
-            throws URISyntaxException {
+    throws URISyntaxException {
         log.debug("REST request to update m4sll_tp_pedido : {}", m4sll_tp_pedido);
         if (m4sll_tp_pedido.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         M4sllTpPedido result = M4sllTipoPedidoRepository.save(m4sll_tp_pedido);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                m4sll_tp_pedido.getId().toString())).body(result);
+                                           m4sll_tp_pedido.getId().toString())).body(result);
     }
 
     /* Insert en la BD */
     @PostMapping("/m4sll_tp_pedido")
     public ResponseEntity<M4sllTpPedido> createM4sllTpPedido(@RequestBody M4sllTpPedido m4sll_tp_pedido)
-            throws URISyntaxException {
+    throws URISyntaxException {
 
         log.debug("REST request to create m4sll_tp_pedido : {}", m4sll_tp_pedido);
-        
+
         M4sllTpPedidoId id = new M4sllTpPedidoId();
-        
+
         TpPedidoServices tpPedidoServices = new TpPedidoServices(M4sllTipoPedidoRepository);
         String tpe_id_pedido = tpPedidoServices.UltimaSecuencia(m4sll_tp_pedido).toString();
-        
+
         id.setIdOrganization(m4sll_tp_pedido.getId().getIdOrganization());
         id.setTpeIdPedido(tpe_id_pedido);
-        
+
         m4sll_tp_pedido.setId(id);
 
         M4sllTpPedido result = M4sllTipoPedidoRepository.save(m4sll_tp_pedido);
         return ResponseEntity
-                .created(new URI("/api/m4sll_tp_pedido/" + result.getId())).headers(HeaderUtil
-                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-                .body(result);
+               .created(new URI("/api/m4sll_tp_pedido/" + result.getId())).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .body(result);
     }
-    
+
     /* Delete en la BD */
     @DeleteMapping("/m4sll_tp_pedido/{id_organization}/{tpe_id_pedido}")
     public ResponseEntity<Void> deleteM4sllTpPedido(
-    		@PathVariable("id_organization") String idOrganization,
-            @PathVariable("tpe_id_pedido") String idTpPedido
-            ) {
+        @PathVariable("id_organization") String idOrganization,
+        @PathVariable("tpe_id_pedido") String idTpPedido
+    ) {
 
         log.debug("REST request to delete m4sll_tp_pedido : {} | {}", idOrganization, idTpPedido);
         M4sllTpPedidoId id = new M4sllTpPedidoId();
 
         id.setIdOrganization(idOrganization);
         id.setTpeIdPedido(idTpPedido);
- 
+
         M4sllTipoPedidoRepository.deleteById(id);
         return ResponseEntity.noContent()
-                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-                .build();
+               .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+               .build();
     }
 }

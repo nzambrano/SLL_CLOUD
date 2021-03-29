@@ -13,12 +13,12 @@ import org.apache.commons.logging.LogFactory;
  * @author Hibernate Tools
  */
 
- public class M4sllPedidoDetHome {
+public class M4sllPedidoDetHome {
 
     private static final Log log = LogFactory.getLog(M4sllPedidoDetHome.class);
 
     @PersistenceContext private EntityManager entityManager;
-    
+
     public void persist(M4sllPedidoDet transientInstance) {
         log.debug("persisting M4sllPedidoDet instance");
         try {
@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
             throw re;
         }
     }
-    
+
     public void remove(M4sllPedidoDet persistentInstance) {
         log.debug("removing M4sllPedidoDet instance");
         try {
@@ -42,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
             throw re;
         }
     }
-    
+
     public M4sllPedidoDet merge(M4sllPedidoDet detachedInstance) {
         log.debug("merging M4sllPedidoDet instance");
         try {
@@ -55,7 +55,7 @@ import org.apache.commons.logging.LogFactory;
             throw re;
         }
     }
-    
+
     public M4sllPedidoDet findById( M4sllPedidoDetId id) {
         log.debug("getting M4sllPedidoDet instance with id: " + id);
         try {

@@ -46,38 +46,38 @@ public class M4sllTpFasesResource {
     /* Insert en la BD */
     @PostMapping("/m4sll_tp_fases")
     public ResponseEntity<M4sllTpFases> createM4sllTpFases(@RequestBody M4sllTpFases m4sll_tp_fases)
-            throws URISyntaxException {
+    throws URISyntaxException {
 
         log.debug("REST request to create m4sll_tp_fases : {}", m4sll_tp_fases);
-        
+
         M4sllTpFasesId id = new M4sllTpFasesId();
-        
+
         TpFaseServices tpFaseServices = new TpFaseServices(M4sllTpFasesRepository);
         String tfa_id_tp_fase = tpFaseServices.UltimaSecuencia(m4sll_tp_fases).toString();
-        
+
         id.setIdOrganization(m4sll_tp_fases.getId().getIdOrganization());
         id.setTfaIdTpFase(tfa_id_tp_fase);
-        
+
         m4sll_tp_fases.setId(id);
 
         M4sllTpFases result = M4sllTpFasesRepository.save(m4sll_tp_fases);
         return ResponseEntity
-                .created(new URI("/api/m4sll_tp_fases/" + result.getId())).headers(HeaderUtil
-                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-                .body(result);
+               .created(new URI("/api/m4sll_tp_fases/" + result.getId())).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .body(result);
     }
 
     /* Update en la BD */
     @PutMapping("/m4sll_tp_fases")
     public ResponseEntity<M4sllTpFases> updateM4sllTpFases(@RequestBody M4sllTpFases m4sll_tp_fases)
-            throws URISyntaxException {
+    throws URISyntaxException {
         log.debug("REST request to update m4sll_tp_fases : {}", m4sll_tp_fases);
         if (m4sll_tp_fases.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         M4sllTpFases result = M4sllTpFasesRepository.save(m4sll_tp_fases);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                m4sll_tp_fases.getId().toString())).body(result);
+                                           m4sll_tp_fases.getId().toString())).body(result);
     }
 
     /* Select en la BD */
@@ -90,24 +90,24 @@ public class M4sllTpFasesResource {
         List<M4sllTpFases> M4sllTpFasesAll = M4sllTpFasesRepository.findTpFases(idOrganization);
         return ResponseEntity.ok().body(M4sllTpFasesAll);
     }
-        
+
     /* Delete en la BD */
     @DeleteMapping("/m4sll_tp_fases/{id_organization}/{tfa_id_tp_fase}")
     public ResponseEntity<Void> deleteM4sllTpFases(
-    		@PathVariable("id_organization") String idOrganization,
-            @PathVariable("tfa_id_tp_fase") String idTpFase
-            ) {
+        @PathVariable("id_organization") String idOrganization,
+        @PathVariable("tfa_id_tp_fase") String idTpFase
+    ) {
 
         log.debug("REST request to delete m4sll_tp_fases : {} | {}", idOrganization, idTpFase);
         M4sllTpFasesId id = new M4sllTpFasesId();
 
         id.setIdOrganization(idOrganization);
         id.setTfaIdTpFase(idTpFase);
- 
+
         M4sllTpFasesRepository.deleteById(id);
         return ResponseEntity.noContent()
-                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-                .build();
+               .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+               .build();
     }
-    
+
 }
