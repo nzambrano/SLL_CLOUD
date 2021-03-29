@@ -14,19 +14,13 @@ import stringcase
 
 # correrocambiaresto
 # Cambiar el directorio base. la r es para que interprete literal la \ sino habria que escaparla poniendo \\
-<<<<<<< HEAD
-basePath = r"C:\www\ESTRUCTURA_NUEVA\procde\SLL_CLOUD\backend\SLLPE"
-=======
     
 currPath = os.path.dirname(os.path.realpath(__file__))
 templatesPath = currPath + r"\files\templates"
 xmlTmplPath = currPath + r"\files\hibernate"
 aStylePath = currPath + r"\files\styling"
 
-
-
 basePath = os.path.dirname(currPath) + r"\backend\SLLPE"
->>>>>>> a16256d798487261323c32dc711d07a0c75e3ce8
 mainPath = basePath + r"\src\main\java\com\prosegur\sllpe"
 
 buildDomainPath = basePath + r"\build\generated\src\java\com\prosegur\sllpe\domain"
