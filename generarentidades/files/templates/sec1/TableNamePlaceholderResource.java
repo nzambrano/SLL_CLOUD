@@ -53,7 +53,6 @@ public class TableNamePlaceholderResource {
     id.setSecPlaceholder(id_sec_placeholder);
     id.setColsNotSecPlaceholder(table_name_placeholder.getId().getColsNotSecPlaceholder());
 
-
     table_name_placeholder.setId(id);
     TableNamePlaceholder result = tableNamePlaceholderRepository.save(table_name_placeholder);
     return ResponseEntity

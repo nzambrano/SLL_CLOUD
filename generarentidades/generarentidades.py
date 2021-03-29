@@ -461,6 +461,13 @@ searchnreplace(dirsLst, searchNReplaceLst)
 # Este paso se debe hacer después de columnas!
 searchnreplace(dirsLst, [(oldTblNameSnake, newTblNameSnake)])
 
+# Aplicar indentacion y formato a los archivos generados
+
+astylePath = currPath + r"\files\styling"
+
+for genFile in dirsLst:
+    subprocess.run(["AStyle.exe", genFile], cwd=astylePath, shell=True)
+
 
 # Deshacer cambios hechos por nuestro script
 
