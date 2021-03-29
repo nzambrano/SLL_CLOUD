@@ -4,3 +4,4 @@ import sll
 .gradle
 .project
 .settings
+~$* #ignorar archivos temporales de office
