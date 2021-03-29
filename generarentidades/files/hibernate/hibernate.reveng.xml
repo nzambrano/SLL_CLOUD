@@ -4,6 +4,6 @@
 
 <hibernate-reverse-engineering>
 
-    <schema-selection match-catalog=".*" match-schema="sll.*" match-table="xxxxxxxxxxxxxxxxxxxxx" />
+    <schema-selection match-catalog=".*" match-schema="match-schema-placeholder" match-table="match-table-placeholder" />
 
 </hibernate-reverse-engineering>

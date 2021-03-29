@@ -14,7 +14,19 @@ import stringcase
 
 # correrocambiaresto
 # Cambiar el directorio base. la r es para que interprete literal la \ sino habria que escaparla poniendo \\
+<<<<<<< HEAD
 basePath = r"C:\www\ESTRUCTURA_NUEVA\procde\SLL_CLOUD\backend\SLLPE"
+=======
+    
+currPath = os.path.dirname(os.path.realpath(__file__))
+templatesPath = currPath + r"\files\templates"
+xmlTmplPath = currPath + r"\files\hibernate"
+aStylePath = currPath + r"\files\styling"
+
+
+
+basePath = os.path.dirname(currPath) + r"\backend\SLLPE"
+>>>>>>> a16256d798487261323c32dc711d07a0c75e3ce8
 mainPath = basePath + r"\src\main\java\com\prosegur\sllpe"
 
 buildDomainPath = basePath + r"\build\generated\src\java\com\prosegur\sllpe\domain"
@@ -24,21 +36,12 @@ mainRestPath = mainPath + r"\web\rest"
 mainServicePath = mainPath + r"\service"
 mainRepositoryPath = mainPath + r"\repository"
 
-currPath = os.path.dirname(os.path.realpath(__file__))
-templatesPath = currPath + r"\files\templates"
-xmlTmplPath = currPath + r"\files\hibernate"
-aStylePath = currPath + r"\files\styling"
+
 hibernateRevengXml = os.path.join(xmlPath, "hibernate.reveng.xml")
 hibernateTmplRevengXml = os.path.join(xmlTmplPath, "hibernate.reveng.xml")
 
 hibernateCfgXml = os.path.join(xmlPath, "hibernate.cfg.xml")
 hibernateTmplCfgXml = os.path.join(xmlTmplPath, "hibernate.cfg.xml")
-
-# correrocambiaresto
-# asegurarse de no tener el puerto repetido en el hibernate.cfg.xml
-# asegurarse que en hibernate.reveng.xml figure xxxxxxxxxxxxxxxxxxxxx en esta linea
-# <schema-selection match-catalog=".*" match-schema="sll.*" match-table="xxxxxxxxxxxxxxxxxxxxx" />
-
 
 # correrocambiaresto
 # Usar generarComandoPython.xlsx para generar el comando para disparar el script:
@@ -53,7 +56,8 @@ hibernateTmplCfgXml = os.path.join(xmlTmplPath, "hibernate.cfg.xml")
 # "dol_secuencia,lit_id_litigio,id_organization"
 
 # Cargar nombre de tablas y path
-newTblNameSnake = stringcase.snakecase(sys.argv[1])
+newSchNameSnake = stringcase.snakecase(sys.argv[1]) 
+newTblNameSnake = stringcase.snakecase(sys.argv[2])
 oldTblNameSnake = stringcase.snakecase("table_name_placeholder")
 
 oldTblNamePascal = stringcase.pascalcase(oldTblNameSnake)
@@ -69,10 +73,10 @@ oldTblNamePascalServices = oldTblNamePascal + "Services.java"
 oldTblNamePascalResource = oldTblNamePascal + "Resource.java"
 
 # Guardo las columnas en listas
-currTemplatePath = os.path.join(templatesPath, sys.argv[4])
-newPksNamesConcat = sys.argv[2]
+currTemplatePath = os.path.join(templatesPath, sys.argv[5])
+newPksNamesConcat = sys.argv[3]
 newPksNamesLst = newPksNamesConcat.split(",")
-newPksDatatypesConcat = sys.argv[3]
+newPksDatatypesConcat = sys.argv[4]
 newPksDatatypesLst = newPksDatatypesConcat.split(",")
 
 # Creo listas para separar la secuencia de las no secuencias y lo mismo para sus datatypes correspindientes
@@ -138,7 +142,8 @@ if not filecmp.cmp(hibernateRevengXml, hibernateTmplRevengXml):
     shutil.copy(hibernateTmplRevengXml, hibernateRevengXml)
 
     # Setear el nuevo hibernate.cfg.xml para matchear la tabla
-    searchnreplace([hibernateRevengXml], [("xxxxxxxxxxxxxxxxxxxxx", newTblNameSnake)])
+    searchnreplace([hibernateRevengXml], [("match-table-placeholder", newTblNameSnake)])
+    searchnreplace([hibernateRevengXml], [("match-schema-placeholder", newSchNameSnake)])
 
 # Asegurarse de que no este la carpeta generated antes de correr hbm2dao
 shutil.rmtree(buildDomainPath, ignore_errors=True)
@@ -462,6 +467,7 @@ searchnreplace(dirsLst, searchNReplaceLst)
 searchnreplace(dirsLst, [(oldTblNameSnake, newTblNameSnake)])
 
 # Aplicar indentacion y formato a los archivos generados
+# http://astyle.sourceforge.net/astyle.html
 
 for genFile in dirsLst:
     subprocess.run(
