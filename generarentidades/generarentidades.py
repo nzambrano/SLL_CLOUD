@@ -3,6 +3,10 @@ import os
 import shutil
 import subprocess
 
+
+# Por hacer:
+# si el seq es string --> replace del max por cast max 
+
 #correrocambiaresto
 # instalar: pip install stringcase
 # uso: https://pypi.org/project/stringcase/
@@ -10,17 +14,18 @@ import stringcase
 
 #correrocambiaresto
 # Cambiar el directorio base. la r es para que interprete literal la \ sino habria que escaparla poniendo \\
-basepath = r"C:\Users\asd\Desktop\laburo\prosegur\proyectos\sll_cloud\backend\SLLPE"
+basePath = r"C:\Users\asd\Desktop\laburo\prosegur\proyectos\sll_cloud\backend\SLLPE"
 
-builddomainpath = basepath + r"\build\generated\src\java\com\prosegur\sllpe\domain"
-maindomainpath = basepath + r"\src\main\java\com\prosegur\sllpe\domain"
-xmlpath = basepath + r"\build\generated\src\resources"
-mainrestpath = basepath + r"\src\main\java\com\prosegur\sllpe\web\rest"
-mainservicepath = basepath + r"\src\main\java\com\prosegur\sllpe\service"
-mainrepositorypath = basepath + r"\src\main\java\com\prosegur\sllpe\repository"
+buildDomainPath = basePath + r"\build\generated\src\java\com\prosegur\sllpe\domain"
+mainDomainPath = basePath + r"\src\main\java\com\prosegur\sllpe\domain"
+xmlPath = basePath + r"\build\generated\src\resources"
+mainRestPath = basePath + r"\src\main\java\com\prosegur\sllpe\web\rest"
+mainServicePath = basePath + r"\src\main\java\com\prosegur\sllpe\service"
+mainRepositoryPath = basePath + r"\src\main\java\com\prosegur\sllpe\repository"
 
-
-hibernaterevengxml = os.path.join(xmlpath, 'hibernate.reveng.xml')
+currPath = os.path.dirname(os.path.realpath(__file__))
+templatesPath = currPath + r'\files\templates'
+hibernateRevengXml = os.path.join(xmlPath, 'hibernate.reveng.xml')
 
 #correrocambiaresto
 # asegurarse de no tener el puerto repetido en el hibernate.cfg.xml
@@ -37,15 +42,12 @@ hibernaterevengxml = os.path.join(xmlpath, 'hibernate.reveng.xml')
 # python generarentidades.py m4sll_doc_litigios dol_secuencia,lit_id_litigio,id_organization m4sll_lit_seguimie lit_id_litigio,id_organization,lis_secuencia
 # oldTblNameSnake = "m4sll_lit_seguimie"
 # newTblNameSnake = "m4sll_doc_litigios"
-# oldPksConcat = "lit_id_litigio,id_organization,lis_secuencia"
-# newPksConcat = "dol_secuencia,lit_id_litigio,id_organization"
+# "lit_id_litigio,id_organization,lis_secuencia"
+# "dol_secuencia,lit_id_litigio,id_organization"
 
-# Cargar parametros en variables
+# Cargar nombre de tablas y path
 newTblNameSnake = stringcase.snakecase(sys.argv[1])
-newPksConcat = sys.argv[2]
-
-oldTblNameSnake = stringcase.snakecase(sys.argv[3])
-oldPksConcat = sys.argv[4]
+oldTblNameSnake = stringcase.snakecase('table_name_placeholder')
 
 oldTblNamePascal = stringcase.pascalcase(oldTblNameSnake)
 newTblNamePascal = stringcase.pascalcase(newTblNameSnake)
@@ -58,6 +60,27 @@ newTblNamePascalHome = newTblNamePascal + "Home.java"
 oldTblNamePascalRepository = oldTblNamePascal + "Repository.java"
 oldTblNamePascalServices = oldTblNamePascal + "Services.java"
 oldTblNamePascalResource = oldTblNamePascal + "Resource.java"
+
+# Guardo las columnas en listas
+currTemplatePath = os.path.join(templatesPath, sys.argv[4])
+newPksNamesConcat = sys.argv[2]
+newPksNamesLst = newPksNamesConcat.split(',')
+newPksDatatypesConcat = sys.argv[3]
+newPksDatatypesLst = newPksDatatypesConcat.split(',')
+
+# Creo listas para separar la secuencia de las no secuencias y lo mismo para sus datatypes correspindientes
+newPksNamesSecLst = []
+newPksNamesNotSecLst = []
+newPksDatatypesSecLst = []
+newPksDatatypesNotSecLst = []
+
+for idx in range(len(newPksNamesLst)):
+    if "secuencia" in newPksNamesLst[idx]:
+        newPksNamesSecLst.append(newPksNamesLst[idx])
+        newPksDatatypesSecLst.append(newPksDatatypesLst[idx])
+    else:
+        newPksNamesNotSecLst.append(newPksNamesLst[idx])
+        newPksDatatypesNotSecLst.append(newPksDatatypesLst[idx])
 
 def searchnreplace(filesIn, lstIn):
     r"""
@@ -85,65 +108,277 @@ def searchnreplace(filesIn, lstIn):
 
 
 # Setear hibernate.cfg.xml para matchear la tabla
-searchnreplace([hibernaterevengxml], [('xxxxxxxxxxxxxxxxxxxxx',newTblNameSnake)])
+searchnreplace([hibernateRevengXml], [('xxxxxxxxxxxxxxxxxxxxx',newTblNameSnake)])
 
 # Asegurarse de que no este la carpeta generated antes de correr hbm2dao
-shutil.rmtree(builddomainpath, ignore_errors=True)
+shutil.rmtree(buildDomainPath, ignore_errors=True)
 
 # Disparar comando gradlew
-subprocess.run(["gradlew", "hbm2dao", "--stacktrace"], cwd=basepath, shell=True)
+subprocess.run(["gradlew", "hbm2dao", "--stacktrace"], cwd=basePath, shell=True)
 
 # Mover los 3 archivos generados a main
-filesLst = os.listdir(builddomainpath)
+filesLst = os.listdir(buildDomainPath)
 
 for filename in filesLst:
     if filename.startswith(newTblNamePascal):
-        shutil.move(os.path.join(builddomainpath, filename), os.path.join(maindomainpath, filename))
+        shutil.move(os.path.join(buildDomainPath, filename), os.path.join(mainDomainPath, filename))
 
 
 # Eliminar el bug de Stateless en el archivo Home
-searchnreplace([os.path.join(maindomainpath, newTblNamePascalHome)],[("@Stateless",""),("import javax.ejb.Stateless;","")] )
+searchnreplace([os.path.join(mainDomainPath, newTblNamePascalHome)],[("@Stateless",""),("import javax.ejb.Stateless;","")] )
 
 
 # Copiar templates Repository Resource y Services y renmombarlos  
-oldFilenameAbsPathRepository = os.path.join(mainrepositorypath, oldTblNamePascalRepository)
-oldFilenameAbsPathResource = os.path.join(mainrestpath, oldTblNamePascalResource)
-oldFilenameAbsPathService = os.path.join(mainservicepath, oldTblNamePascalServices)
+oldFilenameAbsPathRepository = os.path.join(currTemplatePath, oldTblNamePascalRepository)
+oldFilenameAbsPathResource = os.path.join(currTemplatePath, oldTblNamePascalResource)
+oldFilenameAbsPathService = os.path.join(currTemplatePath, oldTblNamePascalServices)
 
-newFilenameAbsPathRepository = os.path.join(mainrepositorypath, newTblNamePascalRepository)
-newFilenameAbsPathResource = os.path.join(mainrestpath, newTblNamePascalResource)
-newFilenameAbsPathService = os.path.join(mainservicepath, newTblNamePascalServices)
+newFilenameAbsPathRepository = os.path.join(mainRepositoryPath, newTblNamePascalRepository)
+newFilenameAbsPathResource = os.path.join(mainRestPath, newTblNamePascalResource)
+newFilenameAbsPathService = os.path.join(mainServicePath, newTblNamePascalServices)
 
 shutil.copy(oldFilenameAbsPathRepository, newFilenameAbsPathRepository)
 shutil.copy(oldFilenameAbsPathResource, newFilenameAbsPathResource)
 
+# Generar una lista con los paths Old y New de los 3 archivos
 dirsLst = []
-
-# Si el template no tiene el servicio secuencia, no crearla
-try:
-    shutil.copy(oldFilenameAbsPathService, newFilenameAbsPathService)
-    dirsLst.append(newFilenameAbsPathService)
-
-except:
-    pass
 
 dirsLst.append(newFilenameAbsPathRepository)
 dirsLst.append(newFilenameAbsPathResource)
 
+# Si la tabla a procesar tiene  secuentcia, crear su servicio
+if newPksNamesSecLst:
+    shutil.copy(oldFilenameAbsPathService, newFilenameAbsPathService)
+    dirsLst.append(newFilenameAbsPathService)
 
-snkTpl = (oldTblNameSnake, newTblNameSnake)
-searchNReplaceLst = [snkTpl]
-
-# Buscar y reemplazar el nombre de la tabla en los archivos Repository Resource y Services
-searchnreplace(dirsLst, searchNReplaceLst)
 
 # Reemplazar columnas
-newPksLst = newPksConcat.split(',')
-oldPksLst = oldPksConcat.split(',')
 
-searchNReplaceLst = list(zip(oldPksLst, newPksLst))
+searchNReplaceLst = []
+
+########## Repository ##########
+
+if newPksNamesSecLst:
+    searchStr = 'COALESCE(max(sec_placeholder),0)+1' 
+    startStr = ''
+    sepStr = ''
+    endStr = ''
+
+    replStr = searchStr[:]
+    replStr = replStr.replace('sec_placeholder', 'cast(sec_placeholder as integer)') if newPksDatatypesSecLst[0] == 'String' else searchStr 
+    replStr = searchStr.replace('sec_placeholder',  stringcase.snakecase(newPksNamesSecLst[0])) 
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+
+    searchStr = 'where_and_colsnotsec_placeholder'
+    startStr = 'where '
+    sepStr = ' and '
+    endStr = ''
+
+    replStr = sepStr.join([stringcase.snakecase(pk) +" = :" + stringcase.snakecase(pk) for pk in newPksNamesNotSecLst])
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+    searchStr = '(param_colsnotsec_placeholder'
+    startStr = '('
+    sepStr = ', '
+    endStr = ''
+
+    replStr =  sepStr.join(['@Param("'+stringcase.snakecase(newPksNamesNotSecLst[idx])+'")'+' '+newPksDatatypesNotSecLst[idx]+' '+stringcase.snakecase(newPksNamesNotSecLst[idx]) for idx in range(len(newPksNamesNotSecLst))])
+
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+
+########## Services ##########
+if newPksNamesSecLst:
+    searchStr = '(tableNamePlaceholder.getId().getColsNotSecPlaceholder())'
+    startStr = '('
+    sepStr = ', '
+    endStr = ')'
+
+    replStr =  sepStr.join(['tableNamePlaceholder.getId().get'+stringcase.pascalcase(pk)+'()' for pk in newPksNamesNotSecLst])
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+
+
+########## Resources ##########
+if newPksNamesSecLst:
+    searchStr = 'ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(table_name_placeholder);'
+    startStr = ''
+    sepStr = ''
+    endStr = ''
+
+    replStr = searchStr[:]
+    replStr = replStr.replace('ColsecDatatype',  newPksDatatypesSecLst[0])
+    replStr = replStr.replace('sec_placeholder',  stringcase.snakecase(newPksNamesSecLst[0])) 
+
+    newStr = startStr + replStr + endStr
+
+    searchNReplaceLst.append((searchStr, newStr))
+
+    searchStr = 'id.setSecPlaceholder(id_sec_placeholder);'
+    startStr = ''
+    sepStr = ''
+    endStr = ''
+
+    replStr = searchStr[:]
+    replStr = replStr.replace('SecPlaceholder',  stringcase.pascalcase(newPksNamesSecLst[0])) 
+    replStr = replStr.replace('sec_placeholder',  stringcase.snakecase(newPksNamesSecLst[0])) 
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+searchStr = 'id.setColsNotSecPlaceholder(table_name_placeholder.getId().getColsNotSecPlaceholder());'
+startStr = ''
+sepStr = ' '
+endStr = ''
+
+replStr = sepStr.join(['id.set'+stringcase.pascalcase(pk)+'(table_name_placeholder.getId().get'+stringcase.pascalcase(pk)+'());' for pk in newPksNamesNotSecLst])
+
+newStr = startStr + replStr + endStr
+searchNReplaceLst.append((searchStr, newStr))
+
+searchStr = r'{colsnotsec_placeholder}'
+startStr = ''
+sepStr = '/'
+endStr = ''
+
+replStr = sepStr.join(['{'+stringcase.snakecase(pk)+'}' for pk in newPksNamesNotSecLst])
+
+newStr = startStr + replStr + endStr
+searchNReplaceLst.append((searchStr, newStr))
+
+
+
+if newPksNamesSecLst:
+    searchStr = r'{sec_placeholder}'
+    startStr = ''
+    sepStr = ''
+    endStr = ''
+
+    replStr = searchStr[:]
+    replStr = replStr.replace('sec_placeholder',  stringcase.snakecase(newPksNamesSecLst[0])) 
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+
+
+
+searchStr = r': {}", debugcolsnotsec_placeholder'
+startStr = r': {}", '
+sepStr = ' + "|" + '
+endStr = ''
+
+replStr = sepStr.join([stringcase.snakecase(pk) for pk in newPksNamesNotSecLst])
+
+newStr = startStr + replStr + endStr
+searchNReplaceLst.append((searchStr, newStr))
+
+if newPksNamesSecLst:
+    searchStr = 'debugsec_placeholder'
+    startStr = ''
+    sepStr = ''
+    endStr = ''
+
+    replStr = searchStr[:]
+    replStr = replStr.replace('debugsec_placeholder',  stringcase.snakecase(newPksNamesSecLst[0])) 
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+
+
+searchStr = 'ByInput(colsnotsec_placeholder);'
+startStr = 'ByInput('
+sepStr = ', '
+endStr = ');'
+
+replStr = sepStr.join([stringcase.snakecase(pk) for pk in newPksNamesNotSecLst])
+
+newStr = startStr + replStr + endStr
+searchNReplaceLst.append((searchStr, newStr))
+
+searchStr = '(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder'
+startStr = '('
+sepStr = ', '
+endStr = ''
+
+replStr =  sepStr.join(['@PathVariable("'+stringcase.snakecase(newPksNamesNotSecLst[idx])+'") '+newPksDatatypesNotSecLst[idx]+' '+stringcase.snakecase(newPksNamesNotSecLst[idx]) for idx in range(len(newPksNamesNotSecLst))])
+
+newStr = startStr + replStr + endStr
+searchNReplaceLst.append((searchStr, newStr))
+
+
+if newPksNamesSecLst:
+    searchStr = '@PathVariable("sec_placeholder") ColsecDatatype sec_placeholder'
+    startStr = ''
+    sepStr = ''
+    endStr = ''
+
+    replStr = searchStr[:]
+    replStr = replStr.replace('ColsecDatatype',  newPksDatatypesSecLst[0])
+    replStr = replStr.replace('sec_placeholder',  stringcase.snakecase(newPksNamesSecLst[0])) 
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+
+searchStr = 'id.setColsNotSecPlaceholder(cols_not_sec_placeholder);'
+startStr = ''
+sepStr = ' '
+endStr = ''
+
+replStr = sepStr.join(['id.set'+stringcase.pascalcase(pk)+'('+stringcase.snakecase(pk)+');' for pk in newPksNamesNotSecLst])
+
+newStr = startStr + replStr + endStr
+searchNReplaceLst.append((searchStr, newStr))
+
+if newPksNamesSecLst:
+    searchStr = 'id.setSecPlaceholder(sec_placeholder);'
+    startStr = ''
+    sepStr = ''
+    endStr = ''
+
+    replStr = searchStr[:]
+    replStr = replStr.replace('sec_placeholder',  stringcase.snakecase(newPksNamesSecLst[0])) 
+    replStr = replStr.replace('SecPlaceholder',  stringcase.pascalcase(newPksNamesSecLst[0])) 
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+##############
+# newPksNamesSecLst
+# newPksNamesNotSecLst
+# newPksDatatypesSecLst
+# newPksDatatypesNotSecLst
+
+# searchStr = 
+# startStr = 
+# sepStr = 
+# endStr = 
+
+# replStr = sepStr.join([pk for pk in newPksNamesNotSecLst])
+
+# newStr = startStr + replStr + endStr
+# searchNReplaceLst.append((searchStr, newStr))
+
+
+# searchNReplaceLst = list(zip(, ))
 
 searchnreplace(dirsLst, searchNReplaceLst)
 
+
+# Buscar y reemplazar el nombre de la tabla en los archivos Repository Resource y Services
+# Este paso se debe hacer después de columnas!
+searchnreplace(dirsLst, [(oldTblNameSnake, newTblNameSnake)])
+
+
 # Deshacer cambios para la prox corrida
-searchnreplace([hibernaterevengxml], [('newTblNameSnake','xxxxxxxxxxxxxxxxxxxxx')])
+searchnreplace([hibernateRevengXml], [('newTblNameSnake','xxxxxxxxxxxxxxxxxxxxx')])
