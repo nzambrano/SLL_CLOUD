@@ -23,6 +23,12 @@ public interface M4sllAutorReuRepository extends JpaRepository<M4sllAutorReu, M4
 		  )
 	public List<M4sllAutorReu> findAutorReuByLitigio(@Param("id_organization") String id_organization, @Param("lit_id_litigio") String lit_id_litigio, @Param("aur_autor_reu") String aur_autor_reu);
 	
+	@Query(
+		    value = "select * from sll.m4sll_autor_reu  where id_organization =  :id_organization and lit_id_litigio = :lit_id_litigio",
+		    nativeQuery = true
+		  )
+	public List<M4sllAutorReu> findAllAutorReuByLitigio(@Param("id_organization") String id_organization, @Param("lit_id_litigio") String lit_id_litigio);
+	
 	
 	
 }

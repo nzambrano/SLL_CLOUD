@@ -27,4 +27,15 @@ public interface M4sllProvisionesRepository extends JpaRepository<M4sllValEcLit,
 	
 	
 	
+	@Query(
+		    value = "SELECT *FROM sll.M4SLL_VAL_EC_LIT FP\r\n" + 
+		    		"INNER JOIN (\r\n" + 
+		    		"	select LIT_ID_LITIGIO, TVE_ID_VAL_ECO, MAX(VEL_SECUENCIA) maxFaseP from sll.M4SLL_VAL_EC_LIT WHERE ID_ORGANIZATION = :ID_ORGANIZATION GROUP BY LIT_ID_LITIGIO, TVE_ID_VAL_ECO) MFP\r\n" + 
+		    		"      ON ( MFP.LIT_ID_LITIGIO = :LIT_ID_LITIGIO AND MFP.TVE_ID_VAL_ECO = FP.TVE_ID_VAL_ECO )\r\n" + 
+		    		"WHERE FP.ID_ORGANIZATION = :ID_ORGANIZATION AND  FP.LIT_ID_LITIGIO = :LIT_ID_LITIGIO AND FP.VEL_SECUENCIA  = MFP.maxFaseP",
+		    nativeQuery = true
+		  )
+	public List <M4sllValEcLit> getProvisionByLitigio(@Param("ID_ORGANIZATION") String ID_ORGANIZATION, @Param("LIT_ID_LITIGIO") String LIT_ID_LITIGIO);
+	
+	
 }

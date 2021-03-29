@@ -40,9 +40,7 @@ public class MaestrosResource {
 		this.abogadosRepository = abogadosRepository;
 		this.negociosRepository = negociosRepository;
 
-    }
-	
-	
+    }	
 
 	/**
 	 * GET listar
