@@ -15,17 +15,19 @@ import stringcase
 # correrocambiaresto
 # Cambiar el directorio base. la r es para que interprete literal la \ sino habria que escaparla poniendo \\
 basePath = r"C:\Users\asd\Desktop\laburo\prosegur\proyectos\sll_cloud\backend\SLLPE"
+mainPath = basePath + r"\src\main\java\com\prosegur\sllpe"
 
 buildDomainPath = basePath + r"\build\generated\src\java\com\prosegur\sllpe\domain"
-mainDomainPath = basePath + r"\src\main\java\com\prosegur\sllpe\domain"
 xmlPath = basePath + r"\build\generated\src\resources"
-mainRestPath = basePath + r"\src\main\java\com\prosegur\sllpe\web\rest"
-mainServicePath = basePath + r"\src\main\java\com\prosegur\sllpe\service"
-mainRepositoryPath = basePath + r"\src\main\java\com\prosegur\sllpe\repository"
+mainDomainPath = mainPath + r"\domain"
+mainRestPath = mainPath + r"\web\rest"
+mainServicePath = mainPath + r"\service"
+mainRepositoryPath = mainPath + r"\repository"
 
 currPath = os.path.dirname(os.path.realpath(__file__))
 templatesPath = currPath + r"\files\templates"
 xmlTmplPath = currPath + r"\files\hibernate"
+aStylePath = currPath + r"\files\styling"
 hibernateRevengXml = os.path.join(xmlPath, "hibernate.reveng.xml")
 hibernateTmplRevengXml = os.path.join(xmlTmplPath, "hibernate.reveng.xml")
 
@@ -119,12 +121,10 @@ def searchnreplace(filesIn, lstIn):
             file.write(filedata)
 
 
-
-
 # Procesar el hibernate.cfg.xml
 if not filecmp.cmp(hibernateCfgXml, hibernateTmplCfgXml):
     # Primero hacer un backup del archivo original
-    shutil.copy(hibernateCfgXml, hibernateCfgXml + '.bak')
+    shutil.copy(hibernateCfgXml, hibernateCfgXml + ".bak")
 
     # Pisar el original con nuestro template
     shutil.copy(hibernateTmplCfgXml, hibernateCfgXml)
@@ -132,7 +132,7 @@ if not filecmp.cmp(hibernateCfgXml, hibernateTmplCfgXml):
 # Procesar el hibernate.reveng.xml
 if not filecmp.cmp(hibernateRevengXml, hibernateTmplRevengXml):
     # Primero hacer un backup del archivo original
-    shutil.copy(hibernateRevengXml, hibernateRevengXml + '.bak')
+    shutil.copy(hibernateRevengXml, hibernateRevengXml + ".bak")
 
     # Pisar el original con nuestro template
     shutil.copy(hibernateTmplRevengXml, hibernateRevengXml)
@@ -463,18 +463,20 @@ searchnreplace(dirsLst, [(oldTblNameSnake, newTblNameSnake)])
 
 # Aplicar indentacion y formato a los archivos generados
 
-astylePath = currPath + r"\files\styling"
-
 for genFile in dirsLst:
-    subprocess.run(["AStyle.exe", genFile], cwd=astylePath, shell=True)
+    subprocess.run(
+        [os.path.join(aStylePath, "AStyle.exe"), "--recursive", f"{newTblNamePascal}*.java"],
+        cwd=mainPath,
+        shell=True,
+    )
 
 
 # Deshacer cambios hechos por nuestro script
 
-if os.path.exists(hibernateRevengXml + '.bak'):
-    shutil.copy(hibernateRevengXml + '.bak', hibernateRevengXml)
-    os.remove(hibernateRevengXml + '.bak')
+if os.path.exists(hibernateRevengXml + ".bak"):
+    shutil.copy(hibernateRevengXml + ".bak", hibernateRevengXml)
+    os.remove(hibernateRevengXml + ".bak")
 
-if os.path.exists(hibernateCfgXml + '.bak'):
-    shutil.copy(hibernateCfgXml + '.bak', hibernateCfgXml)
-    os.remove(hibernateCfgXml + '.bak')
+if os.path.exists(hibernateCfgXml + ".bak"):
+    shutil.copy(hibernateCfgXml + ".bak", hibernateCfgXml)
+    os.remove(hibernateCfgXml + ".bak")
