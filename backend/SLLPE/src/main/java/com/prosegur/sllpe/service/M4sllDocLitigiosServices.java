@@ -23,9 +23,6 @@ public class M4sllDocLitigiosServices {
     }
 
     public Long UltimaSecuencia(M4sllDocLitigios m4sllDocLitigios) {
-        return M4sllDocLitigiosRepository.obtenerUltimaSecuencia(
-                   m4sllDocLitigios.getId().getIdOrganization(),
-                   m4sllDocLitigios.getId().getLitIdLitigio()
-               );
+        return M4sllDocLitigiosRepository.obtenerUltimaSecuencia(m4sllDocLitigios.getId().getIdOrganization(), m4sllDocLitigios.getId().getLitIdLitigio());
     }
 }

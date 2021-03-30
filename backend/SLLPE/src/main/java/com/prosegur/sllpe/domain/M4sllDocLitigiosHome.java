@@ -1,5 +1,6 @@
 package com.prosegur.sllpe.domain;
-// Generated Mar 24, 2021, 12:01:48 PM by Hibernate Tools 5.2.0.Final
+// Generated Mar 30, 2021, 9:31:12 AM by Hibernate Tools 5.2.0.Final
+
 
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
  * @see com.prosegur.sllpe.domain.M4sllDocLitigios
  * @author Hibernate Tools
  */
+
 public class M4sllDocLitigiosHome {
 
     private static final Log log = LogFactory.getLog(M4sllDocLitigiosHome.class);
