@@ -68,7 +68,7 @@ newPksNamesLst = newPksNamesNotSecLst + newPksNamesSecLst
 newPksDatatypesLst = newPksDatatypesNotSecLst + newPksDatatypesSecLst
 
 newCustColsDatatypesLst = [
-    newPksDatatypesLst[newPksNamesLst.index(dt)] for dt in newCustColsNamesLst 
+    newPksDatatypesLst[newPksNamesLst.index(dt)] for dt in newCustColsNamesLst
 ]
 
 currTemplatePath = os.path.join(templatesPath, sys.argv[6])
@@ -162,7 +162,6 @@ searchnreplace(
     [("@Stateless", ""), ("import javax.ejb.Stateless;", "")],
 )
 
-
 # Copiar templates Repository Resource y Services y renmombarlos
 oldFilenameAbsPathRepository = os.path.join(
     currTemplatePath, oldTblNamePascalRepository
@@ -189,7 +188,6 @@ dirsLst.append(newFilenameAbsPathResource)
 if newPksNamesSecLst:
     shutil.copy(oldFilenameAbsPathService, newFilenameAbsPathService)
     dirsLst.append(newFilenameAbsPathService)
-
 
 ############## Procesamiento de columnas - comienzo ##############
 
@@ -347,7 +345,6 @@ if newPksNamesSecLst:
     newStr = startStr + replStr + endStr
     searchNReplaceLst.append((searchStr, newStr))
 
-
 ########## Resources ##########
 if newPksNamesSecLst:
     searchStr = "ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(table_name_placeholder);"
@@ -410,7 +407,6 @@ replStr = sepStr.join(
 newStr = startStr + replStr + endStr
 searchNReplaceLst.append((searchStr, newStr))
 
-
 if newPksNamesSecLst:
     searchStr = r"{sec_placeholder}"
     startStr = ""
@@ -423,7 +419,6 @@ if newPksNamesSecLst:
 
     newStr = startStr + replStr + endStr
     searchNReplaceLst.append((searchStr, newStr))
-
 
 searchStr = r': {}", debugcolsnotsec_placeholder'
 startStr = r': {}", '
@@ -447,7 +442,6 @@ if newPksNamesSecLst:
 
     newStr = startStr + replStr + endStr
     searchNReplaceLst.append((searchStr, newStr))
-
 
 searchStr = "(colsnotsec_placeholder);"
 startStr = "("
@@ -512,7 +506,6 @@ if newCustColsNamesLst:
     newStr = startStr + replStr + endStr
     searchNReplaceLst.append((searchStr, newStr))
 
-
 searchStr = (
     '(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder'
 )
@@ -535,7 +528,6 @@ replStr = sepStr.join(
 newStr = startStr + replStr + endStr
 searchNReplaceLst.append((searchStr, newStr))
 
-
 if newPksNamesSecLst:
     searchStr = '@PathVariable("sec_placeholder") ColsecDatatype sec_placeholder'
     startStr = ""
@@ -549,7 +541,6 @@ if newPksNamesSecLst:
 
     newStr = startStr + replStr + endStr
     searchNReplaceLst.append((searchStr, newStr))
-
 
 searchStr = "id.setColsNotSecPlaceholder(cols_not_sec_placeholder);"
 startStr = ""
@@ -582,7 +573,6 @@ if newPksNamesSecLst:
     newStr = startStr + replStr + endStr
     searchNReplaceLst.append((searchStr, newStr))
 
-
 # Buscar y reemplazar los pares (viejo, nuevo) de las columnas en los archivos Repository Resource y Services
 searchnreplace(dirsLst, searchNReplaceLst)
 
@@ -591,25 +581,28 @@ removeComments(dirsLst, ["//CustomLines"])
 
 ############## Procesamiento de columnas - Fin ##############
 
-
 # Buscar y reemplazar el nombre de la tabla en los archivos Repository Resource y Services
 # Este paso se debe hacer después de columnas!
 searchnreplace(dirsLst, [(oldTblNameSnake, newTblNameSnake)])
 
 # Aplicar indentacion y formato a los archivos generados
 # http://astyle.sourceforge.net/astyle.html
+# --style=java   Java style uses attached braces.
+# --recursive    For each directory in the command line, process all subdirectories recursively.
+# --suffix=none  Do not retain a backup of the original file. The original file is purged after it is formatted.
 
 for genFile in dirsLst:
     subprocess.run(
         [
             os.path.join(aStylePath, "AStyle.exe"),
+            "--style=java",
             "--recursive",
+            "--suffix=none",
             f"{newTblNamePascal}*.java",
         ],
         cwd=mainPath,
         shell=True,
     )
-
 
 # Deshacer cambios hechos por nuestro script
 
