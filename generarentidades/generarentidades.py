@@ -13,93 +13,105 @@ import filecmp
 import stringcase
 
 
-currPath = os.path.dirname(os.path.realpath(__file__))
-templatesPath = currPath + r"\files\templates"
-xmlTmplPath = currPath + r"\files\hibernate"
-aStylePath = currPath + r"\files\styling"
+curr_path = os.path.dirname(os.path.realpath(__file__))
+templates_path = curr_path + r"\files\templates"
+xml_tmpl_path = curr_path + r"\files\hibernate"
+a_style_path = curr_path + r"\files\styling"
 
-basePath = os.path.dirname(currPath) + r"\backend\SLLPE"
-mainPath = basePath + r"\src\main\java\com\prosegur\sllpe"
+base_path = os.path.dirname(curr_path) + r"\backend\SLLPE"
+main_path = base_path + r"\src\main\java\com\prosegur\sllpe"
 
-buildDomainPath = basePath + r"\build\generated\src\java\com\prosegur\sllpe\domain"
-xmlPath = basePath + r"\build\generated\src\resources"
-mainDomainPath = mainPath + r"\domain"
-mainRestPath = mainPath + r"\web\rest"
-mainServicePath = mainPath + r"\service"
-mainRepositoryPath = mainPath + r"\repository"
+build_domain_path = base_path + \
+    r"\build\generated\src\java\com\prosegur\sllpe\domain"
+xml_path = base_path + r"\build\generated\src\resources"
+main_domain_path = main_path + r"\domain"
+main_rest_path = main_path + r"\web\rest"
+main_service_path = main_path + r"\service"
+main_repository_path = main_path + r"\repository"
 
-hibernateRevengXml = os.path.join(xmlPath, "hibernate.reveng.xml")
-hibernateTmplRevengXml = os.path.join(xmlTmplPath, "hibernate.reveng.xml")
+hibernate_reveng_xml = os.path.join(xml_path, "hibernate.reveng.xml")
+hibernate_tmpl_reveng_xml = os.path.join(xml_tmpl_path, "hibernate.reveng.xml")
 
-hibernateCfgXml = os.path.join(xmlPath, "hibernate.cfg.xml")
-hibernateTmplCfgXml = os.path.join(xmlTmplPath, "hibernate.cfg.xml")
+hibernate_cfg_xml = os.path.join(xml_path, "hibernate.cfg.xml")
+hibernate_tmpl_cfg_xml = os.path.join(xml_tmpl_path, "hibernate.cfg.xml")
 
 # Cargar nombre de tablas y path
-newSchNameSnake = stringcase.snakecase(sys.argv[1])
-newTblNameSnake = stringcase.snakecase(sys.argv[2])
-oldTblNameSnake = stringcase.snakecase("table_name_placeholder")
+new_sch_name_snake = stringcase.snakecase(sys.argv[1])
+new_tbl_name_snake = stringcase.snakecase(sys.argv[2])
+old_tbl_name_snake = stringcase.snakecase("table_name_placeholder")
 
-oldTblNamePascal = stringcase.pascalcase(oldTblNameSnake)
-newTblNamePascal = stringcase.pascalcase(newTblNameSnake)
+old_tbl_name_pascal = stringcase.pascalcase(old_tbl_name_snake)
+new_tbl_name_pascal = stringcase.pascalcase(new_tbl_name_snake)
 
-newTblNamePascalRepository = newTblNamePascal + "Repository.java"
-newTblNamePascalServices = newTblNamePascal + "Services.java"
-newTblNamePascalResource = newTblNamePascal + "Resource.java"
-newTblNamePascalHome = newTblNamePascal + "Home.java"
+new_tbl_name_pascal_repository = new_tbl_name_pascal + "Repository.java"
+new_tbl_name_pascal_services = new_tbl_name_pascal + "Services.java"
+new_tbl_name_pascal_resource = new_tbl_name_pascal + "Resource.java"
+new_tbl_name_pascal_home = new_tbl_name_pascal + "Home.java"
 
-oldTblNamePascalRepository = oldTblNamePascal + "Repository.java"
-oldTblNamePascalServices = oldTblNamePascal + "Services.java"
-oldTblNamePascalResource = oldTblNamePascal + "Resource.java"
+old_tbl_name_pascal_repository = old_tbl_name_pascal + "Repository.java"
+old_tbl_name_pascal_services = old_tbl_name_pascal + "Services.java"
+old_tbl_name_pascal_resource = old_tbl_name_pascal + "Resource.java"
 
 # Guardo las columnas en listas
-newPksNotSecConcat = sys.argv[3]
-newPksNamesNotSecLst = [pkc.split("|")[0] for pkc in newPksNotSecConcat.split(",")]
-newPksDatatypesNotSecLst = [pkc.split("|")[1] for pkc in newPksNotSecConcat.split(",")]
-
-newPksSecConcat = sys.argv[4]
-newPksNamesSecLst = [pkc.split("|")[0] for pkc in newPksSecConcat.split(",")] if newPksSecConcat else []
-newPksDatatypesSecLst = [pkc.split("|")[1] for pkc in newPksSecConcat.split(",")] if newPksSecConcat else []
-
-newCustColsNamesConcat = "".join(sys.argv[5])
-newCustColsNamesLst = (
-    newCustColsNamesConcat.split(",") if newCustColsNamesConcat else []
-)
-newPksNamesLst = newPksNamesNotSecLst + newPksNamesSecLst
-newPksDatatypesLst = newPksDatatypesNotSecLst + newPksDatatypesSecLst
-
-newCustColsDatatypesLst = [
-    newPksDatatypesLst[newPksNamesLst.index(dt)] for dt in newCustColsNamesLst
+new_pks_not_sec_concat = sys.argv[3]
+new_pks_names_not_sec_lst = [
+    pkc.split("|")[0] for pkc in new_pks_not_sec_concat.split(",")
+]
+new_pks_datatypes_not_sec_lst = [
+    pkc.split("|")[1] for pkc in new_pks_not_sec_concat.split(",")
 ]
 
-currTemplatePath = os.path.join(templatesPath, sys.argv[6])
+new_pks_sec_concat = sys.argv[4]
+new_pks_names_sec_lst = (
+    [pkc.split("|")[0] for pkc in new_pks_sec_concat.split(",")]
+    if new_pks_sec_concat
+    else []
+)
+new_pks_datatypes_sec_lst = (
+    [pkc.split("|")[1] for pkc in new_pks_sec_concat.split(",")]
+    if new_pks_sec_concat
+    else []
+)
+
+new_cust_cols_names_concat = "".join(sys.argv[5])
+new_cust_cols_names_lst = (
+    new_cust_cols_names_concat.split(",") if new_cust_cols_names_concat else []
+)
+new_pks_names_lst = new_pks_names_not_sec_lst + new_pks_names_sec_lst
+new_pks_datatypes_lst = new_pks_datatypes_not_sec_lst + new_pks_datatypes_sec_lst
+
+new_cust_cols_datatypes_lst = [new_pks_datatypes_lst[new_pks_names_lst.index(
+    dt)] for dt in new_cust_cols_names_lst]
+
+curr_template_path = os.path.join(templates_path, sys.argv[6])
 
 
-def removeComments(filesIn, lstIn):
+def remove_comments(files_in, lst_in):
 
-    for fileIn in filesIn:
-        for delKey in lstIn:
-            with open(fileIn, "r") as f:
+    for file_in in files_in:
+        for del_key in lst_in:
+            with open(file_in, "r") as f:
                 lines = f.readlines()
-            with open(fileIn, "w") as f:
+            with open(file_in, "w") as f:
                 for line in lines:
-                    if not line.lstrip().startswith(delKey):
+                    if not line.lstrip().startswith(del_key):
                         f.write(line)
 
 
-def searchnreplace(filesIn, lstIn):
+def searchnreplace(files_in, lst_in):
     r"""
     Funcion para buscar y reemplazar
 
     Args:
-        filesIn (lista): lista de archivos a iterar Ej: ['C:\dir1\file1.txt','C:\dir2\file2.txt']
-        lstIn (lista de tupples): Lista de pares (viejo, nuevo) a iterar. Ej: [('nombreviejo1','nombrenuevo1'),('nombreviejo2','nombrenuevo2')]
+        files_in (lista): lista de archivos a iterar Ej: ['C:\dir1\file1.txt','C:\dir2\file2.txt']
+        lst_in (lista de tupples): Lista de pares (viejo, nuevo) a iterar. Ej: [('nombreviejo1','nombrenuevo1'),('nombreviejo2','nombrenuevo2')]
     """
-    for fileIn in filesIn:
+    for file_in in files_in:
         # Read in the file
-        with open(fileIn, "r") as file:
+        with open(file_in, "r") as file:
             filedata = file.read()
 
-        for old, new in lstIn:
+        for old, new in lst_in:
             # Replace the target string
             filedata = filedata.replace(old, new)
             filedata = filedata.replace(
@@ -113,499 +125,522 @@ def searchnreplace(filesIn, lstIn):
             )
 
         # Write the file out again
-        with open(fileIn, "w") as file:
+        with open(file_in, "w") as file:
             file.write(filedata)
 
 
 # Procesar el hibernate.cfg.xml
-if not filecmp.cmp(hibernateCfgXml, hibernateTmplCfgXml):
+if not filecmp.cmp(hibernate_cfg_xml, hibernate_tmpl_cfg_xml):
     # Primero hacer un backup del archivo original
-    shutil.copy(hibernateCfgXml, hibernateCfgXml + ".bak")
+    shutil.copy(hibernate_cfg_xml, hibernate_cfg_xml + ".bak")
 
     # Pisar el original con nuestro template
-    shutil.copy(hibernateTmplCfgXml, hibernateCfgXml)
+    shutil.copy(hibernate_tmpl_cfg_xml, hibernate_cfg_xml)
 
 # Procesar el hibernate.reveng.xml
-if not filecmp.cmp(hibernateRevengXml, hibernateTmplRevengXml):
+if not filecmp.cmp(hibernate_reveng_xml, hibernate_tmpl_reveng_xml):
     # Primero hacer un backup del archivo original
-    shutil.copy(hibernateRevengXml, hibernateRevengXml + ".bak")
+    shutil.copy(hibernate_reveng_xml, hibernate_reveng_xml + ".bak")
 
     # Pisar el original con nuestro template
-    shutil.copy(hibernateTmplRevengXml, hibernateRevengXml)
+    shutil.copy(hibernate_tmpl_reveng_xml, hibernate_reveng_xml)
 
     # Setear el nuevo hibernate.cfg.xml para matchear la tabla
-    searchnreplace([hibernateRevengXml], [("match-table-placeholder", newTblNameSnake)])
     searchnreplace(
-        [hibernateRevengXml], [("match-schema-placeholder", newSchNameSnake)]
-    )
+        [hibernate_reveng_xml], [
+            ("match-table-placeholder", new_tbl_name_snake)])
+    searchnreplace(
+        [hibernate_reveng_xml], [
+            ("match-schema-placeholder", new_sch_name_snake)])
 
 # Asegurarse de que no este la carpeta generated antes de correr hbm2dao
-shutil.rmtree(buildDomainPath, ignore_errors=True)
+shutil.rmtree(build_domain_path, ignore_errors=True)
 
-# Disparar comando gradlew
-subprocess.run(["gradlew", "hbm2dao", "--stacktrace"], cwd=basePath, shell=True)
+# Disparar comando gradlew de ingeniería inversa
+subprocess.run(["gradlew", "hbm2dao", "--stacktrace"],
+               cwd=base_path, shell=True)
 
-# Mover los 3 archivos generados a main
-filesLst = os.listdir(buildDomainPath)
+# Mover los archivos de la entidad generada a main
+files_lst = os.listdir(build_domain_path)
 
-for filename in filesLst:
-    if filename.startswith(newTblNamePascal):
+for filename in files_lst:
+    if filename.startswith(new_tbl_name_pascal):
         shutil.move(
-            os.path.join(buildDomainPath, filename),
-            os.path.join(mainDomainPath, filename),
+            os.path.join(build_domain_path, filename),
+            os.path.join(main_domain_path, filename),
         )
-
 
 # Eliminar el bug de Stateless en el archivo Home
 searchnreplace(
-    [os.path.join(mainDomainPath, newTblNamePascalHome)],
+    [os.path.join(main_domain_path, new_tbl_name_pascal_home)],
     [("@Stateless", ""), ("import javax.ejb.Stateless;", "")],
 )
 
 # Copiar templates Repository Resource y Services y renmombarlos
-oldFilenameAbsPathRepository = os.path.join(
-    currTemplatePath, oldTblNamePascalRepository
+old_filename_abs_path_repository = os.path.join(
+    curr_template_path, old_tbl_name_pascal_repository
 )
-oldFilenameAbsPathResource = os.path.join(currTemplatePath, oldTblNamePascalResource)
-oldFilenameAbsPathService = os.path.join(currTemplatePath, oldTblNamePascalServices)
-
-newFilenameAbsPathRepository = os.path.join(
-    mainRepositoryPath, newTblNamePascalRepository
+old_filename_abs_path_resource = os.path.join(
+    curr_template_path, old_tbl_name_pascal_resource
 )
-newFilenameAbsPathResource = os.path.join(mainRestPath, newTblNamePascalResource)
-newFilenameAbsPathService = os.path.join(mainServicePath, newTblNamePascalServices)
+old_filename_abs_path_service = os.path.join(
+    curr_template_path, old_tbl_name_pascal_services
+)
 
-shutil.copy(oldFilenameAbsPathRepository, newFilenameAbsPathRepository)
-shutil.copy(oldFilenameAbsPathResource, newFilenameAbsPathResource)
+new_filename_abs_path_repository = os.path.join(
+    main_repository_path, new_tbl_name_pascal_repository
+)
+new_filename_abs_path_resource = os.path.join(
+    main_rest_path, new_tbl_name_pascal_resource
+)
+new_filename_abs_path_service = os.path.join(
+    main_service_path, new_tbl_name_pascal_services
+)
+
+shutil.copy(old_filename_abs_path_repository, new_filename_abs_path_repository)
+shutil.copy(old_filename_abs_path_resource, new_filename_abs_path_resource)
 
 # Generar una lista con los paths Old y New de los 3 archivos
-dirsLst = []
+dirs_lst = []
 
-dirsLst.append(newFilenameAbsPathRepository)
-dirsLst.append(newFilenameAbsPathResource)
+dirs_lst.append(new_filename_abs_path_repository)
+dirs_lst.append(new_filename_abs_path_resource)
 
 # Si la tabla a procesar tiene  secuentcia, crear su servicio
-if newPksNamesSecLst:
-    shutil.copy(oldFilenameAbsPathService, newFilenameAbsPathService)
-    dirsLst.append(newFilenameAbsPathService)
+if new_pks_names_sec_lst:
+    shutil.copy(old_filename_abs_path_service, new_filename_abs_path_service)
+    dirs_lst.append(new_filename_abs_path_service)
 
 ############## Procesamiento de columnas - comienzo ##############
 
-searchNReplaceLst = []
+search_n_replace_lst = []
 
 ########## Repository ##########
 
-if newPksNamesSecLst:
-    searchStr = "COALESCE(max(sec_placeholder),0)+1"
-    startStr = ""
-    sepStr = ""
-    endStr = ""
+if new_pks_names_sec_lst:
+    search_str = "COALESCE(max(sec_placeholder),0)+1"
+    start_str = ""
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr
-    
-    if newPksDatatypesSecLst[0] == "String":
-        replStr = replStr.replace("sec_placeholder", "cast(sec_placeholder as integer)")
-
-    replStr = replStr.replace(
-        "sec_placeholder", stringcase.snakecase(newPksNamesSecLst[0])
+    repl_str = (
+        repl_str.replace("sec_placeholder", "cast(sec_placeholder as integer)")
+        if new_pks_datatypes_sec_lst[0] == "String"
+        else search_str
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    repl_str = repl_str.replace(
+        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
+    )
 
-    searchStr = "where_and_colsnotsec_placeholder"
-    startStr = "where "
-    sepStr = " and "
-    endStr = ""
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-    replStr = sepStr.join(
+    search_str = "where_and_colsnotsec_placeholder"
+    start_str = "where "
+    sep_str = " and "
+    end_str = ""
+
+    repl_str = sep_str.join(
         [
             stringcase.snakecase(pk) + " = :" + stringcase.snakecase(pk)
-            for pk in newPksNamesNotSecLst
+            for pk in new_pks_names_not_sec_lst
         ]
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-    searchStr = "public ColsecDatatype obtenerUltimaSecuencia"
-    startStr = ""
-    sepStr = ""
-    endStr = ""
+    search_str = "public ColsecDatatype obtenerUltimaSecuencia"
+    start_str = ""
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr.replace("ColsecDatatype",newPksDatatypesSecLst[0])
+    repl_str = search_str.replace(
+        "ColsecDatatype",
+        new_pks_datatypes_sec_lst[0])
 
-    newStr = startStr + replStr + endStr
+    new_str = start_str + repl_str + end_str
 
-    searchNReplaceLst.append((searchStr, newStr))
+    search_n_replace_lst.append((search_str, new_str))
 
-    searchStr = "ByColsNotSecPlaceholder"
-    startStr = "By"
-    sepStr = ""
-    endStr = ""
+    search_str = "ByColsNotSecPlaceholder"
+    start_str = "By"
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr.replace(
-        "ByColsNotSecPlaceholder",
-        "".join([stringcase.pascalcase(pk) for pk in newPksNamesNotSecLst]),
-    )
+    repl_str = search_str.replace("ByColsNotSecPlaceholder", "".join(
+        [stringcase.pascalcase(pk) for pk in new_pks_names_not_sec_lst]), )
 
-    newStr = startStr + replStr + endStr
+    new_str = start_str + repl_str + end_str
 
-    searchNReplaceLst.append((searchStr, newStr))
+    search_n_replace_lst.append((search_str, new_str))
 
-    searchStr = "(param_colsnotsec_placeholder"
-    startStr = "("
-    sepStr = ", "
-    endStr = ""
+    search_str = "(param_colsnotsec_placeholder"
+    start_str = "("
+    sep_str = ", "
+    end_str = ""
 
-    replStr = sepStr.join(
+    repl_str = sep_str.join(
         [
             '@Param("'
-            + stringcase.snakecase(newPksNamesNotSecLst[idx])
+            + stringcase.snakecase(new_pks_names_not_sec_lst[idx])
             + '")'
             + " "
-            + newPksDatatypesNotSecLst[idx]
+            + new_pks_datatypes_not_sec_lst[idx]
             + " "
-            + stringcase.snakecase(newPksNamesNotSecLst[idx])
-            for idx in range(len(newPksNamesNotSecLst))
+            + stringcase.snakecase(new_pks_names_not_sec_lst[idx])
+            for idx in range(len(new_pks_names_not_sec_lst))
         ]
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-if newCustColsNamesLst:
+if new_cust_cols_names_lst:
 
     # Descomentar las líneas CustomGet1 ya que van a ser usadas
 
-    searchStr = "//CustomLinesCustomGet1"
-    startStr = ""
-    sepStr = ""
-    endStr = ""
+    search_str = "//CustomLinesCustomGet1"
+    start_str = ""
+    sep_str = ""
+    end_str = ""
 
-    replStr = ""
+    repl_str = ""
 
-    newStr = startStr + replStr + endStr
+    new_str = start_str + repl_str + end_str
 
-    searchNReplaceLst.append((searchStr, newStr))
+    search_n_replace_lst.append((search_str, new_str))
 
-    searchStr = "where_and_colscustom_placeholder"
-    startStr = "where "
-    sepStr = " and "
-    endStr = ""
+    search_str = "where_and_colscustom_placeholder"
+    start_str = "where "
+    sep_str = " and "
+    end_str = ""
 
-    replStr = sepStr.join(
+    repl_str = sep_str.join(
         [
             stringcase.snakecase(pk) + " = :" + stringcase.snakecase(pk)
-            for pk in newCustColsNamesLst
+            for pk in new_cust_cols_names_lst
         ]
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
     # Este aplica a Repository y Resources también
-    searchStr = "ByColsCustomPlaceholder"
-    startStr = "By"
-    sepStr = ""
-    endStr = ""
+    search_str = "ByColsCustomPlaceholder"
+    start_str = "By"
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr.replace(
+    repl_str = search_str.replace(
         "ByColsCustomPlaceholder",
-        "".join([stringcase.pascalcase(cc) for cc in newCustColsNamesLst]),
+        "".join([stringcase.pascalcase(cc) for cc in new_cust_cols_names_lst]),
     )
 
-    newStr = startStr + replStr + endStr
+    new_str = start_str + repl_str + end_str
 
-    searchNReplaceLst.append((searchStr, newStr))
+    search_n_replace_lst.append((search_str, new_str))
 
-    searchStr = "(param_colscustom_placeholder"
-    startStr = "("
-    sepStr = ", "
-    endStr = ""
+    search_str = "(param_colscustom_placeholder"
+    start_str = "("
+    sep_str = ", "
+    end_str = ""
 
-    replStr = sepStr.join(
+    repl_str = sep_str.join(
         [
             '@Param("'
-            + stringcase.snakecase(newCustColsNamesLst[idx])
+            + stringcase.snakecase(new_cust_cols_names_lst[idx])
             + '")'
             + " "
-            + newCustColsDatatypesLst[idx]
+            + new_cust_cols_datatypes_lst[idx]
             + " "
-            + stringcase.snakecase(newCustColsNamesLst[idx])
-            for idx in range(len(newCustColsNamesLst))
+            + stringcase.snakecase(new_cust_cols_names_lst[idx])
+            for idx in range(len(new_cust_cols_names_lst))
         ]
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
 ########## Services ##########
-if newPksNamesSecLst:
-    searchStr = "(tableNamePlaceholder.getId().getColsNotSecPlaceholder())"
-    startStr = "("
-    sepStr = ", "
-    endStr = ")"
+if new_pks_names_sec_lst:
+    search_str = "(tableNamePlaceholder.getId().getColsNotSecPlaceholder())"
+    start_str = "("
+    sep_str = ", "
+    end_str = ")"
 
-    replStr = sepStr.join(
+    repl_str = sep_str.join(
         [
             "tableNamePlaceholder.getId().get" + stringcase.pascalcase(pk) + "()"
-            for pk in newPksNamesNotSecLst
+            for pk in new_pks_names_not_sec_lst
         ]
     )
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-    searchStr = "public ColsecDatatype UltimaSecuencia"
-    startStr = ""
-    sepStr = ""
-    endStr = ""
+    search_str = "public ColsecDatatype UltimaSecuencia"
+    start_str = ""
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr.replace("ColsecDatatype",newPksDatatypesSecLst[0])
+    repl_str = search_str.replace(
+        "ColsecDatatype",
+        new_pks_datatypes_sec_lst[0])
 
-    newStr = startStr + replStr + endStr
+    new_str = start_str + repl_str + end_str
 
-    searchNReplaceLst.append((searchStr, newStr))
+    search_n_replace_lst.append((search_str, new_str))
 
 ########## Resources ##########
-if newPksNamesSecLst:
-    searchStr = "ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(table_name_placeholder);"
-    startStr = ""
-    sepStr = ""
-    endStr = ""
+if new_pks_names_sec_lst:
+    search_str = "ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(table_name_placeholder);"
+    start_str = ""
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr.replace("ColsecDatatype", newPksDatatypesSecLst[0])
-    replStr = replStr.replace(
-        "sec_placeholder", stringcase.snakecase(newPksNamesSecLst[0])
+    repl_str = search_str.replace(
+        "ColsecDatatype",
+        new_pks_datatypes_sec_lst[0])
+    repl_str = repl_str.replace(
+        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
     )
 
-    newStr = startStr + replStr + endStr
+    new_str = start_str + repl_str + end_str
 
-    searchNReplaceLst.append((searchStr, newStr))
+    search_n_replace_lst.append((search_str, new_str))
 
-    searchStr = "id.setSecPlaceholder(id_sec_placeholder);"
-    startStr = ""
-    sepStr = ""
-    endStr = ""
+    search_str = "id.setSecPlaceholder(id_sec_placeholder);"
+    start_str = ""
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr.replace(
-        "SecPlaceholder", stringcase.pascalcase(newPksNamesSecLst[0])
+    repl_str = search_str.replace(
+        "SecPlaceholder", stringcase.pascalcase(new_pks_names_sec_lst[0])
     )
-    replStr = replStr.replace(
-        "sec_placeholder", stringcase.snakecase(newPksNamesSecLst[0])
+    repl_str = repl_str.replace(
+        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-searchStr = "id.setColsNotSecPlaceholder(table_name_placeholder.getId().getColsNotSecPlaceholder());"
-startStr = ""
-sepStr = " "
-endStr = ""
+search_str = "id.setColsNotSecPlaceholder(table_name_placeholder.getId().getColsNotSecPlaceholder());"
+start_str = ""
+sep_str = " "
+end_str = ""
 
-replStr = sepStr.join(
+repl_str = sep_str.join(
     [
         "id.set"
         + stringcase.pascalcase(pk)
         + "(table_name_placeholder.getId().get"
         + stringcase.pascalcase(pk)
         + "());"
-        for pk in newPksNamesNotSecLst
+        for pk in new_pks_names_not_sec_lst
     ]
 )
 
-newStr = startStr + replStr + endStr
-searchNReplaceLst.append((searchStr, newStr))
+new_str = start_str + repl_str + end_str
+search_n_replace_lst.append((search_str, new_str))
 
-searchStr = r"{colsnotsec_placeholder}"
-startStr = ""
-sepStr = "/"
-endStr = ""
+search_str = r"{colsnotsec_placeholder}"
+start_str = ""
+sep_str = "/"
+end_str = ""
 
-replStr = sepStr.join(
-    ["{" + stringcase.snakecase(pk) + "}" for pk in newPksNamesNotSecLst]
+repl_str = sep_str.join(
+    ["{" + stringcase.snakecase(pk) + "}" for pk in new_pks_names_not_sec_lst]
 )
 
-newStr = startStr + replStr + endStr
-searchNReplaceLst.append((searchStr, newStr))
+new_str = start_str + repl_str + end_str
+search_n_replace_lst.append((search_str, new_str))
 
-if newPksNamesSecLst:
-    searchStr = r"{sec_placeholder}"
-    startStr = ""
-    sepStr = ""
-    endStr = ""
+if new_pks_names_sec_lst:
+    search_str = r"{sec_placeholder}"
+    start_str = ""
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr.replace(
-        "sec_placeholder", stringcase.snakecase(newPksNamesSecLst[0])
+    repl_str = search_str.replace(
+        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-searchStr = r': {}", debugcolsnotsec_placeholder'
-startStr = r': {}", '
-sepStr = ' + "|" + '
-endStr = ""
+search_str = r': {}", debugcolsnotsec_placeholder'
+start_str = r': {}", '
+sep_str = ' + "|" + '
+end_str = ""
 
-replStr = sepStr.join([stringcase.snakecase(pk) for pk in newPksNamesNotSecLst])
+repl_str = sep_str.join([stringcase.snakecase(pk)
+                        for pk in new_pks_names_not_sec_lst])
 
-newStr = startStr + replStr + endStr
-searchNReplaceLst.append((searchStr, newStr))
+new_str = start_str + repl_str + end_str
+search_n_replace_lst.append((search_str, new_str))
 
-if newPksNamesSecLst:
-    searchStr = "debugsec_placeholder"
-    startStr = ""
-    sepStr = ""
-    endStr = ""
+if new_pks_names_sec_lst:
+    search_str = "debugsec_placeholder"
+    start_str = ""
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr.replace(
-        "debugsec_placeholder", stringcase.snakecase(newPksNamesSecLst[0])
+    repl_str = search_str.replace(
+        "debugsec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-searchStr = "(colsnotsec_placeholder);"
-startStr = "("
-sepStr = ", "
-endStr = ");"
+search_str = "(colsnotsec_placeholder);"
+start_str = "("
+sep_str = ", "
+end_str = ");"
 
-replStr = sepStr.join([stringcase.snakecase(pk) for pk in newPksNamesNotSecLst])
+repl_str = sep_str.join([stringcase.snakecase(pk)
+                        for pk in new_pks_names_not_sec_lst])
 
-newStr = startStr + replStr + endStr
-searchNReplaceLst.append((searchStr, newStr))
+new_str = start_str + repl_str + end_str
+search_n_replace_lst.append((search_str, new_str))
 
-if newCustColsNamesLst:
-    searchStr = r"{colscustom_placeholder}"
-    startStr = ""
-    sepStr = "/"
-    endStr = ""
+if new_cust_cols_names_lst:
+    search_str = r"{colscustom_placeholder}"
+    start_str = ""
+    sep_str = "/"
+    end_str = ""
 
-    replStr = sepStr.join(
-        ["{" + stringcase.snakecase(cc) + "}" for cc in newCustColsNamesLst]
+    repl_str = sep_str.join(
+        ["{" + stringcase.snakecase(cc) + "}" for cc in new_cust_cols_names_lst]
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-    searchStr = '(@PathVariable("colscustom_placeholder") ColscustomDatatype colscustom_placeholder'
-    startStr = "("
-    sepStr = ", "
-    endStr = ""
+    search_str = '(@PathVariable("colscustom_placeholder") ColscustomDatatype colscustom_placeholder'
+    start_str = "("
+    sep_str = ", "
+    end_str = ""
 
-    replStr = sepStr.join(
+    repl_str = sep_str.join(
         [
             '@PathVariable("'
-            + stringcase.snakecase(newCustColsNamesLst[idx])
+            + stringcase.snakecase(new_cust_cols_names_lst[idx])
             + '") '
-            + newCustColsDatatypesLst[idx]
+            + new_cust_cols_datatypes_lst[idx]
             + " "
-            + stringcase.snakecase(newCustColsNamesLst[idx])
-            for idx in range(len(newCustColsNamesLst))
+            + stringcase.snakecase(new_cust_cols_names_lst[idx])
+            for idx in range(len(new_cust_cols_names_lst))
         ]
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-    searchStr = r': {}", debugcolscustom_placeholder'
-    startStr = r': {}", '
-    sepStr = ' + "|" + '
-    endStr = ""
+    search_str = r': {}", debugcolscustom_placeholder'
+    start_str = r': {}", '
+    sep_str = ' + "|" + '
+    end_str = ""
 
-    replStr = sepStr.join([stringcase.snakecase(cc) for cc in newCustColsNamesLst])
+    repl_str = sep_str.join(
+        [stringcase.snakecase(cc) for cc in new_cust_cols_names_lst]
+    )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-    searchStr = "(colscustom_placeholder);"
-    startStr = "("
-    sepStr = ", "
-    endStr = ");"
+    search_str = "(colscustom_placeholder);"
+    start_str = "("
+    sep_str = ", "
+    end_str = ");"
 
-    replStr = sepStr.join([stringcase.snakecase(cc) for cc in newCustColsNamesLst])
+    repl_str = sep_str.join(
+        [stringcase.snakecase(cc) for cc in new_cust_cols_names_lst]
+    )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-searchStr = (
+search_str = (
     '(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder'
 )
-startStr = "("
-sepStr = ", "
-endStr = ""
+start_str = "("
+sep_str = ", "
+end_str = ""
 
-replStr = sepStr.join(
+repl_str = sep_str.join(
     [
         '@PathVariable("'
-        + stringcase.snakecase(newPksNamesNotSecLst[idx])
+        + stringcase.snakecase(new_pks_names_not_sec_lst[idx])
         + '") '
-        + newPksDatatypesNotSecLst[idx]
+        + new_pks_datatypes_not_sec_lst[idx]
         + " "
-        + stringcase.snakecase(newPksNamesNotSecLst[idx])
-        for idx in range(len(newPksNamesNotSecLst))
+        + stringcase.snakecase(new_pks_names_not_sec_lst[idx])
+        for idx in range(len(new_pks_names_not_sec_lst))
     ]
 )
 
-newStr = startStr + replStr + endStr
-searchNReplaceLst.append((searchStr, newStr))
+new_str = start_str + repl_str + end_str
+search_n_replace_lst.append((search_str, new_str))
 
-if newPksNamesSecLst:
-    searchStr = '@PathVariable("sec_placeholder") ColsecDatatype sec_placeholder'
-    startStr = ""
-    sepStr = ""
-    endStr = ""
+if new_pks_names_sec_lst:
+    search_str = '@PathVariable("sec_placeholder") ColsecDatatype sec_placeholder'
+    start_str = ""
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr.replace("ColsecDatatype", newPksDatatypesSecLst[0])
-    replStr = replStr.replace(
-        "sec_placeholder", stringcase.snakecase(newPksNamesSecLst[0])
+    repl_str = search_str.replace(
+        "ColsecDatatype",
+        new_pks_datatypes_sec_lst[0])
+    repl_str = repl_str.replace(
+        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-searchStr = "id.setColsNotSecPlaceholder(cols_not_sec_placeholder);"
-startStr = ""
-sepStr = " "
-endStr = ""
+search_str = "id.setColsNotSecPlaceholder(cols_not_sec_placeholder);"
+start_str = ""
+sep_str = " "
+end_str = ""
 
-replStr = sepStr.join(
-    [
-        "id.set" + stringcase.pascalcase(pk) + "(" + stringcase.snakecase(pk) + ");"
-        for pk in newPksNamesNotSecLst
-    ]
-)
+repl_str = sep_str.join(["id.set" +
+                         stringcase.pascalcase(pk) +
+                         "(" +
+                         stringcase.snakecase(pk) +
+                         ");" for pk in new_pks_names_not_sec_lst])
 
-newStr = startStr + replStr + endStr
-searchNReplaceLst.append((searchStr, newStr))
+new_str = start_str + repl_str + end_str
+search_n_replace_lst.append((search_str, new_str))
 
-if newPksNamesSecLst:
-    searchStr = "id.setSecPlaceholder(sec_placeholder);"
-    startStr = ""
-    sepStr = ""
-    endStr = ""
+if new_pks_names_sec_lst:
+    search_str = "id.setSecPlaceholder(sec_placeholder);"
+    start_str = ""
+    sep_str = ""
+    end_str = ""
 
-    replStr = searchStr.replace(
-        "sec_placeholder", stringcase.snakecase(newPksNamesSecLst[0])
+    repl_str = search_str.replace(
+        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
     )
-    replStr = replStr.replace(
-        "SecPlaceholder", stringcase.pascalcase(newPksNamesSecLst[0])
+    repl_str = repl_str.replace(
+        "SecPlaceholder", stringcase.pascalcase(new_pks_names_sec_lst[0])
     )
 
-    newStr = startStr + replStr + endStr
-    searchNReplaceLst.append((searchStr, newStr))
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
 
-# Buscar y reemplazar los pares (viejo, nuevo) de las columnas en los archivos Repository Resource y Services
-searchnreplace(dirsLst, searchNReplaceLst)
+# Buscar y reemplazar los pares (viejo, nuevo) de las columnas en los
+# archivos Repository Resource y Services
+searchnreplace(dirs_lst, search_n_replace_lst)
 
 # Eliminar líneas que no han sido reemplazadas
-removeComments(dirsLst, ["//CustomLines"])
+remove_comments(dirs_lst, ["//CustomLines"])
 
 ############## Procesamiento de columnas - Fin ##############
 
 # Buscar y reemplazar el nombre de la tabla en los archivos Repository Resource y Services
 # Este paso se debe hacer después de columnas!
-searchnreplace(dirsLst, [(oldTblNameSnake, newTblNameSnake)])
+searchnreplace(dirs_lst, [(old_tbl_name_snake, new_tbl_name_snake)])
 
 # Aplicar indentacion y formato a los archivos generados
 # http://astyle.sourceforge.net/astyle.html
@@ -613,25 +648,25 @@ searchnreplace(dirsLst, [(oldTblNameSnake, newTblNameSnake)])
 # --recursive    For each directory in the command line, process all subdirectories recursively.
 # --suffix=none  Do not retain a backup of the original file. The original file is purged after it is formatted.
 
-for genFile in dirsLst:
+for gen_file in dirs_lst:
     subprocess.run(
         [
-            os.path.join(aStylePath, "AStyle.exe"),
+            os.path.join(a_style_path, "AStyle.exe"),
             "--style=java",
             "--recursive",
             "--suffix=none",
-            f"{newTblNamePascal}*.java",
+            f"{new_tbl_name_pascal}*.java",
         ],
-        cwd=mainPath,
+        cwd=main_path,
         shell=True,
     )
 
 # Deshacer cambios hechos por nuestro script
 
-if os.path.exists(hibernateRevengXml + ".bak"):
-    shutil.copy(hibernateRevengXml + ".bak", hibernateRevengXml)
-    os.remove(hibernateRevengXml + ".bak")
+if os.path.exists(hibernate_reveng_xml + ".bak"):
+    shutil.copy(hibernate_reveng_xml + ".bak", hibernate_reveng_xml)
+    os.remove(hibernate_reveng_xml + ".bak")
 
-if os.path.exists(hibernateCfgXml + ".bak"):
-    shutil.copy(hibernateCfgXml + ".bak", hibernateCfgXml)
-    os.remove(hibernateCfgXml + ".bak")
+if os.path.exists(hibernate_cfg_xml + ".bak"):
+    shutil.copy(hibernate_cfg_xml + ".bak", hibernate_cfg_xml)
+    os.remove(hibernate_cfg_xml + ".bak")
