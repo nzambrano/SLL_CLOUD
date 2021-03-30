@@ -12,9 +12,7 @@ import filecmp
 # uso: https://pypi.org/project/stringcase/
 import stringcase
 
-# correrocambiaresto
-# Cambiar el directorio base. la r es para que interprete literal la \ sino habria que escaparla poniendo \\
-    
+
 currPath = os.path.dirname(os.path.realpath(__file__))
 templatesPath = currPath + r"\files\templates"
 xmlTmplPath = currPath + r"\files\hibernate"
@@ -30,27 +28,14 @@ mainRestPath = mainPath + r"\web\rest"
 mainServicePath = mainPath + r"\service"
 mainRepositoryPath = mainPath + r"\repository"
 
-
 hibernateRevengXml = os.path.join(xmlPath, "hibernate.reveng.xml")
 hibernateTmplRevengXml = os.path.join(xmlTmplPath, "hibernate.reveng.xml")
 
 hibernateCfgXml = os.path.join(xmlPath, "hibernate.cfg.xml")
 hibernateTmplCfgXml = os.path.join(xmlTmplPath, "hibernate.cfg.xml")
 
-# correrocambiaresto
-# Usar generarComandoPython.xlsx para generar el comando para disparar el script:
-# python generarentidades.py m4sll_doc_litigios dol_secuencia,lit_id_litigio,id_organization m4sll_lit_seguimie lit_id_litigio,id_organization,lis_secuencia
-
-
-# Para Testing:
-# python generarentidades.py m4sll_doc_litigios dol_secuencia,lit_id_litigio,id_organization m4sll_lit_seguimie lit_id_litigio,id_organization,lis_secuencia
-# oldTblNameSnake = "m4sll_lit_seguimie"
-# newTblNameSnake = "m4sll_doc_litigios"
-# "lit_id_litigio,id_organization,lis_secuencia"
-# "dol_secuencia,lit_id_litigio,id_organization"
-
 # Cargar nombre de tablas y path
-newSchNameSnake = stringcase.snakecase(sys.argv[1]) 
+newSchNameSnake = stringcase.snakecase(sys.argv[1])
 newTblNameSnake = stringcase.snakecase(sys.argv[2])
 oldTblNameSnake = stringcase.snakecase("table_name_placeholder")
 
@@ -67,25 +52,38 @@ oldTblNamePascalServices = oldTblNamePascal + "Services.java"
 oldTblNamePascalResource = oldTblNamePascal + "Resource.java"
 
 # Guardo las columnas en listas
-currTemplatePath = os.path.join(templatesPath, sys.argv[5])
-newPksNamesConcat = sys.argv[3]
-newPksNamesLst = newPksNamesConcat.split(",")
-newPksDatatypesConcat = sys.argv[4]
-newPksDatatypesLst = newPksDatatypesConcat.split(",")
+newPksNotSecConcat = sys.argv[3]
+newPksNamesNotSecLst = [pkc.split("|")[0] for pkc in newPksNotSecConcat.split(",")]
+newPksDatatypesNotSecLst = [pkc.split("|")[1] for pkc in newPksNotSecConcat.split(",")]
 
-# Creo listas para separar la secuencia de las no secuencias y lo mismo para sus datatypes correspindientes
-newPksNamesSecLst = []
-newPksNamesNotSecLst = []
-newPksDatatypesSecLst = []
-newPksDatatypesNotSecLst = []
+newPksSecConcat = sys.argv[4]
+newPksNamesSecLst = [pkc.split("|")[0] for pkc in newPksSecConcat.split(",")]
+newPksDatatypesSecLst = [pkc.split("|")[1] for pkc in newPksSecConcat.split(",")]
 
-for idx in range(len(newPksNamesLst)):
-    if "secuencia" in newPksNamesLst[idx]:
-        newPksNamesSecLst.append(newPksNamesLst[idx])
-        newPksDatatypesSecLst.append(newPksDatatypesLst[idx])
-    else:
-        newPksNamesNotSecLst.append(newPksNamesLst[idx])
-        newPksDatatypesNotSecLst.append(newPksDatatypesLst[idx])
+newCustColsNamesConcat = "".join(sys.argv[5])
+newCustColsNamesLst = (
+    newCustColsNamesConcat.split(",") if newCustColsNamesConcat else []
+)
+newPksNamesLst = newPksNamesNotSecLst + newPksNamesSecLst
+newPksDatatypesLst = newPksDatatypesNotSecLst + newPksDatatypesSecLst
+
+newCustColsDatatypesLst = [
+    newPksDatatypesLst[newPksNamesLst.index(dt)] for dt in newCustColsNamesLst 
+]
+
+currTemplatePath = os.path.join(templatesPath, sys.argv[6])
+
+
+def removeComments(filesIn, lstIn):
+
+    for fileIn in filesIn:
+        for delKey in lstIn:
+            with open(fileIn, "r") as f:
+                lines = f.readlines()
+            with open(fileIn, "w") as f:
+                for line in lines:
+                    if not line.lstrip().startswith(delKey):
+                        f.write(line)
 
 
 def searchnreplace(filesIn, lstIn):
@@ -137,7 +135,9 @@ if not filecmp.cmp(hibernateRevengXml, hibernateTmplRevengXml):
 
     # Setear el nuevo hibernate.cfg.xml para matchear la tabla
     searchnreplace([hibernateRevengXml], [("match-table-placeholder", newTblNameSnake)])
-    searchnreplace([hibernateRevengXml], [("match-schema-placeholder", newSchNameSnake)])
+    searchnreplace(
+        [hibernateRevengXml], [("match-schema-placeholder", newSchNameSnake)]
+    )
 
 # Asegurarse de que no este la carpeta generated antes de correr hbm2dao
 shutil.rmtree(buildDomainPath, ignore_errors=True)
@@ -230,6 +230,20 @@ if newPksNamesSecLst:
     newStr = startStr + replStr + endStr
     searchNReplaceLst.append((searchStr, newStr))
 
+    searchStr = "ByColsNotSecPlaceholder"
+    startStr = "By"
+    sepStr = ""
+    endStr = ""
+
+    replStr = searchStr.replace(
+        "ByColsNotSecPlaceholder",
+        "".join([stringcase.pascalcase(pk) for pk in newPksNamesNotSecLst]),
+    )
+
+    newStr = startStr + replStr + endStr
+
+    searchNReplaceLst.append((searchStr, newStr))
+
     searchStr = "(param_colsnotsec_placeholder"
     startStr = "("
     sepStr = ", "
@@ -251,6 +265,71 @@ if newPksNamesSecLst:
     newStr = startStr + replStr + endStr
     searchNReplaceLst.append((searchStr, newStr))
 
+if newCustColsNamesLst:
+
+    # Descomentar las líneas CustomGet1 ya que van a ser usadas
+
+    searchStr = "//CustomLinesCustomGet1"
+    startStr = ""
+    sepStr = ""
+    endStr = ""
+
+    replStr = ""
+
+    newStr = startStr + replStr + endStr
+
+    searchNReplaceLst.append((searchStr, newStr))
+
+    searchStr = "where_and_colscustom_placeholder"
+    startStr = "where "
+    sepStr = " and "
+    endStr = ""
+
+    replStr = sepStr.join(
+        [
+            stringcase.snakecase(pk) + " = :" + stringcase.snakecase(pk)
+            for pk in newCustColsNamesLst
+        ]
+    )
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+    # Este aplica a Repository y Resources también
+    searchStr = "ByColsCustomPlaceholder"
+    startStr = "By"
+    sepStr = ""
+    endStr = ""
+
+    replStr = searchStr.replace(
+        "ByColsCustomPlaceholder",
+        "".join([stringcase.pascalcase(cc) for cc in newCustColsNamesLst]),
+    )
+
+    newStr = startStr + replStr + endStr
+
+    searchNReplaceLst.append((searchStr, newStr))
+
+    searchStr = "(param_colscustom_placeholder"
+    startStr = "("
+    sepStr = ", "
+    endStr = ""
+
+    replStr = sepStr.join(
+        [
+            '@Param("'
+            + stringcase.snakecase(newCustColsNamesLst[idx])
+            + '")'
+            + " "
+            + newCustColsDatatypesLst[idx]
+            + " "
+            + stringcase.snakecase(newCustColsNamesLst[idx])
+            for idx in range(len(newCustColsNamesLst))
+        ]
+    )
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
 
 ########## Services ##########
 if newPksNamesSecLst:
@@ -370,8 +449,8 @@ if newPksNamesSecLst:
     searchNReplaceLst.append((searchStr, newStr))
 
 
-searchStr = "ByInput(colsnotsec_placeholder);"
-startStr = "ByInput("
+searchStr = "(colsnotsec_placeholder);"
+startStr = "("
 sepStr = ", "
 endStr = ");"
 
@@ -379,6 +458,60 @@ replStr = sepStr.join([stringcase.snakecase(pk) for pk in newPksNamesNotSecLst])
 
 newStr = startStr + replStr + endStr
 searchNReplaceLst.append((searchStr, newStr))
+
+if newCustColsNamesLst:
+    searchStr = r"{colscustom_placeholder}"
+    startStr = ""
+    sepStr = "/"
+    endStr = ""
+
+    replStr = sepStr.join(
+        ["{" + stringcase.snakecase(cc) + "}" for cc in newCustColsNamesLst]
+    )
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+    searchStr = '(@PathVariable("colscustom_placeholder") ColscustomDatatype colscustom_placeholder'
+    startStr = "("
+    sepStr = ", "
+    endStr = ""
+
+    replStr = sepStr.join(
+        [
+            '@PathVariable("'
+            + stringcase.snakecase(newCustColsNamesLst[idx])
+            + '") '
+            + newCustColsDatatypesLst[idx]
+            + " "
+            + stringcase.snakecase(newCustColsNamesLst[idx])
+            for idx in range(len(newCustColsNamesLst))
+        ]
+    )
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+    searchStr = r': {}", debugcolscustom_placeholder'
+    startStr = r': {}", '
+    sepStr = ' + "|" + '
+    endStr = ""
+
+    replStr = sepStr.join([stringcase.snakecase(cc) for cc in newCustColsNamesLst])
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+    searchStr = "(colscustom_placeholder);"
+    startStr = "("
+    sepStr = ", "
+    endStr = ");"
+
+    replStr = sepStr.join([stringcase.snakecase(cc) for cc in newCustColsNamesLst])
+
+    newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
 
 searchStr = (
     '(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder'
@@ -453,6 +586,9 @@ if newPksNamesSecLst:
 # Buscar y reemplazar los pares (viejo, nuevo) de las columnas en los archivos Repository Resource y Services
 searchnreplace(dirsLst, searchNReplaceLst)
 
+# Eliminar líneas que no han sido reemplazadas
+removeComments(dirsLst, ["//CustomLines"])
+
 ############## Procesamiento de columnas - Fin ##############
 
 
@@ -465,7 +601,11 @@ searchnreplace(dirsLst, [(oldTblNameSnake, newTblNameSnake)])
 
 for genFile in dirsLst:
     subprocess.run(
-        [os.path.join(aStylePath, "AStyle.exe"), "--recursive", f"{newTblNamePascal}*.java"],
+        [
+            os.path.join(aStylePath, "AStyle.exe"),
+            "--recursive",
+            f"{newTblNamePascal}*.java",
+        ],
         cwd=mainPath,
         shell=True,
     )
