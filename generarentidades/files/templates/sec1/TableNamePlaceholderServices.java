@@ -22,7 +22,7 @@ public class TableNamePlaceholderServices {
     return tableNamePlaceholder != null ? true : false;
   }
 
-  public Long UltimaSecuencia(TableNamePlaceholder tableNamePlaceholder) {
+  public ColsecDatatype UltimaSecuencia(TableNamePlaceholder tableNamePlaceholder) {
     return TableNamePlaceholderRepository.obtenerUltimaSecuencia(tableNamePlaceholder.getId().getColsNotSecPlaceholder());
   }
 }

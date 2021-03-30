@@ -14,7 +14,7 @@ public interface TableNamePlaceholderRepository extends JpaRepository<TableNameP
     value = "select COALESCE(max(sec_placeholder),0)+1 from sll.table_name_placeholder where_and_colsnotsec_placeholder",
     nativeQuery = true
   )
-  public Long obtenerUltimaSecuencia(param_colsnotsec_placeholder);
+  public ColsecDatatype obtenerUltimaSecuencia(param_colsnotsec_placeholder);
 
   @Query(
     value = "select * from sll.table_name_placeholder where_and_colsnotsec_placeholder",

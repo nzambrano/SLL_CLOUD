@@ -110,19 +110,19 @@ public class TableNamePlaceholderResource {
         Optional<TableNamePlaceholder> table_name_placeholder = tableNamePlaceholderRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(table_name_placeholder);
     }
-    */
 
-  @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}")
-  public ResponseEntity<Void> deleteTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder) {
-    log.debug("REST request to delete table_name_placeholder : {}", debugcolsnotsec_placeholder);
-    List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsNotSecPlaceholder(colsnotsec_placeholder);
+    @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}")
+    public ResponseEntity<Void> deleteTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder) {
+      log.debug("REST request to delete table_name_placeholder : {}", debugcolsnotsec_placeholder);
+      List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsNotSecPlaceholder(colsnotsec_placeholder);
 
-    tableNamePlaceholderRepository.deleteAll(TableNamePlaceholderByInput);
-    return ResponseEntity
-      .noContent()
-      .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, TableNamePlaceholderByInput.toString()))
-      .build();
+      tableNamePlaceholderRepository.deleteAll(TableNamePlaceholderByInput);
+      return ResponseEntity
+        .noContent()
+        .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, TableNamePlaceholderByInput.toString()))
+        .build();
   }
+*/
 
   @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}/{sec_placeholder}")
   public ResponseEntity<Void> deleteTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder, @PathVariable("sec_placeholder") ColsecDatatype sec_placeholder) {

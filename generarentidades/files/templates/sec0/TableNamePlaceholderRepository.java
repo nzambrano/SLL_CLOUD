@@ -1,9 +1,14 @@
+
 package com.prosegur.sllpe.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.prosegur.sllpe.domain.TableNamePlaceholder;
 import com.prosegur.sllpe.domain.TableNamePlaceholderId;
+
+//CustomLinesCustomGet1import java.util.List;
+//CustomLinesCustomGet1import org.springframework.data.jpa.repository.Query;
+//CustomLinesCustomGet1import org.springframework.data.repository.query.Param;
 
 public interface TableNamePlaceholderRepository extends JpaRepository<TableNamePlaceholder, TableNamePlaceholderId> {
 //CustomLinesCustomGet1  @Query(

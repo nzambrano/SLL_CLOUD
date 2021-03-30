@@ -201,12 +201,12 @@ if newPksNamesSecLst:
     sepStr = ""
     endStr = ""
 
-    replStr = (
-        searchStr.replace("sec_placeholder", "cast(sec_placeholder as integer)")
-        if newPksDatatypesSecLst[0] == "String"
-        else searchStr
-    )
-    replStr = searchStr.replace(
+    replStr = searchStr
+    
+    if newPksDatatypesSecLst[0] == "String":
+        replStr = replStr.replace("sec_placeholder", "cast(sec_placeholder as integer)")
+
+    replStr = replStr.replace(
         "sec_placeholder", stringcase.snakecase(newPksNamesSecLst[0])
     )
 
@@ -226,6 +226,17 @@ if newPksNamesSecLst:
     )
 
     newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+    searchStr = "public ColsecDatatype obtenerUltimaSecuencia"
+    startStr = ""
+    sepStr = ""
+    endStr = ""
+
+    replStr = searchStr.replace("ColsecDatatype",newPksDatatypesSecLst[0])
+
+    newStr = startStr + replStr + endStr
+
     searchNReplaceLst.append((searchStr, newStr))
 
     searchStr = "ByColsNotSecPlaceholder"
@@ -343,6 +354,17 @@ if newPksNamesSecLst:
         ]
     )
     newStr = startStr + replStr + endStr
+    searchNReplaceLst.append((searchStr, newStr))
+
+    searchStr = "public ColsecDatatype UltimaSecuencia"
+    startStr = ""
+    sepStr = ""
+    endStr = ""
+
+    replStr = searchStr.replace("ColsecDatatype",newPksDatatypesSecLst[0])
+
+    newStr = startStr + replStr + endStr
+
     searchNReplaceLst.append((searchStr, newStr))
 
 ########## Resources ##########
