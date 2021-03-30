@@ -57,8 +57,8 @@ newPksNamesNotSecLst = [pkc.split("|")[0] for pkc in newPksNotSecConcat.split(",
 newPksDatatypesNotSecLst = [pkc.split("|")[1] for pkc in newPksNotSecConcat.split(",")]
 
 newPksSecConcat = sys.argv[4]
-newPksNamesSecLst = [pkc.split("|")[0] for pkc in newPksSecConcat.split(",")]
-newPksDatatypesSecLst = [pkc.split("|")[1] for pkc in newPksSecConcat.split(",")]
+newPksNamesSecLst = [pkc.split("|")[0] for pkc in newPksSecConcat.split(",")] if newPksSecConcat else []
+newPksDatatypesSecLst = [pkc.split("|")[1] for pkc in newPksSecConcat.split(",")] if newPksSecConcat else []
 
 newCustColsNamesConcat = "".join(sys.argv[5])
 newCustColsNamesLst = (
