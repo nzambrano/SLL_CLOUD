@@ -5,7 +5,7 @@ import subprocess
 import filecmp
 
 # Por hacer:
-# si el seq es string --> replace del max por cast max
+# Recibir parametros por json o via db, en vez de parametros
 
 # correrocambiaresto
 # instalar: pip install stringcase
@@ -87,6 +87,13 @@ curr_template_path = os.path.join(templates_path, sys.argv[6])
 
 
 def remove_comments(files_in, lst_in):
+    r"""
+    Funcion para buscar líneas y borrarlas. Se detectan con una Palabra clave que debe ser puesta al principio de la línea
+
+    Args:
+        files_in (lista): lista de archivos a iterar Ej: ['C:\dir1\file1.txt','C:\dir2\file2.txt']
+        lst_in (lista): Lista de Palabras clave para detectar las lineas a borrar. Ej: ['//Removethisline','//Deletethiscomment]
+    """
 
     for file_in in files_in:
         for del_key in lst_in:
@@ -100,7 +107,7 @@ def remove_comments(files_in, lst_in):
 
 def searchnreplace(files_in, lst_in):
     r"""
-    Funcion para buscar y reemplazar
+    Funcion para buscar y reemplazar texto en archivos
 
     Args:
         files_in (lista): lista de archivos a iterar Ej: ['C:\dir1\file1.txt','C:\dir2\file2.txt']
@@ -206,7 +213,7 @@ dirs_lst = []
 dirs_lst.append(new_filename_abs_path_repository)
 dirs_lst.append(new_filename_abs_path_resource)
 
-# Si la tabla a procesar tiene  secuentcia, crear su servicio
+# Si la tabla a procesar tiene  secuencia, crear su servicio
 if new_pks_names_sec_lst:
     shutil.copy(old_filename_abs_path_service, new_filename_abs_path_service)
     dirs_lst.append(new_filename_abs_path_service)
@@ -270,7 +277,7 @@ if new_pks_names_sec_lst:
     end_str = ""
 
     repl_str = search_str.replace("ByColsNotSecPlaceholder", "".join(
-        [stringcase.pascalcase(pk) for pk in new_pks_names_not_sec_lst]), )
+        [stringcase.pascalcase(pk) for pk in new_pks_names_not_sec_lst]))
 
     new_str = start_str + repl_str + end_str
 
@@ -301,7 +308,7 @@ if new_cust_cols_names_lst:
 
     # Descomentar las líneas CustomGet1 ya que van a ser usadas
 
-    search_str = "//CustomLinesCustomGet1"
+    search_str = "//CustomLinesCustomGet1 "
     start_str = ""
     sep_str = ""
     end_str = ""
@@ -661,12 +668,10 @@ for gen_file in dirs_lst:
         shell=True,
     )
 
-# Deshacer cambios hechos por nuestro script
+# Volver al estado original archivos cambiados por nuestro script
 
 if os.path.exists(hibernate_reveng_xml + ".bak"):
-    shutil.copy(hibernate_reveng_xml + ".bak", hibernate_reveng_xml)
-    os.remove(hibernate_reveng_xml + ".bak")
+    shutil.move(hibernate_reveng_xml + ".bak", hibernate_reveng_xml)
 
 if os.path.exists(hibernate_cfg_xml + ".bak"):
-    shutil.copy(hibernate_cfg_xml + ".bak", hibernate_cfg_xml)
-    os.remove(hibernate_cfg_xml + ".bak")
+    shutil.move(hibernate_cfg_xml + ".bak", hibernate_cfg_xml)

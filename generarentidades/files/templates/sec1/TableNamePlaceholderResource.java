@@ -91,13 +91,13 @@ public class TableNamePlaceholderResource {
     return ResponseEntity.ok().body(TableNamePlaceholderByInput);
   }
 
-//CustomLinesCustomGet1  @GetMapping("/table_name_placeholder/{colscustom_placeholder}")
-//CustomLinesCustomGet1  public ResponseEntity<List<TableNamePlaceholder>> getTableNamePlaceholder(@PathVariable("colscustom_placeholder") ColscustomDatatype colscustom_placeholder) {
-//CustomLinesCustomGet1    log.debug("REST request to get TableNamePlaceholder : {}", debugcolscustom_placeholder);
-//CustomLinesCustomGet1
-//CustomLinesCustomGet1    List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsCustomPlaceholder(colscustom_placeholder);
-//CustomLinesCustomGet1    return ResponseEntity.ok().body(TableNamePlaceholderByInput);
-//CustomLinesCustomGet1  }
+//CustomLinesCustomGet1   @GetMapping("/table_name_placeholder/{colscustom_placeholder}")
+//CustomLinesCustomGet1   public ResponseEntity<List<TableNamePlaceholder>> getTableNamePlaceholder(@PathVariable("colscustom_placeholder") ColscustomDatatype colscustom_placeholder) {
+//CustomLinesCustomGet1     log.debug("REST request to get TableNamePlaceholder : {}", debugcolscustom_placeholder);
+//CustomLinesCustomGet1 
+//CustomLinesCustomGet1     List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsCustomPlaceholder(colscustom_placeholder);
+//CustomLinesCustomGet1     return ResponseEntity.ok().body(TableNamePlaceholderByInput);
+//CustomLinesCustomGet1   }
 
   /*
     @GetMapping("/table_name_placeholder/{colsnotsec_placeholder}/{sec_placeholder}")
