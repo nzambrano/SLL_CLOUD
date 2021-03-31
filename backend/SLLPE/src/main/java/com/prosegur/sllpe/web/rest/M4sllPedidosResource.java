@@ -4,7 +4,6 @@ import com.prosegur.sllpe.domain.M4sllPedidos;
 import com.prosegur.sllpe.domain.M4sllPedidosId;
 import com.prosegur.sllpe.repository.M4sllPedidosRepository;
 import com.prosegur.sllpe.web.rest.errors.BadRequestAlertException;
-import com.prosegur.sllpe.service.PedidoServices;
 
 import io.github.jhipster.web.util.HeaderUtil;
 // import io.github.jhipster.web.util.PaginationUtil;
@@ -36,30 +35,18 @@ public class M4sllPedidosResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private M4sllPedidosRepository M4sllPedidosRepository;
+    private M4sllPedidosRepository m4sllPedidosRepository;
 
-    public M4sllPedidosResource(M4sllPedidosRepository M4sllPedidosRepository) {
-        this.M4sllPedidosRepository = M4sllPedidosRepository;
+    public M4sllPedidosResource(M4sllPedidosRepository m4sllPedidosRepository) {
+        this.m4sllPedidosRepository = m4sllPedidosRepository;
     }
-
 
     @PostMapping("/m4sll_pedidos")
     public ResponseEntity<M4sllPedidos> createM4sllPedidos(@RequestBody M4sllPedidos m4sll_pedidos)
     throws URISyntaxException {
-
         log.debug("REST request to create m4sll_pedidos : {}", m4sll_pedidos);
 
-        M4sllPedidosId id = new M4sllPedidosId();
-        PedidoServices pedidoServices = new PedidoServices(M4sllPedidosRepository);
-        Long ped_secuencia = pedidoServices.UltimaSecuencia(m4sll_pedidos);
-
-        id.setPedSecuencia(ped_secuencia);
-        id.setIdOrganization(m4sll_pedidos.getId().getIdOrganization());
-        id.setLitIdLitigio(m4sll_pedidos.getId().getLitIdLitigio());
-        id.setTpeIdPedido(m4sll_pedidos.getId().getTpeIdPedido());
-
-        m4sll_pedidos.setId(id);
-        M4sllPedidos result = M4sllPedidosRepository.save(m4sll_pedidos);
+        M4sllPedidos result = m4sllPedidosRepository.save(m4sll_pedidos);
         return ResponseEntity
                .created(new URI("/api/m4sll_pedidos/" + result.getId())).headers(HeaderUtil
                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
@@ -73,58 +60,51 @@ public class M4sllPedidosResource {
         if (m4sll_pedidos.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        M4sllPedidos result = M4sllPedidosRepository.save(m4sll_pedidos);
+        M4sllPedidos result = m4sllPedidosRepository.save(m4sll_pedidos);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
                                            m4sll_pedidos.getId().toString())).body(result);
     }
 
-    @GetMapping("/m4sll_pedidos/{id_idOrganization}/{id_litIdLitigio}")
-    public ResponseEntity<List<M4sllPedidos>> getAllM4sllPedidos(
-        @PathVariable("id_idOrganization") String id_idOrganization,
-        @PathVariable("id_litIdLitigio") String id_litIdLitigio
-    ) {
-        log.debug("REST request to get ALL M4sllPedidos : {}",id_idOrganization,id_litIdLitigio);
-        M4sllPedidosId id = new M4sllPedidosId();
-        id.setIdOrganization(id_idOrganization);
-        id.setLitIdLitigio(id_litIdLitigio);
+    @GetMapping("/m4sll_pedidos")
+    public ResponseEntity<List<M4sllPedidos>> getAllM4sllPedidos() {
+        log.debug("REST request to get ALL M4sllPedidos : {}");
 
-        List<M4sllPedidos> M4sllPedidosAll = M4sllPedidosRepository.findPedidosByLitigio(
-                id_idOrganization,
-                id_litIdLitigio
-                                             );
+        List<M4sllPedidos> M4sllPedidosAll = m4sllPedidosRepository.findAll();
         return ResponseEntity.ok().body(M4sllPedidosAll);
     }
 
-    @GetMapping("/m4sll_pedidos/{id_idOrganization}/{id_litIdLitigio}/{id_tpeIdPedido}")
-    public ResponseEntity<M4sllPedidos> getM4sllPedidos(
-        @PathVariable("id_litIdLitigio") String id_litIdLitigio,
-        @PathVariable("id_tpeIdPedido") String id_tpeIdPedido,
-        @PathVariable("id_idOrganization") String id_idOrganization) {
-        log.debug("REST request to get m4sll_pedidos : {} | {}", id_litIdLitigio, id_idOrganization,id_tpeIdPedido);
+    @GetMapping("/m4sll_pedidos/{id_organization}/{lit_id_litigio}/{tpe_id_pedido}")
+    public ResponseEntity<M4sllPedidos> getM4sllPedidos(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("tpe_id_pedido") String tpe_id_pedido) {
+        log.debug("REST request to get M4sllPedidos : {}", id_organization + "|" + lit_id_litigio + "|" + tpe_id_pedido);
         M4sllPedidosId id = new M4sllPedidosId();
-        id.setTpeIdPedido(id_tpeIdPedido);
-        id.setLitIdLitigio(id_litIdLitigio);
-        id.setIdOrganization(id_idOrganization);
+        id.setIdOrganization(id_organization);
+        id.setLitIdLitigio(lit_id_litigio);
+        id.setTpeIdPedido(tpe_id_pedido);
 
-        Optional<M4sllPedidos> m4sll_pedidos = M4sllPedidosRepository.findById(id);
+        Optional<M4sllPedidos> m4sll_pedidos = m4sllPedidosRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(m4sll_pedidos);
     }
 
-    @DeleteMapping("/m4sll_pedidos/{id_tpeIdPedido}/{id_litIdLitigio}/{id_idOrganization}")
-    public ResponseEntity<Void> deleteM4sllPedidos(
-        @PathVariable("id_tpeIdPedido") String id_tpeIdPedido,
-        @PathVariable("id_litIdLitigio") String id_litIdLitigio,
-        @PathVariable("id_idOrganization") String id_idOrganization) {
-        log.debug("REST request to delete m4sll_pedidos : {} | {}",id_tpeIdPedido,id_litIdLitigio,id_idOrganization);
-        M4sllPedidosId id = new M4sllPedidosId();
-        id.setLitIdLitigio(id_litIdLitigio);
-        id.setIdOrganization(id_idOrganization);
-        id.setTpeIdPedido(id_tpeIdPedido);
+    @GetMapping("/m4sll_pedidos/{id_organization}/{lit_id_litigio}")
+    public ResponseEntity<List<M4sllPedidos>> getM4sllPedidos(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
+        log.debug("REST request to get M4sllPedidos : {}", id_organization + "|" + lit_id_litigio);
 
-        M4sllPedidosRepository.deleteById(id);
-        return ResponseEntity.noContent()
+        List<M4sllPedidos> M4sllPedidosByInput = m4sllPedidosRepository.findM4sllPedidosByIdOrganizationLitIdLitigio(id_organization, lit_id_litigio);
+        return ResponseEntity.ok().body(M4sllPedidosByInput);
+    }
+
+    @DeleteMapping("/m4sll_pedidos/{id_organization}/{lit_id_litigio}/{tpe_id_pedido}")
+    public ResponseEntity<Void> deleteM4sllPedidos(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("tpe_id_pedido") String tpe_id_pedido) {
+        log.debug("REST request to delete m4sll_pedidos : {}", id_organization + "|" + lit_id_litigio + "|" + tpe_id_pedido);
+        M4sllPedidosId id = new M4sllPedidosId();
+        id.setIdOrganization(id_organization);
+        id.setLitIdLitigio(lit_id_litigio);
+        id.setTpeIdPedido(tpe_id_pedido);
+
+        m4sllPedidosRepository.deleteById(id);
+        return ResponseEntity
+               .noContent()
                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
                .build();
     }
-
 }

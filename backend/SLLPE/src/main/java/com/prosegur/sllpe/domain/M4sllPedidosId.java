@@ -1,5 +1,5 @@
 package com.prosegur.sllpe.domain;
-// Generated 19 mar. 2021 16:57:04 by Hibernate Tools 5.2.0.Final
+// Generated Mar 30, 2021, 5:11:59 PM by Hibernate Tools 5.2.0.Final
 
 
 import javax.persistence.Column;
@@ -15,26 +15,17 @@ public class M4sllPedidosId  implements java.io.Serializable {
     private String tpeIdPedido;
     private String litIdLitigio;
     private String idOrganization;
-    private Long pedSecuencia;
 
     public M4sllPedidosId() {
     }
 
-    public M4sllPedidosId(String tpeIdPedido, String litIdLitigio, String idOrganization,Long pedSecuencia) {
+    public M4sllPedidosId(String tpeIdPedido, String litIdLitigio, String idOrganization) {
         this.tpeIdPedido = tpeIdPedido;
         this.litIdLitigio = litIdLitigio;
         this.idOrganization = idOrganization;
-        this.pedSecuencia = pedSecuencia;
     }
 
-    @Column(name="ped_secuencia", nullable=false)
-    public long getPedSecuencia() {
-        return this.pedSecuencia;
-    }
 
-    public void setPedSecuencia(long pedSecuencia) {
-        this.pedSecuencia = pedSecuencia;
-    }
 
     @Column(name="tpe_id_pedido", nullable=false, length=3)
     public String getTpeIdPedido() {
@@ -44,6 +35,7 @@ public class M4sllPedidosId  implements java.io.Serializable {
     public void setTpeIdPedido(String tpeIdPedido) {
         this.tpeIdPedido = tpeIdPedido;
     }
+
 
     @Column(name="lit_id_litigio", nullable=false, length=10)
     public String getLitIdLitigio() {

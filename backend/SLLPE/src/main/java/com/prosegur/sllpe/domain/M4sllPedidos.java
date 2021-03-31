@@ -1,5 +1,5 @@
 package com.prosegur.sllpe.domain;
-// Generated 19 mar. 2021 16:57:04 by Hibernate Tools 5.2.0.Final
+// Generated Mar 30, 2021, 5:11:59 PM by Hibernate Tools 5.2.0.Final
 
 
 import java.math.BigDecimal;
@@ -22,7 +22,9 @@ import javax.persistence.TemporalType;
       )
 public class M4sllPedidos  implements java.io.Serializable {
 
+
     private M4sllPedidosId id;
+    private Long pedSecuencia;
     private BigDecimal pedValor;
     private String pedObservacion;
     private String pedSubPedido;
@@ -40,8 +42,9 @@ public class M4sllPedidos  implements java.io.Serializable {
     public M4sllPedidos(M4sllPedidosId id) {
         this.id = id;
     }
-    public M4sllPedidos(M4sllPedidosId id, BigDecimal pedValor, String pedObservacion, String pedSubPedido, String pedPrincipalSN, Date pedPeriodo, BigDecimal pedValorRecargo, String idApprole, String idSecuser, Date dtLastUpdate) {
+    public M4sllPedidos(M4sllPedidosId id, Long pedSecuencia, BigDecimal pedValor, String pedObservacion, String pedSubPedido, String pedPrincipalSN, Date pedPeriodo, BigDecimal pedValorRecargo, String idApprole, String idSecuser, Date dtLastUpdate) {
         this.id = id;
+        this.pedSecuencia = pedSecuencia;
         this.pedValor = pedValor;
         this.pedObservacion = pedObservacion;
         this.pedSubPedido = pedSubPedido;
@@ -55,13 +58,12 @@ public class M4sllPedidos  implements java.io.Serializable {
 
     @EmbeddedId
 
+
     @AttributeOverrides( {
         @AttributeOverride(name="tpeIdPedido", column=@Column(name="tpe_id_pedido", nullable=false, length=3) ),
         @AttributeOverride(name="litIdLitigio", column=@Column(name="lit_id_litigio", nullable=false, length=10) ),
-        @AttributeOverride(name="pedSecuencia", column=@Column(name="ped_secuencia", nullable=false, length=10) ),
         @AttributeOverride(name="idOrganization", column=@Column(name="id_organization", nullable=false, length=4) )
     } )
-
     public M4sllPedidosId getId() {
         return this.id;
     }
@@ -70,7 +72,7 @@ public class M4sllPedidos  implements java.io.Serializable {
         this.id = id;
     }
 
-    /*
+
     @Column(name="ped_secuencia")
     public Long getPedSecuencia() {
         return this.pedSecuencia;
@@ -78,7 +80,7 @@ public class M4sllPedidos  implements java.io.Serializable {
 
     public void setPedSecuencia(Long pedSecuencia) {
         this.pedSecuencia = pedSecuencia;
-    }*/
+    }
 
 
     @Column(name="ped_valor", precision=18, scale=4)
