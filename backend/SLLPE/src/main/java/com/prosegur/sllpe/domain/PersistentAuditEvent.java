@@ -100,9 +100,9 @@ public class PersistentAuditEvent implements Serializable {
     @Override
     public String toString() {
         return "PersistentAuditEvent{" +
-            "principal='" + principal + '\'' +
-            ", auditEventDate=" + auditEventDate +
-            ", auditEventType='" + auditEventType + '\'' +
-            '}';
+               "principal='" + principal + '\'' +
+               ", auditEventDate=" + auditEventDate +
+               ", auditEventType='" + auditEventType + '\'' +
+               '}';
     }
 }

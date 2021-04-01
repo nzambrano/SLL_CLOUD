@@ -12,20 +12,20 @@ import com.prosegur.sllpe.repository.M4sllAutorReuRepository;
 
 public class AutorReuServices {
 
-	private final M4sllAutorReuRepository M4sllAutorReuRepository;
-	
-	public AutorReuServices(M4sllAutorReuRepository m4ccoLlPagosRepository) {
-		this.M4sllAutorReuRepository = m4ccoLlPagosRepository;
-	}
-	
-	public boolean casteoError(M4sllAutorReu autorReu) {
-		return autorReu != null ? true: false;
- 	}
-	
-	
-	public  Long UltimaSecuencia(M4sllAutorReu autorReu) {
-		return  M4sllAutorReuRepository.obtenerUltimaSecuencia(autorReu.getId().getLitIdLitigio(), autorReu.getId().getIdOrganization());
-	}
-	
-	
+    private final M4sllAutorReuRepository M4sllAutorReuRepository;
+
+    public AutorReuServices(M4sllAutorReuRepository m4ccoLlPagosRepository) {
+        this.M4sllAutorReuRepository = m4ccoLlPagosRepository;
+    }
+
+    public boolean casteoError(M4sllAutorReu autorReu) {
+        return autorReu != null ? true: false;
+    }
+
+
+    public  Long UltimaSecuencia(M4sllAutorReu autorReu) {
+        return  M4sllAutorReuRepository.obtenerUltimaSecuencia(autorReu.getId().getLitIdLitigio(), autorReu.getId().getIdOrganization());
+    }
+
+
 }

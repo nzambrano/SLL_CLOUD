@@ -22,8 +22,7 @@ public class M4sllVwBanPeHome {
         try {
             entityManager.persist(transientInstance);
             log.debug("persist successful");
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("persist failed", re);
             throw re;
         }
@@ -34,8 +33,7 @@ public class M4sllVwBanPeHome {
         try {
             entityManager.remove(persistentInstance);
             log.debug("remove successful");
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("remove failed", re);
             throw re;
         }
@@ -47,8 +45,7 @@ public class M4sllVwBanPeHome {
             M4sllVwBanPe result = entityManager.merge(detachedInstance);
             log.debug("merge successful");
             return result;
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("merge failed", re);
             throw re;
         }
@@ -60,8 +57,7 @@ public class M4sllVwBanPeHome {
             M4sllVwBanPe instance = entityManager.find(M4sllVwBanPe.class, id);
             log.debug("get successful");
             return instance;
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("get failed", re);
             throw re;
         }

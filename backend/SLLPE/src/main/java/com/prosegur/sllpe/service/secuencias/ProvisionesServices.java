@@ -15,18 +15,18 @@ import com.prosegur.sllpe.repository.M4sllProvisionesRepository;
 
 public class ProvisionesServices {
 
-	private final M4sllProvisionesRepository m4sllProvisionesRepository;
-	
-	public ProvisionesServices(M4sllProvisionesRepository m4sllProvisionesRepository) {
-		this.m4sllProvisionesRepository = m4sllProvisionesRepository;
-	}
-	
-	public boolean casteoError(M4sllValEcLit provision) {
-		return provision != null ? true: false;
- 	}
-	
-	public  Long UltimaSecuencia(M4sllValEcLit provision) {
-		return  m4sllProvisionesRepository.obtenerUltimaSecuencia( provision.getId().getIdOrganization(), provision.getId().getLitIdLitigio());
-	}
-		
+    private final M4sllProvisionesRepository m4sllProvisionesRepository;
+
+    public ProvisionesServices(M4sllProvisionesRepository m4sllProvisionesRepository) {
+        this.m4sllProvisionesRepository = m4sllProvisionesRepository;
+    }
+
+    public boolean casteoError(M4sllValEcLit provision) {
+        return provision != null ? true: false;
+    }
+
+    public  Long UltimaSecuencia(M4sllValEcLit provision) {
+        return  m4sllProvisionesRepository.obtenerUltimaSecuencia( provision.getId().getIdOrganization(), provision.getId().getLitIdLitigio());
+    }
+
 }
