@@ -1,5 +1,4 @@
 package com.prosegur.sllpe.domain;
-// Generated Mar 23, 2021, 3:56:40 PM by Hibernate Tools 5.2.0.Final
 
 
 import java.math.BigDecimal;
