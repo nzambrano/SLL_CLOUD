@@ -1,17 +1,25 @@
+# Por hacer:
+# Recibir parametros por json o via db, en vez de parametros
+# agregar el tipo de dato en el customget asi puedo generar customget con
+# cualquier columna no necesariamente pks, testear con m4sll_mt_abogados
+
+# A saber:
+# instalar: pip install stringcase
+# uso: https://pypi.org/project/stringcase/
+
+# Formatar/indentar con standard PEP8:
+# cd C:\Users\asd\Desktop\laburo\prosegur\proyectos\sll_cloud\generarentidades
+# camel-snake-pep8 --yes-to-all . generarentidades.py
+# autopep8 --in-place --aggressive --aggressive generarentidades.py
+
+
+import stringcase
 import sys
 import os
 import shutil
 import subprocess
 import filecmp
-
-# Por hacer:
-# Recibir parametros por json o via db, en vez de parametros
-
-# correrocambiaresto
-# instalar: pip install stringcase
-# uso: https://pypi.org/project/stringcase/
-import stringcase
-
+import glob
 
 curr_path = os.path.dirname(os.path.realpath(__file__))
 templates_path = curr_path + r"\files\templates"
@@ -73,15 +81,17 @@ new_pks_datatypes_sec_lst = (
     else []
 )
 
-new_cust_cols_names_concat = "".join(sys.argv[5])
+new_cust_cols_concat = sys.argv[5]
 new_cust_cols_names_lst = (
-    new_cust_cols_names_concat.split(",") if new_cust_cols_names_concat else []
+    [pkc.split("|")[0] for pkc in new_cust_cols_concat.split(",")]
+    if new_cust_cols_concat
+    else []
 )
-new_pks_names_lst = new_pks_names_not_sec_lst + new_pks_names_sec_lst
-new_pks_datatypes_lst = new_pks_datatypes_not_sec_lst + new_pks_datatypes_sec_lst
-
-new_cust_cols_datatypes_lst = [new_pks_datatypes_lst[new_pks_names_lst.index(
-    dt)] for dt in new_cust_cols_names_lst]
+new_cust_cols_datatypes_lst = (
+    [pkc.split("|")[1] for pkc in new_cust_cols_concat.split(",")]
+    if new_cust_cols_concat
+    else []
+)
 
 curr_template_path = os.path.join(templates_path, sys.argv[6])
 
@@ -231,7 +241,7 @@ if new_pks_names_sec_lst:
     end_str = ""
 
     repl_str = (
-        repl_str.replace("sec_placeholder", "cast(sec_placeholder as integer)")
+        search_str.replace("sec_placeholder", "cast(sec_placeholder as integer)")
         if new_pks_datatypes_sec_lst[0] == "String"
         else search_str
     )
@@ -277,7 +287,7 @@ if new_pks_names_sec_lst:
     end_str = ""
 
     repl_str = search_str.replace("ByColsNotSecPlaceholder", "".join(
-        [stringcase.pascalcase(pk) for pk in new_pks_names_not_sec_lst]))
+        [stringcase.pascalcase(pk) for pk in new_pks_names_not_sec_lst]), )
 
     new_str = start_str + repl_str + end_str
 
@@ -671,7 +681,18 @@ for gen_file in dirs_lst:
 # Volver al estado original archivos cambiados por nuestro script
 
 if os.path.exists(hibernate_reveng_xml + ".bak"):
-    shutil.move(hibernate_reveng_xml + ".bak", hibernate_reveng_xml)
+    shutil.copy(hibernate_reveng_xml + ".bak", hibernate_reveng_xml)
+    os.remove(hibernate_reveng_xml + ".bak")
 
 if os.path.exists(hibernate_cfg_xml + ".bak"):
-    shutil.move(hibernate_cfg_xml + ".bak", hibernate_cfg_xml)
+    shutil.copy(hibernate_cfg_xml + ".bak", hibernate_cfg_xml)
+    os.remove(hibernate_cfg_xml + ".bak")
+
+# En caso de haber quedado backups generados por Astyle, borrar
+files = glob.glob(os.path.join(main_path, "**\\*.orig"), recursive=True)
+for fl in files:
+    try:
+        print(f'deleting: {fl}')
+        os.remove(f)
+    except OSError as e:
+        print("Error: %s : %s" % (fl, e.strerror))
