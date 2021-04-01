@@ -1,5 +1,5 @@
 package com.prosegur.sllpe.domain;
-// Generated 26 mar. 2021 15:31:49 by Hibernate Tools 5.2.0.Final
+// Generated Apr 1, 2021, 12:06:49 AM by Hibernate Tools 5.2.0.Final
 
 
 import java.util.Date;

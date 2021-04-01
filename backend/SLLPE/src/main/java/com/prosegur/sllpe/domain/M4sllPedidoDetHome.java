@@ -1,5 +1,6 @@
 package com.prosegur.sllpe.domain;
-// Generated Mar 25, 2021, 1:18:59 PM by Hibernate Tools 5.2.0.Final
+// Generated Apr 1, 2021, 12:11:07 AM by Hibernate Tools 5.2.0.Final
+
 
 
 import javax.persistence.EntityManager;
@@ -24,8 +25,7 @@ public class M4sllPedidoDetHome {
         try {
             entityManager.persist(transientInstance);
             log.debug("persist successful");
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("persist failed", re);
             throw re;
         }
@@ -36,8 +36,7 @@ public class M4sllPedidoDetHome {
         try {
             entityManager.remove(persistentInstance);
             log.debug("remove successful");
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("remove failed", re);
             throw re;
         }
@@ -49,8 +48,7 @@ public class M4sllPedidoDetHome {
             M4sllPedidoDet result = entityManager.merge(detachedInstance);
             log.debug("merge successful");
             return result;
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("merge failed", re);
             throw re;
         }
@@ -62,8 +60,7 @@ public class M4sllPedidoDetHome {
             M4sllPedidoDet instance = entityManager.find(M4sllPedidoDet.class, id);
             log.debug("get successful");
             return instance;
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("get failed", re);
             throw re;
         }

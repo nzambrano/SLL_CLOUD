@@ -2,9 +2,7 @@ package com.prosegur.sllpe.service;
 
 import com.prosegur.sllpe.domain.M4sllLitSeguimie;
 import com.prosegur.sllpe.repository.M4sllLitSeguimieRepository;
-// import java.util.List;
 
-// import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,9 +21,6 @@ public class M4sllLitSeguimieServices {
     }
 
     public Long UltimaSecuencia(M4sllLitSeguimie m4sllLitSeguimie) {
-        return M4sllLitSeguimieRepository.obtenerUltimaSecuencia(
-                   m4sllLitSeguimie.getId().getIdOrganization(),
-                   m4sllLitSeguimie.getId().getLitIdLitigio()
-               );
+        return M4sllLitSeguimieRepository.obtenerUltimaSecuencia(m4sllLitSeguimie.getId().getLitIdLitigio(), m4sllLitSeguimie.getId().getIdOrganization());
     }
 }

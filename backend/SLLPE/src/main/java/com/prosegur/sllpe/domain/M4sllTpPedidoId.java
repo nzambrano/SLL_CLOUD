@@ -1,5 +1,5 @@
 package com.prosegur.sllpe.domain;
-// Generated 25 mar. 2021 15:58:57 by Hibernate Tools 5.2.0.Final
+// Generated Apr 1, 2021, 12:06:17 AM by Hibernate Tools 5.2.0.Final
 
 
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ public class M4sllTpPedidoId  implements java.io.Serializable {
 
 
 
-    @Column(name="tpe_id_pedido", unique=true, nullable=false, length=3)
+    @Column(name="tpe_id_pedido", nullable=false, length=3)
     public String getTpeIdPedido() {
         return this.tpeIdPedido;
     }

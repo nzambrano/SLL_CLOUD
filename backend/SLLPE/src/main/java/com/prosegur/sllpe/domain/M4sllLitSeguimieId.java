@@ -1,5 +1,5 @@
 package com.prosegur.sllpe.domain;
-// Generated Mar 25, 2021, 4:12:26 PM by Hibernate Tools 5.2.0.Final
+// Generated Apr 1, 2021, 12:11:18 AM by Hibernate Tools 5.2.0.Final
 
 
 import javax.persistence.Column;

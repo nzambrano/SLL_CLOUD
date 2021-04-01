@@ -1,9 +1,25 @@
 package com.prosegur.sllpe.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.prosegur.sllpe.domain.M4sllMtoCodAlt;
 import com.prosegur.sllpe.domain.M4sllMtoCodAltId;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface M4sllMtoCodAltRepository extends JpaRepository<M4sllMtoCodAlt, M4sllMtoCodAltId> {
+    @Query(
+        value = "select COALESCE(max(cast(mca_id_codigo_alterno as integer)),0)+1 from sll.m4sll_mto_cod_alt where id_organization = :id_organization",
+        nativeQuery = true
+    )
+    public String obtenerUltimaSecuencia(@Param("id_organization") String id_organization);
+
+    @Query(
+        value = "select * from sll.m4sll_mto_cod_alt where id_organization = :id_organization",
+        nativeQuery = true
+    )
+    public List<M4sllMtoCodAlt> findM4sllMtoCodAltByIdOrganization(@Param("id_organization") String id_organization);
+
+
 }

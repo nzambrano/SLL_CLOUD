@@ -3,7 +3,6 @@ package com.prosegur.sllpe.repository;
 import com.prosegur.sllpe.domain.M4sllNegocios;
 import com.prosegur.sllpe.domain.M4sllNegociosId;
 import java.util.List;
-// import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

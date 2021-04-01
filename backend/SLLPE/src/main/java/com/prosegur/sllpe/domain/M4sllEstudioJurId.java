@@ -1,5 +1,5 @@
 package com.prosegur.sllpe.domain;
-// Generated 25 mar. 2021 12:38:55 by Hibernate Tools 5.2.0.Final
+// Generated Apr 1, 2021, 12:06:02 AM by Hibernate Tools 5.2.0.Final
 
 
 import javax.persistence.Column;
@@ -23,14 +23,7 @@ public class M4sllEstudioJurId  implements java.io.Serializable {
         this.idOrganization = idOrganization;
     }
 
-    @Column(name="id_organization", nullable=false, length=4)
-    public String getIdOrganization() {
-        return this.idOrganization;
-    }
 
-    public void setIdOrganization(String idOrganization) {
-        this.idOrganization = idOrganization;
-    }
 
     @Column(name="eju_id_est_juridico", nullable=false)
     public long getEjuIdEstJuridico() {
@@ -40,6 +33,17 @@ public class M4sllEstudioJurId  implements java.io.Serializable {
     public void setEjuIdEstJuridico(long ejuIdEstJuridico) {
         this.ejuIdEstJuridico = ejuIdEstJuridico;
     }
+
+
+    @Column(name="id_organization", nullable=false, length=4)
+    public String getIdOrganization() {
+        return this.idOrganization;
+    }
+
+    public void setIdOrganization(String idOrganization) {
+        this.idOrganization = idOrganization;
+    }
+
 
     public boolean equals(Object other) {
         if ( (this == other ) ) return true;
