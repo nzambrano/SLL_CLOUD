@@ -76,7 +76,8 @@ public class LitigioResource {
         id.setIdOrganization(idOrganization);
 		map.put("EXPEDIENTE", litigiosRepository.findById(id));
 		map.put("SLL_AUTOR_REU", sllVwAutorReuRepository.findAllVwAutorReuByLitigio(litIdLitigio));
-		map.put("PEDIDOS", pedidosRepository.findPedidosByLitigio(idOrganization, litIdLitigio));
+		// map.put("PEDIDOS", pedidosRepository.findPedidosByLitigio(idOrganization, litIdLitigio));
+		map.put("PEDIDOS", pedidosRepository.findM4sllPedidosByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio));
 		map.put("SLL_FASES", fasesRepository.getFases(idOrganization, litIdLitigio));
 		map.put("SLL_PROV", provisionesRepository.getProvisionByLitigio(idOrganization, litIdLitigio));
 		
