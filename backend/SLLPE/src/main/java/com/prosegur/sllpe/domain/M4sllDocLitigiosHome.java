@@ -1,5 +1,6 @@
 package com.prosegur.sllpe.domain;
-// Generated Mar 24, 2021, 12:01:48 PM by Hibernate Tools 5.2.0.Final
+// Generated Apr 1, 2021, 12:20:50 AM by Hibernate Tools 5.2.0.Final
+
 
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
  * @see com.prosegur.sllpe.domain.M4sllDocLitigios
  * @author Hibernate Tools
  */
+
 public class M4sllDocLitigiosHome {
 
     private static final Log log = LogFactory.getLog(M4sllDocLitigiosHome.class);
@@ -23,8 +25,7 @@ public class M4sllDocLitigiosHome {
         try {
             entityManager.persist(transientInstance);
             log.debug("persist successful");
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("persist failed", re);
             throw re;
         }
@@ -35,8 +36,7 @@ public class M4sllDocLitigiosHome {
         try {
             entityManager.remove(persistentInstance);
             log.debug("remove successful");
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("remove failed", re);
             throw re;
         }
@@ -48,8 +48,7 @@ public class M4sllDocLitigiosHome {
             M4sllDocLitigios result = entityManager.merge(detachedInstance);
             log.debug("merge successful");
             return result;
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("merge failed", re);
             throw re;
         }
@@ -61,8 +60,7 @@ public class M4sllDocLitigiosHome {
             M4sllDocLitigios instance = entityManager.find(M4sllDocLitigios.class, id);
             log.debug("get successful");
             return instance;
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             log.error("get failed", re);
             throw re;
         }

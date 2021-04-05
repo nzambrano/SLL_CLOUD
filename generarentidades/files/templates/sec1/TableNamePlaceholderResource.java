@@ -6,24 +6,16 @@ import com.prosegur.sllpe.repository.TableNamePlaceholderRepository;
 import com.prosegur.sllpe.service.TableNamePlaceholderServices;
 import com.prosegur.sllpe.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
-// import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-// import io.github.jhipster.web.util.PaginationUtil;
-// import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-// import org.springframework.data.domain.Page;
-// import org.springframework.data.domain.Pageable;
-// import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-// import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -87,9 +79,17 @@ public class TableNamePlaceholderResource {
   public ResponseEntity<List<TableNamePlaceholder>> getTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder) {
     log.debug("REST request to get TableNamePlaceholder : {}", debugcolsnotsec_placeholder);
 
-    List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByInput(colsnotsec_placeholder);
+    List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsNotSecPlaceholder(colsnotsec_placeholder);
     return ResponseEntity.ok().body(TableNamePlaceholderByInput);
   }
+
+//CustomLinesCustomGet1   @GetMapping("/table_name_placeholder/{colscustom_placeholder}")
+//CustomLinesCustomGet1   public ResponseEntity<List<TableNamePlaceholder>> getTableNamePlaceholder(@PathVariable("colscustom_placeholder") ColscustomDatatype colscustom_placeholder) {
+//CustomLinesCustomGet1     log.debug("REST request to get TableNamePlaceholder : {}", debugcolscustom_placeholder);
+//CustomLinesCustomGet1 
+//CustomLinesCustomGet1     List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsCustomPlaceholder(colscustom_placeholder);
+//CustomLinesCustomGet1     return ResponseEntity.ok().body(TableNamePlaceholderByInput);
+//CustomLinesCustomGet1   }
 
   /*
     @GetMapping("/table_name_placeholder/{colsnotsec_placeholder}/{sec_placeholder}")
@@ -102,19 +102,19 @@ public class TableNamePlaceholderResource {
         Optional<TableNamePlaceholder> table_name_placeholder = tableNamePlaceholderRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(table_name_placeholder);
     }
-    */
 
-  @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}")
-  public ResponseEntity<Void> deleteTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder) {
-    log.debug("REST request to delete table_name_placeholder : {}", debugcolsnotsec_placeholder);
-    List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByInput(colsnotsec_placeholder);
+    @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}")
+    public ResponseEntity<Void> deleteTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder) {
+      log.debug("REST request to delete table_name_placeholder : {}", debugcolsnotsec_placeholder);
+      List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsNotSecPlaceholder(colsnotsec_placeholder);
 
-    tableNamePlaceholderRepository.deleteAll(TableNamePlaceholderByInput);
-    return ResponseEntity
-      .noContent()
-      .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, TableNamePlaceholderByInput.toString()))
-      .build();
+      tableNamePlaceholderRepository.deleteAll(TableNamePlaceholderByInput);
+      return ResponseEntity
+        .noContent()
+        .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, TableNamePlaceholderByInput.toString()))
+        .build();
   }
+*/
 
   @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}/{sec_placeholder}")
   public ResponseEntity<Void> deleteTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder, @PathVariable("sec_placeholder") ColsecDatatype sec_placeholder) {
