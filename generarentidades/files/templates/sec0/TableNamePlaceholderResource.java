@@ -82,7 +82,7 @@ public class TableNamePlaceholderResource {
 //CustomLinesCustomGet1   public ResponseEntity<List<TableNamePlaceholder>> getTableNamePlaceholder(@PathVariable("colscustom_placeholder") ColscustomDatatype colscustom_placeholder) {
 //CustomLinesCustomGet1     log.debug("REST request to get TableNamePlaceholder : {}", debugcolscustom_placeholder);
 //CustomLinesCustomGet1 
-//CustomLinesCustomGet1     List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsCustomPlaceholder(colscustom_placeholder);
+//CustomLinesCustomGet1     List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findByColsCustomPlaceholder(colscustom_placeholder);
 //CustomLinesCustomGet1     return ResponseEntity.ok().body(TableNamePlaceholderByInput);
 //CustomLinesCustomGet1   }
 

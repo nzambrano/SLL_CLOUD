@@ -19,12 +19,12 @@ public interface TableNamePlaceholderRepository extends JpaRepository<TableNameP
     value = "select * from sll.table_name_placeholder where_and_colsnotsec_placeholder",
     nativeQuery = true
   )
-  public List<TableNamePlaceholder> findTableNamePlaceholderByColsNotSecPlaceholder(param_colsnotsec_placeholder);
+  public List<TableNamePlaceholder> findByColsNotSecPlaceholder(param_colsnotsec_placeholder);
 
 //CustomLinesCustomGet1   @Query(
 //CustomLinesCustomGet1     value = "select * from sll.table_name_placeholder where_and_colscustom_placeholder",
 //CustomLinesCustomGet1     nativeQuery = true
 //CustomLinesCustomGet1   )
-//CustomLinesCustomGet1     public List<TableNamePlaceholder> findTableNamePlaceholderByColsCustomPlaceholder(param_colscustom_placeholder);
+//CustomLinesCustomGet1     public List<TableNamePlaceholder> findByColsCustomPlaceholder(param_colscustom_placeholder);
 
 }

@@ -79,7 +79,7 @@ public class TableNamePlaceholderResource {
   public ResponseEntity<List<TableNamePlaceholder>> getTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder) {
     log.debug("REST request to get TableNamePlaceholder : {}", debugcolsnotsec_placeholder);
 
-    List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsNotSecPlaceholder(colsnotsec_placeholder);
+    List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findByColsNotSecPlaceholder(colsnotsec_placeholder);
     return ResponseEntity.ok().body(TableNamePlaceholderByInput);
   }
 
@@ -87,7 +87,7 @@ public class TableNamePlaceholderResource {
 //CustomLinesCustomGet1   public ResponseEntity<List<TableNamePlaceholder>> getTableNamePlaceholder(@PathVariable("colscustom_placeholder") ColscustomDatatype colscustom_placeholder) {
 //CustomLinesCustomGet1     log.debug("REST request to get TableNamePlaceholder : {}", debugcolscustom_placeholder);
 //CustomLinesCustomGet1 
-//CustomLinesCustomGet1     List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsCustomPlaceholder(colscustom_placeholder);
+//CustomLinesCustomGet1     List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findByColsCustomPlaceholder(colscustom_placeholder);
 //CustomLinesCustomGet1     return ResponseEntity.ok().body(TableNamePlaceholderByInput);
 //CustomLinesCustomGet1   }
 
@@ -106,7 +106,7 @@ public class TableNamePlaceholderResource {
     @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}")
     public ResponseEntity<Void> deleteTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder) {
       log.debug("REST request to delete table_name_placeholder : {}", debugcolsnotsec_placeholder);
-      List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findTableNamePlaceholderByColsNotSecPlaceholder(colsnotsec_placeholder);
+      List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findByColsNotSecPlaceholder(colsnotsec_placeholder);
 
       tableNamePlaceholderRepository.deleteAll(TableNamePlaceholderByInput);
       return ResponseEntity
