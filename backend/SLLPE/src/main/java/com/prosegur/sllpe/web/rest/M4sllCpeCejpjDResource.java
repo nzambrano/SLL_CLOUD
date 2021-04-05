@@ -80,7 +80,7 @@ public class M4sllCpeCejpjDResource {
     public ResponseEntity<List<M4sllCpeCejpjD>> getM4sllCpeCejpjD(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllCpeCejpjD : {}", lit_id_litigio + "|" + id_organization);
 
-        List<M4sllCpeCejpjD> M4sllCpeCejpjDByInput = m4sllCpeCejpjDRepository.findM4sllCpeCejpjDByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
+        List<M4sllCpeCejpjD> M4sllCpeCejpjDByInput = m4sllCpeCejpjDRepository.findByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
         return ResponseEntity.ok().body(M4sllCpeCejpjDByInput);
     }
 
@@ -88,7 +88,7 @@ public class M4sllCpeCejpjDResource {
     public ResponseEntity<List<M4sllCpeCejpjD>> getM4sllCpeCejpjD(@PathVariable("lit_id_litigio") String lit_id_litigio) {
         log.debug("REST request to get M4sllCpeCejpjD : {}", lit_id_litigio);
 
-        List<M4sllCpeCejpjD> M4sllCpeCejpjDByInput = m4sllCpeCejpjDRepository.findM4sllCpeCejpjDByLitIdLitigio(lit_id_litigio);
+        List<M4sllCpeCejpjD> M4sllCpeCejpjDByInput = m4sllCpeCejpjDRepository.findByLitIdLitigio(lit_id_litigio);
         return ResponseEntity.ok().body(M4sllCpeCejpjDByInput);
     }
 
@@ -107,7 +107,7 @@ public class M4sllCpeCejpjDResource {
       @DeleteMapping("/m4sll_cpe_cejpj_d/{lit_id_litigio}/{id_organization}")
       public ResponseEntity<Void> deleteM4sllCpeCejpjD(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_cpe_cejpj_d : {}", lit_id_litigio + "|" + id_organization);
-        List<M4sllCpeCejpjD> M4sllCpeCejpjDByInput = m4sllCpeCejpjDRepository.findM4sllCpeCejpjDByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
+        List<M4sllCpeCejpjD> M4sllCpeCejpjDByInput = m4sllCpeCejpjDRepository.findByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
 
         m4sllCpeCejpjDRepository.deleteAll(M4sllCpeCejpjDByInput);
         return ResponseEntity

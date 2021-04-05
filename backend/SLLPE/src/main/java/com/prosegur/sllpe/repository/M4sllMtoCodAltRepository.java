@@ -19,7 +19,7 @@ public interface M4sllMtoCodAltRepository extends JpaRepository<M4sllMtoCodAlt, 
         value = "select * from sll.m4sll_mto_cod_alt where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllMtoCodAlt> findM4sllMtoCodAltByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllMtoCodAlt> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

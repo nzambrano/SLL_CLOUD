@@ -19,7 +19,7 @@ public interface M4sllTpDocLitigRepository extends JpaRepository<M4sllTpDocLitig
         value = "select * from sll.m4sll_tp_doc_litig where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpDocLitig> findM4sllTpDocLitigByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpDocLitig> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

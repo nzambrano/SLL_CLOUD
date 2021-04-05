@@ -15,5 +15,5 @@ public interface M4sllCpeCejpjCRepository extends JpaRepository<M4sllCpeCejpjC, 
         value = "select * from sll.m4sll_cpe_cejpj_c where lit_id_litigio = :lit_id_litigio",
         nativeQuery = true
     )
-    public List<M4sllCpeCejpjC> findM4sllCpeCejpjCByLitIdLitigio(@Param("lit_id_litigio") String lit_id_litigio);
+    public List<M4sllCpeCejpjC> findByLitIdLitigio(@Param("lit_id_litigio") String lit_id_litigio);
 }

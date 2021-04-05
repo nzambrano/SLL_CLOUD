@@ -40,7 +40,7 @@ public class M4sllAutorReuResource {
 
     private M4sllAutorReuRepository m4sllAutorReuRepository;
     private SllVwAutorReuRepository sllVwAutorReuRepository;
-    
+
     public M4sllAutorReuResource(M4sllAutorReuRepository m4sllAutorReuRepository, SllVwAutorReuRepository sllVwAutorReuRepository) {
         this.m4sllAutorReuRepository = m4sllAutorReuRepository;
         this.sllVwAutorReuRepository = sllVwAutorReuRepository;
@@ -103,17 +103,17 @@ public class M4sllAutorReuResource {
                                                );
         return ResponseEntity.ok().body(M4sllAutorReuAll);
     }
-    
+
     @GetMapping("/sll_autor_reu/{lit_id_litigio}")
-    public ResponseEntity<List<SllVwAutorReu>> getVwAutoresByLitigio(        
-        @PathVariable("lit_id_litigio") String lit_id_litigio        
+    public ResponseEntity<List<SllVwAutorReu>> getVwAutoresByLitigio(
+        @PathVariable("lit_id_litigio") String lit_id_litigio
 
     ) {
         log.debug("REST request to get ALL M4sllAutorReu : {}");
 
-        List<SllVwAutorReu> SllvWAutorReuAll = sllVwAutorReuRepository.findAllVwAutorReuByLitigio(                
+        List<SllVwAutorReu> SllvWAutorReuAll = sllVwAutorReuRepository.findAllVwAutorReuByLitigio(
                 lit_id_litigio
-        );
+                                               );
         return ResponseEntity.ok().body(SllvWAutorReuAll);
     }
 

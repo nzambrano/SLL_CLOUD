@@ -79,7 +79,7 @@ public class M4sllTpCompromisResource {
     public ResponseEntity<List<M4sllTpCompromis>> getM4sllTpCompromis(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllTpCompromis : {}", id_organization);
 
-        List<M4sllTpCompromis> M4sllTpCompromisByInput = m4sllTpCompromisRepository.findM4sllTpCompromisByIdOrganization(id_organization);
+        List<M4sllTpCompromis> M4sllTpCompromisByInput = m4sllTpCompromisRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllTpCompromisByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllTpCompromisResource {
       @DeleteMapping("/m4sll_tp_compromis/{id_organization}")
       public ResponseEntity<Void> deleteM4sllTpCompromis(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_tp_compromis : {}", id_organization);
-        List<M4sllTpCompromis> M4sllTpCompromisByInput = m4sllTpCompromisRepository.findM4sllTpCompromisByIdOrganization(id_organization);
+        List<M4sllTpCompromis> M4sllTpCompromisByInput = m4sllTpCompromisRepository.findByIdOrganization(id_organization);
 
         m4sllTpCompromisRepository.deleteAll(M4sllTpCompromisByInput);
         return ResponseEntity

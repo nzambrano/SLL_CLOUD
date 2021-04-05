@@ -79,7 +79,7 @@ public class M4sllTpRecurrenResource {
     public ResponseEntity<List<M4sllTpRecurren>> getM4sllTpRecurren(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllTpRecurren : {}", id_organization);
 
-        List<M4sllTpRecurren> M4sllTpRecurrenByInput = m4sllTpRecurrenRepository.findM4sllTpRecurrenByIdOrganization(id_organization);
+        List<M4sllTpRecurren> M4sllTpRecurrenByInput = m4sllTpRecurrenRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllTpRecurrenByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllTpRecurrenResource {
       @DeleteMapping("/m4sll_tp_recurren/{id_organization}")
       public ResponseEntity<Void> deleteM4sllTpRecurren(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_tp_recurren : {}", id_organization);
-        List<M4sllTpRecurren> M4sllTpRecurrenByInput = m4sllTpRecurrenRepository.findM4sllTpRecurrenByIdOrganization(id_organization);
+        List<M4sllTpRecurren> M4sllTpRecurrenByInput = m4sllTpRecurrenRepository.findByIdOrganization(id_organization);
 
         m4sllTpRecurrenRepository.deleteAll(M4sllTpRecurrenByInput);
         return ResponseEntity

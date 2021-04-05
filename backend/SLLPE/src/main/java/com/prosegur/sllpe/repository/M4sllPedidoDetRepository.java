@@ -19,12 +19,12 @@ public interface M4sllPedidoDetRepository extends JpaRepository<M4sllPedidoDet, 
         value = "select * from sll.m4sll_pedido_det where tpe_id_pedido = :tpe_id_pedido and lit_id_litigio = :lit_id_litigio and id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllPedidoDet> findM4sllPedidoDetByTpeIdPedidoLitIdLitigioIdOrganization(@Param("tpe_id_pedido") String tpe_id_pedido, @Param("lit_id_litigio") String lit_id_litigio, @Param("id_organization") String id_organization);
+    public List<M4sllPedidoDet> findByTpeIdPedidoLitIdLitigioIdOrganization(@Param("tpe_id_pedido") String tpe_id_pedido, @Param("lit_id_litigio") String lit_id_litigio, @Param("id_organization") String id_organization);
 
     @Query(
         value = "select * from sll.m4sll_pedido_det where tpe_id_pedido = :tpe_id_pedido and lit_id_litigio = :lit_id_litigio",
         nativeQuery = true
     )
-    public List<M4sllPedidoDet> findM4sllPedidoDetByTpeIdPedidoLitIdLitigio(@Param("tpe_id_pedido") String tpe_id_pedido, @Param("lit_id_litigio") String lit_id_litigio);
+    public List<M4sllPedidoDet> findByTpeIdPedidoLitIdLitigio(@Param("tpe_id_pedido") String tpe_id_pedido, @Param("lit_id_litigio") String lit_id_litigio);
 
 }

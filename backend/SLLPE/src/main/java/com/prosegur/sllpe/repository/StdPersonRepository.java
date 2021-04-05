@@ -15,5 +15,5 @@ public interface StdPersonRepository extends JpaRepository<StdPerson, StdPersonI
         value = "select * from sll.std_person where std_id_person = :std_id_person",
         nativeQuery = true
     )
-    public List<StdPerson> findStdPersonByStdIdPerson(@Param("std_id_person") String std_id_person);
+    public List<StdPerson> findByStdIdPerson(@Param("std_id_person") String std_id_person);
 }

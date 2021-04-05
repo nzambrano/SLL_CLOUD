@@ -79,7 +79,7 @@ public class M4sllTpRolesResource {
     public ResponseEntity<List<M4sllTpRoles>> getM4sllTpRoles(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllTpRoles : {}", id_organization);
 
-        List<M4sllTpRoles> M4sllTpRolesByInput = m4sllTpRolesRepository.findM4sllTpRolesByIdOrganization(id_organization);
+        List<M4sllTpRoles> M4sllTpRolesByInput = m4sllTpRolesRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllTpRolesByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllTpRolesResource {
       @DeleteMapping("/m4sll_tp_roles/{id_organization}")
       public ResponseEntity<Void> deleteM4sllTpRoles(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_tp_roles : {}", id_organization);
-        List<M4sllTpRoles> M4sllTpRolesByInput = m4sllTpRolesRepository.findM4sllTpRolesByIdOrganization(id_organization);
+        List<M4sllTpRoles> M4sllTpRolesByInput = m4sllTpRolesRepository.findByIdOrganization(id_organization);
 
         m4sllTpRolesRepository.deleteAll(M4sllTpRolesByInput);
         return ResponseEntity

@@ -83,7 +83,7 @@ public class StdPersonResource {
     public ResponseEntity<List<StdPerson>> getStdPerson(@PathVariable("std_id_person") String std_id_person) {
         log.debug("REST request to get StdPerson : {}", std_id_person);
 
-        List<StdPerson> StdPersonByInput = stdPersonRepository.findStdPersonByStdIdPerson(std_id_person);
+        List<StdPerson> StdPersonByInput = stdPersonRepository.findByStdIdPerson(std_id_person);
         return ResponseEntity.ok().body(StdPersonByInput);
     }
 

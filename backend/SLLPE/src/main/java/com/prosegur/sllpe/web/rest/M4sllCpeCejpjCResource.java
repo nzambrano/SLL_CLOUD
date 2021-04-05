@@ -83,7 +83,7 @@ public class M4sllCpeCejpjCResource {
     public ResponseEntity<List<M4sllCpeCejpjC>> getM4sllCpeCejpjC(@PathVariable("lit_id_litigio") String lit_id_litigio) {
         log.debug("REST request to get M4sllCpeCejpjC : {}", lit_id_litigio);
 
-        List<M4sllCpeCejpjC> M4sllCpeCejpjCByInput = m4sllCpeCejpjCRepository.findM4sllCpeCejpjCByLitIdLitigio(lit_id_litigio);
+        List<M4sllCpeCejpjC> M4sllCpeCejpjCByInput = m4sllCpeCejpjCRepository.findByLitIdLitigio(lit_id_litigio);
         return ResponseEntity.ok().body(M4sllCpeCejpjCByInput);
     }
 

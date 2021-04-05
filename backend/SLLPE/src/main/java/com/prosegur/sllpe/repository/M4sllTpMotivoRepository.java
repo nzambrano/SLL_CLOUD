@@ -19,7 +19,7 @@ public interface M4sllTpMotivoRepository extends JpaRepository<M4sllTpMotivo, M4
         value = "select * from sll.m4sll_tp_motivo where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpMotivo> findM4sllTpMotivoByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpMotivo> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

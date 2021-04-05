@@ -19,12 +19,12 @@ public interface M4sllCpeCejpjDRepository extends JpaRepository<M4sllCpeCejpjD, 
         value = "select * from sll.m4sll_cpe_cejpj_d where lit_id_litigio = :lit_id_litigio and id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllCpeCejpjD> findM4sllCpeCejpjDByLitIdLitigioIdOrganization(@Param("lit_id_litigio") String lit_id_litigio, @Param("id_organization") String id_organization);
+    public List<M4sllCpeCejpjD> findByLitIdLitigioIdOrganization(@Param("lit_id_litigio") String lit_id_litigio, @Param("id_organization") String id_organization);
 
     @Query(
         value = "select * from sll.m4sll_cpe_cejpj_d where lit_id_litigio = :lit_id_litigio",
         nativeQuery = true
     )
-    public List<M4sllCpeCejpjD> findM4sllCpeCejpjDByLitIdLitigio(@Param("lit_id_litigio") String lit_id_litigio);
+    public List<M4sllCpeCejpjD> findByLitIdLitigio(@Param("lit_id_litigio") String lit_id_litigio);
 
 }

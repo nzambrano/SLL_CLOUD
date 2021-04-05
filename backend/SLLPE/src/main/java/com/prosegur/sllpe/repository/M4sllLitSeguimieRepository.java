@@ -19,12 +19,12 @@ public interface M4sllLitSeguimieRepository extends JpaRepository<M4sllLitSeguim
         value = "select * from sll.m4sll_lit_seguimie where lit_id_litigio = :lit_id_litigio and id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllLitSeguimie> findM4sllLitSeguimieByLitIdLitigioIdOrganization(@Param("lit_id_litigio") String lit_id_litigio, @Param("id_organization") String id_organization);
+    public List<M4sllLitSeguimie> findByLitIdLitigioIdOrganization(@Param("lit_id_litigio") String lit_id_litigio, @Param("id_organization") String id_organization);
 
     @Query(
         value = "select * from sll.m4sll_lit_seguimie where lit_id_litigio = :lit_id_litigio",
         nativeQuery = true
     )
-    public List<M4sllLitSeguimie> findM4sllLitSeguimieByLitIdLitigio(@Param("lit_id_litigio") String lit_id_litigio);
+    public List<M4sllLitSeguimie> findByLitIdLitigio(@Param("lit_id_litigio") String lit_id_litigio);
 
 }

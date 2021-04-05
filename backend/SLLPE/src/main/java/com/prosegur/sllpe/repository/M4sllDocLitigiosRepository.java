@@ -19,7 +19,7 @@ public interface M4sllDocLitigiosRepository extends JpaRepository<M4sllDocLitigi
         value = "select * from sll.m4sll_doc_litigios where lit_id_litigio = :lit_id_litigio and id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllDocLitigios> findM4sllDocLitigiosByLitIdLitigioIdOrganization(@Param("lit_id_litigio") String lit_id_litigio, @Param("id_organization") String id_organization);
+    public List<M4sllDocLitigios> findByLitIdLitigioIdOrganization(@Param("lit_id_litigio") String lit_id_litigio, @Param("id_organization") String id_organization);
 
 
 }

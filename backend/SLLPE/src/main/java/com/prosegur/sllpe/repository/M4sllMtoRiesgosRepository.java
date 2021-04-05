@@ -19,7 +19,7 @@ public interface M4sllMtoRiesgosRepository extends JpaRepository<M4sllMtoRiesgos
         value = "select * from sll.m4sll_mto_riesgos where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllMtoRiesgos> findM4sllMtoRiesgosByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllMtoRiesgos> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

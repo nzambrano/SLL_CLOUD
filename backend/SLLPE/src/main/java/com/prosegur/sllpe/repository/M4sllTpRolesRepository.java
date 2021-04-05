@@ -19,7 +19,7 @@ public interface M4sllTpRolesRepository extends JpaRepository<M4sllTpRoles, M4sl
         value = "select * from sll.m4sll_tp_roles where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpRoles> findM4sllTpRolesByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpRoles> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

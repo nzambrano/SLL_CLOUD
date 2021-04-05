@@ -19,7 +19,7 @@ public interface M4sllTpPagosRepository extends JpaRepository<M4sllTpPagos, M4sl
         value = "select * from sll.m4sll_tp_pagos where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpPagos> findM4sllTpPagosByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpPagos> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

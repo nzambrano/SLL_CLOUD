@@ -19,7 +19,7 @@ public interface StdCountryRepository extends JpaRepository<StdCountry, StdCount
         value = "select * from sll.std_country where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<StdCountry> findStdCountryByIdOrganization(@Param("id_organization") String id_organization);
+    public List<StdCountry> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

@@ -79,7 +79,7 @@ public class M4sllTpAutorReuResource {
     public ResponseEntity<List<M4sllTpAutorReu>> getM4sllTpAutorReu(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllTpAutorReu : {}", id_organization);
 
-        List<M4sllTpAutorReu> M4sllTpAutorReuByInput = m4sllTpAutorReuRepository.findM4sllTpAutorReuByIdOrganization(id_organization);
+        List<M4sllTpAutorReu> M4sllTpAutorReuByInput = m4sllTpAutorReuRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllTpAutorReuByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllTpAutorReuResource {
       @DeleteMapping("/m4sll_tp_autor_reu/{id_organization}")
       public ResponseEntity<Void> deleteM4sllTpAutorReu(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_tp_autor_reu : {}", id_organization);
-        List<M4sllTpAutorReu> M4sllTpAutorReuByInput = m4sllTpAutorReuRepository.findM4sllTpAutorReuByIdOrganization(id_organization);
+        List<M4sllTpAutorReu> M4sllTpAutorReuByInput = m4sllTpAutorReuRepository.findByIdOrganization(id_organization);
 
         m4sllTpAutorReuRepository.deleteAll(M4sllTpAutorReuByInput);
         return ResponseEntity

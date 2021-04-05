@@ -24,6 +24,7 @@ public class StdCountryResource {
 
     private final Logger log = LoggerFactory.getLogger(StdCountryResource.class);
     private static final String ENTITY_NAME = "sllpeStdCountry";
+
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
@@ -78,7 +79,7 @@ public class StdCountryResource {
     public ResponseEntity<List<StdCountry>> getStdCountry(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get StdCountry : {}", id_organization);
 
-        List<StdCountry> StdCountryByInput = stdCountryRepository.findStdCountryByIdOrganization(id_organization);
+        List<StdCountry> StdCountryByInput = stdCountryRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(StdCountryByInput);
     }
 
@@ -98,7 +99,7 @@ public class StdCountryResource {
       @DeleteMapping("/std_country/{id_organization}")
       public ResponseEntity<Void> deleteStdCountry(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete std_country : {}", id_organization);
-        List<StdCountry> StdCountryByInput = stdCountryRepository.findStdCountryByIdOrganization(id_organization);
+        List<StdCountry> StdCountryByInput = stdCountryRepository.findByIdOrganization(id_organization);
 
         stdCountryRepository.deleteAll(StdCountryByInput);
         return ResponseEntity

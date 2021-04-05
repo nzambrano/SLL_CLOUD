@@ -79,7 +79,7 @@ public class M4sllMtoRiesgosResource {
     public ResponseEntity<List<M4sllMtoRiesgos>> getM4sllMtoRiesgos(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllMtoRiesgos : {}", id_organization);
 
-        List<M4sllMtoRiesgos> M4sllMtoRiesgosByInput = m4sllMtoRiesgosRepository.findM4sllMtoRiesgosByIdOrganization(id_organization);
+        List<M4sllMtoRiesgos> M4sllMtoRiesgosByInput = m4sllMtoRiesgosRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllMtoRiesgosByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllMtoRiesgosResource {
       @DeleteMapping("/m4sll_mto_riesgos/{id_organization}")
       public ResponseEntity<Void> deleteM4sllMtoRiesgos(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_mto_riesgos : {}", id_organization);
-        List<M4sllMtoRiesgos> M4sllMtoRiesgosByInput = m4sllMtoRiesgosRepository.findM4sllMtoRiesgosByIdOrganization(id_organization);
+        List<M4sllMtoRiesgos> M4sllMtoRiesgosByInput = m4sllMtoRiesgosRepository.findByIdOrganization(id_organization);
 
         m4sllMtoRiesgosRepository.deleteAll(M4sllMtoRiesgosByInput);
         return ResponseEntity

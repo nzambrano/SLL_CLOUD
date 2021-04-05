@@ -79,7 +79,7 @@ public class M4sllMtoCodAltResource {
     public ResponseEntity<List<M4sllMtoCodAlt>> getM4sllMtoCodAlt(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllMtoCodAlt : {}", id_organization);
 
-        List<M4sllMtoCodAlt> M4sllMtoCodAltByInput = m4sllMtoCodAltRepository.findM4sllMtoCodAltByIdOrganization(id_organization);
+        List<M4sllMtoCodAlt> M4sllMtoCodAltByInput = m4sllMtoCodAltRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllMtoCodAltByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllMtoCodAltResource {
       @DeleteMapping("/m4sll_mto_cod_alt/{id_organization}")
       public ResponseEntity<Void> deleteM4sllMtoCodAlt(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_mto_cod_alt : {}", id_organization);
-        List<M4sllMtoCodAlt> M4sllMtoCodAltByInput = m4sllMtoCodAltRepository.findM4sllMtoCodAltByIdOrganization(id_organization);
+        List<M4sllMtoCodAlt> M4sllMtoCodAltByInput = m4sllMtoCodAltRepository.findByIdOrganization(id_organization);
 
         m4sllMtoCodAltRepository.deleteAll(M4sllMtoCodAltByInput);
         return ResponseEntity

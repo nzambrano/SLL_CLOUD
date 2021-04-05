@@ -30,66 +30,66 @@ import com.prosegur.sllpe.repository.SllVwAutorReuRepository;
 @RequestMapping("/api/litigio")
 public class LitigioResource {
 
-	private final Logger log = LoggerFactory.getLogger(LitigioResource.class);
+    private final Logger log = LoggerFactory.getLogger(LitigioResource.class);
 
-	private M4sllLitigiosRepository litigiosRepository;
-	private M4sllPedidosRepository pedidosRepository;
-	private M4sllFasesRepository fasesRepository;
-	private SllVwAutorReuRepository sllVwAutorReuRepository;
-	private M4sllProvisionesRepository provisionesRepository;
-	
-	private  String idOrganization = "0050";
-	
-	public LitigioResource(
-			M4sllLitigiosRepository litigiosRepository,
-			SllVwAutorReuRepository sllVwAutorReuRepository,
-			M4sllPedidosRepository pedidosRepository,
-			M4sllFasesRepository fasesRepository,
-			M4sllProvisionesRepository provisionesRepository
-						
-			
-	) {
+    private M4sllLitigiosRepository litigiosRepository;
+    private M4sllPedidosRepository pedidosRepository;
+    private M4sllFasesRepository fasesRepository;
+    private SllVwAutorReuRepository sllVwAutorReuRepository;
+    private M4sllProvisionesRepository provisionesRepository;
 
-		this.litigiosRepository = litigiosRepository;
-		this.sllVwAutorReuRepository = sllVwAutorReuRepository;
-		this.pedidosRepository = pedidosRepository;
-		this.fasesRepository = fasesRepository;
-		this.provisionesRepository = provisionesRepository;
+    private  String idOrganization = "0050";
+
+    public LitigioResource(
+        M4sllLitigiosRepository litigiosRepository,
+        SllVwAutorReuRepository sllVwAutorReuRepository,
+        M4sllPedidosRepository pedidosRepository,
+        M4sllFasesRepository fasesRepository,
+        M4sllProvisionesRepository provisionesRepository
+
+
+    ) {
+
+        this.litigiosRepository = litigiosRepository;
+        this.sllVwAutorReuRepository = sllVwAutorReuRepository;
+        this.pedidosRepository = pedidosRepository;
+        this.fasesRepository = fasesRepository;
+        this.provisionesRepository = provisionesRepository;
 
     }
-	
 
-	/**
-	 * GET listar
-	 * 
-	 * @throws JSONException
-	 */
-	@GetMapping("/{id_litIdLitigio}")
-	public ResponseEntity<Object> listar(
-				@PathVariable("id_litIdLitigio") String litIdLitigio
-			) {
-		List<HashMap<String, Object>> entities = new ArrayList<HashMap<String, Object>>();
-		HashMap<String, Object> map = new HashMap<>();
-			
-		M4sllLitigiosId id = new M4sllLitigiosId();
+
+    /**
+     * GET listar
+     *
+     * @throws JSONException
+     */
+    @GetMapping("/{id_litIdLitigio}")
+    public ResponseEntity<Object> listar(
+        @PathVariable("id_litIdLitigio") String litIdLitigio
+    ) {
+        List<HashMap<String, Object>> entities = new ArrayList<HashMap<String, Object>>();
+        HashMap<String, Object> map = new HashMap<>();
+
+        M4sllLitigiosId id = new M4sllLitigiosId();
         id.setLitIdLitigio(litIdLitigio);
         id.setIdOrganization(idOrganization);
-		map.put("EXPEDIENTE", litigiosRepository.findById(id));
-		map.put("SLL_AUTOR_REU", sllVwAutorReuRepository.findAllVwAutorReuByLitigio(litIdLitigio));
-		// map.put("PEDIDOS", pedidosRepository.findPedidosByLitigio(idOrganization, litIdLitigio));
-		map.put("PEDIDOS", pedidosRepository.findM4sllPedidosByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio));
-		map.put("SLL_FASES", fasesRepository.getFases(idOrganization, litIdLitigio));
-		map.put("SLL_PROV", provisionesRepository.getProvisionByLitigio(idOrganization, litIdLitigio));
-		
-		// map.put("abogados", abogadosRepository.findAbogados("0050"));
-		// map.put("negocios", negociosRepository.findNegocioByPais("0050"));
+        map.put("EXPEDIENTE", litigiosRepository.findById(id));
+        map.put("SLL_AUTOR_REU", sllVwAutorReuRepository.findAllVwAutorReuByLitigio(litIdLitigio));
+        // map.put("PEDIDOS", pedidosRepository.findPedidosByLitigio(idOrganization, litIdLitigio));
+        map.put("PEDIDOS", pedidosRepository.findM4sllPedidosByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio));
+        map.put("SLL_FASES", fasesRepository.getFases(idOrganization, litIdLitigio));
+        map.put("SLL_PROV", provisionesRepository.getProvisionByLitigio(idOrganization, litIdLitigio));
 
-			
-			
-		entities.add(map);
-		return new ResponseEntity<Object>(entities, HttpStatus.OK);
-	}
-	
-	
-   
+        // map.put("abogados", abogadosRepository.findAbogados("0050"));
+        // map.put("negocios", negociosRepository.findNegocioByPais("0050"));
+
+
+
+        entities.add(map);
+        return new ResponseEntity<Object>(entities, HttpStatus.OK);
+    }
+
+
+
 }

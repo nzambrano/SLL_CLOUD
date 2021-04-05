@@ -19,7 +19,7 @@ public interface M4sllTpCompromisRepository extends JpaRepository<M4sllTpComprom
         value = "select * from sll.m4sll_tp_compromis where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpCompromis> findM4sllTpCompromisByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpCompromis> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

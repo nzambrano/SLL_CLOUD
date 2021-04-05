@@ -19,7 +19,7 @@ public interface M4sllTpIdentificRepository extends JpaRepository<M4sllTpIdentif
         value = "select * from sll.m4sll_tp_identific where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpIdentific> findM4sllTpIdentificByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpIdentific> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

@@ -19,7 +19,7 @@ public interface M4sllTpLitigiosRepository extends JpaRepository<M4sllTpLitigios
         value = "select * from sll.m4sll_tp_litigios where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpLitigios> findM4sllTpLitigiosByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpLitigios> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

@@ -81,7 +81,7 @@ public class StdSubGeoDivResource {
     public ResponseEntity<List<StdSubGeoDiv>> getStdSubGeoDiv(@PathVariable("std_id_geo_div") String std_id_geo_div, @PathVariable("std_id_country") String std_id_country, @PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get StdSubGeoDiv : {}", std_id_geo_div + "|" + std_id_country + "|" + id_organization);
 
-        List<StdSubGeoDiv> StdSubGeoDivByInput = stdSubGeoDivRepository.findStdSubGeoDivByStdIdGeoDivStdIdCountryIdOrganization(std_id_geo_div, std_id_country, id_organization);
+        List<StdSubGeoDiv> StdSubGeoDivByInput = stdSubGeoDivRepository.findByStdIdGeoDivStdIdCountryIdOrganization(std_id_geo_div, std_id_country, id_organization);
         return ResponseEntity.ok().body(StdSubGeoDivByInput);
     }
 
@@ -101,7 +101,7 @@ public class StdSubGeoDivResource {
       @DeleteMapping("/std_sub_geo_div/{std_id_geo_div}/{std_id_country}/{id_organization}")
       public ResponseEntity<Void> deleteStdSubGeoDiv(@PathVariable("std_id_geo_div") String std_id_geo_div, @PathVariable("std_id_country") String std_id_country, @PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete std_sub_geo_div : {}", std_id_geo_div + "|" + std_id_country + "|" + id_organization);
-        List<StdSubGeoDiv> StdSubGeoDivByInput = stdSubGeoDivRepository.findStdSubGeoDivByStdIdGeoDivStdIdCountryIdOrganization(std_id_geo_div, std_id_country, id_organization);
+        List<StdSubGeoDiv> StdSubGeoDivByInput = stdSubGeoDivRepository.findByStdIdGeoDivStdIdCountryIdOrganization(std_id_geo_div, std_id_country, id_organization);
 
         stdSubGeoDivRepository.deleteAll(StdSubGeoDivByInput);
         return ResponseEntity

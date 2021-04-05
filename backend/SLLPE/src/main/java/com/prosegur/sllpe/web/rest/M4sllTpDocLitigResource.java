@@ -79,7 +79,7 @@ public class M4sllTpDocLitigResource {
     public ResponseEntity<List<M4sllTpDocLitig>> getM4sllTpDocLitig(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllTpDocLitig : {}", id_organization);
 
-        List<M4sllTpDocLitig> M4sllTpDocLitigByInput = m4sllTpDocLitigRepository.findM4sllTpDocLitigByIdOrganization(id_organization);
+        List<M4sllTpDocLitig> M4sllTpDocLitigByInput = m4sllTpDocLitigRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllTpDocLitigByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllTpDocLitigResource {
       @DeleteMapping("/m4sll_tp_doc_litig/{id_organization}")
       public ResponseEntity<Void> deleteM4sllTpDocLitig(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_tp_doc_litig : {}", id_organization);
-        List<M4sllTpDocLitig> M4sllTpDocLitigByInput = m4sllTpDocLitigRepository.findM4sllTpDocLitigByIdOrganization(id_organization);
+        List<M4sllTpDocLitig> M4sllTpDocLitigByInput = m4sllTpDocLitigRepository.findByIdOrganization(id_organization);
 
         m4sllTpDocLitigRepository.deleteAll(M4sllTpDocLitigByInput);
         return ResponseEntity

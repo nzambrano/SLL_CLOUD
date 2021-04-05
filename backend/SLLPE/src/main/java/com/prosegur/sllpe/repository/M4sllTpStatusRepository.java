@@ -19,7 +19,7 @@ public interface M4sllTpStatusRepository extends JpaRepository<M4sllTpStatus, M4
         value = "select * from sll.m4sll_tp_status where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpStatus> findM4sllTpStatusByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpStatus> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

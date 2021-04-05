@@ -19,7 +19,7 @@ public interface M4sllTpRecurrenRepository extends JpaRepository<M4sllTpRecurren
         value = "select * from sll.m4sll_tp_recurren where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpRecurren> findM4sllTpRecurrenByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpRecurren> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

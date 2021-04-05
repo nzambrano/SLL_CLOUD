@@ -19,7 +19,7 @@ public interface StdGeoPlaceRepository extends JpaRepository<StdGeoPlace, StdGeo
         value = "select * from sll.std_geo_place where std_id_sub_geo_div = :std_id_sub_geo_div and std_id_geo_div = :std_id_geo_div and std_id_country = :std_id_country and id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<StdGeoPlace> findStdGeoPlaceByStdIdSubGeoDivStdIdGeoDivStdIdCountryIdOrganization(@Param("std_id_sub_geo_div") String std_id_sub_geo_div, @Param("std_id_geo_div") String std_id_geo_div, @Param("std_id_country") String std_id_country, @Param("id_organization") String id_organization);
+    public List<StdGeoPlace> findByStdIdSubGeoDivStdIdGeoDivStdIdCountryIdOrganization(@Param("std_id_sub_geo_div") String std_id_sub_geo_div, @Param("std_id_geo_div") String std_id_geo_div, @Param("std_id_country") String std_id_country, @Param("id_organization") String id_organization);
 
 
 }

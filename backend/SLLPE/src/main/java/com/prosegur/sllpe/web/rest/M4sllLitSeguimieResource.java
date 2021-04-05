@@ -80,7 +80,7 @@ public class M4sllLitSeguimieResource {
     public ResponseEntity<List<M4sllLitSeguimie>> getM4sllLitSeguimie(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllLitSeguimie : {}", lit_id_litigio + "|" + id_organization);
 
-        List<M4sllLitSeguimie> M4sllLitSeguimieByInput = m4sllLitSeguimieRepository.findM4sllLitSeguimieByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
+        List<M4sllLitSeguimie> M4sllLitSeguimieByInput = m4sllLitSeguimieRepository.findByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
         return ResponseEntity.ok().body(M4sllLitSeguimieByInput);
     }
 
@@ -88,7 +88,7 @@ public class M4sllLitSeguimieResource {
     public ResponseEntity<List<M4sllLitSeguimie>> getM4sllLitSeguimie(@PathVariable("lit_id_litigio") String lit_id_litigio) {
         log.debug("REST request to get M4sllLitSeguimie : {}", lit_id_litigio);
 
-        List<M4sllLitSeguimie> M4sllLitSeguimieByInput = m4sllLitSeguimieRepository.findM4sllLitSeguimieByLitIdLitigio(lit_id_litigio);
+        List<M4sllLitSeguimie> M4sllLitSeguimieByInput = m4sllLitSeguimieRepository.findByLitIdLitigio(lit_id_litigio);
         return ResponseEntity.ok().body(M4sllLitSeguimieByInput);
     }
 
@@ -107,7 +107,7 @@ public class M4sllLitSeguimieResource {
       @DeleteMapping("/m4sll_lit_seguimie/{lit_id_litigio}/{id_organization}")
       public ResponseEntity<Void> deleteM4sllLitSeguimie(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_lit_seguimie : {}", lit_id_litigio + "|" + id_organization);
-        List<M4sllLitSeguimie> M4sllLitSeguimieByInput = m4sllLitSeguimieRepository.findM4sllLitSeguimieByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
+        List<M4sllLitSeguimie> M4sllLitSeguimieByInput = m4sllLitSeguimieRepository.findByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
 
         m4sllLitSeguimieRepository.deleteAll(M4sllLitSeguimieByInput);
         return ResponseEntity

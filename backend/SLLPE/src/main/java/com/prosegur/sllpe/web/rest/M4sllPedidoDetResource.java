@@ -81,7 +81,7 @@ public class M4sllPedidoDetResource {
     public ResponseEntity<List<M4sllPedidoDet>> getM4sllPedidoDet(@PathVariable("tpe_id_pedido") String tpe_id_pedido, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllPedidoDet : {}", tpe_id_pedido + "|" + lit_id_litigio + "|" + id_organization);
 
-        List<M4sllPedidoDet> M4sllPedidoDetByInput = m4sllPedidoDetRepository.findM4sllPedidoDetByTpeIdPedidoLitIdLitigioIdOrganization(tpe_id_pedido, lit_id_litigio, id_organization);
+        List<M4sllPedidoDet> M4sllPedidoDetByInput = m4sllPedidoDetRepository.findByTpeIdPedidoLitIdLitigioIdOrganization(tpe_id_pedido, lit_id_litigio, id_organization);
         return ResponseEntity.ok().body(M4sllPedidoDetByInput);
     }
 
@@ -89,7 +89,7 @@ public class M4sllPedidoDetResource {
     public ResponseEntity<List<M4sllPedidoDet>> getM4sllPedidoDet(@PathVariable("tpe_id_pedido") String tpe_id_pedido, @PathVariable("lit_id_litigio") String lit_id_litigio) {
         log.debug("REST request to get M4sllPedidoDet : {}", tpe_id_pedido + "|" + lit_id_litigio);
 
-        List<M4sllPedidoDet> M4sllPedidoDetByInput = m4sllPedidoDetRepository.findM4sllPedidoDetByTpeIdPedidoLitIdLitigio(tpe_id_pedido, lit_id_litigio);
+        List<M4sllPedidoDet> M4sllPedidoDetByInput = m4sllPedidoDetRepository.findByTpeIdPedidoLitIdLitigio(tpe_id_pedido, lit_id_litigio);
         return ResponseEntity.ok().body(M4sllPedidoDetByInput);
     }
 
@@ -108,7 +108,7 @@ public class M4sllPedidoDetResource {
       @DeleteMapping("/m4sll_pedido_det/{tpe_id_pedido}/{lit_id_litigio}/{id_organization}")
       public ResponseEntity<Void> deleteM4sllPedidoDet(@PathVariable("tpe_id_pedido") String tpe_id_pedido, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_pedido_det : {}", tpe_id_pedido + "|" + lit_id_litigio + "|" + id_organization);
-        List<M4sllPedidoDet> M4sllPedidoDetByInput = m4sllPedidoDetRepository.findM4sllPedidoDetByTpeIdPedidoLitIdLitigioIdOrganization(tpe_id_pedido, lit_id_litigio, id_organization);
+        List<M4sllPedidoDet> M4sllPedidoDetByInput = m4sllPedidoDetRepository.findByTpeIdPedidoLitIdLitigioIdOrganization(tpe_id_pedido, lit_id_litigio, id_organization);
 
         m4sllPedidoDetRepository.deleteAll(M4sllPedidoDetByInput);
         return ResponseEntity

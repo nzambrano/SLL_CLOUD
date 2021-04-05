@@ -19,7 +19,7 @@ public interface M4sllTpAutorReuRepository extends JpaRepository<M4sllTpAutorReu
         value = "select * from sll.m4sll_tp_autor_reu where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpAutorReu> findM4sllTpAutorReuByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpAutorReu> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

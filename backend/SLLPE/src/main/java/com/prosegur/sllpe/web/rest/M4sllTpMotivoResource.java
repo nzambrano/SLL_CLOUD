@@ -79,7 +79,7 @@ public class M4sllTpMotivoResource {
     public ResponseEntity<List<M4sllTpMotivo>> getM4sllTpMotivo(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllTpMotivo : {}", id_organization);
 
-        List<M4sllTpMotivo> M4sllTpMotivoByInput = m4sllTpMotivoRepository.findM4sllTpMotivoByIdOrganization(id_organization);
+        List<M4sllTpMotivo> M4sllTpMotivoByInput = m4sllTpMotivoRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllTpMotivoByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllTpMotivoResource {
       @DeleteMapping("/m4sll_tp_motivo/{id_organization}")
       public ResponseEntity<Void> deleteM4sllTpMotivo(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_tp_motivo : {}", id_organization);
-        List<M4sllTpMotivo> M4sllTpMotivoByInput = m4sllTpMotivoRepository.findM4sllTpMotivoByIdOrganization(id_organization);
+        List<M4sllTpMotivo> M4sllTpMotivoByInput = m4sllTpMotivoRepository.findByIdOrganization(id_organization);
 
         m4sllTpMotivoRepository.deleteAll(M4sllTpMotivoByInput);
         return ResponseEntity

@@ -82,7 +82,7 @@ public class StdGeoPlaceResource {
     public ResponseEntity<List<StdGeoPlace>> getStdGeoPlace(@PathVariable("std_id_sub_geo_div") String std_id_sub_geo_div, @PathVariable("std_id_geo_div") String std_id_geo_div, @PathVariable("std_id_country") String std_id_country, @PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get StdGeoPlace : {}", std_id_sub_geo_div + "|" + std_id_geo_div + "|" + std_id_country + "|" + id_organization);
 
-        List<StdGeoPlace> StdGeoPlaceByInput = stdGeoPlaceRepository.findStdGeoPlaceByStdIdSubGeoDivStdIdGeoDivStdIdCountryIdOrganization(std_id_sub_geo_div, std_id_geo_div, std_id_country, id_organization);
+        List<StdGeoPlace> StdGeoPlaceByInput = stdGeoPlaceRepository.findByStdIdSubGeoDivStdIdGeoDivStdIdCountryIdOrganization(std_id_sub_geo_div, std_id_geo_div, std_id_country, id_organization);
         return ResponseEntity.ok().body(StdGeoPlaceByInput);
     }
 
@@ -102,7 +102,7 @@ public class StdGeoPlaceResource {
       @DeleteMapping("/std_geo_place/{std_id_sub_geo_div}/{std_id_geo_div}/{std_id_country}/{id_organization}")
       public ResponseEntity<Void> deleteStdGeoPlace(@PathVariable("std_id_sub_geo_div") String std_id_sub_geo_div, @PathVariable("std_id_geo_div") String std_id_geo_div, @PathVariable("std_id_country") String std_id_country, @PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete std_geo_place : {}", std_id_sub_geo_div + "|" + std_id_geo_div + "|" + std_id_country + "|" + id_organization);
-        List<StdGeoPlace> StdGeoPlaceByInput = stdGeoPlaceRepository.findStdGeoPlaceByStdIdSubGeoDivStdIdGeoDivStdIdCountryIdOrganization(std_id_sub_geo_div, std_id_geo_div, std_id_country, id_organization);
+        List<StdGeoPlace> StdGeoPlaceByInput = stdGeoPlaceRepository.findByStdIdSubGeoDivStdIdGeoDivStdIdCountryIdOrganization(std_id_sub_geo_div, std_id_geo_div, std_id_country, id_organization);
 
         stdGeoPlaceRepository.deleteAll(StdGeoPlaceByInput);
         return ResponseEntity

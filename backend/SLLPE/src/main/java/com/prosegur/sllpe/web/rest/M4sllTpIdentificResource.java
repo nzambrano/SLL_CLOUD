@@ -79,7 +79,7 @@ public class M4sllTpIdentificResource {
     public ResponseEntity<List<M4sllTpIdentific>> getM4sllTpIdentific(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllTpIdentific : {}", id_organization);
 
-        List<M4sllTpIdentific> M4sllTpIdentificByInput = m4sllTpIdentificRepository.findM4sllTpIdentificByIdOrganization(id_organization);
+        List<M4sllTpIdentific> M4sllTpIdentificByInput = m4sllTpIdentificRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllTpIdentificByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllTpIdentificResource {
       @DeleteMapping("/m4sll_tp_identific/{id_organization}")
       public ResponseEntity<Void> deleteM4sllTpIdentific(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_tp_identific : {}", id_organization);
-        List<M4sllTpIdentific> M4sllTpIdentificByInput = m4sllTpIdentificRepository.findM4sllTpIdentificByIdOrganization(id_organization);
+        List<M4sllTpIdentific> M4sllTpIdentificByInput = m4sllTpIdentificRepository.findByIdOrganization(id_organization);
 
         m4sllTpIdentificRepository.deleteAll(M4sllTpIdentificByInput);
         return ResponseEntity
