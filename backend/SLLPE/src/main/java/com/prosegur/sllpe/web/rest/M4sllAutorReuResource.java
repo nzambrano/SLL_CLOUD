@@ -5,7 +5,7 @@ import com.prosegur.sllpe.domain.M4sllAutorReuId;
 import com.prosegur.sllpe.domain.SllVwAutorReu;
 import com.prosegur.sllpe.repository.M4sllAutorReuRepository;
 import com.prosegur.sllpe.repository.SllVwAutorReuRepository;
-import com.prosegur.sllpe.service.AutorReuServices;
+import com.prosegur.sllpe.service.M4sllAutorReuServices;
 import com.prosegur.sllpe.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -51,7 +51,7 @@ public class M4sllAutorReuResource {
     throws URISyntaxException {
         log.debug("REST request to create m4sll_autor_reu : {}", m4sll_autor_reu);
         M4sllAutorReuId id = new M4sllAutorReuId();
-        AutorReuServices autorReuServices = new AutorReuServices(m4sllAutorReuRepository);
+        M4sllAutorReuServices autorReuServices = new M4sllAutorReuServices(m4sllAutorReuRepository);
         Long id_aurSecuencia = autorReuServices.UltimaSecuencia(m4sll_autor_reu);
 
         id.setAurSecuencia(id_aurSecuencia);

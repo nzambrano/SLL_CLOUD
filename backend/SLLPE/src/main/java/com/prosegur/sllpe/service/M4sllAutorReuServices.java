@@ -10,11 +10,11 @@ import com.prosegur.sllpe.repository.M4sllAutorReuRepository;
 @Service
 @Transactional
 
-public class AutorReuServices {
+public class M4sllAutorReuServices {
 
     private final M4sllAutorReuRepository M4sllAutorReuRepository;
 
-    public AutorReuServices(M4sllAutorReuRepository m4ccoLlPagosRepository) {
+    public M4sllAutorReuServices(M4sllAutorReuRepository m4ccoLlPagosRepository) {
         this.M4sllAutorReuRepository = m4ccoLlPagosRepository;
     }
 

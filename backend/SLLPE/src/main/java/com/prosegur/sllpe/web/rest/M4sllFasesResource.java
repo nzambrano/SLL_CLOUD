@@ -5,7 +5,7 @@ import com.prosegur.sllpe.domain.M4sllFasesId;
 import com.prosegur.sllpe.domain.M4sllFases;
 import com.prosegur.sllpe.domain.M4sllFasesId;
 import com.prosegur.sllpe.repository.M4sllFasesRepository;
-import com.prosegur.sllpe.service.AutorReuServices;
+import com.prosegur.sllpe.service.M4sllAutorReuServices;
 import com.prosegur.sllpe.service.secuencias.FasesServices;
 
 import com.prosegur.sllpe.web.rest.errors.BadRequestAlertException;
