@@ -24,7 +24,6 @@ public class StdCountryResource {
 
     private final Logger log = LoggerFactory.getLogger(StdCountryResource.class);
     private static final String ENTITY_NAME = "sllpeStdCountry";
-
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
