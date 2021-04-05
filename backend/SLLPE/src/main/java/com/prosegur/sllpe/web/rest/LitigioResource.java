@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prosegur.sllpe.domain.M4sllLitigiosId;
-import com.prosegur.sllpe.repository.M4sllAutorReuRepository;
+
 import com.prosegur.sllpe.repository.M4sllFasesRepository;
 import com.prosegur.sllpe.repository.M4sllLitigiosRepository;
 import com.prosegur.sllpe.repository.M4sllPedidosRepository;
 import com.prosegur.sllpe.repository.M4sllProvisionesRepository;
+import com.prosegur.sllpe.repository.SllVwAutorReuRepository;
 
 
 
@@ -26,7 +27,7 @@ import com.prosegur.sllpe.repository.M4sllProvisionesRepository;
  * FooResource controller
  */
 @RestController
-@RequestMapping("/api/maestros")
+@RequestMapping("/api/litigio")
 public class LitigioResource {
 
 	private final Logger log = LoggerFactory.getLogger(LitigioResource.class);
@@ -34,14 +35,14 @@ public class LitigioResource {
 	private M4sllLitigiosRepository litigiosRepository;
 	private M4sllPedidosRepository pedidosRepository;
 	private M4sllFasesRepository fasesRepository;
-	private M4sllAutorReuRepository autorReuRepository;
+	private SllVwAutorReuRepository sllVwAutorReuRepository;
 	private M4sllProvisionesRepository provisionesRepository;
 	
 	private  String idOrganization = "0050";
 	
 	public LitigioResource(
 			M4sllLitigiosRepository litigiosRepository,
-			M4sllAutorReuRepository autorReuRepository,
+			SllVwAutorReuRepository sllVwAutorReuRepository,
 			M4sllPedidosRepository pedidosRepository,
 			M4sllFasesRepository fasesRepository,
 			M4sllProvisionesRepository provisionesRepository
@@ -50,7 +51,7 @@ public class LitigioResource {
 	) {
 
 		this.litigiosRepository = litigiosRepository;
-		this.autorReuRepository = autorReuRepository;
+		this.sllVwAutorReuRepository = sllVwAutorReuRepository;
 		this.pedidosRepository = pedidosRepository;
 		this.fasesRepository = fasesRepository;
 		this.provisionesRepository = provisionesRepository;
@@ -63,7 +64,7 @@ public class LitigioResource {
 	 * 
 	 * @throws JSONException
 	 */
-	@GetMapping("/litigio/{id_litIdLitigio}")
+	@GetMapping("/{id_litIdLitigio}")
 	public ResponseEntity<Object> listar(
 				@PathVariable("id_litIdLitigio") String litIdLitigio
 			) {
@@ -74,7 +75,7 @@ public class LitigioResource {
         id.setLitIdLitigio(litIdLitigio);
         id.setIdOrganization(idOrganization);
 		map.put("EXPEDIENTE", litigiosRepository.findById(id));
-		map.put("SLL_AUTOR_REU", autorReuRepository.findAllAutorReuByLitigio(idOrganization, litIdLitigio));
+		map.put("SLL_AUTOR_REU", sllVwAutorReuRepository.findAllVwAutorReuByLitigio(litIdLitigio));
 		map.put("PEDIDOS", pedidosRepository.findPedidosByLitigio(idOrganization, litIdLitigio));
 		map.put("SLL_FASES", fasesRepository.getFases(idOrganization, litIdLitigio));
 		map.put("SLL_PROV", provisionesRepository.getProvisionByLitigio(idOrganization, litIdLitigio));

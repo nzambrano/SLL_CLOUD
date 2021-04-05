@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.prosegur.sllpe.domain.M4sllAutorReu;
 import com.prosegur.sllpe.domain.M4sllAutorReuId;
+import com.prosegur.sllpe.domain.SllVwAutorReu;
 
 
 public interface M4sllAutorReuRepository extends JpaRepository<M4sllAutorReu, M4sllAutorReuId> {
@@ -28,6 +29,8 @@ public interface M4sllAutorReuRepository extends JpaRepository<M4sllAutorReu, M4
 		    nativeQuery = true
 		  )
 	public List<M4sllAutorReu> findAllAutorReuByLitigio(@Param("id_organization") String id_organization, @Param("lit_id_litigio") String lit_id_litigio);
+
+
 
 
 

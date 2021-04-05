@@ -47,13 +47,13 @@ public class MaestrosResource {
 	 * 
 	 * @throws JSONException
 	 */
-	@GetMapping("/catalogos")
+	@GetMapping("/listarMaestros")
 	public ResponseEntity<Object> listar() {
 		List<HashMap<String, Object>> entities = new ArrayList<HashMap<String, Object>>();
 		HashMap<String, Object> map = new HashMap<>();
 			// map.put("litigio", litigiosRepository.findAll());
-		map.put("abogados", abogadosRepository.findAbogados("0050"));
-		map.put("negocios", negociosRepository.findNegocioByPais("0050"));
+		map.put("M4SLL_MT_ABOGADOS", abogadosRepository.findAbogados("0050"));
+		map.put("M4SLL_NEGOCIOS", negociosRepository.findNegocioByPais("0050"));
 
 			
 			

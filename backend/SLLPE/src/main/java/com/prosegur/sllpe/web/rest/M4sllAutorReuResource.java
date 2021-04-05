@@ -2,7 +2,9 @@ package com.prosegur.sllpe.web.rest;
 
 import com.prosegur.sllpe.domain.M4sllAutorReu;
 import com.prosegur.sllpe.domain.M4sllAutorReuId;
+import com.prosegur.sllpe.domain.SllVwAutorReu;
 import com.prosegur.sllpe.repository.M4sllAutorReuRepository;
+import com.prosegur.sllpe.repository.SllVwAutorReuRepository;
 import com.prosegur.sllpe.service.AutorReuServices;
 import com.prosegur.sllpe.web.rest.errors.BadRequestAlertException;
 
@@ -37,9 +39,11 @@ public class M4sllAutorReuResource {
     private String applicationName;
 
     private M4sllAutorReuRepository m4sllAutorReuRepository;
-
-    public M4sllAutorReuResource(M4sllAutorReuRepository m4sllAutorReuRepository) {
+    private SllVwAutorReuRepository sllVwAutorReuRepository;
+    
+    public M4sllAutorReuResource(M4sllAutorReuRepository m4sllAutorReuRepository, SllVwAutorReuRepository sllVwAutorReuRepository) {
         this.m4sllAutorReuRepository = m4sllAutorReuRepository;
+        this.sllVwAutorReuRepository = sllVwAutorReuRepository;
     }
 
     @PostMapping("/m4sll_autor_reu")
@@ -98,6 +102,19 @@ public class M4sllAutorReuResource {
 
                                                );
         return ResponseEntity.ok().body(M4sllAutorReuAll);
+    }
+    
+    @GetMapping("/sll_autor_reu/{lit_id_litigio}")
+    public ResponseEntity<List<SllVwAutorReu>> getVwAutoresByLitigio(        
+        @PathVariable("lit_id_litigio") String lit_id_litigio        
+
+    ) {
+        log.debug("REST request to get ALL M4sllAutorReu : {}");
+
+        List<SllVwAutorReu> SllvWAutorReuAll = sllVwAutorReuRepository.findAllVwAutorReuByLitigio(                
+                lit_id_litigio
+        );
+        return ResponseEntity.ok().body(SllvWAutorReuAll);
     }
 
     /*
