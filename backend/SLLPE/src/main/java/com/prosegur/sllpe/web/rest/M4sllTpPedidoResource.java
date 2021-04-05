@@ -79,7 +79,7 @@ public class M4sllTpPedidoResource {
     public ResponseEntity<List<M4sllTpPedido>> getM4sllTpPedido(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllTpPedido : {}", id_organization);
 
-        List<M4sllTpPedido> M4sllTpPedidoByInput = m4sllTpPedidoRepository.findM4sllTpPedidoByIdOrganization(id_organization);
+        List<M4sllTpPedido> M4sllTpPedidoByInput = m4sllTpPedidoRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllTpPedidoByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllTpPedidoResource {
       @DeleteMapping("/m4sll_tp_pedido/{id_organization}")
       public ResponseEntity<Void> deleteM4sllTpPedido(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_tp_pedido : {}", id_organization);
-        List<M4sllTpPedido> M4sllTpPedidoByInput = m4sllTpPedidoRepository.findM4sllTpPedidoByIdOrganization(id_organization);
+        List<M4sllTpPedido> M4sllTpPedidoByInput = m4sllTpPedidoRepository.findByIdOrganization(id_organization);
 
         m4sllTpPedidoRepository.deleteAll(M4sllTpPedidoByInput);
         return ResponseEntity

@@ -79,7 +79,7 @@ public class M4sllEstudioJurResource {
     public ResponseEntity<List<M4sllEstudioJur>> getM4sllEstudioJur(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllEstudioJur : {}", id_organization);
 
-        List<M4sllEstudioJur> M4sllEstudioJurByInput = m4sllEstudioJurRepository.findM4sllEstudioJurByIdOrganization(id_organization);
+        List<M4sllEstudioJur> M4sllEstudioJurByInput = m4sllEstudioJurRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllEstudioJurByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllEstudioJurResource {
       @DeleteMapping("/m4sll_estudio_jur/{id_organization}")
       public ResponseEntity<Void> deleteM4sllEstudioJur(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_estudio_jur : {}", id_organization);
-        List<M4sllEstudioJur> M4sllEstudioJurByInput = m4sllEstudioJurRepository.findM4sllEstudioJurByIdOrganization(id_organization);
+        List<M4sllEstudioJur> M4sllEstudioJurByInput = m4sllEstudioJurRepository.findByIdOrganization(id_organization);
 
         m4sllEstudioJurRepository.deleteAll(M4sllEstudioJurByInput);
         return ResponseEntity

@@ -19,7 +19,7 @@ public interface M4sllNegociosRepository extends JpaRepository<M4sllNegocios, M4
         value = "select * from sll.m4sll_negocios where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllNegocios> findM4sllNegociosByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllNegocios> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

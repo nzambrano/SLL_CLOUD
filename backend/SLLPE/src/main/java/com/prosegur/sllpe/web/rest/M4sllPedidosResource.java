@@ -84,7 +84,7 @@ public class M4sllPedidosResource {
     public ResponseEntity<List<M4sllPedidos>> getM4sllPedidos(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
         log.debug("REST request to get M4sllPedidos : {}", id_organization + "|" + lit_id_litigio);
 
-        List<M4sllPedidos> M4sllPedidosByInput = m4sllPedidosRepository.findM4sllPedidosByIdOrganizationLitIdLitigio(id_organization, lit_id_litigio);
+        List<M4sllPedidos> M4sllPedidosByInput = m4sllPedidosRepository.findByIdOrganizationLitIdLitigio(id_organization, lit_id_litigio);
         return ResponseEntity.ok().body(M4sllPedidosByInput);
     }
 

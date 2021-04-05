@@ -67,20 +67,19 @@ public class M4sllMtAbogadosResource {
                .body(result);
     }
 
-    /*
     @GetMapping("/m4sll_mt_abogados")
     public ResponseEntity<List<M4sllMtAbogados>> getAllM4sllMtAbogados() {
         log.debug("REST request to get ALL M4sllMtAbogados : {}");
 
         List<M4sllMtAbogados> M4sllMtAbogadosAll = m4sllMtAbogadosRepository.findAll();
         return ResponseEntity.ok().body(M4sllMtAbogadosAll);
-    }*/
+    }
 
     @GetMapping("/m4sll_mt_abogados/{id_organization}")
     public ResponseEntity<List<M4sllMtAbogados>> getM4sllMtAbogados(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllMtAbogados : {}", id_organization);
 
-        List<M4sllMtAbogados> M4sllMtAbogadosByInput = m4sllMtAbogadosRepository.findM4sllMtAbogadosByIdOrganization(id_organization);
+        List<M4sllMtAbogados> M4sllMtAbogadosByInput = m4sllMtAbogadosRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllMtAbogadosByInput);
     }
 
@@ -88,7 +87,7 @@ public class M4sllMtAbogadosResource {
     public ResponseEntity<List<M4sllMtAbogados>> getM4sllMtAbogados(@PathVariable("id_organization") String id_organization, @PathVariable("mab_secuencia") Long mab_secuencia, @PathVariable("mab_chk_int") String mab_chk_int) {
         log.debug("REST request to get M4sllMtAbogados : {}", id_organization + "|" + mab_secuencia + "|" + mab_chk_int);
 
-        List<M4sllMtAbogados> M4sllMtAbogadosByInput = m4sllMtAbogadosRepository.findM4sllMtAbogadosByIdOrganizationMabSecuenciaMabChkInt(id_organization, mab_secuencia, mab_chk_int);
+        List<M4sllMtAbogados> M4sllMtAbogadosByInput = m4sllMtAbogadosRepository.findByIdOrganizationMabSecuenciaMabChkInt(id_organization, mab_secuencia, mab_chk_int);
         return ResponseEntity.ok().body(M4sllMtAbogadosByInput);
     }
 
@@ -107,7 +106,7 @@ public class M4sllMtAbogadosResource {
       @DeleteMapping("/m4sll_mt_abogados/{id_organization}")
       public ResponseEntity<Void> deleteM4sllMtAbogados(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_mt_abogados : {}", id_organization);
-        List<M4sllMtAbogados> M4sllMtAbogadosByInput = m4sllMtAbogadosRepository.findM4sllMtAbogadosByIdOrganization(id_organization);
+        List<M4sllMtAbogados> M4sllMtAbogadosByInput = m4sllMtAbogadosRepository.findByIdOrganization(id_organization);
 
         m4sllMtAbogadosRepository.deleteAll(M4sllMtAbogadosByInput);
         return ResponseEntity

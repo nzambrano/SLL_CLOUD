@@ -19,7 +19,7 @@ public interface M4sllTpPedidoRepository extends JpaRepository<M4sllTpPedido, M4
         value = "select * from sll.m4sll_tp_pedido where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpPedido> findM4sllTpPedidoByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpPedido> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

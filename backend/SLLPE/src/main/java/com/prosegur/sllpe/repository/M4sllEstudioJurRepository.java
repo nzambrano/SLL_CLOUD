@@ -19,7 +19,7 @@ public interface M4sllEstudioJurRepository extends JpaRepository<M4sllEstudioJur
         value = "select * from sll.m4sll_estudio_jur where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllEstudioJur> findM4sllEstudioJurByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllEstudioJur> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

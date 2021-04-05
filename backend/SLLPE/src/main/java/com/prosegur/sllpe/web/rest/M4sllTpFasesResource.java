@@ -79,7 +79,7 @@ public class M4sllTpFasesResource {
     public ResponseEntity<List<M4sllTpFases>> getM4sllTpFases(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to get M4sllTpFases : {}", id_organization);
 
-        List<M4sllTpFases> M4sllTpFasesByInput = m4sllTpFasesRepository.findM4sllTpFasesByIdOrganization(id_organization);
+        List<M4sllTpFases> M4sllTpFasesByInput = m4sllTpFasesRepository.findByIdOrganization(id_organization);
         return ResponseEntity.ok().body(M4sllTpFasesByInput);
     }
 
@@ -99,7 +99,7 @@ public class M4sllTpFasesResource {
       @DeleteMapping("/m4sll_tp_fases/{id_organization}")
       public ResponseEntity<Void> deleteM4sllTpFases(@PathVariable("id_organization") String id_organization) {
         log.debug("REST request to delete m4sll_tp_fases : {}", id_organization);
-        List<M4sllTpFases> M4sllTpFasesByInput = m4sllTpFasesRepository.findM4sllTpFasesByIdOrganization(id_organization);
+        List<M4sllTpFases> M4sllTpFasesByInput = m4sllTpFasesRepository.findByIdOrganization(id_organization);
 
         m4sllTpFasesRepository.deleteAll(M4sllTpFasesByInput);
         return ResponseEntity

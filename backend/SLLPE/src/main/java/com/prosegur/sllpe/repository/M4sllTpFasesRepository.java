@@ -19,7 +19,7 @@ public interface M4sllTpFasesRepository extends JpaRepository<M4sllTpFases, M4sl
         value = "select * from sll.m4sll_tp_fases where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllTpFases> findM4sllTpFasesByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpFases> findByIdOrganization(@Param("id_organization") String id_organization);
 
 
 }

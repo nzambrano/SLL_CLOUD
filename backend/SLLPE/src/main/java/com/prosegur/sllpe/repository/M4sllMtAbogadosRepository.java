@@ -19,12 +19,12 @@ public interface M4sllMtAbogadosRepository extends JpaRepository<M4sllMtAbogados
         value = "select * from sll.m4sll_mt_abogados where id_organization = :id_organization",
         nativeQuery = true
     )
-    public List<M4sllMtAbogados> findM4sllMtAbogadosByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllMtAbogados> findByIdOrganization(@Param("id_organization") String id_organization);
 
     @Query(
         value = "select * from sll.m4sll_mt_abogados where id_organization = :id_organization and mab_secuencia = :mab_secuencia and mab_chk_int = :mab_chk_int",
         nativeQuery = true
     )
-    public List<M4sllMtAbogados> findM4sllMtAbogadosByIdOrganizationMabSecuenciaMabChkInt(@Param("id_organization") String id_organization, @Param("mab_secuencia") Long mab_secuencia, @Param("mab_chk_int") String mab_chk_int);
+    public List<M4sllMtAbogados> findByIdOrganizationMabSecuenciaMabChkInt(@Param("id_organization") String id_organization, @Param("mab_secuencia") Long mab_secuencia, @Param("mab_chk_int") String mab_chk_int);
 
 }
