@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.prosegur.sllpe.domain.StdLegEnt;
 import com.prosegur.sllpe.repository.M4sllMtAbogadosRepository;
 import com.prosegur.sllpe.repository.M4sllNegociosRepository;
+import com.prosegur.sllpe.repository.M4sllTpLitigiosRepository;
+import com.prosegur.sllpe.repository.StdLegEntRepository;
 
 
 /**
@@ -26,19 +29,25 @@ public class MaestrosResource {
 
     private final Logger log = LoggerFactory.getLogger(MaestrosResource.class);
 
-    private M4sllMtAbogadosRepository abogadosRepository;
-    private M4sllNegociosRepository negociosRepository;
+    private M4sllMtAbogadosRepository 	abogadosRepository;
+    private M4sllNegociosRepository 	negociosRepository;
+    private StdLegEntRepository 		legEntRepository;
+    private M4sllTpLitigiosRepository  	tpLitigiosRepository;
 
 
 
     public MaestrosResource(
-        M4sllMtAbogadosRepository abogadosRepository,
-        M4sllNegociosRepository negociosRepository
+        M4sllMtAbogadosRepository   abogadosRepository,
+        M4sllNegociosRepository 	negociosRepository,
+        StdLegEntRepository 	    legEntRepository,
+        M4sllTpLitigiosRepository   tpLitigiosRepository
 
     ) {
 
-        this.abogadosRepository = abogadosRepository;
-        this.negociosRepository = negociosRepository;
+        this.abogadosRepository 	= abogadosRepository;
+        this.negociosRepository 	= negociosRepository;
+        this.legEntRepository   	= legEntRepository;
+        this.tpLitigiosRepository 	= tpLitigiosRepository;
 
     }
 
@@ -54,8 +63,10 @@ public class MaestrosResource {
         // map.put("litigio", litigiosRepository.findAll());
         map.put("M4SLL_MT_ABOGADOS", abogadosRepository.findByIdOrganization("0050"));
         map.put("M4SLL_NEGOCIOS", negociosRepository.findByIdOrganization("0050"));
+        map.put("STD_LEG_ENT", legEntRepository.findAll());
+        map.put("M4SLL_TP_LITIGIOS", tpLitigiosRepository.findByIdOrganization("0050"));
 
-
+        
 
         entities.add(map);
         return new ResponseEntity<Object>(entities, HttpStatus.OK);
