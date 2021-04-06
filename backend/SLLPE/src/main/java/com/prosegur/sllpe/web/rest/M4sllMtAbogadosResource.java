@@ -91,6 +91,14 @@ public class M4sllMtAbogadosResource {
         return ResponseEntity.ok().body(M4sllMtAbogadosByInput);
     }
 
+    @GetMapping("/m4sll_mt_abogados/{id_organization}/{mab_chk_int}")
+    public ResponseEntity<List<M4sllMtAbogados>> getM4sllMtAbogados(@PathVariable("id_organization") String id_organization, @PathVariable("mab_chk_int") String mab_chk_int) {
+        log.debug("REST request to get M4sllMtAbogados : {}", id_organization + "|" + mab_chk_int);
+
+        List<M4sllMtAbogados> M4sllMtAbogadosByInput = m4sllMtAbogadosRepository.findByIdOrganizationMabChkInt(id_organization, mab_chk_int);
+        return ResponseEntity.ok().body(M4sllMtAbogadosByInput);
+    }
+
     /*
       @GetMapping("/m4sll_mt_abogados/{id_organization}/{mab_secuencia}")
       public ResponseEntity<M4sllMtAbogados> getM4sllMtAbogados(@PathVariable("id_organization") String id_organization, @PathVariable("mab_secuencia") Long mab_secuencia) {

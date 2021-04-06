@@ -11,7 +11,6 @@ import com.prosegur.sllpe.repository.M4sllMtoCodAltRepository;
 import com.prosegur.sllpe.repository.M4sllMtoRiesgosRepository;
 import com.prosegur.sllpe.repository.M4sllTpStatusRepository;
 import com.prosegur.sllpe.repository.M4sllTpAutorReuRepository;
-// import com.prosegur.sllpe.repository.UltimaPastaRepository;
 import com.prosegur.sllpe.repository.M4sllTpPedidoRepository;
 import com.prosegur.sllpe.repository.M4sllTpFasesRepository;
 import com.prosegur.sllpe.repository.M4sllTribunalesRepository;
@@ -59,7 +58,6 @@ public class MaestrosResource {
     private M4sllMtoRiesgosRepository       m4sllMtoRiesgosRepository;
     private M4sllTpStatusRepository         m4sllTpStatusRepository;
     private M4sllTpAutorReuRepository       m4sllTpAutorReuRepository;
-//   private UltimaPastaRepository           ultimaPastaRepository;
     private M4sllTpPedidoRepository         m4sllTpPedidoRepository;
     private M4sllTpFasesRepository          m4sllTpFasesRepository;
     private M4sllTribunalesRepository       m4sllTribunalesRepository;
@@ -87,7 +85,6 @@ public class MaestrosResource {
         M4sllMtoRiesgosRepository       m4sllMtoRiesgosRepository,
         M4sllTpStatusRepository         m4sllTpStatusRepository,
         M4sllTpAutorReuRepository       m4sllTpAutorReuRepository,
-        // UltimaPastaRepository           ultimaPastaRepository,
         M4sllTpPedidoRepository         m4sllTpPedidoRepository,
         M4sllTpFasesRepository          m4sllTpFasesRepository,
         M4sllTribunalesRepository       m4sllTribunalesRepository,
@@ -114,7 +111,6 @@ public class MaestrosResource {
         this.m4sllMtoRiesgosRepository     =  m4sllMtoRiesgosRepository;
         this.m4sllTpStatusRepository       =  m4sllTpStatusRepository;
         this.m4sllTpAutorReuRepository     =  m4sllTpAutorReuRepository;
-        // this.ultimaPastaRepository         =  ultimaPastaRepository;
         this.m4sllTpPedidoRepository       =  m4sllTpPedidoRepository;
         this.m4sllTpFasesRepository        =  m4sllTpFasesRepository;
         this.m4sllTribunalesRepository     =  m4sllTribunalesRepository;
@@ -144,14 +140,13 @@ public class MaestrosResource {
         map.put("M4SLL_NEGOCIOS",       m4sllNegociosRepository.findByIdOrganization("0050"));
         map.put("STD_LEG_ENT",          stdLegEntRepository.findAll());
         map.put("M4SLL_MT_ABOGADOS",    m4sllMtAbogadosRepository.findByIdOrganization("0050"));
-        // map.put("M4SLL_MT_ABOGADOSINT", m4sllMtAbogadosintRepository.findByIdOrganization("0050"));
-        // map.put("M4SLL_MT_ABOGADOSEXT", m4sllMtAbogadosextRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_MT_ABOGADOS",    m4sllMtAbogadosRepository.findByIdOrganizationMabChkInt("0050", "I"));
+        map.put("M4SLL_MT_ABOGADOS",    m4sllMtAbogadosRepository.findByIdOrganizationMabChkInt("0050","E"));
         map.put("M4SLL_ESTUDIO_JUR",    m4sllEstudioJurRepository.findByIdOrganization("0050"));
         map.put("M4SLL_MTO_COD_ALT",    m4sllMtoCodAltRepository.findByIdOrganization("0050"));
         map.put("M4SLL_MTO_RIESGOS",    m4sllMtoRiesgosRepository.findByIdOrganization("0050"));
         map.put("M4SLL_TP_STATUS",      m4sllTpStatusRepository.findByIdOrganization("0050"));
         map.put("M4SLL_TP_AUTOR_REU",   m4sllTpAutorReuRepository.findByIdOrganization("0050"));
-        // map.put("ULTIMA_PASTA",         ultimaPastaRepository.findByIdOrganization("0050"));
         map.put("M4SLL_TP_PEDIDO",      m4sllTpPedidoRepository.findByIdOrganization("0050"));
         map.put("M4SLL_TP_FASES",       m4sllTpFasesRepository.findByIdOrganization("0050"));
         map.put("M4SLL_TRIBUNALES",     m4sllTribunalesRepository.findByIdOrganization("0050"));
