@@ -8,18 +8,13 @@ import com.prosegur.sllpe.service.M4sllLitigiosServices;
 import com.prosegur.sllpe.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
-// import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-// import org.springframework.data.domain.Page;
-// import org.springframework.data.domain.Pageable;
-// import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-// import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -36,7 +31,7 @@ public class M4sllLitigiosResource {
     private static final String ENTITY_NAME = "sllpeM4sllLitigios";
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-    
+
     private String idOrganization = "0050";
 
     private M4sllLitigiosRepository m4sllLitigiosRepository;
@@ -51,14 +46,14 @@ public class M4sllLitigiosResource {
         log.debug("REST request to create m4sll_litigios : {}", m4sll_litigios);
         M4sllLitigiosServices litigiosService = new M4sllLitigiosServices(m4sllLitigiosRepository);
         String id = litigiosService.UltimaSecuencia(m4sll_litigios);
-        
+
         M4sllLitigiosId idLitigio = new M4sllLitigiosId();
         idLitigio.setLitIdLitigio(id);
         idLitigio.setIdOrganization(idOrganization);
-        
+
         m4sll_litigios.setId(idLitigio);
         M4sllLitigios result = m4sllLitigiosRepository.save(m4sll_litigios);
-        
+
         return ResponseEntity
                .created(new URI("/api/m4sll_litigios/" + result.getId())).headers(HeaderUtil
                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))

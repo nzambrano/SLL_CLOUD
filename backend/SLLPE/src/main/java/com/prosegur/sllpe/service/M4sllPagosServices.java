@@ -2,9 +2,7 @@ package com.prosegur.sllpe.service;
 
 import com.prosegur.sllpe.domain.M4sllPagos;
 import com.prosegur.sllpe.repository.M4sllPagosRepository;
-// import java.util.List;
 
-// import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
