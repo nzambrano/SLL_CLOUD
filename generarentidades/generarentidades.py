@@ -64,10 +64,11 @@ old_tbl_name_pascal_resource = old_tbl_name_pascal + "Resource.java"
 new_pks_not_sec_concat = sys.argv[3]
 new_pks_names_not_sec_lst = [
     pkc.split("|")[0] for pkc in new_pks_not_sec_concat.split(",")
-]
+] if new_pks_not_sec_concat else []
+
 new_pks_datatypes_not_sec_lst = [
     pkc.split("|")[1] for pkc in new_pks_not_sec_concat.split(",")
-]
+] if new_pks_not_sec_concat else []
 
 new_pks_sec_concat = sys.argv[4]
 new_pks_names_sec_lst = (
@@ -492,7 +493,7 @@ sep_str = ' + "|" + '
 end_str = ""
 
 repl_str = sep_str.join([stringcase.snakecase(pk)
-                        for pk in new_pks_names_not_sec_lst])
+                         for pk in new_pks_names_not_sec_lst])
 
 new_str = start_str + repl_str + end_str
 search_n_replace_lst.append((search_str, new_str))
@@ -516,7 +517,7 @@ sep_str = ", "
 end_str = ");"
 
 repl_str = sep_str.join([stringcase.snakecase(pk)
-                        for pk in new_pks_names_not_sec_lst])
+                         for pk in new_pks_names_not_sec_lst])
 
 new_str = start_str + repl_str + end_str
 search_n_replace_lst.append((search_str, new_str))
@@ -665,18 +666,17 @@ searchnreplace(dirs_lst, [(old_tbl_name_snake, new_tbl_name_snake)])
 # --recursive    For each directory in the command line, process all subdirectories recursively.
 # --suffix=none  Do not retain a backup of the original file. The original file is purged after it is formatted.
 
-for gen_file in dirs_lst:
-    subprocess.run(
-        [
-            os.path.join(a_style_path, "AStyle.exe"),
-            "--style=java",
-            "--recursive",
-            "--suffix=none",
-            f"{new_tbl_name_pascal}*.java",
-        ],
-        cwd=main_path,
-        shell=True,
-    )
+subprocess.run(
+    [
+        os.path.join(a_style_path, "AStyle.exe"),
+        "--style=java",
+        "--recursive",
+        "--suffix=none",
+        f"{new_tbl_name_pascal}*.java",
+    ],
+    cwd=main_path,
+    shell=True,
+)
 
 # Volver al estado original archivos cambiados por nuestro script
 
