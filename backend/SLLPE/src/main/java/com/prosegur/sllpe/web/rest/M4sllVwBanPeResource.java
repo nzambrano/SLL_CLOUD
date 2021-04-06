@@ -1,15 +1,13 @@
 package com.prosegur.sllpe.web.rest;
 
-import com.prosegur.sllpe.domain.M4sllVwBanPe;
-import com.prosegur.sllpe.domain.M4sllVwBanPeId;
-import com.prosegur.sllpe.repository.M4sllVwBanPeRepository;
+
 import com.prosegur.sllpe.domain.M4sllVwBanPeConsulta;
 import com.prosegur.sllpe.repository.M4sllVwBanPeConsultaRepository;
-import com.prosegur.sllpe.web.rest.errors.BadRequestAlertException;
 
-import io.github.jhipster.web.util.HeaderUtil;
+
+
 import io.github.jhipster.web.util.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,10 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api")
