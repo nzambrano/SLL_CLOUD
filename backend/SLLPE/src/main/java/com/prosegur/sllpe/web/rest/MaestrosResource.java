@@ -4,8 +4,6 @@ import com.prosegur.sllpe.repository.StdGeoDivRepository;
 import com.prosegur.sllpe.repository.M4sllNegociosRepository;
 import com.prosegur.sllpe.repository.StdLegEntRepository;
 import com.prosegur.sllpe.repository.M4sllMtAbogadosRepository;
-// import com.prosegur.sllpe.repository.M4sllMtAbogadosintRepository;
-// import com.prosegur.sllpe.repository.M4sllMtAbogadosextRepository;
 import com.prosegur.sllpe.repository.M4sllEstudioJurRepository;
 import com.prosegur.sllpe.repository.M4sllMtoCodAltRepository;
 import com.prosegur.sllpe.repository.M4sllMtoRiesgosRepository;
@@ -51,8 +49,6 @@ public class MaestrosResource {
     private M4sllNegociosRepository         m4sllNegociosRepository;
     private StdLegEntRepository             stdLegEntRepository;
     private M4sllMtAbogadosRepository       m4sllMtAbogadosRepository;
-//   private M4sllMtAbogadosintRepository    m4sllMtAbogadosintRepository;
-//   private M4sllMtAbogadosextRepository    m4sllMtAbogadosextRepository;
     private M4sllEstudioJurRepository       m4sllEstudioJurRepository;
     private M4sllMtoCodAltRepository        m4sllMtoCodAltRepository;
     private M4sllMtoRiesgosRepository       m4sllMtoRiesgosRepository;
@@ -78,8 +74,6 @@ public class MaestrosResource {
         M4sllNegociosRepository         m4sllNegociosRepository,
         StdLegEntRepository             stdLegEntRepository,
         M4sllMtAbogadosRepository       m4sllMtAbogadosRepository,
-        // M4sllMtAbogadosintRepository    m4sllMtAbogadosintRepository,
-        // M4sllMtAbogadosextRepository    m4sllMtAbogadosextRepository,
         M4sllEstudioJurRepository       m4sllEstudioJurRepository,
         M4sllMtoCodAltRepository        m4sllMtoCodAltRepository,
         M4sllMtoRiesgosRepository       m4sllMtoRiesgosRepository,
@@ -104,8 +98,6 @@ public class MaestrosResource {
         this.m4sllNegociosRepository       =  m4sllNegociosRepository;
         this.stdLegEntRepository           =  stdLegEntRepository;
         this.m4sllMtAbogadosRepository     =  m4sllMtAbogadosRepository;
-        // this.m4sllMtAbogadosintRepository  =  m4sllMtAbogadosintRepository;
-        // this.m4sllMtAbogadosextRepository  =  m4sllMtAbogadosextRepository;
         this.m4sllEstudioJurRepository     =  m4sllEstudioJurRepository;
         this.m4sllMtoCodAltRepository      =  m4sllMtoCodAltRepository;
         this.m4sllMtoRiesgosRepository     =  m4sllMtoRiesgosRepository;
@@ -136,31 +128,31 @@ public class MaestrosResource {
     public ResponseEntity<Object> listar() {
         List<HashMap<String, Object>> entities = new ArrayList<HashMap<String, Object>>();
         HashMap<String, Object> map = new HashMap<>();
-        map.put("STD_GEO_DIV",          stdGeoDivRepository.findAll());
-        map.put("M4SLL_NEGOCIOS",       m4sllNegociosRepository.findByIdOrganization("0050"));
-        map.put("STD_LEG_ENT",          stdLegEntRepository.findAll());
-        map.put("M4SLL_MT_ABOGADOS",    m4sllMtAbogadosRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_MT_ABOGADOS",    m4sllMtAbogadosRepository.findByIdOrganizationMabChkInt("0050", "I"));
-        map.put("M4SLL_MT_ABOGADOS",    m4sllMtAbogadosRepository.findByIdOrganizationMabChkInt("0050","E"));
-        map.put("M4SLL_ESTUDIO_JUR",    m4sllEstudioJurRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_MTO_COD_ALT",    m4sllMtoCodAltRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_MTO_RIESGOS",    m4sllMtoRiesgosRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_STATUS",      m4sllTpStatusRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_AUTOR_REU",   m4sllTpAutorReuRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_PEDIDO",      m4sllTpPedidoRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_FASES",       m4sllTpFasesRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TRIBUNALES",     m4sllTribunalesRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_COMPROMIS",   m4sllTpCompromisRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_DOC_LITIG",   m4sllTpDocLitigRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_ENTIDADES",   m4sllTpEntidadesRepository.findAll());
-        map.put("M4SLL_TP_IDENTIFIC",   m4sllTpIdentificRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_LITIGIOS",    m4sllTpLitigiosRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_MOTIVO",      m4sllTpMotivoRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_PAGOS",       m4sllTpPagosRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_RECURREN",    m4sllTpRecurrenRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_ROLES",       m4sllTpRolesRepository.findByIdOrganization("0050"));
-        map.put("M4SLL_TP_STA_DET",     m4sllTpStaDetRepository.findAll());
-        map.put("M4SLL_TP_VAL_ECO",     m4sllTpValEcoRepository.findByIdOrganization("0050"));
+        map.put("STD_GEO_DIV",             stdGeoDivRepository.findAll());
+        map.put("M4SLL_NEGOCIOS",          m4sllNegociosRepository.findByIdOrganization("0050"));
+        map.put("STD_LEG_ENT",             stdLegEntRepository.findAll());
+        map.put("M4SLL_MT_ABOGADOS",       m4sllMtAbogadosRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_MT_ABOGADOSINT",    m4sllMtAbogadosRepository.findByIdOrganizationMabChkInt("0050", "I"));
+        map.put("M4SLL_MT_ABOGADOSEXT",    m4sllMtAbogadosRepository.findByIdOrganizationMabChkInt("0050","E"));
+        map.put("M4SLL_ESTUDIO_JUR",       m4sllEstudioJurRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_MTO_COD_ALT",       m4sllMtoCodAltRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_MTO_RIESGOS",       m4sllMtoRiesgosRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_STATUS",         m4sllTpStatusRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_AUTOR_REU",      m4sllTpAutorReuRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_PEDIDO",         m4sllTpPedidoRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_FASES",          m4sllTpFasesRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TRIBUNALES",        m4sllTribunalesRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_COMPROMIS",      m4sllTpCompromisRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_DOC_LITIG",      m4sllTpDocLitigRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_ENTIDADES",      m4sllTpEntidadesRepository.findAll());
+        map.put("M4SLL_TP_IDENTIFIC",      m4sllTpIdentificRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_LITIGIOS",       m4sllTpLitigiosRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_MOTIVO",         m4sllTpMotivoRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_PAGOS",          m4sllTpPagosRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_RECURREN",       m4sllTpRecurrenRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_ROLES",          m4sllTpRolesRepository.findByIdOrganization("0050"));
+        map.put("M4SLL_TP_STA_DET",        m4sllTpStaDetRepository.findAll());
+        map.put("M4SLL_TP_VAL_ECO",        m4sllTpValEcoRepository.findByIdOrganization("0050"));
 
         entities.add(map);
         return new ResponseEntity<Object>(entities, HttpStatus.OK);
