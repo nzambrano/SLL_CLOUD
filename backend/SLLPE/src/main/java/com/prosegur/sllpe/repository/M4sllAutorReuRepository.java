@@ -1,7 +1,7 @@
 package com.prosegur.sllpe.repository;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.prosegur.sllpe.domain.M4sllAutorReu;
 import com.prosegur.sllpe.domain.M4sllAutorReuId;
-import com.prosegur.sllpe.domain.SllVwAutorReu;
+
 
 
 public interface M4sllAutorReuRepository extends JpaRepository<M4sllAutorReu, M4sllAutorReuId> {

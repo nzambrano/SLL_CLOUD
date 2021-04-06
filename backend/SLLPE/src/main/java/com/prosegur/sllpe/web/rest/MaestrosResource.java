@@ -130,7 +130,7 @@ public class MaestrosResource {
         HashMap<String, Object> map = new HashMap<>();
         map.put("STD_GEO_DIV",             stdGeoDivRepository.findAll());
         map.put("M4SLL_NEGOCIOS",          m4sllNegociosRepository.findByIdOrganization("0050"));
-        map.put("STD_LEG_ENT",             stdLegEntRepository.findAll());
+        map.put("STD_LEG_ENT",             stdLegEntRepository.findByIdOrganization("0050"));
         map.put("M4SLL_MT_ABOGADOS",       m4sllMtAbogadosRepository.findByIdOrganization("0050"));
         map.put("M4SLL_MT_ABOGADOSINT",    m4sllMtAbogadosRepository.findByIdOrganizationMabChkInt("0050", "I"));
         map.put("M4SLL_MT_ABOGADOSEXT",    m4sllMtAbogadosRepository.findByIdOrganizationMabChkInt("0050","E"));
