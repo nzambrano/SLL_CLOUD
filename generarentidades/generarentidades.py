@@ -20,6 +20,8 @@ import shutil
 import subprocess
 import filecmp
 import glob
+import re
+
 
 curr_path = os.path.dirname(os.path.realpath(__file__))
 templates_path = curr_path + r"\files\templates"
@@ -97,9 +99,9 @@ new_cust_cols_datatypes_lst = (
 curr_template_path = os.path.join(templates_path, sys.argv[6])
 
 
-def remove_comments(files_in, lst_in):
+def remove_lines(files_in, lst_in):
     r"""
-    Funcion para buscar líneas y borrarlas. Se detectan con una Palabra clave que debe ser puesta al principio de la línea
+    Funcion para buscar líneas y borrarlas. Se detectan con una Palabra clave que se detecta via REGEX.
 
     Args:
         files_in (lista): lista de archivos a iterar Ej: ['C:\dir1\file1.txt','C:\dir2\file2.txt']
@@ -112,7 +114,7 @@ def remove_comments(files_in, lst_in):
                 lines = f.readlines()
             with open(file_in, "w") as f:
                 for line in lines:
-                    if not line.lstrip().startswith(del_key):
+                    if not re.search(del_key, line):
                         f.write(line)
 
 
@@ -218,16 +220,17 @@ new_filename_abs_path_service = os.path.join(
 shutil.copy(old_filename_abs_path_repository, new_filename_abs_path_repository)
 shutil.copy(old_filename_abs_path_resource, new_filename_abs_path_resource)
 
-# Generar una lista con los paths Old y New de los 3 archivos
-dirs_lst = []
+# Generar una lista con los paths Old y New de los 3 archivos Repository,
+# Resource y Service si es que se procesa
+rest_files_location = []
 
-dirs_lst.append(new_filename_abs_path_repository)
-dirs_lst.append(new_filename_abs_path_resource)
+rest_files_location.append(new_filename_abs_path_repository)
+rest_files_location.append(new_filename_abs_path_resource)
 
 # Si la tabla a procesar tiene  secuencia, crear su servicio
 if new_pks_names_sec_lst:
     shutil.copy(old_filename_abs_path_service, new_filename_abs_path_service)
-    dirs_lst.append(new_filename_abs_path_service)
+    rest_files_location.append(new_filename_abs_path_service)
 
 ############## Procesamiento de columnas - comienzo ##############
 
@@ -649,16 +652,26 @@ if new_pks_names_sec_lst:
 
 # Buscar y reemplazar los pares (viejo, nuevo) de las columnas en los
 # archivos Repository Resource y Services
-searchnreplace(dirs_lst, search_n_replace_lst)
+searchnreplace(rest_files_location, search_n_replace_lst)
 
 # Eliminar líneas que no han sido reemplazadas
-remove_comments(dirs_lst, ["//CustomLines"])
+
+files_location_lst = glob.glob(
+    os.path.join(
+        main_path,
+        f"**\\{new_tbl_name_pascal}*.java"),
+    recursive=True)
+print(files_location_lst)
+
+remove_lines(
+    files_location_lst, [
+        ".*//CustomLines.*", ".*// Generated.*by Hibernate Tools.*"])
 
 ############## Procesamiento de columnas - Fin ##############
 
 # Buscar y reemplazar el nombre de la tabla en los archivos Repository Resource y Services
 # Este paso se debe hacer después de columnas!
-searchnreplace(dirs_lst, [(old_tbl_name_snake, new_tbl_name_snake)])
+searchnreplace(rest_files_location, [(old_tbl_name_snake, new_tbl_name_snake)])
 
 # Aplicar indentacion y formato a los archivos generados
 # http://astyle.sourceforge.net/astyle.html

@@ -1,14 +1,19 @@
 # pip install pyperclip
 # pip install stringcase
 # pip install camel-snake-pep8 --upgrade
+'''
+start /wait camel-snake-pep8 --yes-to-all . mantenimiento.py
+start /wait autopep8 --in-place --aggressive --aggressive mantenimiento.py
+rd /s /q "%CD%\.ropeproject\"
 
+'''
+import stringcase
 import os
+import shutil
+import subprocess
 import glob
 import re
-import subprocess
-import shutil
 import pyperclip
-import stringcase
 
 curr_path = os.path.dirname(os.path.realpath(__file__))
 a_style_path = curr_path + r"\files\styling"
@@ -19,23 +24,31 @@ main_rest_path = main_path + r"\web\rest"
 main_service_path = main_path + r"\service"
 main_repository_path = main_path + r"\repository"
 
-# Eliminar las líneas del tipo "Generated [TimeStamp] by Hibernate Tools..." así GIT no las detecta como cambio
+# Eliminar las líneas del tipo "Generated [TimeStamp] by Hibernate
+# Tools..." así GIT no las detecta como cambio
 
-files_path_lst = glob.glob(os.path.join(main_path, f"**\\*.java"), recursive=True)
+files_in = glob.glob(os.path.join(main_path, f"**\\*.java"), recursive=True)
 
-del_key = ".*// Generated.*by Hibernate Tools.*"
+lst_in = [".*// Generated.*by Hibernate Tools.*", ".*//.*import .*"]
 
-for file_in in files_path_lst:
-    with open(file_in, "r") as f:
-        lines = f.readlines()
-    with open(file_in, "w") as f:
-        for line in lines:
-            if not re.search(del_key, line):
-                f.write(line)
+for file_in in files_in:
+    for del_key in lst_in:
+        with open(file_in, "r") as f:
+            lines = f.readlines()
+        with open(file_in, "w") as f:
+            for line in lines:
+                if not re.search(del_key, line):
+                    f.write(line)
 
-# Formatear todos los archivos Java del Repository, Resources y Domain, para que al generarlas automáticamente, GIT solo detecte cambios de texto y no indentacion
+# Formatear todos los archivos Java del Repository, Resources y Domain,
+# para que al generarlas automáticamente, GIT solo detecte cambios de
+# texto y no indentacion
 
-wk_paths = [main_domain_path, main_rest_path, main_service_path, main_repository_path]
+wk_paths = [
+    main_domain_path,
+    main_rest_path,
+    main_service_path,
+    main_repository_path]
 for wk_path in wk_paths:
     subprocess.run(
         [
@@ -108,9 +121,7 @@ f1 = [
     for f in f1
 ]
 
-
 f1 = set([stringcase.snakecase(f.replace(".java", "")) for f in f1])
-
 
 str = "\n".join(sorted(f1))
 print(str)
