@@ -4,6 +4,9 @@
 # cualquier columna no necesariamente pks, testear con m4sll_mt_abogados
 
 # A saber:
+# Se debe configurar el archivo:
+# generarentidades\files\hibernate\hibernate.cfg.xml
+# con los datos de conexión a la DB
 # instalar: pip install stringcase
 # uso: https://pypi.org/project/stringcase/
 
@@ -685,6 +688,8 @@ subprocess.run(
         "--style=java",
         "--recursive",
         "--suffix=none",
+        "--formatted",
+        "--break-return-type-decl",
         f"{new_tbl_name_pascal}*.java",
     ],
     cwd=main_path,

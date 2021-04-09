@@ -7,8 +7,8 @@
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/SLL</property>
-        <property name="hibernate.connection.username">SLL</property>
-        <property name="hibernate.connection.password">SLL</property>
+        <property name="hibernate.connection.username">sll</property>
+        <property name="hibernate.connection.password">sll</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.connection.zeroDateTimeBehavior">convertToNull</property>
     </session-factory>

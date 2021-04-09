@@ -24,7 +24,7 @@ import java.util.Optional;
 @Transactional
 
 public class M4sllPedidosResource {
-
+    private string idOrganization = "0050";
     private final Logger log = LoggerFactory.getLogger(M4sllPedidosResource.class);
     private static final String ENTITY_NAME = "sllpeM4sllPedidos";
     @Value("${jhipster.clientApp.name}")
@@ -68,11 +68,11 @@ public class M4sllPedidosResource {
         return ResponseEntity.ok().body(M4sllPedidosAll);
     }
 
-    @GetMapping("/m4sll_pedidos/{id_organization}/{lit_id_litigio}/{tpe_id_pedido}")
-    public ResponseEntity<M4sllPedidos> getM4sllPedidos(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("tpe_id_pedido") String tpe_id_pedido) {
+    @GetMapping("/m4sll_pedidos/{lit_id_litigio}/{tpe_id_pedido}")
+    public ResponseEntity<M4sllPedidos> getM4sllPedidos(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("tpe_id_pedido") String tpe_id_pedido) {
         log.debug("REST request to get M4sllPedidos : {}", id_organization + "|" + lit_id_litigio + "|" + tpe_id_pedido);
         M4sllPedidosId id = new M4sllPedidosId();
-        id.setIdOrganization(id_organization);
+        id.setIdOrganization(idOrganization);
         id.setLitIdLitigio(lit_id_litigio);
         id.setTpeIdPedido(tpe_id_pedido);
 
@@ -80,19 +80,19 @@ public class M4sllPedidosResource {
         return ResponseUtil.wrapOrNotFound(m4sll_pedidos);
     }
 
-    @GetMapping("/m4sll_pedidos/{id_organization}/{lit_id_litigio}")
-    public ResponseEntity<List<M4sllPedidos>> getM4sllPedidos(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
-        log.debug("REST request to get M4sllPedidos : {}", id_organization + "|" + lit_id_litigio);
+    @GetMapping("/m4sll_pedidos/{lit_id_litigio}")
+    public ResponseEntity<List<M4sllPedidos>> getM4sllPedidos(@PathVariable("lit_id_litigio") String lit_id_litigio) {
+        log.debug("REST request to get M4sllPedidos : {}", idOrganization + "|" + lit_id_litigio);
 
-        List<M4sllPedidos> M4sllPedidosByInput = m4sllPedidosRepository.findByIdOrganizationLitIdLitigio(id_organization, lit_id_litigio);
+        List<M4sllPedidos> M4sllPedidosByInput = m4sllPedidosRepository.findByIdOrganizationLitIdLitigio(idOrganization, lit_id_litigio);
         return ResponseEntity.ok().body(M4sllPedidosByInput);
     }
 
-    @DeleteMapping("/m4sll_pedidos/{id_organization}/{lit_id_litigio}/{tpe_id_pedido}")
-    public ResponseEntity<Void> deleteM4sllPedidos(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("tpe_id_pedido") String tpe_id_pedido) {
-        log.debug("REST request to delete m4sll_pedidos : {}", id_organization + "|" + lit_id_litigio + "|" + tpe_id_pedido);
+    @DeleteMapping("/m4sll_pedidos/{lit_id_litigio}/{tpe_id_pedido}")
+    public ResponseEntity<Void> deleteM4sllPedidos(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("tpe_id_pedido") String tpe_id_pedido) {
+        log.debug("REST request to delete m4sll_pedidos : {}", idOrganization + "|" + lit_id_litigio + "|" + tpe_id_pedido);
         M4sllPedidosId id = new M4sllPedidosId();
-        id.setIdOrganization(id_organization);
+        id.setIdOrganization(idOrganization);
         id.setLitIdLitigio(lit_id_litigio);
         id.setTpeIdPedido(tpe_id_pedido);
 
