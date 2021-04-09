@@ -59,18 +59,18 @@ public class M4sllAutorReuResource {
                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
                .body(result);
     }*/
-    
+
     @PostMapping("/m4sll_autor_reu")
     public ResponseEntity<List<M4sllAutorReu>> createM4sllAutorReu(@RequestBody List<M4sllAutorReu> listM4sll_autor_reu)
     throws URISyntaxException {
         log.debug("REST request to create m4sll_autor_reu : {}", listM4sll_autor_reu);
-        
+
         M4sllAutorReuServices autorReuServices = new M4sllAutorReuServices(m4sllAutorReuRepository);
-               
-        
+
+
         autorReuServices.saveAllWithSecuencia(listM4sll_autor_reu);
-        
-        
+
+
         List<M4sllAutorReu> result = listM4sll_autor_reu;
         return ResponseEntity
                .created(new URI("/api/m4sll_autor_reu/" )).headers(HeaderUtil

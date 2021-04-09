@@ -28,16 +28,16 @@ public class M4sllAutorReuServices {
     public  Long UltimaSecuencia(M4sllAutorReu autorReu) {
         return  m4sllAutorReuRepository.obtenerUltimaSecuencia(autorReu.getId().getLitIdLitigio(), autorReu.getId().getIdOrganization());
     }
-    
+
     public Collection<M4sllAutorReu> saveAllWithSecuencia(Collection<M4sllAutorReu> listAutorReu)  {
-    	listAutorReu.stream().forEach((m4sll_autor_reu) -> {      	
-    		System.out.println(m4sll_autor_reu);        	
-    		Long id_aurSecuencia = UltimaSecuencia(m4sll_autor_reu);
-    		M4sllAutorReuId id = new M4sllAutorReuId(id_aurSecuencia, m4sll_autor_reu.getId().getLitIdLitigio(), m4sll_autor_reu.getId().getIdOrganization());
-    		m4sll_autor_reu.setId(id);
-    		m4sllAutorReuRepository.save(m4sll_autor_reu);
-    });
-    	return listAutorReu;
+        listAutorReu.stream().forEach((m4sll_autor_reu) -> {
+            System.out.println(m4sll_autor_reu);
+            Long id_aurSecuencia = UltimaSecuencia(m4sll_autor_reu);
+            M4sllAutorReuId id = new M4sllAutorReuId(id_aurSecuencia, m4sll_autor_reu.getId().getLitIdLitigio(), m4sll_autor_reu.getId().getIdOrganization());
+            m4sll_autor_reu.setId(id);
+            m4sllAutorReuRepository.save(m4sll_autor_reu);
+        });
+        return listAutorReu;
     }
 
 
