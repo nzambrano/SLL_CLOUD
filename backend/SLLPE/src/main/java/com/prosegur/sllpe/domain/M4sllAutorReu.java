@@ -23,10 +23,10 @@ public class M4sllAutorReu  implements java.io.Serializable {
 
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private M4sllAutorReuId id;
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private M4sllAutorReuId id;
     private Long stdOrHrPeriod;
     private Long mabSecuencia;
     private String mteIdTpEmpleado;

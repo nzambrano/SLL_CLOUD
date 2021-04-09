@@ -37,14 +37,14 @@ public class M4sllPedidosResource {
     }
 
     @PostMapping("/m4sll_pedidos")
-    public ResponseEntity<M4sllPedidos> createM4sllPedidos(@RequestBody M4sllPedidos m4sll_pedidos)
+    public ResponseEntity<List<M4sllPedidos>> createM4sllPedidos(@RequestBody List<M4sllPedidos> listM4sll_pedidos)
     throws URISyntaxException {
-        log.debug("REST request to create m4sll_pedidos : {}", m4sll_pedidos);
+        log.debug("REST request to create m4sll_pedidos : {}", listM4sll_pedidos);
 
-        M4sllPedidos result = m4sllPedidosRepository.save(m4sll_pedidos);
+        List<M4sllPedidos> result = m4sllPedidosRepository.saveAll(listM4sll_pedidos);
         return ResponseEntity
-               .created(new URI("/api/m4sll_pedidos/" + result.getId())).headers(HeaderUtil
-                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, ""))
                .body(result);
     }
 

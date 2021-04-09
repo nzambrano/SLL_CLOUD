@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/api")
 @Transactional
@@ -36,13 +35,14 @@ public class M4sllPagosResource {
     }
 
     @PostMapping("/m4sll_pagos")
-    public ResponseEntity<M4sllPagos> createM4sllPagos(@RequestBody M4sllPagos m4sll_pagos) throws URISyntaxException {
+    public ResponseEntity<M4sllPagos> createM4sllPagos(@RequestBody M4sllPagos m4sll_pagos)
+    throws URISyntaxException {
         log.debug("REST request to create m4sll_pagos : {}", m4sll_pagos);
         M4sllPagosId id = new M4sllPagosId();
         M4sllPagosServices m4sllPagosServices = new M4sllPagosServices(m4sllPagosRepository);
-        Long id_pagSecuencia = m4sllPagosServices.UltimaSecuencia(m4sll_pagos);
+        Long id_pag_secuencia = m4sllPagosServices.UltimaSecuencia(m4sll_pagos);
 
-        id.setPagSecuencia(id_pagSecuencia);
+        id.setPagSecuencia(id_pag_secuencia);
         id.setLitIdLitigio(m4sll_pagos.getId().getLitIdLitigio());
         id.setIdOrganization(m4sll_pagos.getId().getIdOrganization());
 
@@ -55,7 +55,8 @@ public class M4sllPagosResource {
     }
 
     @PutMapping("/m4sll_pagos")
-    public ResponseEntity<M4sllPagos> updateM4sllPagos(@RequestBody M4sllPagos m4sll_pagos) throws URISyntaxException {
+    public ResponseEntity<M4sllPagos> updateM4sllPagos(@RequestBody M4sllPagos m4sll_pagos)
+    throws URISyntaxException {
         log.debug("REST request to update m4sll_pagos : {}", m4sll_pagos);
         if (m4sll_pagos.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -75,60 +76,46 @@ public class M4sllPagosResource {
         return ResponseEntity.ok().body(M4sllPagosAll);
     }
 
-    @GetMapping("/m4sll_pagos/{id_organization}/{lit_id_litigio}")
-    public ResponseEntity<List<M4sllPagos>> getM4sllPagos(
-        @PathVariable("id_organization") String id_organization,
-        @PathVariable("lit_id_litigio") String lit_id_litigio
-    ) {
-        log.debug("REST request to get M4sllPagos : {} | {}", id_organization, lit_id_litigio);
+    @GetMapping("/m4sll_pagos/{lit_id_litigio}/{id_organization}")
+    public ResponseEntity<List<M4sllPagos>> getM4sllPagos(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
+        log.debug("REST request to get M4sllPagos : {}", lit_id_litigio + "|" + id_organization);
 
-        List<M4sllPagos> M4sllPagosByInput = m4sllPagosRepository.findM4sllPagosByInput(id_organization, lit_id_litigio);
+        List<M4sllPagos> M4sllPagosByInput = m4sllPagosRepository.findByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
         return ResponseEntity.ok().body(M4sllPagosByInput);
     }
 
+
     /*
-      @GetMapping("/m4sll_pagos/{id_organization}/{lit_id_litigio}/{pag_secuencia}")
-      public ResponseEntity<M4sllPagos> getM4sllPagos(
-      		@PathVariable("id_organization") String id_organization,
-      		@PathVariable("lit_id_litigio") String lit_id_litigio,
-      		@PathVariable("pag_secuencia") Long pag_secuencia
-              ) {
-          log.debug("REST request to get m4sll_pagos : {} | {} | {}", lit_id_litigio, id_organization, pag_secuencia);
+      @GetMapping("/m4sll_pagos/{lit_id_litigio}/{id_organization}/{pag_secuencia}")
+      public ResponseEntity<M4sllPagos> getM4sllPagos(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization, @PathVariable("pag_secuencia") Long pag_secuencia) {
+          log.debug("REST request to get M4sllPagos : {}", lit_id_litigio + "|" + id_organization + "|" + pag_secuencia);
           M4sllPagosId id = new M4sllPagosId();
-          id.setIdOrganization(id_organization);
-          id.setLitIdLitigio(lit_id_litigio);
+          id.setLitIdLitigio(lit_id_litigio); id.setIdOrganization(id_organization);
           id.setPagSecuencia(pag_secuencia);
 
           Optional<M4sllPagos> m4sll_pagos = m4sllPagosRepository.findById(id);
           return ResponseUtil.wrapOrNotFound(m4sll_pagos);
       }
-      */
 
-    @DeleteMapping("/m4sll_pagos/{id_organization}/{lit_id_litigio}")
-    public ResponseEntity<Void> deleteM4sllPagos(
-        @PathVariable("id_organization") String id_organization,
-        @PathVariable("lit_id_litigio") String lit_id_litigio
-    ) {
-        log.debug("REST request to delete m4sll_pagos : {} | {}", lit_id_litigio, id_organization);
-        List<M4sllPagos> M4sllPagosByInput = m4sllPagosRepository.findM4sllPagosByInput(id_organization, lit_id_litigio);
+      @DeleteMapping("/m4sll_pagos/{lit_id_litigio}/{id_organization}")
+      public ResponseEntity<Void> deleteM4sllPagos(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
+        log.debug("REST request to delete m4sll_pagos : {}", lit_id_litigio + "|" + id_organization);
+        List<M4sllPagos> M4sllPagosByInput = m4sllPagosRepository.findByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
 
         m4sllPagosRepository.deleteAll(M4sllPagosByInput);
         return ResponseEntity
-               .noContent()
-               .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, M4sllPagosByInput.toString()))
-               .build();
+          .noContent()
+          .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, M4sllPagosByInput.toString()))
+          .build();
     }
+    */
 
-    @DeleteMapping("/m4sll_pagos/{id_organization}/{lit_id_litigio}/{pag_secuencia}")
-    public ResponseEntity<Void> deleteM4sllPagos(
-        @PathVariable("id_organization") String id_organization,
-        @PathVariable("lit_id_litigio") String lit_id_litigio,
-        @PathVariable("pag_secuencia") Long pag_secuencia
-    ) {
-        log.debug("REST request to delete m4sll_pagos : {} | {} | {}", lit_id_litigio, id_organization, pag_secuencia);
+    @DeleteMapping("/m4sll_pagos/{lit_id_litigio}/{id_organization}/{pag_secuencia}")
+    public ResponseEntity<Void> deleteM4sllPagos(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization, @PathVariable("pag_secuencia") Long pag_secuencia) {
+        log.debug("REST request to delete m4sll_pagos : {}", lit_id_litigio + "|" + id_organization + "|" + pag_secuencia);
         M4sllPagosId id = new M4sllPagosId();
-        id.setIdOrganization(id_organization);
         id.setLitIdLitigio(lit_id_litigio);
+        id.setIdOrganization(id_organization);
         id.setPagSecuencia(pag_secuencia);
 
         m4sllPagosRepository.deleteById(id);

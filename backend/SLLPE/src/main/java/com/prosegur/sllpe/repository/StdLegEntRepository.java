@@ -12,9 +12,9 @@ import com.prosegur.sllpe.domain.StdLegEntId;
 
 
 public interface StdLegEntRepository extends JpaRepository<StdLegEnt, StdLegEntId> {
-	@Query(
-	        value = "select * from public.std_leg_ent where id_organization = :id_organization",
-	        nativeQuery = true
-	    )
-	    public List<StdLegEnt> findByIdOrganization(@Param("id_organization") String id_organization);
+    @Query(
+        value = "select * from public.std_leg_ent where id_organization = :id_organization",
+        nativeQuery = true
+    )
+    public List<StdLegEnt> findByIdOrganization(@Param("id_organization") String id_organization);
 }
