@@ -88,9 +88,11 @@ public class M4sllLitigiosResource {
         M4sllLitigiosId id = new M4sllLitigiosId();
         id.setLitIdLitigio(id_litIdLitigio);
         id.setIdOrganization(id_idOrganization);
-
+        
         Optional<M4sllLitigios> m4sll_litigios = m4sllLitigiosRepository.findById(id);
+        // m4sll_litigios.getAutorReu();
         return ResponseUtil.wrapOrNotFound(m4sll_litigios);
+        
     }
 
     @DeleteMapping("/m4sll_litigios/{id_litIdLitigio}/{id_idOrganization}")

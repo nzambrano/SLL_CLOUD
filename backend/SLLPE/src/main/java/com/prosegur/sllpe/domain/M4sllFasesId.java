@@ -11,7 +11,11 @@ import javax.persistence.Embeddable;
 public class M4sllFasesId  implements java.io.Serializable {
 
 
-    private String litIdLitigio;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String litIdLitigio;
     private String tfaIdTpFase;
     private String idOrganization;
 

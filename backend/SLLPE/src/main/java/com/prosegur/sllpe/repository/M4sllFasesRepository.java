@@ -14,7 +14,7 @@ import com.prosegur.sllpe.domain.M4sllFasesId;
 public interface M4sllFasesRepository extends JpaRepository<M4sllFases, M4sllFasesId> {
 
     @Query(value = "select COALESCE(max(fas_secuencia),0)+1 from sll.m4sll_fases where id_organization = :ID_ORGANIZATION and lit_id_litigio = :LIT_ID_LITIGIO", nativeQuery = true)
-    public Long obtenerUltimaSecuencia(
+    public String obtenerUltimaSecuencia(
         @Param("ID_ORGANIZATION") String ID_ORGANIZATION,
         @Param("LIT_ID_LITIGIO") String LIT_ID_LITIGIO
     );

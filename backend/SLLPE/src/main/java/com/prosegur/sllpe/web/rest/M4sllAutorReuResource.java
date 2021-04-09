@@ -2,9 +2,9 @@ package com.prosegur.sllpe.web.rest;
 
 import com.prosegur.sllpe.domain.M4sllAutorReu;
 import com.prosegur.sllpe.domain.M4sllAutorReuId;
-import com.prosegur.sllpe.domain.SllVwAutorReu;
+import com.prosegur.sllpe.domain.M4sllAutorReuCustom;
 import com.prosegur.sllpe.repository.M4sllAutorReuRepository;
-import com.prosegur.sllpe.repository.SllVwAutorReuRepository;
+import com.prosegur.sllpe.repository.M4sllVwAutorReuCustomRepository;
 import com.prosegur.sllpe.service.M4sllAutorReuServices;
 import com.prosegur.sllpe.web.rest.errors.BadRequestAlertException;
 
@@ -25,18 +25,18 @@ import java.util.List;
 @Transactional
 
 public class M4sllAutorReuResource {
-
+	private String idOrganization = "0050";
     private final Logger log = LoggerFactory.getLogger(M4sllAutorReuResource.class);
     private static final String ENTITY_NAME = "sllpeM4sllAutorReu";
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private M4sllAutorReuRepository m4sllAutorReuRepository;
-    private SllVwAutorReuRepository sllVwAutorReuRepository;
+    private M4sllVwAutorReuCustomRepository m4sllVwAutorReuCustomRepository;
 
-    public M4sllAutorReuResource(M4sllAutorReuRepository m4sllAutorReuRepository, SllVwAutorReuRepository sllVwAutorReuRepository) {
+    public M4sllAutorReuResource(M4sllAutorReuRepository m4sllAutorReuRepository, M4sllVwAutorReuCustomRepository m4sllVwAutorReuCustomRepository) {
         this.m4sllAutorReuRepository = m4sllAutorReuRepository;
-        this.sllVwAutorReuRepository = sllVwAutorReuRepository;
+        this.m4sllVwAutorReuCustomRepository = m4sllVwAutorReuCustomRepository;
     }
 
     /*
@@ -79,25 +79,19 @@ public class M4sllAutorReuResource {
     }
 
     @PutMapping("/m4sll_autor_reu")
-    public ResponseEntity<M4sllAutorReu> updateM4sllAutorReu(@RequestBody M4sllAutorReu m4sll_autor_reu)
+    public ResponseEntity<List<M4sllAutorReu>> updateM4sllAutorReu(@RequestBody  List<M4sllAutorReu> listM4sll_autor_reu)
     throws URISyntaxException {
-        log.debug("REST request to update m4sll_autor_reu : {}", m4sll_autor_reu);
-        if (m4sll_autor_reu.getId() == null) {
+        log.debug("REST request to update m4sll_autor_reu : {}", listM4sll_autor_reu);
+        /*if (m4sll_autor_reu.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        M4sllAutorReu result = m4sllAutorReuRepository.save(m4sll_autor_reu);
+        }*/
+        List<M4sllAutorReu> result = m4sllAutorReuRepository.saveAll(listM4sll_autor_reu);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                                           m4sll_autor_reu.getId().toString())).body(result);
+                                           ""//m4sll_autor_reu.getId().toString()
+                                           )).body(result);
     }
-
-    @GetMapping("/m4sll_autor_reu")
-    public ResponseEntity<List<M4sllAutorReu>> getAllM4sllAutorReu() {
-        log.debug("REST request to get ALL M4sllAutorReu : {}");
-
-        List<M4sllAutorReu> M4sllAutorReuAll = m4sllAutorReuRepository.findAll();
-        return ResponseEntity.ok().body(M4sllAutorReuAll);
-    }
-
+   
+    /*
     @GetMapping("/m4sll_autor_reu/{id_organization}/{lit_id_litigio}/{aur_autor_reu}")
     public ResponseEntity<List<M4sllAutorReu>> getAutoresByLitigio(
         @PathVariable("id_organization") String id_organization,
@@ -115,41 +109,24 @@ public class M4sllAutorReuResource {
                                                );
         return ResponseEntity.ok().body(M4sllAutorReuAll);
     }
+    */
 
-    @GetMapping("/sll_autor_reu/{lit_id_litigio}")
-    public ResponseEntity<List<SllVwAutorReu>> getVwAutoresByLitigio(
+    @GetMapping("/m4sll_autor_reu/{lit_id_litigio}")
+    public ResponseEntity<List<M4sllAutorReuCustom>> getAutorReuByLitigio(
         @PathVariable("lit_id_litigio") String lit_id_litigio
 
     ) {
-        log.debug("REST request to get ALL M4sllAutorReu : {}");
+        log.debug("REST request to get ALL M4sllAutorReuCustom : {}");
 
-        List<SllVwAutorReu> SllvWAutorReuAll = sllVwAutorReuRepository.findAllVwAutorReuByLitigio(
-                lit_id_litigio
-                                               );
-        return ResponseEntity.ok().body(SllvWAutorReuAll);
+        List<M4sllAutorReuCustom> M4llvWAutorReuList = m4sllVwAutorReuCustomRepository.findAllVwAutorReuByLitigio(lit_id_litigio);
+        return ResponseEntity.ok().body(M4llvWAutorReuList);
     }
 
-    /*
-    @GetMapping("/m4sll_autor_reu/{id_organization}/{lit_id_litigio}/{aur_secuencia}")
-    public ResponseEntity<M4sllAutorReu> getM4sllAutorReu(
-    		@PathVariable("id_organization") String idOrganization,
-    		@PathVariable("lit_id_litigio") String litIdLitigio,
-    		@PathVariable("aur_secuencia") Integer aurSecuencia
-            ) {
-        log.debug("REST request to get m4sll_autor_reu : {} | {}", litIdLitigio, idOrganization, aurSecuencia );
-        M4sllAutorReuId id = new M4sllAutorReuId();
-        id.setIdOrganization(idOrganization);
-        id.setLitIdLitigio(litIdLitigio);
-        id.setAurSecuencia(aurSecuencia);
+    
 
-        Optional<M4sllAutorReu> m4sll_autor_reu = m4sllAutorReuRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(m4sll_autor_reu);
-    }
-    */
-
-    @DeleteMapping("/m4sll_autor_reu/{id_organization}/{lit_id_litigio}/{aur_secuencia}")
+    @DeleteMapping("/m4sll_autor_reu/{lit_id_litigio}/{aur_secuencia}")
     public ResponseEntity<Void> deleteM4sllAutorReu(
-        @PathVariable("id_organization") String idOrganization,
+        // @PathVariable("id_organization") String idOrganization,
         @PathVariable("lit_id_litigio") String litIdLitigio,
         @PathVariable("aur_secuencia") Integer  aurSecuencia
     ) {

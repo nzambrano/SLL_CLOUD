@@ -19,7 +19,7 @@ import com.prosegur.sllpe.repository.M4sllFasesRepository;
 import com.prosegur.sllpe.repository.M4sllLitigiosRepository;
 import com.prosegur.sllpe.repository.M4sllPedidosRepository;
 import com.prosegur.sllpe.repository.M4sllProvisionesRepository;
-import com.prosegur.sllpe.repository.SllVwAutorReuRepository;
+import com.prosegur.sllpe.repository.M4sllVwAutorReuCustomRepository;
 
 
 
@@ -35,14 +35,14 @@ public class LitigioResource {
     private M4sllLitigiosRepository litigiosRepository;
     private M4sllPedidosRepository pedidosRepository;
     private M4sllFasesRepository fasesRepository;
-    private SllVwAutorReuRepository sllVwAutorReuRepository;
+    private M4sllVwAutorReuCustomRepository m4sllVwAutorReuCustomRepository;
     private M4sllProvisionesRepository provisionesRepository;
 
     private  String idOrganization = "0050";
 
     public LitigioResource(
         M4sllLitigiosRepository litigiosRepository,
-        SllVwAutorReuRepository sllVwAutorReuRepository,
+        M4sllVwAutorReuCustomRepository m4sllVwAutorReuCustomRepository,
         M4sllPedidosRepository pedidosRepository,
         M4sllFasesRepository fasesRepository,
         M4sllProvisionesRepository provisionesRepository
@@ -51,7 +51,7 @@ public class LitigioResource {
     ) {
 
         this.litigiosRepository = litigiosRepository;
-        this.sllVwAutorReuRepository = sllVwAutorReuRepository;
+        this.m4sllVwAutorReuCustomRepository = m4sllVwAutorReuCustomRepository;
         this.pedidosRepository = pedidosRepository;
         this.fasesRepository = fasesRepository;
         this.provisionesRepository = provisionesRepository;
@@ -75,7 +75,7 @@ public class LitigioResource {
         id.setLitIdLitigio(litIdLitigio);
         id.setIdOrganization(idOrganization);
         map.put("EXPEDIENTE", litigiosRepository.findById(id));
-        map.put("SLL_AUTOR_REU", sllVwAutorReuRepository.findAllVwAutorReuByLitigio(litIdLitigio));
+        map.put("SLL_AUTOR_REU", m4sllVwAutorReuCustomRepository.findAllVwAutorReuByLitigio(litIdLitigio));
         // map.put("PEDIDOS", pedidosRepository.findPedidosByLitigio(idOrganization, litIdLitigio));
         map.put("PEDIDOS", pedidosRepository.findByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio));
         map.put("SLL_FASES", fasesRepository.getFases(idOrganization, litIdLitigio));

@@ -21,7 +21,11 @@ import javax.persistence.TemporalType;
 public class StdPerson  implements java.io.Serializable {
 
 
-    private StdPersonId id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private StdPersonId id;
     private String stdNFamName1;
     private String stdNMaidenName;
     private String stdNFirstName;
@@ -86,6 +90,7 @@ public class StdPerson  implements java.io.Serializable {
     private Date plcoDate4HiddenDataProtec;
     private String scoGbLegal;
     private String plcoIdOrganization;
+    private String nombreApellido;
 
     public StdPerson() {
     }
@@ -160,6 +165,8 @@ public class StdPerson  implements java.io.Serializable {
         this.plcoDate4HiddenDataProtec = plcoDate4HiddenDataProtec;
         this.scoGbLegal = scoGbLegal;
         this.plcoIdOrganization = plcoIdOrganization;
+        //p.std_n_fam_name_1 || '' '' || p.std_n_first_name
+        this.nombreApellido =  this.stdNFamName1 + " " + this.stdNFirstName;
     }
 
     @EmbeddedId
@@ -816,6 +823,21 @@ public class StdPerson  implements java.io.Serializable {
     public void setPlcoIdOrganization(String plcoIdOrganization) {
         this.plcoIdOrganization = plcoIdOrganization;
     }
+
+    
+    @Column(insertable=false, updatable=false)
+	public String nombreApellido() {
+		return nombreApellido;
+	}
+	
+    /*
+	public void setNombreApellido() {
+		this.nombreApellido =  this.stdNFamName1 + " " + this.stdNFirstName;
+    }
+    */
+   
+    
+    
 
 
 
