@@ -1,6 +1,7 @@
 package com.prosegur.sllpe.domain;
 
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
@@ -11,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
  * @see com.prosegur.sllpe.domain.M4sllPagos
  * @author Hibernate Tools
  */
+
 public class M4sllPagosHome {
 
     private static final Log log = LogFactory.getLog(M4sllPagosHome.class);

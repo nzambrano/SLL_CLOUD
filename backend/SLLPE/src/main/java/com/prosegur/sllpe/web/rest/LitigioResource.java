@@ -19,6 +19,8 @@ import com.prosegur.sllpe.repository.M4sllFasesRepository;
 import com.prosegur.sllpe.repository.M4sllLitigiosRepository;
 import com.prosegur.sllpe.repository.M4sllPedidosRepository;
 import com.prosegur.sllpe.repository.M4sllProvisionesRepository;
+import com.prosegur.sllpe.repository.M4sllPagosRepository;
+import com.prosegur.sllpe.repository.M4sllDocLitigiosRepository;
 import com.prosegur.sllpe.repository.SllVwAutorReuRepository;
 
 
@@ -37,6 +39,8 @@ public class LitigioResource {
     private M4sllFasesRepository fasesRepository;
     private SllVwAutorReuRepository sllVwAutorReuRepository;
     private M4sllProvisionesRepository provisionesRepository;
+    private M4sllPagosRepository pagosRepository;
+    private M4sllDocLitigiosRepository docLitigiosRepository;
 
     private  String idOrganization = "0050";
 
@@ -45,9 +49,9 @@ public class LitigioResource {
         SllVwAutorReuRepository sllVwAutorReuRepository,
         M4sllPedidosRepository pedidosRepository,
         M4sllFasesRepository fasesRepository,
-        M4sllProvisionesRepository provisionesRepository
-
-
+        M4sllProvisionesRepository provisionesRepository,
+        M4sllPagosRepository pagosRepository,
+        M4sllDocLitigiosRepository docLitigiosRepository
     ) {
 
         this.litigiosRepository = litigiosRepository;
@@ -55,6 +59,8 @@ public class LitigioResource {
         this.pedidosRepository = pedidosRepository;
         this.fasesRepository = fasesRepository;
         this.provisionesRepository = provisionesRepository;
+        this.pagosRepository = pagosRepository;
+        this.docLitigiosRepository = docLitigiosRepository;
 
     }
 
@@ -80,6 +86,8 @@ public class LitigioResource {
         map.put("PEDIDOS", pedidosRepository.findByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio));
         map.put("SLL_FASES", fasesRepository.getFases(idOrganization, litIdLitigio));
         map.put("SLL_PROV", provisionesRepository.getProvisionByLitigio(idOrganization, litIdLitigio));
+        map.put("SLL_PAGOS", pagosRepository.findByLitIdLitigioIdOrganization(idOrganization, litIdLitigio));
+        map.put("SLL_DOC_LITIGIOS", docLitigiosRepository.findByLitIdLitigioIdOrganization(idOrganization, litIdLitigio));
 
         // map.put("abogados", abogadosRepository.findAbogados("0050"));
         // map.put("negocios", negociosRepository.findNegocioByPais("0050"));
