@@ -16,10 +16,4 @@ public interface StdPersonRepository extends JpaRepository<StdPerson, StdPersonI
         nativeQuery = true
     )
     public List<StdPerson> findByStdIdPerson(@Param("std_id_person") String std_id_person);
-    
-    @Query(
-            value = "select *from public.std_person where upper(std_n_first_name) LIKE (CONCAT('%',upper('GARAY'),'%')) OR upper(std_n_fam_name_1) LIKE (CONCAT('%',upper(:name),'%')) OR std_n_maiden_name like (CONCAT('%',upper(:name),'%')) limit 25",
-            nativeQuery = true
-        )
-    public List<StdPerson> findByName(@Param("name") String name);
 }

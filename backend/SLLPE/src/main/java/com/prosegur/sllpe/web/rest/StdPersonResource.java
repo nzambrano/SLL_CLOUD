@@ -36,7 +36,6 @@ public class StdPersonResource {
         this.stdPersonRepository = stdPersonRepository;
     }
 
-    /*
     @PostMapping("/std_person")
     public ResponseEntity<StdPerson> createStdPerson(@RequestBody StdPerson std_person)
     throws URISyntaxException {
@@ -49,7 +48,6 @@ public class StdPersonResource {
                .body(result);
     }
 
-
     @PutMapping("/std_person")
     public ResponseEntity<StdPerson> updateStdPerson(@RequestBody StdPerson std_person)
     throws URISyntaxException {
@@ -61,7 +59,7 @@ public class StdPersonResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
                                            std_person.getId().toString())).body(result);
     }
-	*/
+
     @GetMapping("/std_person")
     public ResponseEntity<List<StdPerson>> getAllStdPerson() {
         log.debug("REST request to get ALL StdPerson : {}");
@@ -70,41 +68,31 @@ public class StdPersonResource {
         return ResponseEntity.ok().body(StdPersonAll);
     }
 
-    /*
-    @GetMapping("/std_person/{std_id_person}/{id_organization}")
-    public ResponseEntity<StdPerson> getStdPerson(@PathVariable("std_id_person") String std_id_person, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to get StdPerson : {}", std_id_person + "|" + id_organization);
+    @GetMapping("/std_person/{id_organization}/{std_id_person}")
+    public ResponseEntity<StdPerson> getStdPerson(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_person") String std_id_person) {
+        log.debug("REST request to get StdPerson : {}", id_organization + "|" + std_id_person);
         StdPersonId id = new StdPersonId();
-        id.setStdIdPerson(std_id_person);
         id.setIdOrganization(id_organization);
+        id.setStdIdPerson(std_id_person);
 
         Optional<StdPerson> std_person = stdPersonRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(std_person);
     }
-    */
 
     @GetMapping("/std_person/{std_id_person}")
-    public ResponseEntity<List<StdPerson>> getStdPersonByStdIdPerson(@PathVariable("std_id_person") String std_id_person) {
+    public ResponseEntity<List<StdPerson>> getStdPerson(@PathVariable("std_id_person") String std_id_person) {
         log.debug("REST request to get StdPerson : {}", std_id_person);
 
         List<StdPerson> StdPersonByInput = stdPersonRepository.findByStdIdPerson(std_id_person);
         return ResponseEntity.ok().body(StdPersonByInput);
     }
 
-    @GetMapping("/std_person/name/{name}")
-    public ResponseEntity<List<StdPerson>> getStdPersonByName(@PathVariable("name") String name) {
-        log.debug("REST request to get StdPerson : {}", name);
-
-        List<StdPerson> StdPersonByInput = stdPersonRepository.findByName(name);
-        return ResponseEntity.ok().body(StdPersonByInput);
-    }
-    /*
-    @DeleteMapping("/std_person/{std_id_person}/{id_organization}")
-    public ResponseEntity<Void> deleteStdPerson(@PathVariable("std_id_person") String std_id_person, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to delete std_person : {}", std_id_person + "|" + id_organization);
+    @DeleteMapping("/std_person/{id_organization}/{std_id_person}")
+    public ResponseEntity<Void> deleteStdPerson(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_person") String std_id_person) {
+        log.debug("REST request to delete std_person : {}", id_organization + "|" + std_id_person);
         StdPersonId id = new StdPersonId();
-        id.setStdIdPerson(std_id_person);
         id.setIdOrganization(id_organization);
+        id.setStdIdPerson(std_id_person);
 
         stdPersonRepository.deleteById(id);
         return ResponseEntity
@@ -112,5 +100,4 @@ public class StdPersonResource {
                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
                .build();
     }
-    */
 }
