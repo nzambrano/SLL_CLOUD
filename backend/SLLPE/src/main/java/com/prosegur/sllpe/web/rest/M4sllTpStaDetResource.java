@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/sllpe")
 @Transactional
 
 public class M4sllTpStaDetResource {
@@ -68,24 +68,24 @@ public class M4sllTpStaDetResource {
         return ResponseEntity.ok().body(M4sllTpStaDetAll);
     }
 
-    @GetMapping("/m4sll_tp_sta_det/{tsd_id_tp_sta_det}/{id_organization}")
-    public ResponseEntity<M4sllTpStaDet> getM4sllTpStaDet(@PathVariable("tsd_id_tp_sta_det") String tsd_id_tp_sta_det, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to get M4sllTpStaDet : {}", tsd_id_tp_sta_det + "|" + id_organization);
+    @GetMapping("/m4sll_tp_sta_det/{id_organization}/{tsd_id_tp_sta_det}")
+    public ResponseEntity<M4sllTpStaDet> getM4sllTpStaDet(@PathVariable("id_organization") String id_organization, @PathVariable("tsd_id_tp_sta_det") String tsd_id_tp_sta_det) {
+        log.debug("REST request to get M4sllTpStaDet : {}", id_organization + "|" + tsd_id_tp_sta_det);
         M4sllTpStaDetId id = new M4sllTpStaDetId();
-        id.setTsdIdTpStaDet(tsd_id_tp_sta_det);
         id.setIdOrganization(id_organization);
+        id.setTsdIdTpStaDet(tsd_id_tp_sta_det);
 
         Optional<M4sllTpStaDet> m4sll_tp_sta_det = m4sllTpStaDetRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(m4sll_tp_sta_det);
     }
 
 
-    @DeleteMapping("/m4sll_tp_sta_det/{tsd_id_tp_sta_det}/{id_organization}")
-    public ResponseEntity<Void> deleteM4sllTpStaDet(@PathVariable("tsd_id_tp_sta_det") String tsd_id_tp_sta_det, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to delete m4sll_tp_sta_det : {}", tsd_id_tp_sta_det + "|" + id_organization);
+    @DeleteMapping("/m4sll_tp_sta_det/{id_organization}/{tsd_id_tp_sta_det}")
+    public ResponseEntity<Void> deleteM4sllTpStaDet(@PathVariable("id_organization") String id_organization, @PathVariable("tsd_id_tp_sta_det") String tsd_id_tp_sta_det) {
+        log.debug("REST request to delete m4sll_tp_sta_det : {}", id_organization + "|" + tsd_id_tp_sta_det);
         M4sllTpStaDetId id = new M4sllTpStaDetId();
-        id.setTsdIdTpStaDet(tsd_id_tp_sta_det);
         id.setIdOrganization(id_organization);
+        id.setTsdIdTpStaDet(tsd_id_tp_sta_det);
 
         m4sllTpStaDetRepository.deleteById(id);
         return ResponseEntity

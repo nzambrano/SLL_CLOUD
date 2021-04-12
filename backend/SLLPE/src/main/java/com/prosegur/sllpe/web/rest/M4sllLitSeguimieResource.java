@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/sllpe")
 @Transactional
 public class M4sllLitSeguimieResource {
 
@@ -43,8 +43,8 @@ public class M4sllLitSeguimieResource {
         Long id_lis_secuencia = m4sllLitSeguimieServices.UltimaSecuencia(m4sll_lit_seguimie);
 
         id.setLisSecuencia(id_lis_secuencia);
-        id.setLitIdLitigio(m4sll_lit_seguimie.getId().getLitIdLitigio());
         id.setIdOrganization(m4sll_lit_seguimie.getId().getIdOrganization());
+        id.setLitIdLitigio(m4sll_lit_seguimie.getId().getLitIdLitigio());
 
         m4sll_lit_seguimie.setId(id);
         M4sllLitSeguimie result = m4sllLitSeguimieRepository.save(m4sll_lit_seguimie);
@@ -76,11 +76,11 @@ public class M4sllLitSeguimieResource {
         return ResponseEntity.ok().body(M4sllLitSeguimieAll);
     }
 
-    @GetMapping("/m4sll_lit_seguimie/{lit_id_litigio}/{id_organization}")
-    public ResponseEntity<List<M4sllLitSeguimie>> getM4sllLitSeguimie(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to get M4sllLitSeguimie : {}", lit_id_litigio + "|" + id_organization);
+    @GetMapping("/m4sll_lit_seguimie/{id_organization}/{lit_id_litigio}")
+    public ResponseEntity<List<M4sllLitSeguimie>> getM4sllLitSeguimie(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
+        log.debug("REST request to get M4sllLitSeguimie : {}", id_organization + "|" + lit_id_litigio);
 
-        List<M4sllLitSeguimie> M4sllLitSeguimieByInput = m4sllLitSeguimieRepository.findByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
+        List<M4sllLitSeguimie> M4sllLitSeguimieByInput = m4sllLitSeguimieRepository.findByIdOrganizationLitIdLitigio(id_organization, lit_id_litigio);
         return ResponseEntity.ok().body(M4sllLitSeguimieByInput);
     }
 
@@ -93,21 +93,21 @@ public class M4sllLitSeguimieResource {
     }
 
     /*
-      @GetMapping("/m4sll_lit_seguimie/{lit_id_litigio}/{id_organization}/{lis_secuencia}")
-      public ResponseEntity<M4sllLitSeguimie> getM4sllLitSeguimie(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization, @PathVariable("lis_secuencia") Long lis_secuencia) {
-          log.debug("REST request to get M4sllLitSeguimie : {}", lit_id_litigio + "|" + id_organization + "|" + lis_secuencia);
+      @GetMapping("/m4sll_lit_seguimie/{id_organization}/{lit_id_litigio}/{lis_secuencia}")
+      public ResponseEntity<M4sllLitSeguimie> getM4sllLitSeguimie(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("lis_secuencia") Long lis_secuencia) {
+          log.debug("REST request to get M4sllLitSeguimie : {}", id_organization + "|" + lit_id_litigio + "|" + lis_secuencia);
           M4sllLitSeguimieId id = new M4sllLitSeguimieId();
-          id.setLitIdLitigio(lit_id_litigio); id.setIdOrganization(id_organization);
+          id.setIdOrganization(id_organization); id.setLitIdLitigio(lit_id_litigio);
           id.setLisSecuencia(lis_secuencia);
 
           Optional<M4sllLitSeguimie> m4sll_lit_seguimie = m4sllLitSeguimieRepository.findById(id);
           return ResponseUtil.wrapOrNotFound(m4sll_lit_seguimie);
       }
 
-      @DeleteMapping("/m4sll_lit_seguimie/{lit_id_litigio}/{id_organization}")
-      public ResponseEntity<Void> deleteM4sllLitSeguimie(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to delete m4sll_lit_seguimie : {}", lit_id_litigio + "|" + id_organization);
-        List<M4sllLitSeguimie> M4sllLitSeguimieByInput = m4sllLitSeguimieRepository.findByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
+      @DeleteMapping("/m4sll_lit_seguimie/{id_organization}/{lit_id_litigio}")
+      public ResponseEntity<Void> deleteM4sllLitSeguimie(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
+        log.debug("REST request to delete m4sll_lit_seguimie : {}", id_organization + "|" + lit_id_litigio);
+        List<M4sllLitSeguimie> M4sllLitSeguimieByInput = m4sllLitSeguimieRepository.findByIdOrganizationLitIdLitigio(id_organization, lit_id_litigio);
 
         m4sllLitSeguimieRepository.deleteAll(M4sllLitSeguimieByInput);
         return ResponseEntity
@@ -117,12 +117,12 @@ public class M4sllLitSeguimieResource {
     }
     */
 
-    @DeleteMapping("/m4sll_lit_seguimie/{lit_id_litigio}/{id_organization}/{lis_secuencia}")
-    public ResponseEntity<Void> deleteM4sllLitSeguimie(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization, @PathVariable("lis_secuencia") Long lis_secuencia) {
-        log.debug("REST request to delete m4sll_lit_seguimie : {}", lit_id_litigio + "|" + id_organization + "|" + lis_secuencia);
+    @DeleteMapping("/m4sll_lit_seguimie/{id_organization}/{lit_id_litigio}/{lis_secuencia}")
+    public ResponseEntity<Void> deleteM4sllLitSeguimie(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("lis_secuencia") Long lis_secuencia) {
+        log.debug("REST request to delete m4sll_lit_seguimie : {}", id_organization + "|" + lit_id_litigio + "|" + lis_secuencia);
         M4sllLitSeguimieId id = new M4sllLitSeguimieId();
-        id.setLitIdLitigio(lit_id_litigio);
         id.setIdOrganization(id_organization);
+        id.setLitIdLitigio(lit_id_litigio);
         id.setLisSecuencia(lis_secuencia);
 
         m4sllLitSeguimieRepository.deleteById(id);

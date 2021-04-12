@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/sllpe")
 @Transactional
 
 public class M4sllTpEntidadesResource {
@@ -68,24 +68,24 @@ public class M4sllTpEntidadesResource {
         return ResponseEntity.ok().body(M4sllTpEntidadesAll);
     }
 
-    @GetMapping("/m4sll_tp_entidades/{tpe_id_tp_entidad}/{id_organization}")
-    public ResponseEntity<M4sllTpEntidades> getM4sllTpEntidades(@PathVariable("tpe_id_tp_entidad") String tpe_id_tp_entidad, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to get M4sllTpEntidades : {}", tpe_id_tp_entidad + "|" + id_organization);
+    @GetMapping("/m4sll_tp_entidades/{id_organization}/{tpe_id_tp_entidad}")
+    public ResponseEntity<M4sllTpEntidades> getM4sllTpEntidades(@PathVariable("id_organization") String id_organization, @PathVariable("tpe_id_tp_entidad") String tpe_id_tp_entidad) {
+        log.debug("REST request to get M4sllTpEntidades : {}", id_organization + "|" + tpe_id_tp_entidad);
         M4sllTpEntidadesId id = new M4sllTpEntidadesId();
-        id.setTpeIdTpEntidad(tpe_id_tp_entidad);
         id.setIdOrganization(id_organization);
+        id.setTpeIdTpEntidad(tpe_id_tp_entidad);
 
         Optional<M4sllTpEntidades> m4sll_tp_entidades = m4sllTpEntidadesRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(m4sll_tp_entidades);
     }
 
 
-    @DeleteMapping("/m4sll_tp_entidades/{tpe_id_tp_entidad}/{id_organization}")
-    public ResponseEntity<Void> deleteM4sllTpEntidades(@PathVariable("tpe_id_tp_entidad") String tpe_id_tp_entidad, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to delete m4sll_tp_entidades : {}", tpe_id_tp_entidad + "|" + id_organization);
+    @DeleteMapping("/m4sll_tp_entidades/{id_organization}/{tpe_id_tp_entidad}")
+    public ResponseEntity<Void> deleteM4sllTpEntidades(@PathVariable("id_organization") String id_organization, @PathVariable("tpe_id_tp_entidad") String tpe_id_tp_entidad) {
+        log.debug("REST request to delete m4sll_tp_entidades : {}", id_organization + "|" + tpe_id_tp_entidad);
         M4sllTpEntidadesId id = new M4sllTpEntidadesId();
-        id.setTpeIdTpEntidad(tpe_id_tp_entidad);
         id.setIdOrganization(id_organization);
+        id.setTpeIdTpEntidad(tpe_id_tp_entidad);
 
         m4sllTpEntidadesRepository.deleteById(id);
         return ResponseEntity

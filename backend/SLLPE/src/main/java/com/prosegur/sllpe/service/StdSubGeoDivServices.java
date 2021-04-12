@@ -21,6 +21,6 @@ public class StdSubGeoDivServices {
     }
 
     public String UltimaSecuencia(StdSubGeoDiv stdSubGeoDiv) {
-        return StdSubGeoDivRepository.obtenerUltimaSecuencia(stdSubGeoDiv.getId().getStdIdGeoDiv(), stdSubGeoDiv.getId().getStdIdCountry(), stdSubGeoDiv.getId().getIdOrganization());
+        return StdSubGeoDivRepository.obtenerUltimaSecuencia(stdSubGeoDiv.getId().getIdOrganization(), stdSubGeoDiv.getId().getStdIdCountry(), stdSubGeoDiv.getId().getStdIdGeoDiv());
     }
 }

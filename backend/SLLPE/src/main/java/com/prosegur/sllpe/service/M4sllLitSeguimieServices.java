@@ -21,6 +21,6 @@ public class M4sllLitSeguimieServices {
     }
 
     public Long UltimaSecuencia(M4sllLitSeguimie m4sllLitSeguimie) {
-        return M4sllLitSeguimieRepository.obtenerUltimaSecuencia(m4sllLitSeguimie.getId().getLitIdLitigio(), m4sllLitSeguimie.getId().getIdOrganization());
+        return M4sllLitSeguimieRepository.obtenerUltimaSecuencia(m4sllLitSeguimie.getId().getIdOrganization(), m4sllLitSeguimie.getId().getLitIdLitigio());
     }
 }

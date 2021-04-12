@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/sllpe")
 @Transactional
 public class StdSubGeoDivResource {
 
@@ -43,9 +43,9 @@ public class StdSubGeoDivResource {
         String id_std_id_sub_geo_div = stdSubGeoDivServices.UltimaSecuencia(std_sub_geo_div);
 
         id.setStdIdSubGeoDiv(id_std_id_sub_geo_div);
-        id.setStdIdGeoDiv(std_sub_geo_div.getId().getStdIdGeoDiv());
-        id.setStdIdCountry(std_sub_geo_div.getId().getStdIdCountry());
         id.setIdOrganization(std_sub_geo_div.getId().getIdOrganization());
+        id.setStdIdCountry(std_sub_geo_div.getId().getStdIdCountry());
+        id.setStdIdGeoDiv(std_sub_geo_div.getId().getStdIdGeoDiv());
 
         std_sub_geo_div.setId(id);
         StdSubGeoDiv result = stdSubGeoDivRepository.save(std_sub_geo_div);
@@ -77,31 +77,31 @@ public class StdSubGeoDivResource {
         return ResponseEntity.ok().body(StdSubGeoDivAll);
     }
 
-    @GetMapping("/std_sub_geo_div/{std_id_geo_div}/{std_id_country}/{id_organization}")
-    public ResponseEntity<List<StdSubGeoDiv>> getStdSubGeoDiv(@PathVariable("std_id_geo_div") String std_id_geo_div, @PathVariable("std_id_country") String std_id_country, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to get StdSubGeoDiv : {}", std_id_geo_div + "|" + std_id_country + "|" + id_organization);
+    @GetMapping("/std_sub_geo_div/{id_organization}/{std_id_country}/{std_id_geo_div}")
+    public ResponseEntity<List<StdSubGeoDiv>> getStdSubGeoDiv(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_country") String std_id_country, @PathVariable("std_id_geo_div") String std_id_geo_div) {
+        log.debug("REST request to get StdSubGeoDiv : {}", id_organization + "|" + std_id_country + "|" + std_id_geo_div);
 
-        List<StdSubGeoDiv> StdSubGeoDivByInput = stdSubGeoDivRepository.findByStdIdGeoDivStdIdCountryIdOrganization(std_id_geo_div, std_id_country, id_organization);
+        List<StdSubGeoDiv> StdSubGeoDivByInput = stdSubGeoDivRepository.findByIdOrganizationStdIdCountryStdIdGeoDiv(id_organization, std_id_country, std_id_geo_div);
         return ResponseEntity.ok().body(StdSubGeoDivByInput);
     }
 
 
     /*
-      @GetMapping("/std_sub_geo_div/{std_id_geo_div}/{std_id_country}/{id_organization}/{std_id_sub_geo_div}")
-      public ResponseEntity<StdSubGeoDiv> getStdSubGeoDiv(@PathVariable("std_id_geo_div") String std_id_geo_div, @PathVariable("std_id_country") String std_id_country, @PathVariable("id_organization") String id_organization, @PathVariable("std_id_sub_geo_div") String std_id_sub_geo_div) {
-          log.debug("REST request to get StdSubGeoDiv : {}", std_id_geo_div + "|" + std_id_country + "|" + id_organization + "|" + std_id_sub_geo_div);
+      @GetMapping("/std_sub_geo_div/{id_organization}/{std_id_country}/{std_id_geo_div}/{std_id_sub_geo_div}")
+      public ResponseEntity<StdSubGeoDiv> getStdSubGeoDiv(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_country") String std_id_country, @PathVariable("std_id_geo_div") String std_id_geo_div, @PathVariable("std_id_sub_geo_div") String std_id_sub_geo_div) {
+          log.debug("REST request to get StdSubGeoDiv : {}", id_organization + "|" + std_id_country + "|" + std_id_geo_div + "|" + std_id_sub_geo_div);
           StdSubGeoDivId id = new StdSubGeoDivId();
-          id.setStdIdGeoDiv(std_id_geo_div); id.setStdIdCountry(std_id_country); id.setIdOrganization(id_organization);
+          id.setIdOrganization(id_organization); id.setStdIdCountry(std_id_country); id.setStdIdGeoDiv(std_id_geo_div);
           id.setStdIdSubGeoDiv(std_id_sub_geo_div);
 
           Optional<StdSubGeoDiv> std_sub_geo_div = stdSubGeoDivRepository.findById(id);
           return ResponseUtil.wrapOrNotFound(std_sub_geo_div);
       }
 
-      @DeleteMapping("/std_sub_geo_div/{std_id_geo_div}/{std_id_country}/{id_organization}")
-      public ResponseEntity<Void> deleteStdSubGeoDiv(@PathVariable("std_id_geo_div") String std_id_geo_div, @PathVariable("std_id_country") String std_id_country, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to delete std_sub_geo_div : {}", std_id_geo_div + "|" + std_id_country + "|" + id_organization);
-        List<StdSubGeoDiv> StdSubGeoDivByInput = stdSubGeoDivRepository.findByStdIdGeoDivStdIdCountryIdOrganization(std_id_geo_div, std_id_country, id_organization);
+      @DeleteMapping("/std_sub_geo_div/{id_organization}/{std_id_country}/{std_id_geo_div}")
+      public ResponseEntity<Void> deleteStdSubGeoDiv(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_country") String std_id_country, @PathVariable("std_id_geo_div") String std_id_geo_div) {
+        log.debug("REST request to delete std_sub_geo_div : {}", id_organization + "|" + std_id_country + "|" + std_id_geo_div);
+        List<StdSubGeoDiv> StdSubGeoDivByInput = stdSubGeoDivRepository.findByIdOrganizationStdIdCountryStdIdGeoDiv(id_organization, std_id_country, std_id_geo_div);
 
         stdSubGeoDivRepository.deleteAll(StdSubGeoDivByInput);
         return ResponseEntity
@@ -111,13 +111,13 @@ public class StdSubGeoDivResource {
     }
     */
 
-    @DeleteMapping("/std_sub_geo_div/{std_id_geo_div}/{std_id_country}/{id_organization}/{std_id_sub_geo_div}")
-    public ResponseEntity<Void> deleteStdSubGeoDiv(@PathVariable("std_id_geo_div") String std_id_geo_div, @PathVariable("std_id_country") String std_id_country, @PathVariable("id_organization") String id_organization, @PathVariable("std_id_sub_geo_div") String std_id_sub_geo_div) {
-        log.debug("REST request to delete std_sub_geo_div : {}", std_id_geo_div + "|" + std_id_country + "|" + id_organization + "|" + std_id_sub_geo_div);
+    @DeleteMapping("/std_sub_geo_div/{id_organization}/{std_id_country}/{std_id_geo_div}/{std_id_sub_geo_div}")
+    public ResponseEntity<Void> deleteStdSubGeoDiv(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_country") String std_id_country, @PathVariable("std_id_geo_div") String std_id_geo_div, @PathVariable("std_id_sub_geo_div") String std_id_sub_geo_div) {
+        log.debug("REST request to delete std_sub_geo_div : {}", id_organization + "|" + std_id_country + "|" + std_id_geo_div + "|" + std_id_sub_geo_div);
         StdSubGeoDivId id = new StdSubGeoDivId();
-        id.setStdIdGeoDiv(std_id_geo_div);
-        id.setStdIdCountry(std_id_country);
         id.setIdOrganization(id_organization);
+        id.setStdIdCountry(std_id_country);
+        id.setStdIdGeoDiv(std_id_geo_div);
         id.setStdIdSubGeoDiv(std_id_sub_geo_div);
 
         stdSubGeoDivRepository.deleteById(id);

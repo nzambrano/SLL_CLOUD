@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/sllpe")
 @Transactional
 
 public class StdLegEntResource {
@@ -68,24 +68,24 @@ public class StdLegEntResource {
         return ResponseEntity.ok().body(StdLegEntAll);
     }
 
-    @GetMapping("/std_leg_ent/{std_id_leg_ent}/{id_organization}")
-    public ResponseEntity<StdLegEnt> getStdLegEnt(@PathVariable("std_id_leg_ent") String std_id_leg_ent, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to get StdLegEnt : {}", std_id_leg_ent + "|" + id_organization);
+    @GetMapping("/std_leg_ent/{id_organization}/{std_id_leg_ent}")
+    public ResponseEntity<StdLegEnt> getStdLegEnt(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_leg_ent") String std_id_leg_ent) {
+        log.debug("REST request to get StdLegEnt : {}", id_organization + "|" + std_id_leg_ent);
         StdLegEntId id = new StdLegEntId();
-        id.setStdIdLegEnt(std_id_leg_ent);
         id.setIdOrganization(id_organization);
+        id.setStdIdLegEnt(std_id_leg_ent);
 
         Optional<StdLegEnt> std_leg_ent = stdLegEntRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(std_leg_ent);
     }
 
 
-    @DeleteMapping("/std_leg_ent/{std_id_leg_ent}/{id_organization}")
-    public ResponseEntity<Void> deleteStdLegEnt(@PathVariable("std_id_leg_ent") String std_id_leg_ent, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to delete std_leg_ent : {}", std_id_leg_ent + "|" + id_organization);
+    @DeleteMapping("/std_leg_ent/{id_organization}/{std_id_leg_ent}")
+    public ResponseEntity<Void> deleteStdLegEnt(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_leg_ent") String std_id_leg_ent) {
+        log.debug("REST request to delete std_leg_ent : {}", id_organization + "|" + std_id_leg_ent);
         StdLegEntId id = new StdLegEntId();
-        id.setStdIdLegEnt(std_id_leg_ent);
         id.setIdOrganization(id_organization);
+        id.setStdIdLegEnt(std_id_leg_ent);
 
         stdLegEntRepository.deleteById(id);
         return ResponseEntity

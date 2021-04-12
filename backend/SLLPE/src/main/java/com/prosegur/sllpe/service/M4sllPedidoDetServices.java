@@ -21,6 +21,6 @@ public class M4sllPedidoDetServices {
     }
 
     public Long UltimaSecuencia(M4sllPedidoDet m4sllPedidoDet) {
-        return M4sllPedidoDetRepository.obtenerUltimaSecuencia(m4sllPedidoDet.getId().getTpeIdPedido(), m4sllPedidoDet.getId().getLitIdLitigio(), m4sllPedidoDet.getId().getIdOrganization());
+        return M4sllPedidoDetRepository.obtenerUltimaSecuencia(m4sllPedidoDet.getId().getIdOrganization(), m4sllPedidoDet.getId().getLitIdLitigio(), m4sllPedidoDet.getId().getTpeIdPedido());
     }
 }
