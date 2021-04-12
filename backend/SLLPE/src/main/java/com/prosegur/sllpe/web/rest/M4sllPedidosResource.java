@@ -24,7 +24,8 @@ import java.util.Optional;
 @Transactional
 
 public class M4sllPedidosResource {
-    private String idOrganization = "0050";
+    @Value("${sllpe.idOrganization.code}")
+    private String idOrganization;
     private final Logger log = LoggerFactory.getLogger(M4sllPedidosResource.class);
     private static final String ENTITY_NAME = "sllpeM4sllPedidos";
     @Value("${jhipster.clientApp.name}")

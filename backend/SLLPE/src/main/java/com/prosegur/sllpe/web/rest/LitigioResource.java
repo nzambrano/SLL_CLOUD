@@ -89,8 +89,8 @@ public class LitigioResource {
         map.put("PEDIDOS", pedidosRepository.findByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio));
         map.put("SLL_FASES", fasesRepository.getFases(idOrganization, litIdLitigio));
         map.put("SLL_PROV", provisionesRepository.getProvisionByLitigio(idOrganization, litIdLitigio));
-        map.put("SLL_PAGOS", pagosRepository.findByLitIdLitigioIdOrganization(idOrganization, litIdLitigio));
-        map.put("SLL_DOC_LITIGIOS", docLitigiosRepository.findByLitIdLitigioIdOrganization(idOrganization, litIdLitigio));
+        map.put("SLL_PAGOS", pagosRepository.findByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio));
+        map.put("SLL_DOC_LITIGIOS", docLitigiosRepository.findByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio));
 
         // map.put("abogados", abogadosRepository.findAbogados("0050"));
         // map.put("negocios", negociosRepository.findNegocioByPais("0050"));

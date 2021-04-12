@@ -52,6 +52,7 @@ hibernate_tmpl_cfg_xml = os.path.join(xml_tmpl_path, "hibernate.cfg.xml")
 new_sch_name_snake = stringcase.snakecase(sys.argv[1])
 new_tbl_name_snake = stringcase.snakecase(sys.argv[2])
 old_tbl_name_snake = stringcase.snakecase("table_name_placeholder")
+old_sch_name_snake = stringcase.snakecase("schema_name_placeholder")
 
 old_tbl_name_pascal = stringcase.pascalcase(old_tbl_name_snake)
 new_tbl_name_pascal = stringcase.pascalcase(new_tbl_name_snake)
@@ -675,6 +676,7 @@ remove_lines(
 # Buscar y reemplazar el nombre de la tabla en los archivos Repository Resource y Services
 # Este paso se debe hacer después de columnas!
 searchnreplace(rest_files_location, [(old_tbl_name_snake, new_tbl_name_snake)])
+searchnreplace(rest_files_location, [(old_sch_name_snake, new_sch_name_snake)])
 
 # Aplicar indentacion y formato a los archivos generados
 # http://astyle.sourceforge.net/astyle.html

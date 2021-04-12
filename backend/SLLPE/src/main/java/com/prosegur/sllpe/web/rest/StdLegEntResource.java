@@ -79,6 +79,13 @@ public class StdLegEntResource {
         return ResponseUtil.wrapOrNotFound(std_leg_ent);
     }
 
+    @GetMapping("/std_leg_ent/{id_organization}")
+    public ResponseEntity<List<StdLegEnt>> getStdLegEnt(@PathVariable("id_organization") String id_organization) {
+        log.debug("REST request to get StdLegEnt : {}", id_organization);
+
+        List<StdLegEnt> StdLegEntByInput = stdLegEntRepository.findByIdOrganization(id_organization);
+        return ResponseEntity.ok().body(StdLegEntByInput);
+    }
 
     @DeleteMapping("/std_leg_ent/{id_organization}/{std_id_leg_ent}")
     public ResponseEntity<Void> deleteStdLegEnt(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_leg_ent") String std_id_leg_ent) {
