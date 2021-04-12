@@ -23,7 +23,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/sllpe")
 @Transactional
 
 public class M4sllProvisionesResource {
