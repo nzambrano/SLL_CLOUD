@@ -43,8 +43,8 @@ public class M4sllCpeCejpjDResource {
         Long id_ccd_id_secuencia = m4sllCpeCejpjDServices.UltimaSecuencia(m4sll_cpe_cejpj_d);
 
         id.setCcdIdSecuencia(id_ccd_id_secuencia);
-        id.setLitIdLitigio(m4sll_cpe_cejpj_d.getId().getLitIdLitigio());
         id.setIdOrganization(m4sll_cpe_cejpj_d.getId().getIdOrganization());
+        id.setLitIdLitigio(m4sll_cpe_cejpj_d.getId().getLitIdLitigio());
 
         m4sll_cpe_cejpj_d.setId(id);
         M4sllCpeCejpjD result = m4sllCpeCejpjDRepository.save(m4sll_cpe_cejpj_d);
@@ -76,11 +76,11 @@ public class M4sllCpeCejpjDResource {
         return ResponseEntity.ok().body(M4sllCpeCejpjDAll);
     }
 
-    @GetMapping("/m4sll_cpe_cejpj_d/{lit_id_litigio}/{id_organization}")
-    public ResponseEntity<List<M4sllCpeCejpjD>> getM4sllCpeCejpjD(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to get M4sllCpeCejpjD : {}", lit_id_litigio + "|" + id_organization);
+    @GetMapping("/m4sll_cpe_cejpj_d/{id_organization}/{lit_id_litigio}")
+    public ResponseEntity<List<M4sllCpeCejpjD>> getM4sllCpeCejpjD(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
+        log.debug("REST request to get M4sllCpeCejpjD : {}", id_organization + "|" + lit_id_litigio);
 
-        List<M4sllCpeCejpjD> M4sllCpeCejpjDByInput = m4sllCpeCejpjDRepository.findByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
+        List<M4sllCpeCejpjD> M4sllCpeCejpjDByInput = m4sllCpeCejpjDRepository.findByIdOrganizationLitIdLitigio(id_organization, lit_id_litigio);
         return ResponseEntity.ok().body(M4sllCpeCejpjDByInput);
     }
 
@@ -93,21 +93,21 @@ public class M4sllCpeCejpjDResource {
     }
 
     /*
-      @GetMapping("/m4sll_cpe_cejpj_d/{lit_id_litigio}/{id_organization}/{ccd_id_secuencia}")
-      public ResponseEntity<M4sllCpeCejpjD> getM4sllCpeCejpjD(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization, @PathVariable("ccd_id_secuencia") Long ccd_id_secuencia) {
-          log.debug("REST request to get M4sllCpeCejpjD : {}", lit_id_litigio + "|" + id_organization + "|" + ccd_id_secuencia);
+      @GetMapping("/m4sll_cpe_cejpj_d/{id_organization}/{lit_id_litigio}/{ccd_id_secuencia}")
+      public ResponseEntity<M4sllCpeCejpjD> getM4sllCpeCejpjD(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("ccd_id_secuencia") Long ccd_id_secuencia) {
+          log.debug("REST request to get M4sllCpeCejpjD : {}", id_organization + "|" + lit_id_litigio + "|" + ccd_id_secuencia);
           M4sllCpeCejpjDId id = new M4sllCpeCejpjDId();
-          id.setLitIdLitigio(lit_id_litigio); id.setIdOrganization(id_organization);
+          id.setIdOrganization(id_organization); id.setLitIdLitigio(lit_id_litigio);
           id.setCcdIdSecuencia(ccd_id_secuencia);
 
           Optional<M4sllCpeCejpjD> m4sll_cpe_cejpj_d = m4sllCpeCejpjDRepository.findById(id);
           return ResponseUtil.wrapOrNotFound(m4sll_cpe_cejpj_d);
       }
 
-      @DeleteMapping("/m4sll_cpe_cejpj_d/{lit_id_litigio}/{id_organization}")
-      public ResponseEntity<Void> deleteM4sllCpeCejpjD(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to delete m4sll_cpe_cejpj_d : {}", lit_id_litigio + "|" + id_organization);
-        List<M4sllCpeCejpjD> M4sllCpeCejpjDByInput = m4sllCpeCejpjDRepository.findByLitIdLitigioIdOrganization(lit_id_litigio, id_organization);
+      @DeleteMapping("/m4sll_cpe_cejpj_d/{id_organization}/{lit_id_litigio}")
+      public ResponseEntity<Void> deleteM4sllCpeCejpjD(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
+        log.debug("REST request to delete m4sll_cpe_cejpj_d : {}", id_organization + "|" + lit_id_litigio);
+        List<M4sllCpeCejpjD> M4sllCpeCejpjDByInput = m4sllCpeCejpjDRepository.findByIdOrganizationLitIdLitigio(id_organization, lit_id_litigio);
 
         m4sllCpeCejpjDRepository.deleteAll(M4sllCpeCejpjDByInput);
         return ResponseEntity
@@ -117,12 +117,12 @@ public class M4sllCpeCejpjDResource {
     }
     */
 
-    @DeleteMapping("/m4sll_cpe_cejpj_d/{lit_id_litigio}/{id_organization}/{ccd_id_secuencia}")
-    public ResponseEntity<Void> deleteM4sllCpeCejpjD(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization, @PathVariable("ccd_id_secuencia") Long ccd_id_secuencia) {
-        log.debug("REST request to delete m4sll_cpe_cejpj_d : {}", lit_id_litigio + "|" + id_organization + "|" + ccd_id_secuencia);
+    @DeleteMapping("/m4sll_cpe_cejpj_d/{id_organization}/{lit_id_litigio}/{ccd_id_secuencia}")
+    public ResponseEntity<Void> deleteM4sllCpeCejpjD(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("ccd_id_secuencia") Long ccd_id_secuencia) {
+        log.debug("REST request to delete m4sll_cpe_cejpj_d : {}", id_organization + "|" + lit_id_litigio + "|" + ccd_id_secuencia);
         M4sllCpeCejpjDId id = new M4sllCpeCejpjDId();
-        id.setLitIdLitigio(lit_id_litigio);
         id.setIdOrganization(id_organization);
+        id.setLitIdLitigio(lit_id_litigio);
         id.setCcdIdSecuencia(ccd_id_secuencia);
 
         m4sllCpeCejpjDRepository.deleteById(id);

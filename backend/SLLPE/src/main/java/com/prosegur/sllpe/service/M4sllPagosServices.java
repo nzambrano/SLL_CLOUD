@@ -21,6 +21,6 @@ public class M4sllPagosServices {
     }
 
     public Long UltimaSecuencia(M4sllPagos m4sllPagos) {
-        return M4sllPagosRepository.obtenerUltimaSecuencia(m4sllPagos.getId().getLitIdLitigio(), m4sllPagos.getId().getIdOrganization());
+        return M4sllPagosRepository.obtenerUltimaSecuencia(m4sllPagos.getId().getIdOrganization(), m4sllPagos.getId().getLitIdLitigio());
     }
 }

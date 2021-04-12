@@ -68,12 +68,12 @@ public class M4sllCpeCejpjCResource {
         return ResponseEntity.ok().body(M4sllCpeCejpjCAll);
     }
 
-    @GetMapping("/m4sll_cpe_cejpj_c/{lit_id_litigio}/{id_organization}")
-    public ResponseEntity<M4sllCpeCejpjC> getM4sllCpeCejpjC(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to get M4sllCpeCejpjC : {}", lit_id_litigio + "|" + id_organization);
+    @GetMapping("/m4sll_cpe_cejpj_c/{id_organization}/{lit_id_litigio}")
+    public ResponseEntity<M4sllCpeCejpjC> getM4sllCpeCejpjC(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
+        log.debug("REST request to get M4sllCpeCejpjC : {}", id_organization + "|" + lit_id_litigio);
         M4sllCpeCejpjCId id = new M4sllCpeCejpjCId();
-        id.setLitIdLitigio(lit_id_litigio);
         id.setIdOrganization(id_organization);
+        id.setLitIdLitigio(lit_id_litigio);
 
         Optional<M4sllCpeCejpjC> m4sll_cpe_cejpj_c = m4sllCpeCejpjCRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(m4sll_cpe_cejpj_c);
@@ -87,12 +87,12 @@ public class M4sllCpeCejpjCResource {
         return ResponseEntity.ok().body(M4sllCpeCejpjCByInput);
     }
 
-    @DeleteMapping("/m4sll_cpe_cejpj_c/{lit_id_litigio}/{id_organization}")
-    public ResponseEntity<Void> deleteM4sllCpeCejpjC(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to delete m4sll_cpe_cejpj_c : {}", lit_id_litigio + "|" + id_organization);
+    @DeleteMapping("/m4sll_cpe_cejpj_c/{id_organization}/{lit_id_litigio}")
+    public ResponseEntity<Void> deleteM4sllCpeCejpjC(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
+        log.debug("REST request to delete m4sll_cpe_cejpj_c : {}", id_organization + "|" + lit_id_litigio);
         M4sllCpeCejpjCId id = new M4sllCpeCejpjCId();
-        id.setLitIdLitigio(lit_id_litigio);
         id.setIdOrganization(id_organization);
+        id.setLitIdLitigio(lit_id_litigio);
 
         m4sllCpeCejpjCRepository.deleteById(id);
         return ResponseEntity

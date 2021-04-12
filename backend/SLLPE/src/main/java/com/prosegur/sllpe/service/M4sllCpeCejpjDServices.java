@@ -21,6 +21,6 @@ public class M4sllCpeCejpjDServices {
     }
 
     public Long UltimaSecuencia(M4sllCpeCejpjD m4sllCpeCejpjD) {
-        return M4sllCpeCejpjDRepository.obtenerUltimaSecuencia(m4sllCpeCejpjD.getId().getLitIdLitigio(), m4sllCpeCejpjD.getId().getIdOrganization());
+        return M4sllCpeCejpjDRepository.obtenerUltimaSecuencia(m4sllCpeCejpjD.getId().getIdOrganization(), m4sllCpeCejpjD.getId().getLitIdLitigio());
     }
 }
