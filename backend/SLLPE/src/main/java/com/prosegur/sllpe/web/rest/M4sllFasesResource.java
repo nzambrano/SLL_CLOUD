@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/sllpe")
+@RequestMapping("/api")
 @Transactional
 
 public class M4sllFasesResource {
@@ -45,8 +45,8 @@ public class M4sllFasesResource {
     @PostMapping("/m4sll_fases")
     public ResponseEntity<List<M4sllFases>> createM4sllFases(@RequestBody List<M4sllFases> listFases)
     throws URISyntaxException {
-        log.debug("REST request to create m4sll_fases : {}", listFases); 
-        FasesServices faseServices = new FasesServices(m4sllfasesRepository); 
+        log.debug("REST request to create m4sll_fases : {}", listFases);
+        FasesServices faseServices = new FasesServices(m4sllfasesRepository);
         // faseServices.saveAllWithSecuencia(listFases);
         m4sllfasesRepository.saveAll(listFases);
         List<M4sllFases> result = listFases;
@@ -130,7 +130,7 @@ public class M4sllFasesResource {
         id.setIdOrganization(idOrganization);
         id.setLitIdLitigio(litIdLitigio);
         id.setTfaIdTpFase(tfaIdTpFase);
-                
+
         m4sllfasesRepository.deleteById(id);
         return ResponseEntity.noContent()
                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))

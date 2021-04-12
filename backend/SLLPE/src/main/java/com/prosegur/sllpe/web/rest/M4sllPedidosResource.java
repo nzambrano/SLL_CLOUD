@@ -20,11 +20,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/sllpe")
+@RequestMapping("/api")
 @Transactional
 
 public class M4sllPedidosResource {
-    private string idOrganization = "0050";
+    private String idOrganization = "0050";
     private final Logger log = LoggerFactory.getLogger(M4sllPedidosResource.class);
     private static final String ENTITY_NAME = "sllpeM4sllPedidos";
     @Value("${jhipster.clientApp.name}")
@@ -70,7 +70,7 @@ public class M4sllPedidosResource {
 
     @GetMapping("/m4sll_pedidos/{lit_id_litigio}/{tpe_id_pedido}")
     public ResponseEntity<M4sllPedidos> getM4sllPedidos(@PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("tpe_id_pedido") String tpe_id_pedido) {
-        log.debug("REST request to get M4sllPedidos : {}", id_organization + "|" + lit_id_litigio + "|" + tpe_id_pedido);
+        log.debug("REST request to get M4sllPedidos : {}", idOrganization + "|" + lit_id_litigio + "|" + tpe_id_pedido);
         M4sllPedidosId id = new M4sllPedidosId();
         id.setIdOrganization(idOrganization);
         id.setLitIdLitigio(lit_id_litigio);
