@@ -21,7 +21,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/sllpe")
+@RequestMapping("/api")
 @Transactional
 
 public class M4sllAutorReuResource {
@@ -90,7 +90,7 @@ public class M4sllAutorReuResource {
                                            ""//m4sll_autor_reu.getId().toString()
                                            )).body(result);
     }
-   
+
     /*
     @GetMapping("/m4sll_autor_reu/{id_organization}/{lit_id_litigio}/{aur_autor_reu}")
     public ResponseEntity<List<M4sllAutorReu>> getAutoresByLitigio(
@@ -122,7 +122,7 @@ public class M4sllAutorReuResource {
         return ResponseEntity.ok().body(M4llvWAutorReuList);
     }
 
-    
+
 
     @DeleteMapping("/m4sll_autor_reu/{lit_id_litigio}/{aur_secuencia}")
     public ResponseEntity<Void> deleteM4sllAutorReu(

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/sllpe")
+@RequestMapping("/api")
 @Transactional
 
 public class StdPersonResource {
@@ -49,7 +49,7 @@ public class StdPersonResource {
                .body(result);
     }
 
-    
+
     @PutMapping("/std_person")
     public ResponseEntity<StdPerson> updateStdPerson(@RequestBody StdPerson std_person)
     throws URISyntaxException {
@@ -90,7 +90,7 @@ public class StdPersonResource {
         List<StdPerson> StdPersonByInput = stdPersonRepository.findByStdIdPerson(std_id_person);
         return ResponseEntity.ok().body(StdPersonByInput);
     }
-    
+
     @GetMapping("/std_person/name/{name}")
     public ResponseEntity<List<StdPerson>> getStdPersonByName(@PathVariable("name") String name) {
         log.debug("REST request to get StdPerson : {}", name);

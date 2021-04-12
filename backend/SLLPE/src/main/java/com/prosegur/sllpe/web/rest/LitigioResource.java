@@ -13,15 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.prosegur.sllpe.domain.M4sllLitigiosId;
 
 import com.prosegur.sllpe.repository.M4sllFasesRepository;
 import com.prosegur.sllpe.repository.M4sllLitigiosRepository;
 import com.prosegur.sllpe.repository.M4sllPedidosRepository;
 import com.prosegur.sllpe.repository.M4sllProvisionesRepository;
+import com.prosegur.sllpe.repository.M4sllVwAutorReuCustomRepository;
 import com.prosegur.sllpe.repository.M4sllPagosRepository;
 import com.prosegur.sllpe.repository.M4sllDocLitigiosRepository;
-import com.prosegur.sllpe.repository.SllVwAutorReuRepository;
+
 
 
 
@@ -35,9 +37,10 @@ public class LitigioResource {
     private final Logger log = LoggerFactory.getLogger(LitigioResource.class);
 
     private M4sllLitigiosRepository litigiosRepository;
+    private M4sllVwAutorReuCustomRepository m4sllVwAutorReuCustomRepository;
     private M4sllPedidosRepository pedidosRepository;
     private M4sllFasesRepository fasesRepository;
-    private M4sllVwAutorReuCustomRepository m4sllVwAutorReuCustomRepository;
+    
     private M4sllProvisionesRepository provisionesRepository;
     private M4sllPagosRepository pagosRepository;
     private M4sllDocLitigiosRepository docLitigiosRepository;
