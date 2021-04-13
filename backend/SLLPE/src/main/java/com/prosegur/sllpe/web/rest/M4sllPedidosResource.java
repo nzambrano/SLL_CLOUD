@@ -20,12 +20,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/sllpe")
+@RequestMapping("/api")
 @Transactional
 
 public class M4sllPedidosResource {
-    @Value("${sllpe.idOrganization.code}")
-    private String idOrganization;
+    // @Value("${sllpe.idOrganization.code}")
+    // String SLLPEIDORGANIZATION = System.getenv("SLLPEIDORGANIZATION");
+    private String idOrganization = System.getenv("SLLPEIDORGANIZATION");;
     private final Logger log = LoggerFactory.getLogger(M4sllPedidosResource.class);
     private static final String ENTITY_NAME = "sllpeM4sllPedidos";
     @Value("${jhipster.clientApp.name}")

@@ -128,7 +128,8 @@ public class MaestrosResource {
     public ResponseEntity<Object> listar() {
         List<HashMap<String, Object>> entities = new ArrayList<HashMap<String, Object>>();
         HashMap<String, Object> map = new HashMap<>();
-        map.put("STD_GEO_DIV",             stdGeoDivRepository.findAll());
+        // StdIdCountry = 7 es  Perú
+        map.put("STD_GEO_DIV",             stdGeoDivRepository.findByIdOrganizationStdIdCountry("0050","7"));
         map.put("M4SLL_NEGOCIOS",          m4sllNegociosRepository.findByIdOrganization("0050"));
         map.put("STD_LEG_ENT",             stdLegEntRepository.findByIdOrganization("0050"));
         map.put("M4SLL_MT_ABOGADOS",       m4sllMtAbogadosRepository.findByIdOrganization("0050"));

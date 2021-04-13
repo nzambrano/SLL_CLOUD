@@ -21,7 +21,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/sllpe")
+@RequestMapping("/api")
 @Transactional
 
 public class M4sllAutorReuResource {
