@@ -35,18 +35,18 @@ public class TableNamePlaceholderResource {
   }
 
   @PostMapping("/table_name_placeholder")
-  public ResponseEntity<TableNamePlaceholder> createTableNamePlaceholder(@RequestBody TableNamePlaceholder table_name_placeholder)
+  public ResponseEntity<TableNamePlaceholder> createTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
     throws URISyntaxException {
-    log.debug("REST request to create table_name_placeholder : {}", table_name_placeholder);
+    log.debug("REST request to create table_name_placeholder : {}", tableNamePlaceholder);
     TableNamePlaceholderId id = new TableNamePlaceholderId();
     TableNamePlaceholderServices tableNamePlaceholderServices = new TableNamePlaceholderServices(tableNamePlaceholderRepository);
-    ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(table_name_placeholder);
+    ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(tableNamePlaceholder);
 
     id.setSecPlaceholder(id_sec_placeholder);
-    id.setColsNotSecPlaceholder(table_name_placeholder.getId().getColsNotSecPlaceholder());
+    id.setColsNotSecPlaceholder(tableNamePlaceholder.getId().getColsNotSecPlaceholder());
 
-    table_name_placeholder.setId(id);
-    TableNamePlaceholder result = tableNamePlaceholderRepository.save(table_name_placeholder);
+    tableNamePlaceholder.setId(id);
+    TableNamePlaceholder result = tableNamePlaceholderRepository.save(tableNamePlaceholder);
     return ResponseEntity
       .created(new URI("/api/table_name_placeholder/" + result.getId()))
       .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
@@ -54,16 +54,16 @@ public class TableNamePlaceholderResource {
   }
 
   @PutMapping("/table_name_placeholder")
-  public ResponseEntity<TableNamePlaceholder> updateTableNamePlaceholder(@RequestBody TableNamePlaceholder table_name_placeholder)
+  public ResponseEntity<TableNamePlaceholder> updateTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
     throws URISyntaxException {
-    log.debug("REST request to update table_name_placeholder : {}", table_name_placeholder);
-    if (table_name_placeholder.getId() == null) {
+    log.debug("REST request to update table_name_placeholder : {}", tableNamePlaceholder);
+    if (tableNamePlaceholder.getId() == null) {
       throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
     }
-    TableNamePlaceholder result = tableNamePlaceholderRepository.save(table_name_placeholder);
+    TableNamePlaceholder result = tableNamePlaceholderRepository.save(tableNamePlaceholder);
     return ResponseEntity
       .ok()
-      .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, table_name_placeholder.getId().toString()))
+      .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, tableNamePlaceholder.getId().toString()))
       .body(result);
   }
 
@@ -99,8 +99,8 @@ public class TableNamePlaceholderResource {
         id.setColsNotSecPlaceholder(cols_not_sec_placeholder);        
         id.setSecPlaceholder(sec_placeholder);
 
-        Optional<TableNamePlaceholder> table_name_placeholder = tableNamePlaceholderRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(table_name_placeholder);
+        Optional<TableNamePlaceholder> tableNamePlaceholder = tableNamePlaceholderRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(tableNamePlaceholder);
     }
 
     @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}")

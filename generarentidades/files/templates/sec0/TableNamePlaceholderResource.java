@@ -37,11 +37,11 @@ public class TableNamePlaceholderResource {
     }
 
     @PostMapping("/table_name_placeholder")
-    public ResponseEntity<TableNamePlaceholder> createTableNamePlaceholder(@RequestBody TableNamePlaceholder table_name_placeholder)
+    public ResponseEntity<TableNamePlaceholder> createTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
             throws URISyntaxException {
-        log.debug("REST request to create table_name_placeholder : {}", table_name_placeholder);
+        log.debug("REST request to create table_name_placeholder : {}", tableNamePlaceholder);
 
-        TableNamePlaceholder result = tableNamePlaceholderRepository.save(table_name_placeholder);
+        TableNamePlaceholder result = tableNamePlaceholderRepository.save(tableNamePlaceholder);
         return ResponseEntity
                 .created(new URI("/api/table_name_placeholder/" + result.getId())).headers(HeaderUtil
                         .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
@@ -49,15 +49,15 @@ public class TableNamePlaceholderResource {
     }
 
     @PutMapping("/table_name_placeholder")
-    public ResponseEntity<TableNamePlaceholder> updateTableNamePlaceholder(@RequestBody TableNamePlaceholder table_name_placeholder)
+    public ResponseEntity<TableNamePlaceholder> updateTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
             throws URISyntaxException {
-        log.debug("REST request to update table_name_placeholder : {}", table_name_placeholder);
-        if (table_name_placeholder.getId() == null) {
+        log.debug("REST request to update table_name_placeholder : {}", tableNamePlaceholder);
+        if (tableNamePlaceholder.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        TableNamePlaceholder result = tableNamePlaceholderRepository.save(table_name_placeholder);
+        TableNamePlaceholder result = tableNamePlaceholderRepository.save(tableNamePlaceholder);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                table_name_placeholder.getId().toString())).body(result);
+                tableNamePlaceholder.getId().toString())).body(result);
     }
 
     @GetMapping("/table_name_placeholder")
@@ -74,8 +74,8 @@ public class TableNamePlaceholderResource {
     TableNamePlaceholderId id = new TableNamePlaceholderId();
     id.setColsNotSecPlaceholder(cols_not_sec_placeholder);        
 
-    Optional<TableNamePlaceholder> table_name_placeholder = tableNamePlaceholderRepository.findById(id);
-    return ResponseUtil.wrapOrNotFound(table_name_placeholder);
+    Optional<TableNamePlaceholder> tableNamePlaceholder = tableNamePlaceholderRepository.findById(id);
+    return ResponseUtil.wrapOrNotFound(tableNamePlaceholder);
   }
 
 //CustomLinesCustomGet1   @GetMapping("/table_name_placeholder/{colscustom_placeholder}")

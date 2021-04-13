@@ -268,7 +268,7 @@ if new_pks_names_sec_lst:
 
     repl_str = sep_str.join(
         [
-            stringcase.snakecase(pk) + " = :" + stringcase.snakecase(pk)
+            stringcase.snakecase(pk) + " = :" + stringcase.camelcase(pk)
             for pk in new_pks_names_not_sec_lst
         ]
     )
@@ -314,7 +314,7 @@ if new_pks_names_sec_lst:
             + " "
             + new_pks_datatypes_not_sec_lst[idx]
             + " "
-            + stringcase.snakecase(new_pks_names_not_sec_lst[idx])
+            + stringcase.camelcase(new_pks_names_not_sec_lst[idx])
             for idx in range(len(new_pks_names_not_sec_lst))
         ]
     )
@@ -344,7 +344,7 @@ if new_cust_cols_names_lst:
 
     repl_str = sep_str.join(
         [
-            stringcase.snakecase(pk) + " = :" + stringcase.snakecase(pk)
+            stringcase.snakecase(pk) + " = :" + stringcase.camelcase(pk)
             for pk in new_cust_cols_names_lst
         ]
     )
@@ -380,7 +380,7 @@ if new_cust_cols_names_lst:
             + " "
             + new_cust_cols_datatypes_lst[idx]
             + " "
-            + stringcase.snakecase(new_cust_cols_names_lst[idx])
+            + stringcase.camelcase(new_cust_cols_names_lst[idx])
             for idx in range(len(new_cust_cols_names_lst))
         ]
     )
@@ -390,8 +390,8 @@ if new_cust_cols_names_lst:
 
 ########## Services ##########
 if new_pks_names_sec_lst:
-    search_str = "(tableNamePlaceholder.getId().getColsNotSecPlaceholder())"
-    start_str = "("
+    search_str = "obtenerUltimaSecuencia(tableNamePlaceholder.getId().getColsNotSecPlaceholder())"
+    start_str = "obtenerUltimaSecuencia("
     sep_str = ", "
     end_str = ")"
 
@@ -419,7 +419,7 @@ if new_pks_names_sec_lst:
 
 ########## Resources ##########
 if new_pks_names_sec_lst:
-    search_str = "ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(table_name_placeholder);"
+    search_str = "ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(tableNamePlaceholder);"
     start_str = ""
     sep_str = ""
     end_str = ""
@@ -428,7 +428,7 @@ if new_pks_names_sec_lst:
         "ColsecDatatype",
         new_pks_datatypes_sec_lst[0])
     repl_str = repl_str.replace(
-        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
+        "sec_placeholder", stringcase.camelcase(new_pks_names_sec_lst[0])
     )
 
     new_str = start_str + repl_str + end_str
@@ -444,13 +444,13 @@ if new_pks_names_sec_lst:
         "SecPlaceholder", stringcase.pascalcase(new_pks_names_sec_lst[0])
     )
     repl_str = repl_str.replace(
-        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
+        "sec_placeholder", stringcase.camelcase(new_pks_names_sec_lst[0])
     )
 
     new_str = start_str + repl_str + end_str
     search_n_replace_lst.append((search_str, new_str))
 
-search_str = "id.setColsNotSecPlaceholder(table_name_placeholder.getId().getColsNotSecPlaceholder());"
+search_str = "id.setColsNotSecPlaceholder(tableNamePlaceholder.getId().getColsNotSecPlaceholder());"
 start_str = ""
 sep_str = " "
 end_str = ""
@@ -459,7 +459,7 @@ repl_str = sep_str.join(
     [
         "id.set"
         + stringcase.pascalcase(pk)
-        + "(table_name_placeholder.getId().get"
+        + "(tableNamePlaceholder.getId().get"
         + stringcase.pascalcase(pk)
         + "());"
         for pk in new_pks_names_not_sec_lst
@@ -499,7 +499,7 @@ start_str = r': {}", '
 sep_str = ' + "|" + '
 end_str = ""
 
-repl_str = sep_str.join([stringcase.snakecase(pk)
+repl_str = sep_str.join([stringcase.camelcase(pk)
                          for pk in new_pks_names_not_sec_lst])
 
 new_str = start_str + repl_str + end_str
@@ -512,7 +512,7 @@ if new_pks_names_sec_lst:
     end_str = ""
 
     repl_str = search_str.replace(
-        "debugsec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
+        "debugsec_placeholder", stringcase.camelcase(new_pks_names_sec_lst[0])
     )
 
     new_str = start_str + repl_str + end_str
@@ -523,7 +523,7 @@ start_str = "("
 sep_str = ", "
 end_str = ");"
 
-repl_str = sep_str.join([stringcase.snakecase(pk)
+repl_str = sep_str.join([stringcase.camelcase(pk)
                          for pk in new_pks_names_not_sec_lst])
 
 new_str = start_str + repl_str + end_str
@@ -554,7 +554,7 @@ if new_cust_cols_names_lst:
             + '") '
             + new_cust_cols_datatypes_lst[idx]
             + " "
-            + stringcase.snakecase(new_cust_cols_names_lst[idx])
+            + stringcase.camelcase(new_cust_cols_names_lst[idx])
             for idx in range(len(new_cust_cols_names_lst))
         ]
     )
@@ -568,7 +568,7 @@ if new_cust_cols_names_lst:
     end_str = ""
 
     repl_str = sep_str.join(
-        [stringcase.snakecase(cc) for cc in new_cust_cols_names_lst]
+        [stringcase.camelcase(cc) for cc in new_cust_cols_names_lst]
     )
 
     new_str = start_str + repl_str + end_str
@@ -580,7 +580,7 @@ if new_cust_cols_names_lst:
     end_str = ");"
 
     repl_str = sep_str.join(
-        [stringcase.snakecase(cc) for cc in new_cust_cols_names_lst]
+        [stringcase.camelcase(cc) for cc in new_cust_cols_names_lst]
     )
 
     new_str = start_str + repl_str + end_str
@@ -600,7 +600,7 @@ repl_str = sep_str.join(
         + '") '
         + new_pks_datatypes_not_sec_lst[idx]
         + " "
-        + stringcase.snakecase(new_pks_names_not_sec_lst[idx])
+        + stringcase.camelcase(new_pks_names_not_sec_lst[idx])
         for idx in range(len(new_pks_names_not_sec_lst))
     ]
 )
@@ -614,11 +614,16 @@ if new_pks_names_sec_lst:
     sep_str = ""
     end_str = ""
 
-    repl_str = search_str.replace(
-        "ColsecDatatype",
-        new_pks_datatypes_sec_lst[0])
-    repl_str = repl_str.replace(
-        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
+    repl_str = sep_str.join(
+        [
+            '@PathVariable("'
+            + stringcase.snakecase(new_pks_names_sec_lst[idx])
+            + '") '
+            + new_pks_datatypes_sec_lst[idx]
+            + " "
+            + stringcase.camelcase(new_pks_names_sec_lst[idx])
+            for idx in range(len(new_pks_names_sec_lst))
+        ]
     )
 
     new_str = start_str + repl_str + end_str
@@ -632,7 +637,7 @@ end_str = ""
 repl_str = sep_str.join(["id.set" +
                          stringcase.pascalcase(pk) +
                          "(" +
-                         stringcase.snakecase(pk) +
+                         stringcase.camelcase(pk) +
                          ");" for pk in new_pks_names_not_sec_lst])
 
 new_str = start_str + repl_str + end_str
@@ -645,7 +650,7 @@ if new_pks_names_sec_lst:
     end_str = ""
 
     repl_str = search_str.replace(
-        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
+        "sec_placeholder", stringcase.camelcase(new_pks_names_sec_lst[0])
     )
     repl_str = repl_str.replace(
         "SecPlaceholder", stringcase.pascalcase(new_pks_names_sec_lst[0])
@@ -665,7 +670,6 @@ files_location_lst = glob.glob(
         main_path,
         f"**\\{new_tbl_name_pascal}*.java"),
     recursive=True)
-print(files_location_lst)
 
 remove_lines(
     files_location_lst, [
