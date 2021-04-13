@@ -100,7 +100,20 @@ new_cust_cols_datatypes_lst = (
     else []
 )
 
-curr_template_path = os.path.join(templates_path, sys.argv[6])
+new_ev_cols_concat = sys.argv[6]
+new_ev_cols_names_lst = (
+    [evc.split("|")[0] for evc in new_ev_cols_concat.split(",")]
+    if new_ev_cols_concat
+    else []
+)
+new_ev_cols_datatypes_lst = (
+    [evc.split("|")[1] for evc in new_ev_cols_concat.split(",")]
+    if new_ev_cols_concat
+    else []
+)
+
+
+curr_template_path = os.path.join(templates_path, sys.argv[7])
 
 
 def remove_lines(files_in, lst_in):
@@ -418,6 +431,30 @@ if new_pks_names_sec_lst:
     search_n_replace_lst.append((search_str, new_str))
 
 ########## Resources ##########
+
+if new_ev_cols_names_lst:
+    search_str = '//CustomLinesColsEv    private ColsEvDatatype ColsEvNamePlaceholder = System.getenv("COLS_EV_NAMES_PLACEHOLDER");'
+    start_str = ""
+    sep_str = " "
+    end_str = ""
+
+    repl_str = sep_str.join(
+        [
+            'private '
+            + new_ev_cols_datatypes_lst[idx]
+            + ' '
+            + stringcase.camelcase(new_ev_cols_names_lst[idx])
+            + ' = System.getenv("'
+            + stringcase.uppercase(new_ev_cols_names_lst[idx])
+            + '");'
+            for idx in range(len(new_ev_cols_names_lst))
+        ]
+    )
+
+    new_str = start_str + repl_str + end_str
+
+    search_n_replace_lst.append((search_str, new_str))
+
 if new_pks_names_sec_lst:
     search_str = "ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(tableNamePlaceholder);"
     start_str = ""
@@ -475,7 +512,7 @@ sep_str = "/"
 end_str = ""
 
 repl_str = sep_str.join(
-    ["{" + stringcase.snakecase(pk) + "}" for pk in new_pks_names_not_sec_lst]
+    ["{" + stringcase.snakecase(pk) + "}" for pk in new_pks_names_not_sec_lst if pk not in new_ev_cols_names_lst]
 )
 
 new_str = start_str + repl_str + end_str
@@ -536,7 +573,7 @@ if new_cust_cols_names_lst:
     end_str = ""
 
     repl_str = sep_str.join(
-        ["{" + stringcase.snakecase(cc) + "}" for cc in new_cust_cols_names_lst]
+        ["{" + stringcase.snakecase(cc) + "}" for cc in new_cust_cols_names_lst if cc not in new_ev_cols_names_lst]
     )
 
     new_str = start_str + repl_str + end_str

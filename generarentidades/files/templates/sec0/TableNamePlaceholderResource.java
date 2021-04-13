@@ -25,6 +25,8 @@ import java.util.Optional;
 
 public class TableNamePlaceholderResource {
 
+//CustomLinesColsEv    private ColsEvDatatype ColsEvNamePlaceholder = System.getenv("COLS_EV_NAMES_PLACEHOLDER");
+
     private final Logger log = LoggerFactory.getLogger(TableNamePlaceholderResource.class);
     private static final String ENTITY_NAME = "sllpeTableNamePlaceholder";
     @Value("${jhipster.clientApp.name}")
