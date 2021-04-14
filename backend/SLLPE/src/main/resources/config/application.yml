@@ -209,6 +209,5 @@ jhipster:
 # ===================================================================
 
 # application:
-sllpe:
-  idOrganization:
-    code: '0050'
+idOrganization: ${ID_ORGANIZATION}
+idOrganization2: 0050

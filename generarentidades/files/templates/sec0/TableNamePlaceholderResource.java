@@ -24,13 +24,12 @@ import java.util.Optional;
 @Transactional
 
 public class TableNamePlaceholderResource {
-
-//CustomLinesColsEv    private ColsEvDatatype ColsEvNamePlaceholder = System.getenv().get("COLS_EV_NAMES_PLACEHOLDER");
-
     private final Logger log = LoggerFactory.getLogger(TableNamePlaceholderResource.class);
     private static final String ENTITY_NAME = "sllpeTableNamePlaceholder";
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+
+//CustomLinesColsEv    @Value("${ColsEvNamePlaceholder}") private ColsEvDatatype ColsEvNamePlaceholder;
 
     private TableNamePlaceholderRepository tableNamePlaceholderRepository;
 

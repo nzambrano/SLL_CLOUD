@@ -433,20 +433,22 @@ if new_pks_names_sec_lst:
 ########## Resources ##########
 
 if new_ev_cols_names_lst:
-    search_str = '//CustomLinesColsEv    private ColsEvDatatype ColsEvNamePlaceholder = System.getenv().get("COLS_EV_NAMES_PLACEHOLDER");'
+    search_str = r'//CustomLinesColsEv    @Value("${ColsEvNamePlaceholder}") private ColsEvDatatype ColsEvNamePlaceholder;'
     start_str = ""
     sep_str = " "
     end_str = ""
 
     repl_str = sep_str.join(
         [
-            'private '
+            r'@Value("${'
+            + stringcase.camelcase(new_ev_cols_names_lst[idx])
+            + r'}")'
+            + '\n'
+            + 'private '
             + new_ev_cols_datatypes_lst[idx]
             + ' '
             + stringcase.camelcase(new_ev_cols_names_lst[idx])
-            + ' = System.getenv().get("'
-            + stringcase.uppercase(new_ev_cols_names_lst[idx])
-            + '");'
+            + ';'
             for idx in range(len(new_ev_cols_names_lst))
         ]
     )
