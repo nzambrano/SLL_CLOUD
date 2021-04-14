@@ -37,18 +37,17 @@ public class TableNamePlaceholderResource {
     public TableNamePlaceholderResource(TableNamePlaceholderRepository tableNamePlaceholderRepository) {
         this.tableNamePlaceholderRepository = tableNamePlaceholderRepository;
     }
+  @PostMapping("/table_name_placeholder")
+  public ResponseEntity<List<TableNamePlaceholder>> createTableNamePlaceholder(@RequestBody List<TableNamePlaceholder> listTableNamePlaceholder)
+    throws URISyntaxException {
+    log.debug("REST request to create table_name_placeholder : {}", listTableNamePlaceholder);
+    List<M4sllPedidos> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
+    return ResponseEntity
+      .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+      .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
+      .body(result);
+  }
 
-    @PostMapping("/table_name_placeholder")
-    public ResponseEntity<TableNamePlaceholder> createTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
-            throws URISyntaxException {
-        log.debug("REST request to create table_name_placeholder : {}", tableNamePlaceholder);
-
-        TableNamePlaceholder result = tableNamePlaceholderRepository.save(tableNamePlaceholder);
-        return ResponseEntity
-                .created(new URI("/api/table_name_placeholder/" + result.getId())).headers(HeaderUtil
-                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-                .body(result);
-    }
 
     @PutMapping("/table_name_placeholder")
     public ResponseEntity<TableNamePlaceholder> updateTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
@@ -101,3 +100,29 @@ public class TableNamePlaceholderResource {
       .build();
   }
 }
+
+/*
+  // PostMapping para un solo registro
+    @PostMapping("/table_name_placeholder")
+    public ResponseEntity<TableNamePlaceholder> createTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
+            throws URISyntaxException {
+        log.debug("REST request to create table_name_placeholder : {}", tableNamePlaceholder);
+
+        TableNamePlaceholder result = tableNamePlaceholderRepository.save(tableNamePlaceholder);
+        return ResponseEntity
+                .created(new URI("/api/table_name_placeholder/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+    }
+
+  // PutMapping para un muchos registros
+    @PutMapping("/table_name_placeholder")
+    public <List<ResponseEntity<TableNamePlaceholder>> updateTableNamePlaceholder(@RequestBody List<TableNamePlaceholder> listTableNamePlaceholder)
+      throws URISyntaxException {
+      log.debug("REST request to update table_name_placeholder : {}", listTableNamePlaceholder);
+      List<M4sllPedidos> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
+      return ResponseEntity
+        .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+        .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
+        .body(result);
+*/

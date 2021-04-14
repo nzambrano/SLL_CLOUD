@@ -512,8 +512,10 @@ sep_str = "/"
 end_str = ""
 
 repl_str = sep_str.join(
-    ["{" + stringcase.snakecase(pk) + "}" for pk in new_pks_names_not_sec_lst if pk not in new_ev_cols_names_lst]
-)
+    [
+        "{" +
+        stringcase.snakecase(pk) +
+        "}" for pk in new_pks_names_not_sec_lst if pk not in new_ev_cols_names_lst])
 
 new_str = start_str + repl_str + end_str
 search_n_replace_lst.append((search_str, new_str))
@@ -573,8 +575,10 @@ if new_cust_cols_names_lst:
     end_str = ""
 
     repl_str = sep_str.join(
-        ["{" + stringcase.snakecase(cc) + "}" for cc in new_cust_cols_names_lst if cc not in new_ev_cols_names_lst]
-    )
+        [
+            "{" +
+            stringcase.snakecase(cc) +
+            "}" for cc in new_cust_cols_names_lst if cc not in new_ev_cols_names_lst])
 
     new_str = start_str + repl_str + end_str
     search_n_replace_lst.append((search_str, new_str))
@@ -704,8 +708,8 @@ searchnreplace(rest_files_location, search_n_replace_lst)
 
 files_location_lst = glob.glob(
     os.path.join(
-        main_path,
-        f"**\\{new_tbl_name_pascal}*.java"),
+        main_path, "**",
+        f"{new_tbl_name_pascal}*.java"),
     recursive=True)
 
 remove_lines(
@@ -750,7 +754,7 @@ if os.path.exists(hibernate_cfg_xml + ".bak"):
     os.remove(hibernate_cfg_xml + ".bak")
 
 # En caso de haber quedado backups generados por Astyle, borrar
-files = glob.glob(os.path.join(main_path, "**\\*.orig"), recursive=True)
+files = glob.glob(os.path.join(main_path, "**", "*.orig"), recursive=True)
 for fl in files:
     try:
         print(f'deleting: {fl}')

@@ -37,21 +37,13 @@ public class TableNamePlaceholderResource {
   }
 
   @PostMapping("/table_name_placeholder")
-  public ResponseEntity<TableNamePlaceholder> createTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
+  public ResponseEntity<List<TableNamePlaceholder>> createTableNamePlaceholder(@RequestBody List<TableNamePlaceholder> listTableNamePlaceholder)
     throws URISyntaxException {
-    log.debug("REST request to create table_name_placeholder : {}", tableNamePlaceholder);
-    TableNamePlaceholderId id = new TableNamePlaceholderId();
-    TableNamePlaceholderServices tableNamePlaceholderServices = new TableNamePlaceholderServices(tableNamePlaceholderRepository);
-    ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(tableNamePlaceholder);
-
-    id.setSecPlaceholder(id_sec_placeholder);
-    id.setColsNotSecPlaceholder(tableNamePlaceholder.getId().getColsNotSecPlaceholder());
-
-    tableNamePlaceholder.setId(id);
-    TableNamePlaceholder result = tableNamePlaceholderRepository.save(tableNamePlaceholder);
+    log.debug("REST request to create table_name_placeholder : {}", listTableNamePlaceholder);
+    List<M4sllPedidos> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
     return ResponseEntity
-      .created(new URI("/api/table_name_placeholder/" + result.getId()))
-      .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+      .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+      .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
       .body(result);
   }
 
@@ -93,30 +85,6 @@ public class TableNamePlaceholderResource {
 //CustomLinesCustomGet1     return ResponseEntity.ok().body(TableNamePlaceholderByInput);
 //CustomLinesCustomGet1   }
 
-  /*
-    @GetMapping("/table_name_placeholder/{colsnotsec_placeholder}/{sec_placeholder}")
-    public ResponseEntity<TableNamePlaceholder> getTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder, @PathVariable("sec_placeholder") ColsecDatatype sec_placeholder) {
-        log.debug("REST request to get TableNamePlaceholder : {}", debugcolsnotsec_placeholder + "|" + debugsec_placeholder);
-        TableNamePlaceholderId id = new TableNamePlaceholderId();
-        id.setColsNotSecPlaceholder(cols_not_sec_placeholder);        
-        id.setSecPlaceholder(sec_placeholder);
-
-        Optional<TableNamePlaceholder> tableNamePlaceholder = tableNamePlaceholderRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(tableNamePlaceholder);
-    }
-
-    @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}")
-    public ResponseEntity<Void> deleteTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder) {
-      log.debug("REST request to delete table_name_placeholder : {}", debugcolsnotsec_placeholder);
-      List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findByColsNotSecPlaceholder(colsnotsec_placeholder);
-
-      tableNamePlaceholderRepository.deleteAll(TableNamePlaceholderByInput);
-      return ResponseEntity
-        .noContent()
-        .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, TableNamePlaceholderByInput.toString()))
-        .build();
-  }
-*/
 
   @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}/{sec_placeholder}")
   public ResponseEntity<Void> deleteTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder, @PathVariable("sec_placeholder") ColsecDatatype sec_placeholder) {
@@ -132,3 +100,61 @@ public class TableNamePlaceholderResource {
       .build();
   }
 }
+  /*
+  // PostMapping para un solo registro
+    @PostMapping("/table_name_placeholder")
+    public ResponseEntity<TableNamePlaceholder> createTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
+      throws URISyntaxException {
+      log.debug("REST request to create table_name_placeholder : {}", tableNamePlaceholder);
+      TableNamePlaceholderId id = new TableNamePlaceholderId();
+      TableNamePlaceholderServices tableNamePlaceholderServices = new TableNamePlaceholderServices(tableNamePlaceholderRepository);
+      ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(tableNamePlaceholder);
+
+      id.setSecPlaceholder(id_sec_placeholder);
+      id.setColsNotSecPlaceholder(tableNamePlaceholder.getId().getColsNotSecPlaceholder());
+
+      tableNamePlaceholder.setId(id);
+      TableNamePlaceholder result = tableNamePlaceholderRepository.save(tableNamePlaceholder);
+      return ResponseEntity
+        .created(new URI("/api/table_name_placeholder/" + result.getId()))
+        .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+        .body(result);
+    }
+
+  // GetMapping para un solo registro
+    @GetMapping("/table_name_placeholder/{colsnotsec_placeholder}/{sec_placeholder}")
+    public ResponseEntity<TableNamePlaceholder> getTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder, @PathVariable("sec_placeholder") ColsecDatatype sec_placeholder) {
+        log.debug("REST request to get TableNamePlaceholder : {}", debugcolsnotsec_placeholder + "|" + debugsec_placeholder);
+        TableNamePlaceholderId id = new TableNamePlaceholderId();
+        id.setColsNotSecPlaceholder(cols_not_sec_placeholder);        
+        id.setSecPlaceholder(sec_placeholder);
+
+        Optional<TableNamePlaceholder> tableNamePlaceholder = tableNamePlaceholderRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(tableNamePlaceholder);
+    }
+
+  // DeleteMapping para muchos registros de una misma combinacion (se excluye la columna de secuencia)
+    @DeleteMapping("/table_name_placeholder/{colsnotsec_placeholder}")
+    public ResponseEntity<Void> deleteTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder) {
+      log.debug("REST request to delete table_name_placeholder : {}", debugcolsnotsec_placeholder);
+      List<TableNamePlaceholder> TableNamePlaceholderByInput = tableNamePlaceholderRepository.findByColsNotSecPlaceholder(colsnotsec_placeholder);
+
+      tableNamePlaceholderRepository.deleteAll(TableNamePlaceholderByInput);
+      return ResponseEntity
+        .noContent()
+        .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, TableNamePlaceholderByInput.toString()))
+        .build();
+  }
+
+// PutMapping para un muchos registros
+  @PutMapping("/table_name_placeholder")
+  public <List<ResponseEntity<TableNamePlaceholder>> updateTableNamePlaceholder(@RequestBody List<TableNamePlaceholder> listTableNamePlaceholder)
+    throws URISyntaxException {
+    log.debug("REST request to update table_name_placeholder : {}", listTableNamePlaceholder);
+    List<M4sllPedidos> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
+    return ResponseEntity
+      .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+      .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
+      .body(result);
+
+*/
