@@ -322,7 +322,7 @@ if new_pks_names_sec_lst:
     repl_str = sep_str.join(
         [
             '@Param("'
-            + stringcase.snakecase(new_pks_names_not_sec_lst[idx])
+            + stringcase.camelcase(new_pks_names_not_sec_lst[idx])
             + '")'
             + " "
             + new_pks_datatypes_not_sec_lst[idx]
@@ -388,7 +388,7 @@ if new_cust_cols_names_lst:
     repl_str = sep_str.join(
         [
             '@Param("'
-            + stringcase.snakecase(new_cust_cols_names_lst[idx])
+            + stringcase.camelcase(new_cust_cols_names_lst[idx])
             + '")'
             + " "
             + new_cust_cols_datatypes_lst[idx]
@@ -433,7 +433,7 @@ if new_pks_names_sec_lst:
 ########## Resources ##########
 
 if new_ev_cols_names_lst:
-    search_str = '//CustomLinesColsEv    private ColsEvDatatype ColsEvNamePlaceholder = System.getenv("COLS_EV_NAMES_PLACEHOLDER");'
+    search_str = '//CustomLinesColsEv    private ColsEvDatatype ColsEvNamePlaceholder = System.getenv().get("COLS_EV_NAMES_PLACEHOLDER");'
     start_str = ""
     sep_str = " "
     end_str = ""
@@ -444,7 +444,7 @@ if new_ev_cols_names_lst:
             + new_ev_cols_datatypes_lst[idx]
             + ' '
             + stringcase.camelcase(new_ev_cols_names_lst[idx])
-            + ' = System.getenv("'
+            + ' = System.getenv().get("'
             + stringcase.uppercase(new_ev_cols_names_lst[idx])
             + '");'
             for idx in range(len(new_ev_cols_names_lst))
