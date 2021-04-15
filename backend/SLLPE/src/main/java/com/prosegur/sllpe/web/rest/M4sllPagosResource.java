@@ -40,7 +40,9 @@ public class M4sllPagosResource {
     public ResponseEntity<List<M4sllPagos>> createM4sllPagos(@RequestBody List<M4sllPagos> listM4sllPagos)
     throws URISyntaxException {
         log.debug("REST request to create m4sll_pagos : {}", listM4sllPagos);
-        List<M4sllPagos> result = m4sllPagosRepository.saveAll(listM4sllPagos);
+        M4sllPagosServices m4sllPagosServices = new M4sllPagosServices(m4sllPagosRepository);
+        List<M4sllPagos>result =  m4sllPagosServices.saveAllWithSecuencia(listM4sllPagos);        
+        // List<M4sllPagos> result = m4sllPagosRepository.saveAll(listM4sllPagos);
         return ResponseEntity
                .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
