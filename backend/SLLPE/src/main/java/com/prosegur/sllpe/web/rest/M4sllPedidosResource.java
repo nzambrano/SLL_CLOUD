@@ -48,17 +48,15 @@ public class M4sllPedidosResource {
                .body(result);
     }
 
-
     @PutMapping("/m4sll_pedidos")
-    public ResponseEntity<M4sllPedidos> updateM4sllPedidos(@RequestBody M4sllPedidos m4sllPedidos)
+    public ResponseEntity<List<M4sllPedidos>> updateM4sllPedidos(@RequestBody List<M4sllPedidos> listM4sllPedidos)
     throws URISyntaxException {
-        log.debug("REST request to update m4sll_pedidos : {}", m4sllPedidos);
-        if (m4sllPedidos.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        M4sllPedidos result = m4sllPedidosRepository.save(m4sllPedidos);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                                           m4sllPedidos.getId().toString())).body(result);
+        log.debug("REST request to update m4sll_pedidos : {}", listM4sllPedidos);
+        List<M4sllPedidos> result = m4sllPedidosRepository.saveAll(listM4sllPedidos);
+        return ResponseEntity
+               .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+                       .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
+               .body(result);
     }
 
     @GetMapping("/m4sll_pedidos")
@@ -119,14 +117,18 @@ public class M4sllPedidosResource {
                 .body(result);
     }
 
-  // PutMapping para un muchos registros
+  // PutMapping para un solo registro
     @PutMapping("/m4sll_pedidos")
-    public <List<ResponseEntity<M4sllPedidos>> updateM4sllPedidos(@RequestBody List<M4sllPedidos> listM4sllPedidos)
-      throws URISyntaxException {
-      log.debug("REST request to update m4sll_pedidos : {}", listM4sllPedidos);
-      List<M4sllPedidos> result = m4sllPedidosRepository.saveAll(listM4sllPedidos);
-      return ResponseEntity
-        .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
-        .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
-        .body(result);
+    public ResponseEntity<M4sllPedidos> updateM4sllPedidos(@RequestBody M4sllPedidos m4sllPedidos)
+            throws URISyntaxException {
+        log.debug("REST request to update m4sll_pedidos : {}", m4sllPedidos);
+        if (m4sllPedidos.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        M4sllPedidos result = m4sllPedidosRepository.save(m4sllPedidos);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
+                m4sllPedidos.getId().toString())).body(result);
+    }
+
+
 */

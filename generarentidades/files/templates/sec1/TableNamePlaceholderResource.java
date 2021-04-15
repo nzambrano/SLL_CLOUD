@@ -46,19 +46,17 @@ public class TableNamePlaceholderResource {
       .body(result);
   }
 
+
   @PutMapping("/table_name_placeholder")
-  public ResponseEntity<TableNamePlaceholder> updateTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
+  public ResponseEntity<List<TableNamePlaceholder>> updateTableNamePlaceholder(@RequestBody List<TableNamePlaceholder> listTableNamePlaceholder)
     throws URISyntaxException {
-    log.debug("REST request to update table_name_placeholder : {}", tableNamePlaceholder);
-    if (tableNamePlaceholder.getId() == null) {
-      throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-    }
-    TableNamePlaceholder result = tableNamePlaceholderRepository.save(tableNamePlaceholder);
+    log.debug("REST request to update table_name_placeholder : {}", listTableNamePlaceholder);
+    List<M4sllPedidos> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
     return ResponseEntity
-      .ok()
-      .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, tableNamePlaceholder.getId().toString()))
+      .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+      .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
       .body(result);
-  }
+    }
 
   @GetMapping("/table_name_placeholder")
   public ResponseEntity<List<TableNamePlaceholder>> getAllTableNamePlaceholder() {
@@ -145,15 +143,20 @@ public class TableNamePlaceholderResource {
         .build();
   }
 
-// PutMapping para un muchos registros
+// PutMapping para un registro
   @PutMapping("/table_name_placeholder")
-  public <List<ResponseEntity<TableNamePlaceholder>> updateTableNamePlaceholder(@RequestBody List<TableNamePlaceholder> listTableNamePlaceholder)
+  public ResponseEntity<TableNamePlaceholder> updateTableNamePlaceholder(@RequestBody TableNamePlaceholder tableNamePlaceholder)
     throws URISyntaxException {
-    log.debug("REST request to update table_name_placeholder : {}", listTableNamePlaceholder);
-    List<M4sllPedidos> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
+    log.debug("REST request to update table_name_placeholder : {}", tableNamePlaceholder);
+    if (tableNamePlaceholder.getId() == null) {
+      throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+    }
+    TableNamePlaceholder result = tableNamePlaceholderRepository.save(tableNamePlaceholder);
     return ResponseEntity
-      .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
-      .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
+      .ok()
+      .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, tableNamePlaceholder.getId().toString()))
       .body(result);
+  }
+
 
 */
