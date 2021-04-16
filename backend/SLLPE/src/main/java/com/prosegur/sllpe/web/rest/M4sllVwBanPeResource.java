@@ -3,13 +3,13 @@ package com.prosegur.sllpe.web.rest;
 
 import com.prosegur.sllpe.domain.M4sllVwBanPeConsulta;
 import com.prosegur.sllpe.repository.M4sllVwBanPeConsultaRepository;
-
-
+import com.prosegur.sllpe.service.M4sllVwBanPeConsultaService;
 
 import io.github.jhipster.web.util.PaginationUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +39,9 @@ public class M4sllVwBanPeResource {
     public M4sllVwBanPeResource(M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository) {
         this.m4sllVwBanPeConsultaRepository = m4sllVwBanPeConsultaRepository;
     }
+    
+    @Autowired
+    M4sllVwBanPeConsultaService m4sllVwBanPeConsultaService;
 
     /**
      * {@code GET  /m4sll_vw_ban_pe_consulta} : get all the m4sll_vw_ban_pe_consulta.
@@ -54,5 +57,22 @@ public class M4sllVwBanPeResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+    
+    @GetMapping("/m4sll_vw_ban_pe_consulta")
+    public ResponseEntity<List<M4sllVwBanPeConsulta>> getBanPeConsultaWithSeg(Pageable pageable) {
+        log.debug("REST request to get a page of m4sll_vw_ban_pe_consulta : {}");
+        
+        
+        
+        // List<M4sllVwBanPeConsulta> page = m4sllVwBanPeConsultaService.getBanPeConsultaWithSeg(pageable);
+        Page<M4sllVwBanPeConsulta> page = m4sllVwBanPeConsultaService.getBanPeConsultaWithSeg(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        // return ResponseEntity.ok().body(page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+    
+    
+    
+    
 
 }

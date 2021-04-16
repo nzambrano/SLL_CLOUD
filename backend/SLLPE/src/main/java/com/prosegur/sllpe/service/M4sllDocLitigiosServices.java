@@ -4,22 +4,31 @@ import com.prosegur.sllpe.domain.M4sllDocLitigios;
 import com.prosegur.sllpe.domain.M4sllDocLitigiosId;
 import com.prosegur.sllpe.repository.M4sllDocLitigiosRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.core.env.Environment;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+
 import java.util.List;
-import java.util.Collection;
 
 @Service
 @Transactional
 public class M4sllDocLitigiosServices {
+	@Autowired
+    private Environment environment;
+	
     private final Logger log = LoggerFactory.getLogger(M4sllDocLitigiosServices.class);
+    
     @Value("${idOrganization}")
-    private String idOrganization;
+    private String idOrganization99;
+    
     private final M4sllDocLitigiosRepository m4sllDocLitigiosRepository;
 
     public M4sllDocLitigiosServices(M4sllDocLitigiosRepository m4sllDocLitigiosRepository) {
@@ -40,10 +49,12 @@ public class M4sllDocLitigiosServices {
             M4sllDocLitigiosId id = new M4sllDocLitigiosId();
             id.setDolSecuencia(ultimaSecuencia);
             // id.setIdOrganization(System.getenv().get("ID_ORGANIZATION"));
-            id.setIdOrganization(idOrganization);
+            id.setIdOrganization(idOrganization99);
             id.setLitIdLitigio(m4sllDocLitigios.getId().getLitIdLitigio());
 
-            log.info("idOrganization: {}", idOrganization);
+            log.info("idOrganization99: {}", idOrganization99);
+            
+            log.info("environment: {}", environment.getProperty("idOrganization"));
 
             String classToString = ReflectionToStringBuilder.toString(id, ToStringStyle.JSON_STYLE);
             log.info("REST request to insert m4sll_doc_litigios id: {}, sec: {}", classToString, ultimaSecuencia);

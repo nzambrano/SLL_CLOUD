@@ -4,6 +4,7 @@ import com.prosegur.sllpe.domain.M4sllDocLitigios;
 import com.prosegur.sllpe.domain.M4sllDocLitigiosId;
 import com.prosegur.sllpe.repository.M4sllDocLitigiosRepository;
 import com.prosegur.sllpe.service.M4sllDocLitigiosServices;
+import com.prosegur.sllpe.service.M4sllVwBanPeConsultaService;
 import com.prosegur.sllpe.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 
@@ -12,6 +13,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,9 @@ public class M4sllDocLitigiosResource {
     private final Logger log = LoggerFactory.getLogger(M4sllDocLitigiosResource.class);
     private static final String ENTITY_NAME = "sllpeM4sllDocLitigios";
 
+    @Autowired
+    M4sllDocLitigiosServices m4sllDocLitigiosServices;
+    
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
@@ -39,7 +44,7 @@ public class M4sllDocLitigiosResource {
     public ResponseEntity<List<M4sllDocLitigios>> createM4sllDocLitigios(@RequestBody List<M4sllDocLitigios> listM4sllDocLitigios)
     throws URISyntaxException {
         log.debug("REST request to create m4sll_doc_litigios : {}", listM4sllDocLitigios);
-        M4sllDocLitigiosServices m4sllDocLitigiosServices = new M4sllDocLitigiosServices(m4sllDocLitigiosRepository);
+        // M4sllDocLitigiosServices m4sllDocLitigiosServices = new M4sllDocLitigiosServices(m4sllDocLitigiosRepository);
         List<M4sllDocLitigios>result =  m4sllDocLitigiosServices.saveAllWithSecuencia(listM4sllDocLitigios);
         return ResponseEntity
                .created(new URI("/api/m4sll_doc_litigios/")).headers(HeaderUtil

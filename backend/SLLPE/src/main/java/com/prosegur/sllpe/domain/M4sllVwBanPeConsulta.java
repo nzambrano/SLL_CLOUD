@@ -46,6 +46,9 @@ public class M4sllVwBanPeConsulta implements Serializable {
 
     @Column(name = "tsd_nm_tp_status_det")
     private String tsd_nm_tp_status_det;
+    
+    @Column(name = "std_id_geo_div")
+    private String std_id_geo_div;
 
     ////////////////////////////////////////////////
 
