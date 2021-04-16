@@ -21,13 +21,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 @Transactional
 public class M4sllDocLitigiosResource {
-
     private final Logger log = LoggerFactory.getLogger(M4sllDocLitigiosResource.class);
     private static final String ENTITY_NAME = "sllpeM4sllDocLitigios";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    @Value("${idOrganization}")
+    private String idOrganization;
     private M4sllDocLitigiosRepository m4sllDocLitigiosRepository;
 
     public M4sllDocLitigiosResource(M4sllDocLitigiosRepository m4sllDocLitigiosRepository) {
@@ -35,36 +36,26 @@ public class M4sllDocLitigiosResource {
     }
 
     @PostMapping("/m4sll_doc_litigios")
-    public ResponseEntity<M4sllDocLitigios> createM4sllDocLitigios(@RequestBody M4sllDocLitigios m4sll_doc_litigios)
+    public ResponseEntity<List<M4sllDocLitigios>> createM4sllDocLitigios(@RequestBody List<M4sllDocLitigios> listM4sllDocLitigios)
     throws URISyntaxException {
-        log.debug("REST request to create m4sll_doc_litigios : {}", m4sll_doc_litigios);
-        M4sllDocLitigiosId id = new M4sllDocLitigiosId();
+        log.debug("REST request to create m4sll_doc_litigios : {}", listM4sllDocLitigios);
         M4sllDocLitigiosServices m4sllDocLitigiosServices = new M4sllDocLitigiosServices(m4sllDocLitigiosRepository);
-        Long id_dol_secuencia = m4sllDocLitigiosServices.UltimaSecuencia(m4sll_doc_litigios);
-
-        id.setDolSecuencia(id_dol_secuencia);
-        id.setIdOrganization(m4sll_doc_litigios.getId().getIdOrganization());
-        id.setLitIdLitigio(m4sll_doc_litigios.getId().getLitIdLitigio());
-
-        m4sll_doc_litigios.setId(id);
-        M4sllDocLitigios result = m4sllDocLitigiosRepository.save(m4sll_doc_litigios);
+        List<M4sllDocLitigios>result =  m4sllDocLitigiosServices.saveAllWithSecuencia(listM4sllDocLitigios);
         return ResponseEntity
-               .created(new URI("/api/m4sll_doc_litigios/" + result.getId()))
-               .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .created(new URI("/api/m4sll_doc_litigios/")).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
                .body(result);
     }
 
+
     @PutMapping("/m4sll_doc_litigios")
-    public ResponseEntity<M4sllDocLitigios> updateM4sllDocLitigios(@RequestBody M4sllDocLitigios m4sll_doc_litigios)
+    public ResponseEntity<List<M4sllDocLitigios>> updateM4sllDocLitigios(@RequestBody List<M4sllDocLitigios> listM4sllDocLitigios)
     throws URISyntaxException {
-        log.debug("REST request to update m4sll_doc_litigios : {}", m4sll_doc_litigios);
-        if (m4sll_doc_litigios.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        M4sllDocLitigios result = m4sllDocLitigiosRepository.save(m4sll_doc_litigios);
+        log.debug("REST request to update m4sll_doc_litigios : {}", listM4sllDocLitigios);
+        List<M4sllDocLitigios> result = m4sllDocLitigiosRepository.saveAll(listM4sllDocLitigios);
         return ResponseEntity
-               .ok()
-               .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, m4sll_doc_litigios.getId().toString()))
+               .created(new URI("/api/m4sll_doc_litigios/")).headers(HeaderUtil
+                       .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
                .body(result);
     }
 
@@ -76,47 +67,23 @@ public class M4sllDocLitigiosResource {
         return ResponseEntity.ok().body(M4sllDocLitigiosAll);
     }
 
-    @GetMapping("/m4sll_doc_litigios/{id_organization}/{lit_id_litigio}")
-    public ResponseEntity<List<M4sllDocLitigios>> getM4sllDocLitigios(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
-        log.debug("REST request to get M4sllDocLitigios : {}", id_organization + "|" + lit_id_litigio);
+    @GetMapping("/m4sll_doc_litigios/{lit_id_litigio}")
+    public ResponseEntity<List<M4sllDocLitigios>> getM4sllDocLitigios(@PathVariable("lit_id_litigio") String litIdLitigio) {
+        log.debug("REST request to get M4sllDocLitigios : {}", idOrganization + "|" + litIdLitigio);
 
-        List<M4sllDocLitigios> M4sllDocLitigiosByInput = m4sllDocLitigiosRepository.findByIdOrganizationLitIdLitigio(id_organization, lit_id_litigio);
+        List<M4sllDocLitigios> M4sllDocLitigiosByInput = m4sllDocLitigiosRepository.findByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio);
         return ResponseEntity.ok().body(M4sllDocLitigiosByInput);
     }
 
 
-    /*
-      @GetMapping("/m4sll_doc_litigios/{id_organization}/{lit_id_litigio}/{dol_secuencia}")
-      public ResponseEntity<M4sllDocLitigios> getM4sllDocLitigios(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("dol_secuencia") Long dol_secuencia) {
-          log.debug("REST request to get M4sllDocLitigios : {}", id_organization + "|" + lit_id_litigio + "|" + dol_secuencia);
-          M4sllDocLitigiosId id = new M4sllDocLitigiosId();
-          id.setIdOrganization(id_organization); id.setLitIdLitigio(lit_id_litigio);
-          id.setDolSecuencia(dol_secuencia);
 
-          Optional<M4sllDocLitigios> m4sll_doc_litigios = m4sllDocLitigiosRepository.findById(id);
-          return ResponseUtil.wrapOrNotFound(m4sll_doc_litigios);
-      }
-
-      @DeleteMapping("/m4sll_doc_litigios/{id_organization}/{lit_id_litigio}")
-      public ResponseEntity<Void> deleteM4sllDocLitigios(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio) {
-        log.debug("REST request to delete m4sll_doc_litigios : {}", id_organization + "|" + lit_id_litigio);
-        List<M4sllDocLitigios> M4sllDocLitigiosByInput = m4sllDocLitigiosRepository.findByIdOrganizationLitIdLitigio(id_organization, lit_id_litigio);
-
-        m4sllDocLitigiosRepository.deleteAll(M4sllDocLitigiosByInput);
-        return ResponseEntity
-          .noContent()
-          .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, M4sllDocLitigiosByInput.toString()))
-          .build();
-    }
-    */
-
-    @DeleteMapping("/m4sll_doc_litigios/{id_organization}/{lit_id_litigio}/{dol_secuencia}")
-    public ResponseEntity<Void> deleteM4sllDocLitigios(@PathVariable("id_organization") String id_organization, @PathVariable("lit_id_litigio") String lit_id_litigio, @PathVariable("dol_secuencia") Long dol_secuencia) {
-        log.debug("REST request to delete m4sll_doc_litigios : {}", id_organization + "|" + lit_id_litigio + "|" + dol_secuencia);
+    @DeleteMapping("/m4sll_doc_litigios/{lit_id_litigio}/{dol_secuencia}")
+    public ResponseEntity<Void> deleteM4sllDocLitigios(@PathVariable("lit_id_litigio") String litIdLitigio, @PathVariable("dol_secuencia") Long dolSecuencia) {
+        log.debug("REST request to delete m4sll_doc_litigios : {}", idOrganization + "|" + litIdLitigio + "|" + dolSecuencia);
         M4sllDocLitigiosId id = new M4sllDocLitigiosId();
-        id.setIdOrganization(id_organization);
-        id.setLitIdLitigio(lit_id_litigio);
-        id.setDolSecuencia(dol_secuencia);
+        id.setIdOrganization(idOrganization);
+        id.setLitIdLitigio(litIdLitigio);
+        id.setDolSecuencia(dolSecuencia);
 
         m4sllDocLitigiosRepository.deleteById(id);
         return ResponseEntity
@@ -125,3 +92,68 @@ public class M4sllDocLitigiosResource {
                .build();
     }
 }
+/*
+// PostMapping para un solo registro
+  @PostMapping("/m4sll_doc_litigios")
+  public ResponseEntity<M4sllDocLitigios> createM4sllDocLitigios(@RequestBody M4sllDocLitigios m4sllDocLitigios)
+    throws URISyntaxException {
+    log.debug("REST request to create m4sll_doc_litigios : {}", m4sllDocLitigios);
+    M4sllDocLitigiosId id = new M4sllDocLitigiosId();
+    M4sllDocLitigiosServices m4sllDocLitigiosServices = new M4sllDocLitigiosServices(m4sllDocLitigiosRepository);
+    Long id_dolSecuencia = m4sllDocLitigiosServices.UltimaSecuencia(m4sllDocLitigios);
+
+    id.setDolSecuencia(id_dolSecuencia);
+    id.setIdOrganization(System.getenv().get("ID_ORGANIZATION"));
+id.setLitIdLitigio(m4sllDocLitigios.getId().getLitIdLitigio());
+
+    m4sllDocLitigios.setId(id);
+    M4sllDocLitigios result = m4sllDocLitigiosRepository.save(m4sllDocLitigios);
+    return ResponseEntity
+      .created(new URI("/api/m4sll_doc_litigios/" + result.getId()))
+      .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+      .body(result);
+  }
+
+// GetMapping para un solo registro
+  @GetMapping("/m4sll_doc_litigios/{lit_id_litigio}/{dol_secuencia}")
+  public ResponseEntity<M4sllDocLitigios> getM4sllDocLitigios(@PathVariable("lit_id_litigio") String litIdLitigio, @PathVariable("dol_secuencia") Long dolSecuencia) {
+      log.debug("REST request to get M4sllDocLitigios : {}", idOrganization + "|" + litIdLitigio + "|" + dolSecuencia);
+      M4sllDocLitigiosId id = new M4sllDocLitigiosId();
+      id.setIdOrganization(idOrganization);
+id.setLitIdLitigio(litIdLitigio);
+      id.setDolSecuencia(dolSecuencia);
+
+      Optional<M4sllDocLitigios> m4sllDocLitigios = m4sllDocLitigiosRepository.findById(id);
+      return ResponseUtil.wrapOrNotFound(m4sllDocLitigios);
+  }
+
+// DeleteMapping para muchos registros de una misma combinacion (se excluye la columna de secuencia)
+  @DeleteMapping("/m4sll_doc_litigios/{lit_id_litigio}")
+  public ResponseEntity<Void> deleteM4sllDocLitigios(@PathVariable("lit_id_litigio") String litIdLitigio) {
+    log.debug("REST request to delete m4sll_doc_litigios : {}", idOrganization + "|" + litIdLitigio);
+    List<M4sllDocLitigios> M4sllDocLitigiosByInput = m4sllDocLitigiosRepository.findByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio);
+
+    m4sllDocLitigiosRepository.deleteAll(M4sllDocLitigiosByInput);
+    return ResponseEntity
+      .noContent()
+      .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, M4sllDocLitigiosByInput.toString()))
+      .build();
+}
+
+// PutMapping para un registro
+@PutMapping("/m4sll_doc_litigios")
+public ResponseEntity<M4sllDocLitigios> updateM4sllDocLitigios(@RequestBody M4sllDocLitigios m4sllDocLitigios)
+  throws URISyntaxException {
+  log.debug("REST request to update m4sll_doc_litigios : {}", m4sllDocLitigios);
+  if (m4sllDocLitigios.getId() == null) {
+    throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+  }
+  M4sllDocLitigios result = m4sllDocLitigiosRepository.save(m4sllDocLitigios);
+  return ResponseEntity
+    .ok()
+    .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, m4sllDocLitigios.getId().toString()))
+    .body(result);
+}
+
+
+*/
