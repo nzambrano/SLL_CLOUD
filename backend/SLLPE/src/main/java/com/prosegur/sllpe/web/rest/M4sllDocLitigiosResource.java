@@ -29,6 +29,8 @@ public class M4sllDocLitigiosResource {
     @Autowired
     M4sllDocLitigiosServices m4sllDocLitigiosServices;
     
+    
+    
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
