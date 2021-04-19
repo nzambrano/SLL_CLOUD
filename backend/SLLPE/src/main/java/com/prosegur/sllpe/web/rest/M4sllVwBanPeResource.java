@@ -39,7 +39,7 @@ public class M4sllVwBanPeResource {
     public M4sllVwBanPeResource(M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository) {
         this.m4sllVwBanPeConsultaRepository = m4sllVwBanPeConsultaRepository;
     }
-    
+
     @Autowired
     M4sllVwBanPeConsultaService m4sllVwBanPeConsultaService;
 
@@ -57,22 +57,22 @@ public class M4sllVwBanPeResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-    
+
     @GetMapping("/m4sll_vw_ban_pe_consulta")
     public ResponseEntity<List<M4sllVwBanPeConsulta>> getBanPeConsultaWithSeg(Pageable pageable) {
         log.debug("REST request to get a page of m4sll_vw_ban_pe_consulta : {}");
-        
-        
-        
+
+
+
         // List<M4sllVwBanPeConsulta> page = m4sllVwBanPeConsultaService.getBanPeConsultaWithSeg(pageable);
         Page<M4sllVwBanPeConsulta> page = m4sllVwBanPeConsultaService.getBanPeConsultaWithSeg(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         // return ResponseEntity.ok().body(page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-    
-    
-    
-    
+
+
+
+
 
 }
