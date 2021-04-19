@@ -1,15 +1,11 @@
 package com.prosegur.sllpe.web.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -24,9 +20,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.prosegur.sllpe.SllpeApp;
-import com.prosegur.sllpe.domain.M4sllFases;
-import com.prosegur.sllpe.domain.M4sllFasesId;
-import com.prosegur.sllpe.domain.M4sllVwBanPeConsulta;
 
 
 
@@ -40,8 +33,7 @@ import com.prosegur.sllpe.domain.M4sllVwBanPeConsulta;
 class M4sllCwBanPeResourceTest {
 
 	@Autowired
-	private MockMvc bandejaMockMvc;
-	private M4sllVwBanPeConsulta  bandeja;
+	private MockMvc bandejaMockMvc;	
 
 	@Test
 	void getBandeja() throws IOException, Exception {

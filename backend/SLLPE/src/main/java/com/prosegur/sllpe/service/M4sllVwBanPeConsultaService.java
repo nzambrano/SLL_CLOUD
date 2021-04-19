@@ -25,7 +25,6 @@ import com.prosegur.sllpe.repository.M4sllVwBanPeConsultaRepository;
 
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.core.env.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,8 +62,6 @@ public class M4sllVwBanPeConsultaService {
     	LOGGER.info("idOrganization99: "+ idOrganization99);
     	
     	
-    	
-    	List<M4sllVwBanPeConsulta> listaBandeja = null;
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<M4sllVwBanPeConsulta> cr = cb.createQuery(M4sllVwBanPeConsulta.class);
 		Root<M4sllVwBanPeConsulta> root = cr.from(M4sllVwBanPeConsulta.class);
