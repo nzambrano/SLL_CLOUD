@@ -4,7 +4,6 @@ import com.prosegur.sllpe.domain.M4sllDocLitigios;
 import com.prosegur.sllpe.domain.M4sllDocLitigiosId;
 import com.prosegur.sllpe.repository.M4sllDocLitigiosRepository;
 import com.prosegur.sllpe.service.M4sllDocLitigiosServices;
-import com.prosegur.sllpe.service.M4sllVwBanPeConsultaService;
 import com.prosegur.sllpe.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 
@@ -28,9 +27,6 @@ public class M4sllDocLitigiosResource {
 
     @Autowired
     M4sllDocLitigiosServices m4sllDocLitigiosServices;
-    
-    
-    
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
@@ -46,7 +42,6 @@ public class M4sllDocLitigiosResource {
     public ResponseEntity<List<M4sllDocLitigios>> createM4sllDocLitigios(@RequestBody List<M4sllDocLitigios> listM4sllDocLitigios)
     throws URISyntaxException {
         log.debug("REST request to create m4sll_doc_litigios : {}", listM4sllDocLitigios);
-        // M4sllDocLitigiosServices m4sllDocLitigiosServices = new M4sllDocLitigiosServices(m4sllDocLitigiosRepository);
         List<M4sllDocLitigios>result =  m4sllDocLitigiosServices.saveAllWithSecuencia(listM4sllDocLitigios);
         return ResponseEntity
                .created(new URI("/api/m4sll_doc_litigios/")).headers(HeaderUtil
@@ -110,7 +105,7 @@ public class M4sllDocLitigiosResource {
     Long id_dolSecuencia = m4sllDocLitigiosServices.UltimaSecuencia(m4sllDocLitigios);
 
     id.setDolSecuencia(id_dolSecuencia);
-    id.setIdOrganization(System.getenv().get("ID_ORGANIZATION"));
+    id.setIdOrganization(idOrganization);
 id.setLitIdLitigio(m4sllDocLitigios.getId().getLitIdLitigio());
 
     m4sllDocLitigios.setId(id);
