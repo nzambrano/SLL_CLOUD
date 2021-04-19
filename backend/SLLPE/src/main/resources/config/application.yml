@@ -210,5 +210,3 @@ jhipster:
 
 # application:
 idOrganization: ${ID_ORGANIZATION:"0050"}
-#idOrganization: "0050"
-idOrganization2: 0050

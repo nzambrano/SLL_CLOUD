@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +25,14 @@ public class M4sllPagosResource {
     private final Logger log = LoggerFactory.getLogger(M4sllPagosResource.class);
     private static final String ENTITY_NAME = "sllpeM4sllPagos";
 
+    @Autowired
+    M4sllPagosServices m4sllPagosServices;
+
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     @Value("${idOrganization}")
     private String idOrganization;
-
     private M4sllPagosRepository m4sllPagosRepository;
 
     public M4sllPagosResource(M4sllPagosRepository m4sllPagosRepository) {
@@ -40,11 +43,9 @@ public class M4sllPagosResource {
     public ResponseEntity<List<M4sllPagos>> createM4sllPagos(@RequestBody List<M4sllPagos> listM4sllPagos)
     throws URISyntaxException {
         log.debug("REST request to create m4sll_pagos : {}", listM4sllPagos);
-        M4sllPagosServices m4sllPagosServices = new M4sllPagosServices(m4sllPagosRepository);
-        List<M4sllPagos>result =  m4sllPagosServices.saveAllWithSecuencia(listM4sllPagos);        
-        // List<M4sllPagos> result = m4sllPagosRepository.saveAll(listM4sllPagos);
+        List<M4sllPagos>result =  m4sllPagosServices.saveAllWithSecuencia(listM4sllPagos);
         return ResponseEntity
-               .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+               .created(new URI("/api/m4sll_pagos/")).headers(HeaderUtil
                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
                .body(result);
     }
@@ -56,7 +57,7 @@ public class M4sllPagosResource {
         log.debug("REST request to update m4sll_pagos : {}", listM4sllPagos);
         List<M4sllPagos> result = m4sllPagosRepository.saveAll(listM4sllPagos);
         return ResponseEntity
-               .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+               .created(new URI("/api/m4sll_pagos/")).headers(HeaderUtil
                        .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
                .body(result);
     }
@@ -105,7 +106,8 @@ public class M4sllPagosResource {
     Long id_pagSecuencia = m4sllPagosServices.UltimaSecuencia(m4sllPagos);
 
     id.setPagSecuencia(id_pagSecuencia);
-    id.setIdOrganization(m4sllPagos.getId().getIdOrganization()); id.setLitIdLitigio(m4sllPagos.getId().getLitIdLitigio());
+    id.setIdOrganization(idOrganization);
+id.setLitIdLitigio(m4sllPagos.getId().getLitIdLitigio());
 
     m4sllPagos.setId(id);
     M4sllPagos result = m4sllPagosRepository.save(m4sllPagos);
@@ -120,7 +122,8 @@ public class M4sllPagosResource {
   public ResponseEntity<M4sllPagos> getM4sllPagos(@PathVariable("lit_id_litigio") String litIdLitigio, @PathVariable("pag_secuencia") Long pagSecuencia) {
       log.debug("REST request to get M4sllPagos : {}", idOrganization + "|" + litIdLitigio + "|" + pagSecuencia);
       M4sllPagosId id = new M4sllPagosId();
-      id.setIdOrganization(idOrganization); id.setLitIdLitigio(litIdLitigio);
+      id.setIdOrganization(idOrganization);
+id.setLitIdLitigio(litIdLitigio);
       id.setPagSecuencia(pagSecuencia);
 
       Optional<M4sllPagos> m4sllPagos = m4sllPagosRepository.findById(id);
