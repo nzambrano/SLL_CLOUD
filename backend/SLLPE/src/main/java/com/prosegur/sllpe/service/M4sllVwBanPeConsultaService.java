@@ -32,20 +32,20 @@ import org.slf4j.LoggerFactory;
 @Service
 @Transactional
 public class M4sllVwBanPeConsultaService {
-	@Autowired
+    @Autowired
     private Environment environment;
-	
-	
-	@Value("${idOrganization}")
+
+
+    @Value("${idOrganization}")
     private String idOrganization99;
- 
-	String idOrganization = "0050";
+
+    String idOrganization = "0050";
     //  private final M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository;
-	private static final Logger LOGGER = LoggerFactory.getLogger(M4sllVwBanPeConsultaService.class);
-	
-	@Autowired
-	private EntityManager em;
-	
+    private static final Logger LOGGER = LoggerFactory.getLogger(M4sllVwBanPeConsultaService.class);
+
+    @Autowired
+    private EntityManager em;
+
     @Autowired
     M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository;
     /*public M4sllVwBanPeConsultaService(M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository) {
@@ -60,25 +60,25 @@ public class M4sllVwBanPeConsultaService {
     	LOGGER.info("Generating getBanPeWithSeg");
     	LOGGER.info("Generating getBanPeWithSeg"+ environment.getProperty("idOrganization"));
     	LOGGER.info("idOrganization99: "+ idOrganization99);
-    	
-    	
+
+
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<M4sllVwBanPeConsulta> cr = cb.createQuery(M4sllVwBanPeConsulta.class);
 		Root<M4sllVwBanPeConsulta> root = cr.from(M4sllVwBanPeConsulta.class);
-		
-		
+
+
 		List<Predicate> predicates = new ArrayList<>();
-		
+
 		// Agregamos condiciones
-		
+
 		// traerme los roles de la persona autenticada
-		
+
 		// ir a base de datos a tabla seguridad y traer array de condiciones
-		
-		// for agregando condiciones		
-		// esta linea se repite por 
+
+		// for agregando condiciones
+		// esta linea se repite por
 		predicates.add(cb.equal(root.get("std_id_geo_div"), "12"));
-		
+
 		if (predicates.isEmpty()) {
 			cr.select(root);
 		} else {
@@ -86,23 +86,23 @@ public class M4sllVwBanPeConsultaService {
 		}
 		// cr.setFirstResult(page.getPageNumber() * page.getPageSize());
 		// cr.select(root).setMaxResults(page.getPageSize());
-		
+
 		// paginado
 		TypedQuery<M4sllVwBanPeConsulta> query = em.createQuery(cr);
 		int totalRows = query.getResultList().size();
 		query.setFirstResult(page.getPageNumber() * page.getPageSize());
 		query.setMaxResults(page.getPageSize());
-		
+
 		// listaBandeja = em.createQuery(cr).getResultList();
 
 		Page<M4sllVwBanPeConsulta> result = new PageImpl<M4sllVwBanPeConsulta>(query.getResultList(), page, totalRows);
 		return result;
 		//return result;
-    	
-    	
+
+
     }
 
-   
+
     /*public Collection<M4sllAutorReu> saveAllWithSecuencia(Collection<M4sllAutorReu> listAutorReu)  {
     	listAutorReu.stream().forEach((m4sll_autor_reu) -> {
     		System.out.println(m4sll_autor_reu);

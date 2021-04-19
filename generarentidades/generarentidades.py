@@ -112,8 +112,20 @@ new_ev_cols_datatypes_lst = (
     else []
 )
 
+new_pk_cols_concat = sys.argv[7]
+new_pk_cols_names_lst = (
+    [pk.split("|")[0] for pk in new_pk_cols_concat.split(",")]
+    if new_pk_cols_concat
+    else []
+)
+new_pk_cols_datatypes_lst = (
+    [pk.split("|")[1] for pk in new_pk_cols_concat.split(",")]
+    if new_pk_cols_concat
+    else []
+)
 
-curr_template_path = os.path.join(templates_path, sys.argv[7])
+
+curr_template_path = os.path.join(templates_path, sys.argv[8])
 
 
 def remove_lines(files_in, lst_in):
@@ -417,25 +429,52 @@ if new_pks_names_sec_lst:
     new_str = start_str + repl_str + end_str
     search_n_replace_lst.append((search_str, new_str))
 
-    search_str = "public ColsecDatatype UltimaSecuencia"
+    search_str = "ColsecDatatypeInServices"
     start_str = ""
     sep_str = ""
     end_str = ""
 
     repl_str = search_str.replace(
-        "ColsecDatatype",
+        "ColsecDatatypeInServices",
         new_pks_datatypes_sec_lst[0])
 
     new_str = start_str + repl_str + end_str
 
     search_n_replace_lst.append((search_str, new_str))
 
+    search_str = "id.setSecPlaceholder(ultimaSecuencia);"
+    start_str = ""
+    sep_str = ""
+    end_str = ""
+
+    repl_str = search_str.replace(
+        "SecPlaceholder", stringcase.pascalcase(new_pks_names_sec_lst[0])
+    )
+
+    new_str = start_str + repl_str + end_str
+    new_str = new_str if new_pks_names_sec_lst[0] in new_pk_cols_names_lst else ""
+    search_n_replace_lst.append((search_str, new_str))
+
 ########## Resources ##########
 
 if new_ev_cols_names_lst:
-    search_str = r'//CustomLinesColsEv    @Value("${ColsEvNamePlaceholder}") private ColsEvDatatype ColsEvNamePlaceholder;'
+
+    # Descomentar las líneas ColsEv ya que van a ser usadas
+
+    search_str = "//CustomLinesColsEv "
     start_str = ""
-    sep_str = " "
+    sep_str = ""
+    end_str = ""
+
+    repl_str = ""
+
+    new_str = start_str + repl_str + end_str
+
+    search_n_replace_lst.append((search_str, new_str))
+
+    search_str = r'@Value("${colsEvNamePlaceholder}") private ColsEvDatatype colsEvNamePlaceholder;'
+    start_str = ""
+    sep_str = "\n"
     end_str = ""
 
     repl_str = sep_str.join(
@@ -487,23 +526,21 @@ if new_pks_names_sec_lst:
     )
 
     new_str = start_str + repl_str + end_str
+    new_str = new_str if new_pks_names_sec_lst[0] in new_pk_cols_names_lst else ""
     search_n_replace_lst.append((search_str, new_str))
 
 search_str = "id.setColsNotSecPlaceholder(tableNamePlaceholder.getId().getColsNotSecPlaceholder());"
 start_str = ""
-sep_str = " "
+sep_str = "\n"
 end_str = ""
 
-repl_str = sep_str.join(
-    [
-        "id.set"
-        + stringcase.pascalcase(pk)
-        + "(tableNamePlaceholder.getId().get"
-        + stringcase.pascalcase(pk)
-        + "());"
-        for pk in new_pks_names_not_sec_lst
-    ]
-)
+repl_str = sep_str.join(["id.set" +
+                         stringcase.pascalcase(pk) +
+                         "(" +
+                         ("tableNamePlaceholder.getId().get" if pk not in new_ev_cols_names_lst else "") +
+                         (stringcase.pascalcase(pk) if pk not in new_ev_cols_names_lst else stringcase.camelcase(pk)) +
+                         ("()" if pk not in new_ev_cols_names_lst else "") +
+                         ");" for pk in new_pks_names_not_sec_lst])
 
 new_str = start_str + repl_str + end_str
 search_n_replace_lst.append((search_str, new_str))
@@ -659,13 +696,12 @@ if new_pks_names_sec_lst:
 
     repl_str = sep_str.join(
         [
-            '@PathVariable("' +
-            stringcase.snakecase(
-                new_pks_names_sec_lst[idx]) +
-            '") ' +
-            new_pks_datatypes_sec_lst[idx] +
-            " " +
-            stringcase.camelcase(
+            '@PathVariable("'
+            + stringcase.snakecase(new_pks_names_sec_lst[idx])
+            + '") '
+            + new_pks_datatypes_sec_lst[idx]
+            + " "
+            + stringcase.camelcase(
                 new_pks_names_sec_lst[idx]) for idx,
             val in enumerate(new_pks_names_sec_lst) if val not in new_ev_cols_names_lst])
 
@@ -674,7 +710,7 @@ if new_pks_names_sec_lst:
 
 search_str = "id.setColsNotSecPlaceholder(cols_not_sec_placeholder);"
 start_str = ""
-sep_str = " "
+sep_str = "\n"
 end_str = ""
 
 repl_str = sep_str.join(["id.set" +
@@ -700,6 +736,7 @@ if new_pks_names_sec_lst:
     )
 
     new_str = start_str + repl_str + end_str
+    new_str = new_str if new_pks_names_sec_lst[0] in new_pk_cols_names_lst else ""
     search_n_replace_lst.append((search_str, new_str))
 
 # Buscar y reemplazar los pares (viejo, nuevo) de las columnas en los

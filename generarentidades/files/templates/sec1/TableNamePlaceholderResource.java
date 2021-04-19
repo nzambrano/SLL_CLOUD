@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,11 +25,13 @@ public class TableNamePlaceholderResource {
   private final Logger log = LoggerFactory.getLogger(TableNamePlaceholderResource.class);
   private static final String ENTITY_NAME = "sllpeTableNamePlaceholder";
 
+    @Autowired
+    TableNamePlaceholderServices tableNamePlaceholderServices;
+
   @Value("${jhipster.clientApp.name}")
   private String applicationName;
 
-//CustomLinesColsEv    @Value("${ColsEvNamePlaceholder}") private ColsEvDatatype ColsEvNamePlaceholder;
-
+//CustomLinesColsEv @Value("${colsEvNamePlaceholder}") private ColsEvDatatype colsEvNamePlaceholder;
   private TableNamePlaceholderRepository tableNamePlaceholderRepository;
 
   public TableNamePlaceholderResource(TableNamePlaceholderRepository tableNamePlaceholderRepository) {
@@ -39,9 +42,9 @@ public class TableNamePlaceholderResource {
   public ResponseEntity<List<TableNamePlaceholder>> createTableNamePlaceholder(@RequestBody List<TableNamePlaceholder> listTableNamePlaceholder)
     throws URISyntaxException {
     log.debug("REST request to create table_name_placeholder : {}", listTableNamePlaceholder);
-    List<M4sllPedidos> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
+    List<TableNamePlaceholder>result =  tableNamePlaceholderServices.saveAllWithSecuencia(listTableNamePlaceholder);
     return ResponseEntity
-      .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+      .created(new URI("/api/table_name_placeholder/")).headers(HeaderUtil
       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
       .body(result);
   }
@@ -51,9 +54,9 @@ public class TableNamePlaceholderResource {
   public ResponseEntity<List<TableNamePlaceholder>> updateTableNamePlaceholder(@RequestBody List<TableNamePlaceholder> listTableNamePlaceholder)
     throws URISyntaxException {
     log.debug("REST request to update table_name_placeholder : {}", listTableNamePlaceholder);
-    List<M4sllPedidos> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
+    List<TableNamePlaceholder> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
     return ResponseEntity
-      .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+      .created(new URI("/api/table_name_placeholder/")).headers(HeaderUtil
       .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
       .body(result);
     }

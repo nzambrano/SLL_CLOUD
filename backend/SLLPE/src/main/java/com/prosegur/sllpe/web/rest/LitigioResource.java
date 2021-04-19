@@ -40,7 +40,7 @@ public class LitigioResource {
     private M4sllVwAutorReuCustomRepository m4sllVwAutorReuCustomRepository;
     private M4sllPedidosRepository pedidosRepository;
     private M4sllFasesRepository fasesRepository;
-    
+
     private M4sllProvisionesRepository provisionesRepository;
     private M4sllPagosRepository pagosRepository;
     private M4sllDocLitigiosRepository docLitigiosRepository;
