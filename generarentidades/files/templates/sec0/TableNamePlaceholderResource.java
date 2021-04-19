@@ -29,8 +29,7 @@ public class TableNamePlaceholderResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-//CustomLinesColsEv    @Value("${ColsEvNamePlaceholder}") private ColsEvDatatype ColsEvNamePlaceholder;
-
+//CustomLinesColsEv @Value("${colsEvNamePlaceholder}") private ColsEvDatatype colsEvNamePlaceholder;
     private TableNamePlaceholderRepository tableNamePlaceholderRepository;
 
     public TableNamePlaceholderResource(TableNamePlaceholderRepository tableNamePlaceholderRepository) {
@@ -40,7 +39,7 @@ public class TableNamePlaceholderResource {
   public ResponseEntity<List<TableNamePlaceholder>> createTableNamePlaceholder(@RequestBody List<TableNamePlaceholder> listTableNamePlaceholder)
     throws URISyntaxException {
     log.debug("REST request to create table_name_placeholder : {}", listTableNamePlaceholder);
-    List<M4sllPedidos> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
+    List<TableNamePlaceholder> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
     return ResponseEntity
       .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
@@ -51,7 +50,7 @@ public class TableNamePlaceholderResource {
     public ResponseEntity<List<TableNamePlaceholder>> updateTableNamePlaceholder(@RequestBody List<TableNamePlaceholder> listTableNamePlaceholder)
       throws URISyntaxException {
       log.debug("REST request to update table_name_placeholder : {}", listTableNamePlaceholder);
-      List<M4sllPedidos> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
+      List<TableNamePlaceholder> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
       return ResponseEntity
         .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
         .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
