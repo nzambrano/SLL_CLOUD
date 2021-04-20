@@ -31,7 +31,7 @@ public class M4sllFasesServices {
     }
 
     public Long UltimaSecuencia(M4sllFases m4sllFases) {
-        return m4sllFasesRepository.obtenerUltimaSecuencia(m4sllFases.getId().getIdOrganization(), m4sllFases.getId().getLitIdLitigio());
+        return m4sllFasesRepository.obtenerUltimaSecuencia(m4sllFases.getId().getIdOrganization(), m4sllFases.getId().getLitIdLitigio(), m4sllFases.getId().getTfaIdTpFase());
     }
 
     public List<M4sllFases> saveAllWithSecuencia(List<M4sllFases> listM4sllFases)  {
@@ -41,8 +41,7 @@ public class M4sllFasesServices {
 
             id.setIdOrganization(idOrganization);
             id.setLitIdLitigio(m4sllFases.getId().getLitIdLitigio());
-
-            log.info("idOrganization: {}", idOrganization);
+            id.setTfaIdTpFase(m4sllFases.getId().getTfaIdTpFase());
 
             String classToString = ReflectionToStringBuilder.toString(id, ToStringStyle.JSON_STYLE);
             log.info("REST request to insert m4sll_fases id: {}, seq: {}", classToString, ultimaSecuencia);
