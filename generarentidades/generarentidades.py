@@ -287,8 +287,8 @@ if new_pks_names_sec_lst:
     search_n_replace_lst.append((search_str, new_str))
 
     search_str = "where_and_colsnotsec_placeholder"
-    start_str = "where "
-    sep_str = " and "
+    start_str = "WHERE "
+    sep_str = " AND "
     end_str = ""
 
     repl_str = sep_str.join(
@@ -363,13 +363,28 @@ if new_cust_cols_names_lst:
     search_n_replace_lst.append((search_str, new_str))
 
     search_str = "where_and_colscustom_placeholder"
-    start_str = "where "
-    sep_str = " and "
+    start_str = "WHERE "
+    sep_str = " AND "
     end_str = ""
 
     repl_str = sep_str.join(
         [
             stringcase.snakecase(pk) + " = :" + stringcase.camelcase(pk)
+            for pk in new_cust_cols_names_lst
+        ]
+    )
+
+    new_str = start_str + repl_str + end_str
+    search_n_replace_lst.append((search_str, new_str))
+
+    search_str = "orderbypks_placeholder"
+    start_str = "ORDER BY "
+    sep_str = ", "
+    end_str = " DESC"
+
+    repl_str = sep_str.join(
+        [
+            stringcase.lowercase(pk)
             for pk in new_cust_cols_names_lst
         ]
     )
@@ -560,16 +575,18 @@ new_str = start_str + repl_str + end_str
 search_n_replace_lst.append((search_str, new_str))
 
 if new_pks_names_sec_lst:
-    search_str = r"{sec_placeholder}"
+    search_str = r"/{sec_placeholder}"
     start_str = ""
     sep_str = ""
     end_str = ""
 
     repl_str = search_str.replace(
-        "sec_placeholder", stringcase.snakecase(new_pks_names_sec_lst[0])
+        r'/{sec_placeholder}', r'/{' + stringcase.snakecase(new_pks_names_sec_lst[0])+r'}'
     )
 
     new_str = start_str + repl_str + end_str
+    new_str = new_str if new_pks_names_sec_lst[0] in new_pk_cols_names_lst else ""
+
     search_n_replace_lst.append((search_str, new_str))
 
 search_str = r': {}", debugcolsnotsec_placeholder'
@@ -584,7 +601,7 @@ new_str = start_str + repl_str + end_str
 search_n_replace_lst.append((search_str, new_str))
 
 if new_pks_names_sec_lst:
-    search_str = "debugsec_placeholder"
+    search_str = '+ "|" + debugsec_placeholder'
     start_str = ""
     sep_str = ""
     end_str = ""
@@ -594,6 +611,7 @@ if new_pks_names_sec_lst:
     )
 
     new_str = start_str + repl_str + end_str
+    new_str = new_str if new_pks_names_sec_lst[0] in new_pk_cols_names_lst else ""
     search_n_replace_lst.append((search_str, new_str))
 
 search_str = "(colsnotsec_placeholder);"

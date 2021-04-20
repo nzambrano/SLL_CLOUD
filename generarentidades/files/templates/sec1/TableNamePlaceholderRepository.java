@@ -10,19 +10,19 @@ import org.springframework.data.repository.query.Param;
 
 public interface TableNamePlaceholderRepository extends JpaRepository<TableNamePlaceholder, TableNamePlaceholderId> {
   @Query(
-    value = "select COALESCE(max(sec_placeholder),0)+1 from schema_name_placeholder.table_name_placeholder where_and_colsnotsec_placeholder",
+    value = "SELECT COALESCE(max(sec_placeholder),0)+1 FROM schema_name_placeholder.table_name_placeholder where_and_colsnotsec_placeholder",
     nativeQuery = true
   )
   public ColsecDatatype obtenerUltimaSecuencia(param_colsnotsec_placeholder);
 
   @Query(
-    value = "select * from schema_name_placeholder.table_name_placeholder where_and_colsnotsec_placeholder",
+    value = "SELECT * FROM schema_name_placeholder.table_name_placeholder where_and_colsnotsec_placeholder orderbypks_placeholder",
     nativeQuery = true
   )
   public List<TableNamePlaceholder> findByColsNotSecPlaceholder(param_colsnotsec_placeholder);
 
 //CustomLinesCustomGet1   @Query(
-//CustomLinesCustomGet1     value = "select * from schema_name_placeholder.table_name_placeholder where_and_colscustom_placeholder",
+//CustomLinesCustomGet1     value = "SELECT * FROM schema_name_placeholder.table_name_placeholder where_and_colscustom_placeholder orderbypks_placeholder",
 //CustomLinesCustomGet1     nativeQuery = true
 //CustomLinesCustomGet1   )
 //CustomLinesCustomGet1     public List<TableNamePlaceholder> findByColsCustomPlaceholder(param_colscustom_placeholder);
