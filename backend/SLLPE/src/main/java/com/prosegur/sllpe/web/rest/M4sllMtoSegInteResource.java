@@ -78,14 +78,6 @@ public class M4sllMtoSegInteResource {
         return ResponseEntity.ok().body(M4sllMtoSegInteByInput);
     }
 
-    @GetMapping("/m4sll_mto_seg_inte/{id_app_role}")
-    public ResponseEntity<List<M4sllMtoSegInte>> getM4sllMtoSegInte(@PathVariable("id_app_role") String idAppRole) {
-        log.debug("REST request to get M4sllMtoSegInte : {}", idAppRole);
-
-        List<M4sllMtoSegInte> M4sllMtoSegInteByInput = m4sllMtoSegInteRepository.findByIdAppRole(idAppRole);
-        return ResponseEntity.ok().body(M4sllMtoSegInteByInput);
-    }
-
 
     @DeleteMapping("/m4sll_mto_seg_inte/{id_app_role}/{msi_secuencia}")
     public ResponseEntity<Void> deleteM4sllMtoSegInte(@PathVariable("id_app_role") String idAppRole, @PathVariable("msi_secuencia") Long msiSecuencia) {
