@@ -41,7 +41,7 @@ public class TableNamePlaceholderResource {
     log.debug("REST request to create table_name_placeholder : {}", listTableNamePlaceholder);
     List<TableNamePlaceholder> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
     return ResponseEntity
-      .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+      .created(new URI("/api/table_name_placeholder/")).headers(HeaderUtil
       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
       .body(result);
   }
@@ -52,7 +52,7 @@ public class TableNamePlaceholderResource {
       log.debug("REST request to update table_name_placeholder : {}", listTableNamePlaceholder);
       List<TableNamePlaceholder> result = tableNamePlaceholderRepository.saveAll(listTableNamePlaceholder);
       return ResponseEntity
-        .created(new URI("/api/m4sll_pedidos/")).headers(HeaderUtil
+        .created(new URI("/api/table_name_placeholder/")).headers(HeaderUtil
         .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
         .body(result);
     }
