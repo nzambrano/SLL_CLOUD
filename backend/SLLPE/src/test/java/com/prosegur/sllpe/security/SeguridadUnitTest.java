@@ -37,9 +37,7 @@ import com.prosegur.sllpe.service.SeguridadService;
 
 class SeguridadUnitTest {
 	private final Logger log = LoggerFactory.getLogger(SeguridadUnitTest.class);
-	@Autowired
-	private MockMvc bandejaMockMvc;
-
+	
 	@Autowired
 	private SeguridadService seguridadService;
 

@@ -20,14 +20,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.prosegur.sllpe.domain.M4sllMtoSegInte;
 import com.prosegur.sllpe.domain.M4sllVwBanPeConsulta;
+import com.prosegur.sllpe.repository.M4sllMtoSegInteRepository;
 import com.prosegur.sllpe.repository.M4sllVwBanPeConsultaRepository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.core.env.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
+// import org.springframework.security.core.Authentication;
 
 @Service
 @Transactional
@@ -36,9 +38,9 @@ public class M4sllVwBanPeConsultaService {
 	private Environment environment;
 
 	@Value("${idOrganization}")
-	private String idOrganization99;
+	private String idOrganization;
 
-	String idOrganization = "0050";
+	
 	// private final M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository;
 	private static final Logger LOGGER = LoggerFactory.getLogger(M4sllVwBanPeConsultaService.class);
 
@@ -47,6 +49,9 @@ public class M4sllVwBanPeConsultaService {
 
 	@Autowired
 	M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository;
+	
+	@Autowired
+	M4sllMtoSegInteRepository m4sllMtoSegInteRepository;
 	
 	@Autowired
 	SeguridadService seguridadService;
@@ -64,7 +69,7 @@ public class M4sllVwBanPeConsultaService {
 	public Page<M4sllVwBanPeConsulta> getBanPeConsultaWithSeg(Pageable page) {
 		LOGGER.info("Generating getBanPeWithSeg");
 		LOGGER.info("Generating getBanPeWithSeg" + environment.getProperty("idOrganization"));
-		LOGGER.info("idOrganization99: " + idOrganization99);
+		// LOGGER.info("idOrganization99: " + idOrganization99);
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<M4sllVwBanPeConsulta> cr = cb.createQuery(M4sllVwBanPeConsulta.class);
@@ -78,11 +83,20 @@ public class M4sllVwBanPeConsultaService {
 		List<String> roles = seguridadService.getRoles();
 
 		// ir a base de datos a tabla seguridad y traer array de condiciones
-		
-		
+		List<M4sllMtoSegInte> listSegInterna = m4sllMtoSegInteRepository.findByIdAppRole(idOrganization, roles);
+		LOGGER.info("lista seguridad interna: ", listSegInterna);
 		// for agregando condiciones
 		// esta linea se repite por
-		predicates.add(cb.equal(root.get("std_id_geo_div"), "12"));
+		
+		listSegInterna.stream().forEach((segInterna) -> {
+			System.out.println(segInterna);
+			LOGGER.info("seguridad interna: ", segInterna);
+			LOGGER.info("seguridad getMsiColumna: ", segInterna.getMsiColumna());
+			LOGGER.info("seguridad getMsiValor: ", segInterna.getMsiValor());
+			
+			predicates.add(cb.equal(root.get(segInterna.getMsiColumna()), segInterna.getMsiValor()));
+		});
+		// predicates.add(cb.equal(root.get("std_id_geo_div"), "12"));
 
 		if (predicates.isEmpty()) {
 			cr.select(root);
