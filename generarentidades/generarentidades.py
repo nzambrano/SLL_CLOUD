@@ -268,13 +268,13 @@ search_n_replace_lst = []
 ########## Repository ##########
 
 if new_pks_names_sec_lst:
-    search_str = "COALESCE(max(sec_placeholder),0)+1"
+    search_str = "COALESCE(MAX(sec_placeholder),0)+1"
     start_str = ""
     sep_str = ""
     end_str = ""
 
     repl_str = (
-        search_str.replace("sec_placeholder", "cast(sec_placeholder as integer)")
+        search_str.replace("sec_placeholder", "CAST(sec_placeholder as integer)")
         if new_pks_datatypes_sec_lst[0] == "String"
         else search_str
     )
@@ -377,21 +377,6 @@ if new_cust_cols_names_lst:
     new_str = start_str + repl_str + end_str
     search_n_replace_lst.append((search_str, new_str))
 
-    search_str = "orderbypks_placeholder"
-    start_str = "ORDER BY "
-    sep_str = ", "
-    end_str = " DESC"
-
-    repl_str = sep_str.join(
-        [
-            stringcase.lowercase(pk)
-            for pk in new_cust_cols_names_lst
-        ]
-    )
-
-    new_str = start_str + repl_str + end_str
-    search_n_replace_lst.append((search_str, new_str))
-
     # Este aplica a Repository y Resources también
     search_str = "ByColsCustomPlaceholder"
     start_str = "By"
@@ -427,6 +412,23 @@ if new_cust_cols_names_lst:
 
     new_str = start_str + repl_str + end_str
     search_n_replace_lst.append((search_str, new_str))
+
+search_str = "orderbypks_placeholder"
+start_str = "ORDER BY "
+sep_str = ", "
+end_str = " DESC"
+
+repl_str = sep_str.join(
+    [
+        ('TO_NUMBER(' if new_pk_cols_names_lst[idx] in new_pks_names_sec_lst and new_pk_cols_datatypes_lst[idx] == 'String' else "")
+        + stringcase.lowercase(new_pk_cols_names_lst[idx])
+        + (')' if new_pk_cols_names_lst[idx] in new_pks_names_sec_lst and new_pk_cols_datatypes_lst[idx] == 'String' else "")
+        for idx in range(len(new_pk_cols_names_lst))
+    ]
+)
+
+new_str = start_str + repl_str + end_str
+search_n_replace_lst.append((search_str, new_str))
 
 ########## Services ##########
 if new_pks_names_sec_lst:
@@ -581,8 +583,11 @@ if new_pks_names_sec_lst:
     end_str = ""
 
     repl_str = search_str.replace(
-        r'/{sec_placeholder}', r'/{' + stringcase.snakecase(new_pks_names_sec_lst[0])+r'}'
-    )
+        r'/{sec_placeholder}',
+        r'/{' +
+        stringcase.snakecase(
+            new_pks_names_sec_lst[0]) +
+        r'}')
 
     new_str = start_str + repl_str + end_str
     new_str = new_str if new_pks_names_sec_lst[0] in new_pk_cols_names_lst else ""
