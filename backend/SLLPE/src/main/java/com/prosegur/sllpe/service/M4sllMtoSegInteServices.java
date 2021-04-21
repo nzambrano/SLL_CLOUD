@@ -42,8 +42,6 @@ public class M4sllMtoSegInteServices {
             id.setIdOrganization(idOrganization);
             id.setIdAppRole(m4sllMtoSegInte.getId().getIdAppRole());
 
-            log.info("idOrganization: {}", idOrganization);
-
             String classToString = ReflectionToStringBuilder.toString(id, ToStringStyle.JSON_STYLE);
             log.info("REST request to insert m4sll_mto_seg_inte id: {}, seq: {}", classToString, ultimaSecuencia);
 
