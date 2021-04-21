@@ -24,40 +24,38 @@ import java.util.Optional;
 @Transactional
 
 public class StdPersonResource {
-
     private final Logger log = LoggerFactory.getLogger(StdPersonResource.class);
     private static final String ENTITY_NAME = "sllpeStdPerson";
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    @Value("${idOrganization}")
+    private String idOrganization;
     private StdPersonRepository stdPersonRepository;
 
     public StdPersonResource(StdPersonRepository stdPersonRepository) {
         this.stdPersonRepository = stdPersonRepository;
     }
-
     @PostMapping("/std_person")
-    public ResponseEntity<StdPerson> createStdPerson(@RequestBody StdPerson std_person)
+    public ResponseEntity<List<StdPerson>> createStdPerson(@RequestBody List<StdPerson> listStdPerson)
     throws URISyntaxException {
-        log.debug("REST request to create std_person : {}", std_person);
-
-        StdPerson result = stdPersonRepository.save(std_person);
+        log.debug("REST request to create std_person : {}", listStdPerson);
+        List<StdPerson> result = stdPersonRepository.saveAll(listStdPerson);
         return ResponseEntity
-               .created(new URI("/api/std_person/" + result.getId())).headers(HeaderUtil
-                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .created(new URI("/api/std_person/")).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
                .body(result);
     }
 
     @PutMapping("/std_person")
-    public ResponseEntity<StdPerson> updateStdPerson(@RequestBody StdPerson std_person)
+    public ResponseEntity<List<StdPerson>> updateStdPerson(@RequestBody List<StdPerson> listStdPerson)
     throws URISyntaxException {
-        log.debug("REST request to update std_person : {}", std_person);
-        if (std_person.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        StdPerson result = stdPersonRepository.save(std_person);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                                           std_person.getId().toString())).body(result);
+        log.debug("REST request to update std_person : {}", listStdPerson);
+        List<StdPerson> result = stdPersonRepository.saveAll(listStdPerson);
+        return ResponseEntity
+               .created(new URI("/api/std_person/")).headers(HeaderUtil
+                       .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
+               .body(result);
     }
 
     @GetMapping("/std_person")
@@ -68,31 +66,24 @@ public class StdPersonResource {
         return ResponseEntity.ok().body(StdPersonAll);
     }
 
-    @GetMapping("/std_person/{id_organization}/{std_id_person}")
-    public ResponseEntity<StdPerson> getStdPerson(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_person") String std_id_person) {
-        log.debug("REST request to get StdPerson : {}", id_organization + "|" + std_id_person);
-        StdPersonId id = new StdPersonId();
-        id.setIdOrganization(id_organization);
-        id.setStdIdPerson(std_id_person);
-
-        Optional<StdPerson> std_person = stdPersonRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(std_person);
-    }
-
     @GetMapping("/std_person/{std_id_person}")
-    public ResponseEntity<List<StdPerson>> getStdPerson(@PathVariable("std_id_person") String std_id_person) {
-        log.debug("REST request to get StdPerson : {}", std_id_person);
+    public ResponseEntity<StdPerson> getStdPerson(@PathVariable("std_id_person") String stdIdPerson) {
+        log.debug("REST request to get StdPerson : {}", idOrganization + "|" + stdIdPerson);
+        StdPersonId id = new StdPersonId();
+        id.setIdOrganization(idOrganization);
+        id.setStdIdPerson(stdIdPerson);
 
-        List<StdPerson> StdPersonByInput = stdPersonRepository.findByStdIdPerson(std_id_person);
-        return ResponseEntity.ok().body(StdPersonByInput);
+        Optional<StdPerson> stdPerson = stdPersonRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(stdPerson);
     }
 
-    @DeleteMapping("/std_person/{id_organization}/{std_id_person}")
-    public ResponseEntity<Void> deleteStdPerson(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_person") String std_id_person) {
-        log.debug("REST request to delete std_person : {}", id_organization + "|" + std_id_person);
+
+    @DeleteMapping("/std_person/{std_id_person}")
+    public ResponseEntity<Void> deleteStdPerson(@PathVariable("std_id_person") String stdIdPerson) {
+        log.debug("REST request to delete std_person : {}", idOrganization + "|" + stdIdPerson);
         StdPersonId id = new StdPersonId();
-        id.setIdOrganization(id_organization);
-        id.setStdIdPerson(std_id_person);
+        id.setIdOrganization(idOrganization);
+        id.setStdIdPerson(stdIdPerson);
 
         stdPersonRepository.deleteById(id);
         return ResponseEntity
@@ -101,3 +92,33 @@ public class StdPersonResource {
                .build();
     }
 }
+
+/*
+  // PostMapping para un solo registro
+    @PostMapping("/std_person")
+    public ResponseEntity<StdPerson> createStdPerson(@RequestBody StdPerson stdPerson)
+            throws URISyntaxException {
+        log.debug("REST request to create std_person : {}", stdPerson);
+
+        StdPerson result = stdPersonRepository.save(stdPerson);
+        return ResponseEntity
+                .created(new URI("/api/std_person/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+    }
+
+  // PutMapping para un solo registro
+    @PutMapping("/std_person")
+    public ResponseEntity<StdPerson> updateStdPerson(@RequestBody StdPerson stdPerson)
+            throws URISyntaxException {
+        log.debug("REST request to update std_person : {}", stdPerson);
+        if (stdPerson.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        StdPerson result = stdPersonRepository.save(stdPerson);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
+                stdPerson.getId().toString())).body(result);
+    }
+
+
+*/
