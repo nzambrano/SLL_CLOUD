@@ -44,7 +44,7 @@ public class M4sllFasesServices {
             id.setTfaIdTpFase(m4sllFases.getId().getTfaIdTpFase());
 
             String classToString = ReflectionToStringBuilder.toString(id, ToStringStyle.JSON_STYLE);
-            log.info("REST request to insert m4sll_fases id: {}, seq: {}", classToString, ultimaSecuencia);
+            log.debug("REST request to insert m4sll_fases id: {}, seq: {}", classToString, ultimaSecuencia);
 
             m4sllFases.setId(id);
             m4sllFasesRepository.save(m4sllFases);

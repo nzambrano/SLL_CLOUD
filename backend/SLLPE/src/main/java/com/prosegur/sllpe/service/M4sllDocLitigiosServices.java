@@ -42,10 +42,8 @@ public class M4sllDocLitigiosServices {
             id.setIdOrganization(idOrganization);
             id.setLitIdLitigio(m4sllDocLitigios.getId().getLitIdLitigio());
 
-            log.info("idOrganization: {}", idOrganization);
-
             String classToString = ReflectionToStringBuilder.toString(id, ToStringStyle.JSON_STYLE);
-            log.info("REST request to insert m4sll_doc_litigios id: {}, seq: {}", classToString, ultimaSecuencia);
+            log.debug("REST request to insert m4sll_doc_litigios id: {}, seq: {}", classToString, ultimaSecuencia);
 
             m4sllDocLitigios.setId(id);
             m4sllDocLitigiosRepository.save(m4sllDocLitigios);
