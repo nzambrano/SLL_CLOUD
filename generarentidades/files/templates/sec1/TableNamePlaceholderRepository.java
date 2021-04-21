@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface TableNamePlaceholderRepository extends JpaRepository<TableNamePlaceholder, TableNamePlaceholderId> {
   @Query(
-    value = "SELECT COALESCE(max(sec_placeholder),0)+1 FROM schema_name_placeholder.table_name_placeholder where_and_colsnotsec_placeholder",
+    value = "SELECT COALESCE(MAX(sec_placeholder),0)+1 FROM schema_name_placeholder.table_name_placeholder where_and_colsnotsec_placeholder",
     nativeQuery = true
   )
   public ColsecDatatype obtenerUltimaSecuencia(param_colsnotsec_placeholder);

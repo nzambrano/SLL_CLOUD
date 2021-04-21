@@ -41,7 +41,7 @@ public class TableNamePlaceholderServices {
       id.setColsNotSecPlaceholder(tableNamePlaceholder.getId().getColsNotSecPlaceholder());
 
       String classToString = ReflectionToStringBuilder.toString(id, ToStringStyle.JSON_STYLE);
-      log.info("REST request to insert table_name_placeholder id: {}, seq: {}", classToString, ultimaSecuencia);
+      log.debug("REST request to insert table_name_placeholder id: {}, seq: {}", classToString, ultimaSecuencia);
 
       tableNamePlaceholder.setId(id);
       tableNamePlaceholderRepository.save(tableNamePlaceholder);

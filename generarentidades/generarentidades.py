@@ -2,15 +2,17 @@
 # Recibir parametros por json o via db, en vez de parametros
 # agregar el tipo de dato en el customget asi puedo generar customget con
 # cualquier columna no necesariamente pks, testear con m4sll_mt_abogados
+# conseguir implementar un orgder by global (no en la query del
+# repositorty) y q tambien ordene findAll
 
 # A saber:
-# Se debe configurar el archivo:
+# 1. Se debe configurar el archivo:
 # generarentidades\files\hibernate\hibernate.cfg.xml
 # con los datos de conexión a la DB
-# instalar: pip install stringcase
+# 2. instalar: pip install stringcase
 # uso: https://pypi.org/project/stringcase/
 
-# Formatar/indentar con standard PEP8:
+# Formatear/indentar con standard PEP8:
 # cd C:\Users\asd\Desktop\laburo\prosegur\proyectos\sll_cloud\generarentidades
 # camel-snake-pep8 --yes-to-all . generarentidades.py
 # autopep8 --in-place --aggressive --aggressive generarentidades.py
@@ -712,14 +714,14 @@ new_str = start_str + repl_str + end_str
 search_n_replace_lst.append((search_str, new_str))
 
 if new_pks_names_sec_lst:
-    search_str = '@PathVariable("sec_placeholder") ColsecDatatype sec_placeholder'
+    search_str = ', @PathVariable("sec_placeholder") ColsecDatatype sec_placeholder'
     start_str = ""
     sep_str = ""
     end_str = ""
 
     repl_str = sep_str.join(
         [
-            '@PathVariable("'
+            ', @PathVariable("'
             + stringcase.snakecase(new_pks_names_sec_lst[idx])
             + '") '
             + new_pks_datatypes_sec_lst[idx]
@@ -729,6 +731,8 @@ if new_pks_names_sec_lst:
             val in enumerate(new_pks_names_sec_lst) if val not in new_ev_cols_names_lst])
 
     new_str = start_str + repl_str + end_str
+    new_str = new_str if new_pks_names_sec_lst[0] in new_pk_cols_names_lst else ""
+
     search_n_replace_lst.append((search_str, new_str))
 
 search_str = "id.setColsNotSecPlaceholder(cols_not_sec_placeholder);"
