@@ -78,7 +78,10 @@ public class M4sllMtoSegInteResource {
         return ResponseEntity.ok().body(M4sllMtoSegInteByInput);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 10e07f8b19038d1eec29c16735c0b78a791ae0a9
 
     @DeleteMapping("/m4sll_mto_seg_inte/{id_app_role}/{msi_secuencia}")
     public ResponseEntity<Void> deleteM4sllMtoSegInte(@PathVariable("id_app_role") String idAppRole, @PathVariable("msi_secuencia") Long msiSecuencia) {

@@ -19,7 +19,15 @@ public interface M4sllFasesRepository extends JpaRepository<M4sllFases, M4sllFas
         value = "SELECT * FROM sll.m4sll_fases WHERE id_organization = :idOrganization AND lit_id_litigio = :litIdLitigio AND tfa_id_tp_fase = :tfaIdTpFase ORDER BY id_organization, lit_id_litigio, fas_secuencia DESC",
         nativeQuery = true
     )
-    public List<M4sllFases> findByIdOrganizationLitIdLitigioTfaIdTpFase(@Param("idOrganization") String idOrganization, @Param("litIdLitigio") String litIdLitigio, @Param("tfaIdTpFase") String tfaIdTpFase);
+    public M4sllFases findByIdOrganizationLitIdLitigioTfaIdTpFase(@Param("idOrganization") String idOrganization, @Param("litIdLitigio") String litIdLitigio, @Param("tfaIdTpFase") String tfaIdTpFase);
+
+    @Query(
+            value = "SELECT * FROM sll.m4sll_fases WHERE id_organization = :idOrganization AND lit_id_litigio = :litIdLitigio ORDER BY id_organization, lit_id_litigio, fas_secuencia DESC",
+            nativeQuery = true
+        )
+    public List<M4sllFases> findByIdOrganizationLitIdLitigio(@Param("idOrganization") String idOrganization, @Param("litIdLitigio") String litIdLitigio);
+
+
 
     @Query(
         value = "SELECT * FROM sll.m4sll_fases WHERE id_organization = :idOrganization AND lit_id_litigio = :litIdLitigio AND fas_secuencia = :fasSecuencia ORDER BY id_organization, lit_id_litigio, fas_secuencia DESC",

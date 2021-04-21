@@ -62,33 +62,33 @@ public class M4sllFasesResource {
                .body(result);
     }
 
-    @GetMapping("/m4sll_fases")
-    public ResponseEntity<List<M4sllFases>> getAllM4sllFases() {
+    @GetMapping("/m4sll_fases/{lit_id_litigio}")
+    public ResponseEntity<List<M4sllFases>> getAllM4sllFases(@PathVariable("lit_id_litigio") String litIdLitigio) {
         log.debug("REST request to get ALL M4sllFases : {}");
 
-        List<M4sllFases> M4sllFasesAll = m4sllFasesRepository.findAll();
+        List<M4sllFases> M4sllFasesAll = m4sllFasesRepository.findByIdOrganizationLitIdLitigio(idOrganization, litIdLitigio);
         return ResponseEntity.ok().body(M4sllFasesAll);
     }
 
     @GetMapping("/m4sll_fases/{lit_id_litigio}/{tfa_id_tp_fase}")
-    public ResponseEntity<List<M4sllFases>> getM4sllFases(@PathVariable("lit_id_litigio") String litIdLitigio, @PathVariable("tfa_id_tp_fase") String tfaIdTpFase) {
+    public ResponseEntity<M4sllFases> getM4sllFases(@PathVariable("lit_id_litigio") String litIdLitigio, @PathVariable("tfa_id_tp_fase") String tfaIdTpFase) {
         log.debug("REST request to get M4sllFases : {}", idOrganization + "|" + litIdLitigio + "|" + tfaIdTpFase);
 
-        List<M4sllFases> M4sllFasesByInput = m4sllFasesRepository.findByIdOrganizationLitIdLitigioTfaIdTpFase(idOrganization, litIdLitigio, tfaIdTpFase);
+        M4sllFases M4sllFasesByInput = m4sllFasesRepository.findByIdOrganizationLitIdLitigioTfaIdTpFase(idOrganization, litIdLitigio, tfaIdTpFase);
         return ResponseEntity.ok().body(M4sllFasesByInput);
     }
 
-    @GetMapping("/m4sll_fases/{lit_id_litigio}/{fas_secuencia}")
+    /*@GetMapping("/m4sll_fases/{lit_id_litigio}/{fas_secuencia}")
     public ResponseEntity<List<M4sllFases>> getM4sllFases(@PathVariable("lit_id_litigio") String litIdLitigio, @PathVariable("fas_secuencia") Long fasSecuencia) {
         log.debug("REST request to get M4sllFases : {}", idOrganization + "|" + litIdLitigio + "|" + fasSecuencia);
 
         List<M4sllFases> M4sllFasesByInput = m4sllFasesRepository.findByIdOrganizationLitIdLitigioFasSecuencia(idOrganization, litIdLitigio, fasSecuencia);
         return ResponseEntity.ok().body(M4sllFasesByInput);
-    }
+    }*/
 
 
     @DeleteMapping("/m4sll_fases/{lit_id_litigio}/{tfa_id_tp_fase}")
-    public ResponseEntity<Void> deleteM4sllFases(@PathVariable("lit_id_litigio") String litIdLitigio, @PathVariable("tfa_id_tp_fase") String tfaIdTpFase, @PathVariable("fas_secuencia") Long fasSecuencia) {
+    public ResponseEntity<Void> deleteM4sllFases(@PathVariable("lit_id_litigio") String litIdLitigio, @PathVariable("tfa_id_tp_fase") String tfaIdTpFase) {
         log.debug("REST request to delete m4sll_fases : {}", idOrganization + "|" + litIdLitigio + "|" + tfaIdTpFase );
         M4sllFasesId id = new M4sllFasesId();
         id.setIdOrganization(idOrganization);
