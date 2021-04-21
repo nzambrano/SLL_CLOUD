@@ -31,7 +31,6 @@ public class M4sllPedidosResource {
 
     @Value("${idOrganization}")
     private String idOrganization;
-
     private M4sllPedidosRepository m4sllPedidosRepository;
 
     public M4sllPedidosResource(M4sllPedidosRepository m4sllPedidosRepository) {
