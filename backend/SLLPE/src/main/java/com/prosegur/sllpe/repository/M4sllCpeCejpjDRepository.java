@@ -21,10 +21,5 @@ public interface M4sllCpeCejpjDRepository extends JpaRepository<M4sllCpeCejpjD, 
     )
     public List<M4sllCpeCejpjD> findByIdOrganizationLitIdLitigio(@Param("idOrganization") String idOrganization, @Param("litIdLitigio") String litIdLitigio);
 
-    @Query(
-        value = "SELECT * FROM sll.m4sll_cpe_cejpj_d WHERE lit_id_litigio = :litIdLitigio ORDER BY id_organization, lit_id_litigio, ccd_id_secuencia DESC",
-        nativeQuery = true
-    )
-    public List<M4sllCpeCejpjD> findByLitIdLitigio(@Param("litIdLitigio") String litIdLitigio);
 
 }

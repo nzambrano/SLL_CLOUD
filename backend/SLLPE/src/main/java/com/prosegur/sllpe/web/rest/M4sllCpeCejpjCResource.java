@@ -77,13 +77,6 @@ public class M4sllCpeCejpjCResource {
         return ResponseUtil.wrapOrNotFound(m4sllCpeCejpjC);
     }
 
-    @GetMapping("/m4sll_cpe_cejpj_c/{lit_id_litigio}")
-    public ResponseEntity<List<M4sllCpeCejpjC>> getM4sllCpeCejpjC(@PathVariable("lit_id_litigio") String litIdLitigio) {
-        log.debug("REST request to get M4sllCpeCejpjC : {}", litIdLitigio);
-
-        List<M4sllCpeCejpjC> M4sllCpeCejpjCByInput = m4sllCpeCejpjCRepository.findByLitIdLitigio(litIdLitigio);
-        return ResponseEntity.ok().body(M4sllCpeCejpjCByInput);
-    }
 
     @DeleteMapping("/m4sll_cpe_cejpj_c/{lit_id_litigio}")
     public ResponseEntity<Void> deleteM4sllCpeCejpjC(@PathVariable("lit_id_litigio") String litIdLitigio) {
