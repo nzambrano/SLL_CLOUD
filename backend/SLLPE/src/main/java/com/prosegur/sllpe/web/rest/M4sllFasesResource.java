@@ -86,7 +86,6 @@ public class M4sllFasesResource {
         return ResponseEntity.ok().body(M4sllFasesByInput);
     }
 
-
     @DeleteMapping("/m4sll_fases/{lit_id_litigio}/{tfa_id_tp_fase}")
     public ResponseEntity<Void> deleteM4sllFases(@PathVariable("lit_id_litigio") String litIdLitigio, @PathVariable("tfa_id_tp_fase") String tfaIdTpFase) {
         log.debug("REST request to delete m4sll_fases : {}", idOrganization + "|" + litIdLitigio + "|" + tfaIdTpFase );

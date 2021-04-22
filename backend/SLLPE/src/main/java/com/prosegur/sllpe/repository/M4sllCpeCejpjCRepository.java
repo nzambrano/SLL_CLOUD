@@ -12,8 +12,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface M4sllCpeCejpjCRepository extends JpaRepository<M4sllCpeCejpjC, M4sllCpeCejpjCId> {
     @Query(
-        value = "select * from sll.m4sll_cpe_cejpj_c where lit_id_litigio = :lit_id_litigio",
+        value = "select * from sll.m4sll_cpe_cejpj_c WHERE lit_id_litigio = :litIdLitigio ORDER BY id_organization, lit_id_litigio DESC",
         nativeQuery = true
     )
-    public List<M4sllCpeCejpjC> findByLitIdLitigio(@Param("lit_id_litigio") String lit_id_litigio);
+    public List<M4sllCpeCejpjC> findByLitIdLitigio(@Param("litIdLitigio") String litIdLitigio);
 }

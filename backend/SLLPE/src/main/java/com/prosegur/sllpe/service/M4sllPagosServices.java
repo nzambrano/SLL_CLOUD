@@ -42,10 +42,8 @@ public class M4sllPagosServices {
             id.setIdOrganization(idOrganization);
             id.setLitIdLitigio(m4sllPagos.getId().getLitIdLitigio());
 
-            log.info("idOrganization: {}", idOrganization);
-
             String classToString = ReflectionToStringBuilder.toString(id, ToStringStyle.JSON_STYLE);
-            log.info("REST request to insert m4sll_pagos id: {}, seq: {}", classToString, ultimaSecuencia);
+            log.debug("REST request to insert m4sll_pagos id: {}, seq: {}", classToString, ultimaSecuencia);
 
             m4sllPagos.setId(id);
             m4sllPagosRepository.save(m4sllPagos);

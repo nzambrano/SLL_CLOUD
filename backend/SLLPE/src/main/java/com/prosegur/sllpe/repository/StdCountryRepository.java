@@ -10,16 +10,16 @@ import org.springframework.data.repository.query.Param;
 
 public interface StdCountryRepository extends JpaRepository<StdCountry, StdCountryId> {
     @Query(
-        value = "select COALESCE(max(cast(std_id_country as integer)),0)+1 from public.std_country where id_organization = :id_organization",
+        value = "SELECT COALESCE(MAX(CAST(std_id_country as integer)),0)+1 FROM public.std_country WHERE id_organization = :idOrganization",
         nativeQuery = true
     )
-    public String obtenerUltimaSecuencia(@Param("id_organization") String id_organization);
+    public String obtenerUltimaSecuencia(@Param("idOrganization") String idOrganization);
 
     @Query(
-        value = "select * from public.std_country where id_organization = :id_organization",
+        value = "SELECT * FROM public.std_country WHERE id_organization = :idOrganization ORDER BY id_organization, TO_NUMBER(std_id_country) DESC",
         nativeQuery = true
     )
-    public List<StdCountry> findByIdOrganization(@Param("id_organization") String id_organization);
+    public List<StdCountry> findByIdOrganization(@Param("idOrganization") String idOrganization);
 
 
 }

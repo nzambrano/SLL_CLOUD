@@ -24,40 +24,38 @@ import java.util.Optional;
 @Transactional
 
 public class M4sllTpStaDetResource {
-
     private final Logger log = LoggerFactory.getLogger(M4sllTpStaDetResource.class);
     private static final String ENTITY_NAME = "sllpeM4sllTpStaDet";
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    @Value("${idOrganization}")
+    private String idOrganization;
     private M4sllTpStaDetRepository m4sllTpStaDetRepository;
 
     public M4sllTpStaDetResource(M4sllTpStaDetRepository m4sllTpStaDetRepository) {
         this.m4sllTpStaDetRepository = m4sllTpStaDetRepository;
     }
-
     @PostMapping("/m4sll_tp_sta_det")
-    public ResponseEntity<M4sllTpStaDet> createM4sllTpStaDet(@RequestBody M4sllTpStaDet m4sll_tp_sta_det)
+    public ResponseEntity<List<M4sllTpStaDet>> createM4sllTpStaDet(@RequestBody List<M4sllTpStaDet> listM4sllTpStaDet)
     throws URISyntaxException {
-        log.debug("REST request to create m4sll_tp_sta_det : {}", m4sll_tp_sta_det);
-
-        M4sllTpStaDet result = m4sllTpStaDetRepository.save(m4sll_tp_sta_det);
+        log.debug("REST request to create m4sll_tp_sta_det : {}", listM4sllTpStaDet);
+        List<M4sllTpStaDet> result = m4sllTpStaDetRepository.saveAll(listM4sllTpStaDet);
         return ResponseEntity
-               .created(new URI("/api/m4sll_tp_sta_det/" + result.getId())).headers(HeaderUtil
-                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .created(new URI("/api/m4sll_tp_sta_det/")).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
                .body(result);
     }
 
     @PutMapping("/m4sll_tp_sta_det")
-    public ResponseEntity<M4sllTpStaDet> updateM4sllTpStaDet(@RequestBody M4sllTpStaDet m4sll_tp_sta_det)
+    public ResponseEntity<List<M4sllTpStaDet>> updateM4sllTpStaDet(@RequestBody List<M4sllTpStaDet> listM4sllTpStaDet)
     throws URISyntaxException {
-        log.debug("REST request to update m4sll_tp_sta_det : {}", m4sll_tp_sta_det);
-        if (m4sll_tp_sta_det.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        M4sllTpStaDet result = m4sllTpStaDetRepository.save(m4sll_tp_sta_det);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                                           m4sll_tp_sta_det.getId().toString())).body(result);
+        log.debug("REST request to update m4sll_tp_sta_det : {}", listM4sllTpStaDet);
+        List<M4sllTpStaDet> result = m4sllTpStaDetRepository.saveAll(listM4sllTpStaDet);
+        return ResponseEntity
+               .created(new URI("/api/m4sll_tp_sta_det/")).headers(HeaderUtil
+                       .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
+               .body(result);
     }
 
     @GetMapping("/m4sll_tp_sta_det")
@@ -68,24 +66,24 @@ public class M4sllTpStaDetResource {
         return ResponseEntity.ok().body(M4sllTpStaDetAll);
     }
 
-    @GetMapping("/m4sll_tp_sta_det/{id_organization}/{tsd_id_tp_sta_det}")
-    public ResponseEntity<M4sllTpStaDet> getM4sllTpStaDet(@PathVariable("id_organization") String id_organization, @PathVariable("tsd_id_tp_sta_det") String tsd_id_tp_sta_det) {
-        log.debug("REST request to get M4sllTpStaDet : {}", id_organization + "|" + tsd_id_tp_sta_det);
+    @GetMapping("/m4sll_tp_sta_det/{tsd_id_tp_sta_det}")
+    public ResponseEntity<M4sllTpStaDet> getM4sllTpStaDet(@PathVariable("tsd_id_tp_sta_det") String tsdIdTpStaDet) {
+        log.debug("REST request to get M4sllTpStaDet : {}", idOrganization + "|" + tsdIdTpStaDet);
         M4sllTpStaDetId id = new M4sllTpStaDetId();
-        id.setIdOrganization(id_organization);
-        id.setTsdIdTpStaDet(tsd_id_tp_sta_det);
+        id.setIdOrganization(idOrganization);
+        id.setTsdIdTpStaDet(tsdIdTpStaDet);
 
-        Optional<M4sllTpStaDet> m4sll_tp_sta_det = m4sllTpStaDetRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(m4sll_tp_sta_det);
+        Optional<M4sllTpStaDet> m4sllTpStaDet = m4sllTpStaDetRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(m4sllTpStaDet);
     }
 
 
-    @DeleteMapping("/m4sll_tp_sta_det/{id_organization}/{tsd_id_tp_sta_det}")
-    public ResponseEntity<Void> deleteM4sllTpStaDet(@PathVariable("id_organization") String id_organization, @PathVariable("tsd_id_tp_sta_det") String tsd_id_tp_sta_det) {
-        log.debug("REST request to delete m4sll_tp_sta_det : {}", id_organization + "|" + tsd_id_tp_sta_det);
+    @DeleteMapping("/m4sll_tp_sta_det/{tsd_id_tp_sta_det}")
+    public ResponseEntity<Void> deleteM4sllTpStaDet(@PathVariable("tsd_id_tp_sta_det") String tsdIdTpStaDet) {
+        log.debug("REST request to delete m4sll_tp_sta_det : {}", idOrganization + "|" + tsdIdTpStaDet);
         M4sllTpStaDetId id = new M4sllTpStaDetId();
-        id.setIdOrganization(id_organization);
-        id.setTsdIdTpStaDet(tsd_id_tp_sta_det);
+        id.setIdOrganization(idOrganization);
+        id.setTsdIdTpStaDet(tsdIdTpStaDet);
 
         m4sllTpStaDetRepository.deleteById(id);
         return ResponseEntity
@@ -94,3 +92,33 @@ public class M4sllTpStaDetResource {
                .build();
     }
 }
+
+/*
+  // PostMapping para un solo registro
+    @PostMapping("/m4sll_tp_sta_det")
+    public ResponseEntity<M4sllTpStaDet> createM4sllTpStaDet(@RequestBody M4sllTpStaDet m4sllTpStaDet)
+            throws URISyntaxException {
+        log.debug("REST request to create m4sll_tp_sta_det : {}", m4sllTpStaDet);
+
+        M4sllTpStaDet result = m4sllTpStaDetRepository.save(m4sllTpStaDet);
+        return ResponseEntity
+                .created(new URI("/api/m4sll_tp_sta_det/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+    }
+
+  // PutMapping para un solo registro
+    @PutMapping("/m4sll_tp_sta_det")
+    public ResponseEntity<M4sllTpStaDet> updateM4sllTpStaDet(@RequestBody M4sllTpStaDet m4sllTpStaDet)
+            throws URISyntaxException {
+        log.debug("REST request to update m4sll_tp_sta_det : {}", m4sllTpStaDet);
+        if (m4sllTpStaDet.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        M4sllTpStaDet result = m4sllTpStaDetRepository.save(m4sllTpStaDet);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
+                m4sllTpStaDet.getId().toString())).body(result);
+    }
+
+
+*/

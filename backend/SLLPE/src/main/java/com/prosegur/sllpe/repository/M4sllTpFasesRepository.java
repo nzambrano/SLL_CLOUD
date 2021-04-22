@@ -10,16 +10,16 @@ import org.springframework.data.repository.query.Param;
 
 public interface M4sllTpFasesRepository extends JpaRepository<M4sllTpFases, M4sllTpFasesId> {
     @Query(
-        value = "select COALESCE(max(cast(tfa_id_tp_fase as integer)),0)+1 from sll.m4sll_tp_fases where id_organization = :id_organization",
+        value = "SELECT COALESCE(MAX(CAST(tfa_id_tp_fase as integer)),0)+1 FROM sll.m4sll_tp_fases WHERE id_organization = :idOrganization",
         nativeQuery = true
     )
-    public String obtenerUltimaSecuencia(@Param("id_organization") String id_organization);
+    public String obtenerUltimaSecuencia(@Param("idOrganization") String idOrganization);
 
     @Query(
-        value = "select * from sll.m4sll_tp_fases where id_organization = :id_organization",
+        value = "SELECT * FROM sll.m4sll_tp_fases WHERE id_organization = :idOrganization ORDER BY id_organization, TO_NUMBER(tfa_id_tp_fase) DESC",
         nativeQuery = true
     )
-    public List<M4sllTpFases> findByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpFases> findByIdOrganization(@Param("idOrganization") String idOrganization);
 
 
 }

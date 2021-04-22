@@ -10,21 +10,21 @@ import org.springframework.data.repository.query.Param;
 
 public interface M4sllCpeCejpjDRepository extends JpaRepository<M4sllCpeCejpjD, M4sllCpeCejpjDId> {
     @Query(
-        value = "select COALESCE(max(ccd_id_secuencia),0)+1 from sll.m4sll_cpe_cejpj_d where id_organization = :id_organization and lit_id_litigio = :lit_id_litigio",
+        value = "SELECT COALESCE(MAX(ccd_id_secuencia),0)+1 FROM sll.m4sll_cpe_cejpj_d WHERE id_organization = :idOrganization AND lit_id_litigio = :litIdLitigio",
         nativeQuery = true
     )
-    public Long obtenerUltimaSecuencia(@Param("id_organization") String id_organization, @Param("lit_id_litigio") String lit_id_litigio);
+    public Long obtenerUltimaSecuencia(@Param("idOrganization") String idOrganization, @Param("litIdLitigio") String litIdLitigio);
 
     @Query(
-        value = "select * from sll.m4sll_cpe_cejpj_d where id_organization = :id_organization and lit_id_litigio = :lit_id_litigio",
+        value = "SELECT * FROM sll.m4sll_cpe_cejpj_d WHERE id_organization = :idOrganization AND lit_id_litigio = :litIdLitigio ORDER BY id_organization, lit_id_litigio, ccd_id_secuencia DESC",
         nativeQuery = true
     )
-    public List<M4sllCpeCejpjD> findByIdOrganizationLitIdLitigio(@Param("id_organization") String id_organization, @Param("lit_id_litigio") String lit_id_litigio);
+    public List<M4sllCpeCejpjD> findByIdOrganizationLitIdLitigio(@Param("idOrganization") String idOrganization, @Param("litIdLitigio") String litIdLitigio);
 
     @Query(
-        value = "select * from sll.m4sll_cpe_cejpj_d where lit_id_litigio = :lit_id_litigio",
+        value = "SELECT * FROM sll.m4sll_cpe_cejpj_d WHERE lit_id_litigio = :litIdLitigio ORDER BY id_organization, lit_id_litigio, ccd_id_secuencia DESC",
         nativeQuery = true
     )
-    public List<M4sllCpeCejpjD> findByLitIdLitigio(@Param("lit_id_litigio") String lit_id_litigio);
+    public List<M4sllCpeCejpjD> findByLitIdLitigio(@Param("litIdLitigio") String litIdLitigio);
 
 }

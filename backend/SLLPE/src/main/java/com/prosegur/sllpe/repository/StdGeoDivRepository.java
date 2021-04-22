@@ -10,16 +10,16 @@ import org.springframework.data.repository.query.Param;
 
 public interface StdGeoDivRepository extends JpaRepository<StdGeoDiv, StdGeoDivId> {
     @Query(
-        value = "select COALESCE(max(cast(std_id_geo_div as integer)),0)+1 from public.std_geo_div where id_organization = :id_organization and std_id_country = :std_id_country",
+        value = "SELECT COALESCE(MAX(CAST(std_id_geo_div as integer)),0)+1 FROM public.std_geo_div WHERE id_organization = :idOrganization AND std_id_country = :stdIdCountry",
         nativeQuery = true
     )
-    public String obtenerUltimaSecuencia(@Param("id_organization") String id_organization, @Param("std_id_country") String std_id_country);
+    public String obtenerUltimaSecuencia(@Param("idOrganization") String idOrganization, @Param("stdIdCountry") String stdIdCountry);
 
     @Query(
-        value = "select * from public.std_geo_div where id_organization = :id_organization and std_id_country = :std_id_country",
+        value = "SELECT * FROM public.std_geo_div WHERE id_organization = :idOrganization AND std_id_country = :stdIdCountry ORDER BY id_organization, std_id_country, TO_NUMBER(std_id_geo_div) DESC",
         nativeQuery = true
     )
-    public List<StdGeoDiv> findByIdOrganizationStdIdCountry(@Param("id_organization") String id_organization, @Param("std_id_country") String std_id_country);
+    public List<StdGeoDiv> findByIdOrganizationStdIdCountry(@Param("idOrganization") String idOrganization, @Param("stdIdCountry") String stdIdCountry);
 
 
 }

@@ -79,7 +79,6 @@ public class M4sllDocLitigiosResource {
     }
 
 
-
     @DeleteMapping("/m4sll_doc_litigios/{lit_id_litigio}/{dol_secuencia}")
     public ResponseEntity<Void> deleteM4sllDocLitigios(@PathVariable("lit_id_litigio") String litIdLitigio, @PathVariable("dol_secuencia") Long dolSecuencia) {
         log.debug("REST request to delete m4sll_doc_litigios : {}", idOrganization + "|" + litIdLitigio + "|" + dolSecuencia);

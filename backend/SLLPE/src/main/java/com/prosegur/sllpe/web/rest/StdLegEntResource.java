@@ -24,40 +24,38 @@ import java.util.Optional;
 @Transactional
 
 public class StdLegEntResource {
-
     private final Logger log = LoggerFactory.getLogger(StdLegEntResource.class);
     private static final String ENTITY_NAME = "sllpeStdLegEnt";
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    @Value("${idOrganization}")
+    private String idOrganization;
     private StdLegEntRepository stdLegEntRepository;
 
     public StdLegEntResource(StdLegEntRepository stdLegEntRepository) {
         this.stdLegEntRepository = stdLegEntRepository;
     }
-
     @PostMapping("/std_leg_ent")
-    public ResponseEntity<StdLegEnt> createStdLegEnt(@RequestBody StdLegEnt std_leg_ent)
+    public ResponseEntity<List<StdLegEnt>> createStdLegEnt(@RequestBody List<StdLegEnt> listStdLegEnt)
     throws URISyntaxException {
-        log.debug("REST request to create std_leg_ent : {}", std_leg_ent);
-
-        StdLegEnt result = stdLegEntRepository.save(std_leg_ent);
+        log.debug("REST request to create std_leg_ent : {}", listStdLegEnt);
+        List<StdLegEnt> result = stdLegEntRepository.saveAll(listStdLegEnt);
         return ResponseEntity
-               .created(new URI("/api/std_leg_ent/" + result.getId())).headers(HeaderUtil
-                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+               .created(new URI("/api/std_leg_ent/")).headers(HeaderUtil
+                       .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.toString()))
                .body(result);
     }
 
     @PutMapping("/std_leg_ent")
-    public ResponseEntity<StdLegEnt> updateStdLegEnt(@RequestBody StdLegEnt std_leg_ent)
+    public ResponseEntity<List<StdLegEnt>> updateStdLegEnt(@RequestBody List<StdLegEnt> listStdLegEnt)
     throws URISyntaxException {
-        log.debug("REST request to update std_leg_ent : {}", std_leg_ent);
-        if (std_leg_ent.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        StdLegEnt result = stdLegEntRepository.save(std_leg_ent);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-                                           std_leg_ent.getId().toString())).body(result);
+        log.debug("REST request to update std_leg_ent : {}", listStdLegEnt);
+        List<StdLegEnt> result = stdLegEntRepository.saveAll(listStdLegEnt);
+        return ResponseEntity
+               .created(new URI("/api/std_leg_ent/")).headers(HeaderUtil
+                       .createEntityUpdateAlert(applicationName, false, ENTITY_NAME, result.toString()))
+               .body(result);
     }
 
     @GetMapping("/std_leg_ent")
@@ -68,31 +66,31 @@ public class StdLegEntResource {
         return ResponseEntity.ok().body(StdLegEntAll);
     }
 
-    @GetMapping("/std_leg_ent/{id_organization}/{std_id_leg_ent}")
-    public ResponseEntity<StdLegEnt> getStdLegEnt(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_leg_ent") String std_id_leg_ent) {
-        log.debug("REST request to get StdLegEnt : {}", id_organization + "|" + std_id_leg_ent);
+    @GetMapping("/std_leg_ent/{std_id_leg_ent}")
+    public ResponseEntity<StdLegEnt> getStdLegEnt(@PathVariable("std_id_leg_ent") String stdIdLegEnt) {
+        log.debug("REST request to get StdLegEnt : {}", idOrganization + "|" + stdIdLegEnt);
         StdLegEntId id = new StdLegEntId();
-        id.setIdOrganization(id_organization);
-        id.setStdIdLegEnt(std_id_leg_ent);
+        id.setIdOrganization(idOrganization);
+        id.setStdIdLegEnt(stdIdLegEnt);
 
-        Optional<StdLegEnt> std_leg_ent = stdLegEntRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(std_leg_ent);
+        Optional<StdLegEnt> stdLegEnt = stdLegEntRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(stdLegEnt);
     }
 
-    @GetMapping("/std_leg_ent/{id_organization}")
-    public ResponseEntity<List<StdLegEnt>> getStdLegEnt(@PathVariable("id_organization") String id_organization) {
-        log.debug("REST request to get StdLegEnt : {}", id_organization);
+    @GetMapping("/std_leg_ent/")
+    public ResponseEntity<List<StdLegEnt>> getStdLegEnt() {
+        log.debug("REST request to get StdLegEnt : {}", idOrganization);
 
-        List<StdLegEnt> StdLegEntByInput = stdLegEntRepository.findByIdOrganization(id_organization);
+        List<StdLegEnt> StdLegEntByInput = stdLegEntRepository.findByIdOrganization(idOrganization);
         return ResponseEntity.ok().body(StdLegEntByInput);
     }
 
-    @DeleteMapping("/std_leg_ent/{id_organization}/{std_id_leg_ent}")
-    public ResponseEntity<Void> deleteStdLegEnt(@PathVariable("id_organization") String id_organization, @PathVariable("std_id_leg_ent") String std_id_leg_ent) {
-        log.debug("REST request to delete std_leg_ent : {}", id_organization + "|" + std_id_leg_ent);
+    @DeleteMapping("/std_leg_ent/{std_id_leg_ent}")
+    public ResponseEntity<Void> deleteStdLegEnt(@PathVariable("std_id_leg_ent") String stdIdLegEnt) {
+        log.debug("REST request to delete std_leg_ent : {}", idOrganization + "|" + stdIdLegEnt);
         StdLegEntId id = new StdLegEntId();
-        id.setIdOrganization(id_organization);
-        id.setStdIdLegEnt(std_id_leg_ent);
+        id.setIdOrganization(idOrganization);
+        id.setStdIdLegEnt(stdIdLegEnt);
 
         stdLegEntRepository.deleteById(id);
         return ResponseEntity
@@ -101,3 +99,33 @@ public class StdLegEntResource {
                .build();
     }
 }
+
+/*
+  // PostMapping para un solo registro
+    @PostMapping("/std_leg_ent")
+    public ResponseEntity<StdLegEnt> createStdLegEnt(@RequestBody StdLegEnt stdLegEnt)
+            throws URISyntaxException {
+        log.debug("REST request to create std_leg_ent : {}", stdLegEnt);
+
+        StdLegEnt result = stdLegEntRepository.save(stdLegEnt);
+        return ResponseEntity
+                .created(new URI("/api/std_leg_ent/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+    }
+
+  // PutMapping para un solo registro
+    @PutMapping("/std_leg_ent")
+    public ResponseEntity<StdLegEnt> updateStdLegEnt(@RequestBody StdLegEnt stdLegEnt)
+            throws URISyntaxException {
+        log.debug("REST request to update std_leg_ent : {}", stdLegEnt);
+        if (stdLegEnt.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        StdLegEnt result = stdLegEntRepository.save(stdLegEnt);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
+                stdLegEnt.getId().toString())).body(result);
+    }
+
+
+*/

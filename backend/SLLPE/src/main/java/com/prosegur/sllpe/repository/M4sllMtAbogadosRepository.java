@@ -10,27 +10,21 @@ import org.springframework.data.repository.query.Param;
 
 public interface M4sllMtAbogadosRepository extends JpaRepository<M4sllMtAbogados, M4sllMtAbogadosId> {
     @Query(
-        value = "select COALESCE(max(mab_secuencia),0)+1 from sll.m4sll_mt_abogados where id_organization = :id_organization",
+        value = "SELECT COALESCE(MAX(mab_secuencia),0)+1 FROM sll.m4sll_mt_abogados WHERE id_organization = :idOrganization",
         nativeQuery = true
     )
-    public Long obtenerUltimaSecuencia(@Param("id_organization") String id_organization);
+    public Long obtenerUltimaSecuencia(@Param("idOrganization") String idOrganization);
 
     @Query(
-        value = "select * from sll.m4sll_mt_abogados where id_organization = :id_organization",
+        value = "SELECT * FROM sll.m4sll_mt_abogados WHERE id_organization = :idOrganization ORDER BY id_organization, mab_secuencia DESC",
         nativeQuery = true
     )
-    public List<M4sllMtAbogados> findByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllMtAbogados> findByIdOrganization(@Param("idOrganization") String idOrganization);
 
     @Query(
-        value = "select * from sll.m4sll_mt_abogados where id_organization = :id_organization and mab_secuencia = :mab_secuencia and mab_chk_int = :mab_chk_int",
+        value = "SELECT * FROM sll.m4sll_mt_abogados WHERE id_organization = :idOrganization AND mab_chk_int = :mabChkInt ORDER BY id_organization, mab_secuencia DESC",
         nativeQuery = true
     )
-    public List<M4sllMtAbogados> findByIdOrganizationMabSecuenciaMabChkInt(@Param("id_organization") String id_organization, @Param("mab_secuencia") Long mab_secuencia, @Param("mab_chk_int") String mab_chk_int);
-
-    @Query(
-        value = "select * from sll.m4sll_mt_abogados where id_organization = :id_organization and mab_chk_int = :mab_chk_int",
-        nativeQuery = true
-    )
-    public List<M4sllMtAbogados> findByIdOrganizationMabChkInt(@Param("id_organization") String id_organization, @Param("mab_chk_int") String mab_chk_int);
+    public List<M4sllMtAbogados> findByIdOrganizationMabChkInt(@Param("idOrganization") String idOrganization, @Param("mabChkInt") String mabChkInt);
 
 }

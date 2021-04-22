@@ -10,16 +10,16 @@ import org.springframework.data.repository.query.Param;
 
 public interface M4sllTpLitigiosRepository extends JpaRepository<M4sllTpLitigios, M4sllTpLitigiosId> {
     @Query(
-        value = "select COALESCE(max(cast(tpl_id_tp_litigio as integer)),0)+1 from sll.m4sll_tp_litigios where id_organization = :id_organization",
+        value = "SELECT COALESCE(MAX(CAST(tpl_id_tp_litigio as integer)),0)+1 FROM sll.m4sll_tp_litigios WHERE id_organization = :idOrganization",
         nativeQuery = true
     )
-    public String obtenerUltimaSecuencia(@Param("id_organization") String id_organization);
+    public String obtenerUltimaSecuencia(@Param("idOrganization") String idOrganization);
 
     @Query(
-        value = "select * from sll.m4sll_tp_litigios where id_organization = :id_organization",
+        value = "SELECT * FROM sll.m4sll_tp_litigios WHERE id_organization = :idOrganization ORDER BY id_organization, TO_NUMBER(tpl_id_tp_litigio) DESC",
         nativeQuery = true
     )
-    public List<M4sllTpLitigios> findByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpLitigios> findByIdOrganization(@Param("idOrganization") String idOrganization);
 
 
 }

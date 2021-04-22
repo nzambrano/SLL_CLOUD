@@ -62,13 +62,16 @@ public class M4sllNegociosResource {
                .body(result);
     }
 
-    @GetMapping("/m4sll_negocios")
-    public ResponseEntity<List<M4sllNegocios>> getAllM4sllNegocios() {
-        log.debug("REST request to get ALL M4sllNegocios : {}");
+    // Este Servicio REST esta comentado porque particularmente para esta entidad, apuntaría al mismo End Point que otro que se encuentra habilitado
+    /*
+        @GetMapping("/m4sll_negocios")
+        public ResponseEntity<List<M4sllNegocios>> getAllM4sllNegocios() {
+          log.debug("REST request to get ALL M4sllNegocios : {}");
 
-        List<M4sllNegocios> M4sllNegociosAll = m4sllNegociosRepository.findAll();
-        return ResponseEntity.ok().body(M4sllNegociosAll);
-    }
+          List<M4sllNegocios> M4sllNegociosAll = m4sllNegociosRepository.findAll();
+          return ResponseEntity.ok().body(M4sllNegociosAll);
+        }
+    */
 
     @GetMapping("/m4sll_negocios")
     public ResponseEntity<List<M4sllNegocios>> getM4sllNegocios() {
@@ -79,9 +82,8 @@ public class M4sllNegociosResource {
     }
 
 
-
     @DeleteMapping("/m4sll_negocios/{neg_id_negocio}")
-    public ResponseEntity<Void> deleteM4sllNegocios(, @PathVariable("neg_id_negocio") String negIdNegocio) {
+    public ResponseEntity<Void> deleteM4sllNegocios(@PathVariable("neg_id_negocio") String negIdNegocio) {
         log.debug("REST request to delete m4sll_negocios : {}", idOrganization + "|" + negIdNegocio);
         M4sllNegociosId id = new M4sllNegociosId();
         id.setIdOrganization(idOrganization);
@@ -117,7 +119,7 @@ public class M4sllNegociosResource {
 
 // GetMapping para un solo registro
   @GetMapping("/m4sll_negocios/{neg_id_negocio}")
-  public ResponseEntity<M4sllNegocios> getM4sllNegocios(, @PathVariable("neg_id_negocio") String negIdNegocio) {
+  public ResponseEntity<M4sllNegocios> getM4sllNegocios(@PathVariable("neg_id_negocio") String negIdNegocio) {
       log.debug("REST request to get M4sllNegocios : {}", idOrganization + "|" + negIdNegocio);
       M4sllNegociosId id = new M4sllNegociosId();
       id.setIdOrganization(idOrganization);

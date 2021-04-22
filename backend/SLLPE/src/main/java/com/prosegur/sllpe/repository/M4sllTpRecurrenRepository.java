@@ -10,16 +10,16 @@ import org.springframework.data.repository.query.Param;
 
 public interface M4sllTpRecurrenRepository extends JpaRepository<M4sllTpRecurren, M4sllTpRecurrenId> {
     @Query(
-        value = "select COALESCE(max(cast(tre_id_recurrencia as integer)),0)+1 from sll.m4sll_tp_recurren where id_organization = :id_organization",
+        value = "SELECT COALESCE(MAX(CAST(tre_id_recurrencia as integer)),0)+1 FROM sll.m4sll_tp_recurren WHERE id_organization = :idOrganization",
         nativeQuery = true
     )
-    public String obtenerUltimaSecuencia(@Param("id_organization") String id_organization);
+    public String obtenerUltimaSecuencia(@Param("idOrganization") String idOrganization);
 
     @Query(
-        value = "select * from sll.m4sll_tp_recurren where id_organization = :id_organization",
+        value = "SELECT * FROM sll.m4sll_tp_recurren WHERE id_organization = :idOrganization ORDER BY id_organization, TO_NUMBER(tre_id_recurrencia) DESC",
         nativeQuery = true
     )
-    public List<M4sllTpRecurren> findByIdOrganization(@Param("id_organization") String id_organization);
+    public List<M4sllTpRecurren> findByIdOrganization(@Param("idOrganization") String idOrganization);
 
 
 }
