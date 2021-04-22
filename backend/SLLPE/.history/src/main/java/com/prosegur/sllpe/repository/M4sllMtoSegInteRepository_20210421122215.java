@@ -28,7 +28,7 @@ public interface M4sllMtoSegInteRepository extends JpaRepository<M4sllMtoSegInte
     public List<M4sllMtoSegInte> findByIdAppRole(@Param("idAppRole") String idAppRole);
 
 
-    @Query(nativeQuery =true,value = "select * from sll.m4sll_mto_seg_inte where id_organization = :idOrganization AND  id_app_role IN (:idAppRole) ORDER BY id_app_role, msi_tabla,msi_columna ASC ")
+    @Query(nativeQuery =true,value = "select * from sll.m4sll_mto_seg_inte where id_organization = :idOrganization AND  id_app_role IN (:idAppRole)")
     public List<M4sllMtoSegInte> findByIdAppRole(@Param("idOrganization") String idOrganization, @Param("idAppRole") List<String> names);
 
 }

@@ -43,7 +43,7 @@ class M4sllCwBanPeResourceTest {
 		List<M4sllFases> listaFases= Arrays.asList(fase);
 		*/
 		bandejaMockMvc
-				.perform(get("/api/m4sll_vw_ban_pe_consulta?page=3&size=5").contentType(MediaType.APPLICATION_JSON)
+				.perform(get("/api/m4sll_vw_ban_pe_consulta?page=0&size=5").contentType(MediaType.APPLICATION_JSON)
 						.content("").characterEncoding("UTF-8"))
 				.andDo(print()).andExpect(status().isOk()).andReturn();
 

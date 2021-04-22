@@ -40,6 +40,8 @@ public class M4sllVwBanPeConsultaService {
 	@Value("${idOrganization}")
 	private String idOrganization;
 
+	private String nameColumn = "";
+	private int i = 1;
 	
 	// private final M4sllVwBanPeConsultaRepository m4sllVwBanPeConsultaRepository;
 	private static final Logger LOGGER = LoggerFactory.getLogger(M4sllVwBanPeConsultaService.class);
@@ -76,6 +78,7 @@ public class M4sllVwBanPeConsultaService {
 		Root<M4sllVwBanPeConsulta> root = cr.from(M4sllVwBanPeConsulta.class);
 
 		List<Predicate> predicates = new ArrayList<>();
+		List<Predicate> predicatesFinal = new ArrayList<>();
 
 		// Agregamos condiciones
 
@@ -84,30 +87,115 @@ public class M4sllVwBanPeConsultaService {
 
 		// ir a base de datos a tabla seguridad y traer array de condiciones
 		List<M4sllMtoSegInte> listSegInterna = m4sllMtoSegInteRepository.findByIdAppRole(idOrganization, roles);
-		LOGGER.info("lista seguridad interna: ", listSegInterna);
+		LOGGER.debug("lista seguridad interna: ", listSegInterna);
+		CriteriaBuilder criteriaBuilder;
 		// for agregando condiciones
 		// esta linea se repite por
 		
-		listSegInterna.stream().forEach((segInterna) -> {
-			System.out.println(segInterna);
-			LOGGER.info("seguridad interna: ", segInterna);
-			LOGGER.info("seguridad getMsiColumna: ", segInterna.getMsiColumna());
-			LOGGER.info("seguridad getMsiValor: ", segInterna.getMsiValor());
+		
+		
+		/*Predicate predicateForBlueColor
+		  = cb.equal(root.get("color"), "blue");
+		Predicate predicateForRedColor
+		  = cb.equal(root.get("color"), "red");
+		Predicate predicateForColor
+		  = cb.or(predicateForBlueColor, predicateForRedColor);
+		*/
+		
+		//listSegInterna.stream().forEach((segInterna) -> {
+		Integer countlistSeg = listSegInterna.size();
+		i = 1;
+		listSegInterna.forEach((segInterna) -> {
+			nameColumn = segInterna.getMsiColumna();
 			
-			predicates.add(cb.equal(root.get(segInterna.getMsiColumna()), segInterna.getMsiValor()));
+			// si se cambia de nombre de columna se agregan las condiciones anteriors en Or ya que pertenecen a la misma agrupacion de condiciones
+			// ejmp "msiTabla" : "M4SLL_LITIGIOS",  "msiColumna" : "std_id_geo_div", "msiValor" : "12",
+			//      "msiTabla" : "M4SLL_LITIGIOS",  "msiColumna" : "std_id_geo_div", "msiValor" : "10",
+			// debe quedar AND (std_id_geo_div = '12' or std_id_geo_div = '10')
+			
+			
+			
+			if (nameColumn.equals(segInterna.getMsiColumna()) ) {
+				Predicate predicateMatchNameColumnCondition
+				  = cb.equal(root.get(segInterna.getMsiColumna()), segInterna.getMsiValor());
+				
+				predicates.add(predicateMatchNameColumnCondition);
+			}
+			
+			if (!nameColumn.equals(segInterna.getMsiColumna()) || countlistSeg == i) {
+				Predicate predicateGroupColumn
+				  = cb.or(predicates.toArray(new Predicate[predicates.size()]));
+				
+				predicatesFinal.add(predicateGroupColumn);
+				
+				predicates.clear();
+				LOGGER.debug("cambio de columna ");
+				System.out.println("cambio de columna ");
+
+				//se empieza nuevamente a agregar condiciones para el prox grupo de colmnas
+				Predicate predicateMatchNameColumnCondition
+				  = cb.equal(root.get(segInterna.getMsiColumna()), segInterna.getMsiValor());
+				/*
+				 Predicate finalPredicate
+  					= criteriaBuilder.and(predicateForColor, predicateForGrade);
+				 */
+				predicates.add(predicateMatchNameColumnCondition);
+				
+				// si es el ultimo elemento se agrega de una vez al predicado final para posteriormente ejecutar el query
+				if (countlistSeg == i) {
+					LOGGER.debug("ultimo elemento for o cambio de columna ");
+					System.out.println("ultimo elemento for o cambio de columna ");
+					
+					predicatesFinal.add(predicateMatchNameColumnCondition);
+				}
+
+				
+				
+			}
+			
+			System.out.println(segInterna);
+			LOGGER.debug("Roles getRoles : {}", roles);
+			System.out.println("roles: " + roles);
+			LOGGER.debug("seguridad interna: ", segInterna);
+			LOGGER.debug("seguridad getMsiColumna: ", segInterna.getMsiColumna());
+			System.out.println("seguridad getMsiColumna: " + segInterna.getMsiColumna());
+			LOGGER.debug("seguridad getMsiValor: ", segInterna.getMsiValor());
+			System.out.println("seguridad getMsiColumna: " + segInterna.getMsiValor());
+			
+			// predicates.add(cb.equal(root.get(segInterna.getMsiColumna()), segInterna.getMsiValor()));
+			// predicates.add(cb.equal(root.get(segInterna.getMsiColumna()), segInterna.getMsiValor()));
+			
+			
+			
+		 	
+			// predicates.add(predicateMatchNameColumnCondition);
+		 	
+			
+			
+			i++;
+			
 		});
+		// cb.or(null)
+		
 		// predicates.add(cb.equal(root.get("std_id_geo_div"), "12"));
 
-		if (predicates.isEmpty()) {
+		if (predicatesFinal.isEmpty()) {
 			cr.select(root);
 		} else {
-			cr.select(root).where(predicates.toArray(new Predicate[predicates.size()]));
+			/*Predicate finalPredicate
+			  = cb.and(predicatesFinal.toArray(new Predicate[predicatesFinal.size()]));
+			*/
+			
+			cr.select(root).where(predicatesFinal.toArray(new Predicate[predicatesFinal.size()]));
 		}
 		// cr.setFirstResult(page.getPageNumber() * page.getPageSize());
 		// cr.select(root).setMaxResults(page.getPageSize());
 
 		// paginado
 		TypedQuery<M4sllVwBanPeConsulta> query = em.createQuery(cr);
+		LOGGER.debug("seguridad query: ",query.toString());
+		System.out.println("seguridad query: " + query.toString());
+		
 		int totalRows = query.getResultList().size();
 		query.setFirstResult(page.getPageNumber() * page.getPageSize());
 		query.setMaxResults(page.getPageSize());
