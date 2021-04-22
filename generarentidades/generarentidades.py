@@ -515,6 +515,23 @@ if new_ev_cols_names_lst:
 
     search_n_replace_lst.append((search_str, new_str))
 
+    # si las columnas que se reciben via variable de entorno son las mismas a
+    # las No Secuencia,habría un @GetMapping repetido en el Resource, por lo
+    # que se comenta el primero que es el no afectado por las variables de
+    # entorno
+    if new_ev_cols_names_lst == new_pks_names_not_sec_lst:
+        search_str = "//CustomLinesGetAllDefault "
+        start_str = ""
+        sep_str = ""
+        end_str = ""
+
+        repl_str = ""
+
+        new_str = start_str + repl_str + end_str
+
+        search_n_replace_lst.append((search_str, new_str))
+
+
 if new_pks_names_sec_lst:
     search_str = "ColsecDatatype id_sec_placeholder = tableNamePlaceholderServices.UltimaSecuencia(tableNamePlaceholder);"
     start_str = ""
@@ -564,8 +581,8 @@ repl_str = sep_str.join(["id.set" +
 new_str = start_str + repl_str + end_str
 search_n_replace_lst.append((search_str, new_str))
 
-search_str = r"{colsnotsec_placeholder}"
-start_str = ""
+search_str = r'/{colsnotsec_placeholder}'
+start_str = "/"
 sep_str = "/"
 end_str = ""
 
@@ -576,6 +593,8 @@ repl_str = sep_str.join(
         "}" for pk in new_pks_names_not_sec_lst if pk not in new_ev_cols_names_lst])
 
 new_str = start_str + repl_str + end_str
+# para los casos que solo tienen variables de entorno en columnas no secuencia
+new_str = new_str if repl_str else ""
 search_n_replace_lst.append((search_str, new_str))
 
 if new_pks_names_sec_lst:
@@ -692,9 +711,9 @@ if new_cust_cols_names_lst:
     search_n_replace_lst.append((search_str, new_str))
 
 search_str = (
-    '(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder'
+    '@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder'
 )
-start_str = "("
+start_str = ""
 sep_str = ", "
 end_str = ""
 
@@ -711,6 +730,8 @@ repl_str = sep_str.join(
 )
 
 new_str = start_str + repl_str + end_str
+# para los casos que solo tienen variables de entorno en columnas no secuencia
+new_str = new_str if repl_str else ""
 search_n_replace_lst.append((search_str, new_str))
 
 if new_pks_names_sec_lst:
@@ -734,6 +755,18 @@ if new_pks_names_sec_lst:
     new_str = new_str if new_pks_names_sec_lst[0] in new_pk_cols_names_lst else ""
 
     search_n_replace_lst.append((search_str, new_str))
+
+# Este error pasa cuando solo hay una columna no secuencia y es variable
+# de entorno
+search_str = '(, @PathVariable'
+start_str = ""
+sep_str = ""
+end_str = ""
+
+repl_str = search_str.replace('(, @', '(@')
+
+new_str = start_str + repl_str + end_str
+search_n_replace_lst.append((search_str, new_str))
 
 search_str = "id.setColsNotSecPlaceholder(cols_not_sec_placeholder);"
 start_str = ""

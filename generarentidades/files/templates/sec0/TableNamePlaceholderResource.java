@@ -57,6 +57,8 @@ public class TableNamePlaceholderResource {
         .body(result);
     }
 
+//CustomLinesGetAllDefault     // Este Servicio REST esta comentado porque particularmente para esta entidad, apuntaría al mismo End Point que otro que se encuentra habilitado
+//CustomLinesGetAllDefault /*
     @GetMapping("/table_name_placeholder")
     public ResponseEntity<List<TableNamePlaceholder>> getAllTableNamePlaceholder() {
         log.debug("REST request to get ALL TableNamePlaceholder : {}");
@@ -64,6 +66,7 @@ public class TableNamePlaceholderResource {
         List<TableNamePlaceholder> TableNamePlaceholderAll = tableNamePlaceholderRepository.findAll();
         return ResponseEntity.ok().body(TableNamePlaceholderAll);
     }
+//CustomLinesGetAllDefault */
 
   @GetMapping("/table_name_placeholder/{colsnotsec_placeholder}")
   public ResponseEntity<TableNamePlaceholder> getTableNamePlaceholder(@PathVariable("colsnotsec_placeholder") ColsnotsecDatatype colsnotsec_placeholder) {
