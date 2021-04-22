@@ -106,54 +106,99 @@ public class M4sllVwBanPeConsultaService {
 		Integer countlistSeg = listSegInterna.size();
 		i = 1;
 		listSegInterna.forEach((segInterna) -> {
-			nameColumn = segInterna.getMsiColumna();
-			
+			if( i ==1 ) {
+				nameColumn = segInterna.getMsiColumna();
+			}
 			// si se cambia de nombre de columna se agregan las condiciones anteriors en Or ya que pertenecen a la misma agrupacion de condiciones
 			// ejmp "msiTabla" : "M4SLL_LITIGIOS",  "msiColumna" : "std_id_geo_div", "msiValor" : "12",
 			//      "msiTabla" : "M4SLL_LITIGIOS",  "msiColumna" : "std_id_geo_div", "msiValor" : "10",
 			// debe quedar AND (std_id_geo_div = '12' or std_id_geo_div = '10')
 			
+			LOGGER.debug("var columna " + predicates.toString());
+			System.out.println("var getMsiColumna " + predicates.toString());
+			LOGGER.debug("var columna " + segInterna.getMsiColumna());
+			System.out.println("var getMsiColumna " + segInterna.getMsiColumna());
 			
+			LOGGER.debug("var columna igual a getMsiColumna " + nameColumn.equals(segInterna.getMsiColumna()));
+			System.out.println("var columna igual a getMsiColumna " + nameColumn.equals(segInterna.getMsiColumna()));
 			
 			if (nameColumn.equals(segInterna.getMsiColumna()) ) {
+				LOGGER.debug("nameColumn.equals(segInterna.getMsiColumna()) " + "entro iguales");
+				System.out.println("nameColumn.equals(segInterna.getMsiColumna()) " + "entro iguales");
 				Predicate predicateMatchNameColumnCondition
 				  = cb.equal(root.get(segInterna.getMsiColumna()), segInterna.getMsiValor());
 				
 				predicates.add(predicateMatchNameColumnCondition);
+				
+				LOGGER.debug("se agrega or ");
+				LOGGER.debug("se agrega segInterna.getMsiColumna() " + segInterna.getMsiColumna());
+				System.out.println("se agrega segInterna.getMsiColumna() " + segInterna.getMsiColumna());
+				System.out.println("se agrega segInterna.getMsiValor() " + segInterna.getMsiValor());
+				
+				
+				/*if (countlistSeg == i) {
+					LOGGER.debug("ultimo elemento for o cambio de columna ");
+					System.out.println("ultimo elemento for o cambio de columna ");
+					
+					predicatesFinal.add(predicateMatchNameColumnCondition);
+				}
+				*/
 			}
 			
 			if (!nameColumn.equals(segInterna.getMsiColumna()) || countlistSeg == i) {
+				nameColumn = segInterna.getMsiColumna();
+				LOGGER.debug("nameColumn.equals(segInterna.getMsiColumna()) " + " entro  no iguales");
+				System.out.println("nameColumn.equals(segInterna.getMsiValor()) " + " entro no iguales");
 				Predicate predicateGroupColumn
 				  = cb.or(predicates.toArray(new Predicate[predicates.size()]));
 				
 				predicatesFinal.add(predicateGroupColumn);
-				
+				LOGGER.debug("predicates antes de limpiar " + predicates.toString());
+				System.out.println("predicates antes de limpiar " + predicates.toString());
 				predicates.clear();
+				LOGGER.debug("empieza and ");
+				System.out.println("ultimo elemento for o cambio de columna ");
+				
+				LOGGER.debug("predicates despues de limpiar " + predicates.toString());
+				System.out.println("predicates despues de limpiar " + predicates.toString());
 				LOGGER.debug("cambio de columna ");
 				System.out.println("cambio de columna ");
 
 				//se empieza nuevamente a agregar condiciones para el prox grupo de colmnas
 				Predicate predicateMatchNameColumnCondition
 				  = cb.equal(root.get(segInterna.getMsiColumna()), segInterna.getMsiValor());
-				/*
-				 Predicate finalPredicate
-  					= criteriaBuilder.and(predicateForColor, predicateForGrade);
-				 */
+				
+				LOGGER.debug("se agrega segInterna.getMsiColumna() " + segInterna.getMsiColumna());
+				System.out.println("se agrega segInterna.getMsiColumna() " + segInterna.getMsiColumna());
+				System.out.println("se agrega segInterna.getMsiValor() " + segInterna.getMsiValor());
 				predicates.add(predicateMatchNameColumnCondition);
 				
 				// si es el ultimo elemento se agrega de una vez al predicado final para posteriormente ejecutar el query
-				if (countlistSeg == i) {
+				/*if (countlistSeg == i) {
 					LOGGER.debug("ultimo elemento for o cambio de columna ");
 					System.out.println("ultimo elemento for o cambio de columna ");
 					
 					predicatesFinal.add(predicateMatchNameColumnCondition);
 				}
-
-				
+				*/
 				
 			}
+			// si es el ultimo elemento se agrega de una vez al predicado final para posteriormente ejecutar el query
+			if (countlistSeg == i) {
+				
+				LOGGER.debug("loger ultimo elemento for o cambio de columna sin accion ");
+				System.out.println("system out ultimo elemento for o cambio de columna ");
+				/*
+				LOGGER.debug("ultimo elemento for o cambio de columna ");
+				System.out.println("ultimo elemento for o cambio de columna ");
+				
+				predicatesFinal.add(predicateMatchNameColumnCondition);
+				*/
+			}
+
 			
-			System.out.println(segInterna);
+			
+			/*System.out.println(segInterna);
 			LOGGER.debug("Roles getRoles : {}", roles);
 			System.out.println("roles: " + roles);
 			LOGGER.debug("seguridad interna: ", segInterna);
@@ -161,7 +206,7 @@ public class M4sllVwBanPeConsultaService {
 			System.out.println("seguridad getMsiColumna: " + segInterna.getMsiColumna());
 			LOGGER.debug("seguridad getMsiValor: ", segInterna.getMsiValor());
 			System.out.println("seguridad getMsiColumna: " + segInterna.getMsiValor());
-			
+			*/
 			// predicates.add(cb.equal(root.get(segInterna.getMsiColumna()), segInterna.getMsiValor()));
 			// predicates.add(cb.equal(root.get(segInterna.getMsiColumna()), segInterna.getMsiValor()));
 			
@@ -185,8 +230,14 @@ public class M4sllVwBanPeConsultaService {
 			/*Predicate finalPredicate
 			  = cb.and(predicatesFinal.toArray(new Predicate[predicatesFinal.size()]));
 			*/
+			// agregado para and/or
+			Predicate finalPredicate
+			  = cb.and(predicatesFinal.toArray(new Predicate[predicatesFinal.size()]));
 			
-			cr.select(root).where(predicatesFinal.toArray(new Predicate[predicatesFinal.size()]));
+			//antes con solo or
+			//cr.select(root).where(predicatesFinal.toArray(new Predicate[predicatesFinal.size()]));
+			finalPredicate.toString();
+			cr.select(root).where(finalPredicate);
 		}
 		// cr.setFirstResult(page.getPageNumber() * page.getPageSize());
 		// cr.select(root).setMaxResults(page.getPageSize());
